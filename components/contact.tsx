@@ -56,8 +56,8 @@ export default function Contact() {
 						</div>
 						<h2 className='text-3xl font-bold tracking-tight text-white'></h2>
 						<p className='mt-6 text-lg leading-8 text-gray-300'>
-							We'd love to hear from you. Please use the contact details below
-							or fill out the form to reach out to us.
+							We&apos;d love to hear from you. Please use the contact details
+							below or fill out the form to reach out to us.
 						</p>
 						<dl className='mt-10 space-y-4 text-base leading-7 text-gray-300'>
 							<div className='flex gap-x-4'>

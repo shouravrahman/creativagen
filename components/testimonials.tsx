@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 const featuredTestimonial = {
 	body: "Integer id nunc sit semper purus. Bibendum at lacus ut arcu blandit montes vitae auctor libero. Hac condimentum dignissim nibh vulputate ut nunc. Amet nibh orci mi venenatis blandit vel et proin. Non hendrerit in vel ac diam.",
 	author: {
@@ -63,7 +64,7 @@ const testimonials = [
 	],
 ];
 
-function classNames(...classes) {
+function classNames(...classes: string[]) {
 	return classes.filter(Boolean).join(" ");
 }
 
