@@ -3,13 +3,12 @@
 import TypewriterComponent from "typewriter-effect";
 import Link from "next/link";
 import { useAuth } from "@clerk/nextjs";
-
+import { motion, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
 export const LandingHero = () => {
 	const { isSignedIn } = useAuth();
-
 	return (
 		<div className='text-white font-bold md:my-4 lg:my-10 py-2 md:py-8 px-8 flex flex-col-reverse md:flex-col items-center justify-around gap-10 md:gap-6 space-y-2 '>
 			<section className='flex flex-col w-[80dvw] items-center lg:justify-around gap-2 md:gap-6'>
@@ -47,7 +46,12 @@ export const LandingHero = () => {
 					No credit card required.
 				</div>
 			</section>
-			<div className='relative '>
+			<motion.div
+				initial={{ opacity: 0 }}
+				animate={{ opacity: 1 }}
+				transition={{ duration: 2.5 }}
+				className='relative '
+			>
 				<Image
 					src='/hero.png'
 					height={800}
@@ -56,7 +60,7 @@ export const LandingHero = () => {
 					className='rounded-2xl p-2 border border-slate-400/10 text-center'
 					layout='responsive'
 				/>
-			</div>
+			</motion.div>
 		</div>
 	);
 };
