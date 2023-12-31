@@ -1,4 +1,7 @@
+"use client";
 /* eslint-disable @next/next/no-img-element */
+import { motion, useAnimation, useInView } from "framer-motion";
+import { useEffect, useRef } from "react";
 const featuredTestimonial = {
 	body: "Integer id nunc sit semper purus. Bibendum at lacus ut arcu blandit montes vitae auctor libero. Hac condimentum dignissim nibh vulputate ut nunc. Amet nibh orci mi venenatis blandit vel et proin. Non hendrerit in vel ac diam.",
 	author: {
@@ -69,6 +72,16 @@ function classNames(...classes: string[]) {
 }
 
 export default function Testimonials() {
+	const ref = useRef(null);
+	const isInview = useInView(ref, { once: true });
+	const controls = useAnimation();
+
+	useEffect(() => {
+		if (isInview) {
+			controls.start("visible");
+		}
+	}, [isInview]);
+
 	return (
 		<div className='relative isolate bg-[#111827] pb-32 pt-24 sm:pt-32'>
 			<div
@@ -105,7 +118,12 @@ export default function Testimonials() {
 					</p>
 				</div>
 				<div className='mx-auto mt-16 grid max-w-2xl grid-cols-1 grid-rows-1 gap-8 text-sm leading-6 text-zinc-400 sm:mt-20 sm:grid-cols-2 xl:mx-0 xl:max-w-none xl:grid-flow-col xl:grid-cols-4'>
-					<figure className='col-span-2 hidden sm:block sm:rounded-2xl sm:bg-[#0e1420] sm:shadow-lg sm:ring-1 sm:ring-gray-900/5 xl:col-start-2 xl:row-end-1'>
+					<motion.figure
+						className='col-span-2 hidden sm:block sm:rounded-2xl sm:bg-[#0e1420] sm:shadow-lg sm:ring-1 sm:ring-gray-900/5 xl:col-start-2 xl:row-end-1 border border-slate-400/10'
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						transition={{ duration: 2.5 }}
+					>
 						<blockquote className='p-12 text-xl font-semibold leading-8 tracking-tight text-zinc-400'>
 							<p>{`“${featuredTestimonial.body}”`}</p>
 						</blockquote>
@@ -127,7 +145,7 @@ export default function Testimonials() {
 								alt=''
 							/>
 						</figcaption>
-					</figure>
+					</motion.figure>
 					{testimonials.map((columnGroup, columnGroupIdx) => (
 						<div
 							key={columnGroupIdx}
@@ -145,10 +163,24 @@ export default function Testimonials() {
 										"space-y-8"
 									)}
 								>
-									{column.map((testimonial) => (
-										<figure
+									{column.map((testimonial, i) => (
+										<motion.figure
 											key={testimonial.author.handle}
-											className='rounded-2xl bg-[#0e1420] p-6 shadow-lg ring-1 ring-gray-900/5'
+											className='rounded-2xl bg-[#0e1420] p-6 shadow-lg ring-1 ring-gray-900/5 border border-slate-400/10'
+											ref={ref}
+											variants={{
+												hidden: { opacity: 0, translateX: 90 },
+												visible: { opacity: 1, translateX: 0 },
+											}}
+											transition={{
+												type: "spring",
+												duration: 0.3,
+												damping: 8,
+												delay: i * 0.1,
+												stiffness: 80,
+											}}
+											initial='hidden'
+											animate={controls}
 										>
 											<blockquote className='text-zinc-400'>
 												<p>{`“${testimonial.body}”`}</p>
@@ -166,7 +198,7 @@ export default function Testimonials() {
 													<div className='text-gray-600'>{`@${testimonial.author.handle}`}</div>
 												</div>
 											</figcaption>
-										</figure>
+										</motion.figure>
 									))}
 								</div>
 							))}

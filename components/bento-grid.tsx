@@ -1,6 +1,15 @@
+"use client";
 /* eslint-disable @next/next/no-img-element */
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import {
+	motion,
+	useAnimation,
+	useInView,
+	useScroll,
+	useTransform,
+} from "framer-motion";
+import { useEffect, useRef } from "react";
 const gridData = [
 	{
 		img: "/feat.jpg",
@@ -40,8 +49,18 @@ const gridData = [
 	},
 ];
 export function BentoGrid() {
+	const ref = useRef(null);
+	const isInview = useInView(ref, { once: true });
+	const controls = useAnimation();
+
+	useEffect(() => {
+		if (isInview) {
+			controls.start("visible");
+		}
+	}, [isInview]);
+
 	return (
-		<div className='bg-[#00000011] rounded-2xl'>
+		<div className='rounded-2xl'>
 			<header className='flex h-20 w-full shrink-0 items-center px-4 md:px-6' />
 			<div className='mx-auto max-w-xl text-center mb-2'>
 				<h2 className='text-lg font-semibold leading-8 tracking-tight text-indigo-600'>
@@ -53,11 +72,25 @@ export function BentoGrid() {
 			</div>
 			<main className='max-w-[80dvw] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-8 md:p-6 mt-16'>
 				{gridData.map((data, i) => (
-					<div
+					<motion.div
+						ref={ref}
+						variants={{
+							hidden: { opacity: 0, translateX: 90 },
+							visible: { opacity: 1, translateX: 0 },
+						}}
+						transition={{
+							type: "spring",
+							duration: 0.3,
+							damping: 8,
+							delay: i * 0.1,
+							stiffness: 80,
+						}}
+						initial='hidden'
+						animate={controls}
 						key={i}
 						className={`${
 							data.bgClass
-						} overflow-hidden flex flex-col justify-around shadow-lg row-span-1 rounded-2xl border-2 border-slate-400/10 bg-neutral-100 p-4 dark:bg-neutral-900 ${
+						} overflow-hidden flex flex-col justify-around shadow-lg row-span-1 rounded-2xl border outline-none border-slate-400/10 bg-neutral-100 p-4 dark:bg-neutral-900 ${
 							i === 3 || i === 6 ? "md:col-span-2" : ""
 						} ${i === 2 ? "md:col-span-2" : ""}`}
 					>
@@ -89,7 +122,7 @@ export function BentoGrid() {
 								</Button>
 							</div>
 						</div>
-					</div>
+					</motion.div>
 				))}
 			</main>
 		</div>
