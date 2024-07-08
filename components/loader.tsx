@@ -2,13 +2,13 @@ import Image from "next/image";
 
 export const Loader = () => {
 	return (
-		<div className='h-full flex flex-col gap-y-4 items-center justify-center'>
-			<div className='w-10 h-10 relative animate-spin'>
-				<Image alt='Logo' src='/logo.png' fill />
+		<div className=' flex items-center justify-center'>
+			<div className='flex space-x-2 justify-center items-center dark:invert'>
+				<span className='sr-only'>Loading...</span>
+				<div className='h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.3s]'></div>
+				<div className='h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.15s]'></div>
+				<div className='h-8 w-8 bg-black rounded-full animate-bounce'></div>
 			</div>
-			<p className='text-sm text-muted-foreground'>
-				CreativaGen is thinking...
-			</p>
 		</div>
 	);
 };

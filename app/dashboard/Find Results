@@ -1,0 +1,24 @@
+Searching 121 files for "logo-trs"
+
+\\wsl.localhost\Ubuntu\home\shourav\workspace\creativagen\components\sidebar.tsx:
+   29              width={200}
+   30              className="object-cover"
+   31:             src="/logo-trs.png"
+   32              alt="Company name"
+   33            />
+
+\\wsl.localhost\Ubuntu\home\shourav\workspace\creativagen\components\footer.tsx:
+   36  						width={200}
+   37  						className='object-cover'
+   38: 						src='/logo-trs.png'
+   39  						alt='Company name'
+   40  					/>
+
+\\wsl.localhost\Ubuntu\home\shourav\workspace\creativagen\components\landing-navbar.tsx:
+   18            <Image
+   19              alt="Logo"
+   20:             src="/logo-trs.png"
+   21            
+   22              objectFit="contain" // Choose the object fit based on your design requirements
+
+3 matches across 3 files

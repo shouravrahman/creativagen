@@ -12,25 +12,25 @@ import Footer from "@/components/footer";
 const font = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	title: "CreativaGen",
-	description: "AI Platform",
+  title: "CreativaGen",
+  description: "AI Platform",
 };
 
 export default async function RootLayout({
-	children,
+  children,
 }: {
-	children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-	return (
-		<ClerkProvider>
-			<html lang='en' suppressHydrationWarning>
-				<CrispProvider />
-				<body className={` ${font.className}`}>
-					<ToasterProvider />
-					<ModalProvider />
-					{children}
-				</body>
-			</html>
-		</ClerkProvider>
-	);
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <CrispProvider />
+      <ClerkProvider>
+        <body className={` ${font.className}`}>
+          <ToasterProvider />
+          <ModalProvider />
+          {children}
+        </body>
+      </ClerkProvider>
+    </html>
+  );
 }

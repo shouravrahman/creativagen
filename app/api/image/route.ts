@@ -1,53 +1,39 @@
-import { auth } from "@clerk/nextjs";
-import { NextResponse } from "next/server";
+import { auth } from '@clerk/nextjs/server'; import { NextResponse } from "next/server";
+
+import { incrementApiLimit } from "@/lib/api-limit";
+import { validateRequest } from "@/lib/validator";
+import { checkSubscriptionAndApiLimit } from "@/lib/subscriptionApiLimit";
+// import { openai } from "@/lib/openApiConfig";
 import { Configuration, OpenAIApi } from "openai";
 
-import { checkSubscription } from "@/lib/subscription";
-import { incrementApiLimit, checkApiLimit } from "@/lib/api-limit";
+
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
+
 });
 
 const openai = new OpenAIApi(configuration);
 
-export async function POST(
-  req: Request
-) {
+export async function POST(req: Request): Promise<NextResponse> {
   try {
-    const { userId } = auth();
+    const validationResponse = validateRequest(req);
+
+
+    if (validationResponse) {
+      return validationResponse;
+    }
+
+
     const body = await req.json();
-    const { prompt, amount = 1, resolution = "512x512" } = body;
+    const { prompt, amount = 1, resolution = "1024*1024" } = body;
 
-    if (!userId) {
-      return new NextResponse("Unauthorized", { status: 401 });
-    }
+    const { isPro, freeTrial } = await checkSubscriptionAndApiLimit();
 
-    if (!configuration.apiKey) {
-      return new NextResponse("OpenAI API Key not configured.", { status: 500 });
-    }
-
-    if (!prompt) {
-      return new NextResponse("Prompt is required", { status: 400 });
-    }
-
-    if (!amount) {
-      return new NextResponse("Amount is required", { status: 400 });
-    }
-
-    if (!resolution) {
-      return new NextResponse("Resolution is required", { status: 400 });
-    }
-
-    const freeTrial = await checkApiLimit();
-    const isPro = await checkSubscription();
-
-    if (!freeTrial && !isPro) {
-      return new NextResponse("Free trial has expired. Please upgrade to pro.", { status: 403 });
-    }
-
+    // Your image processing logic using OpenAI API
     const response = await openai.createImage({
       prompt,
+      model: "dall-e-3",
       n: parseInt(amount, 10),
       size: resolution,
     });
@@ -58,7 +44,14 @@ export async function POST(
 
     return NextResponse.json(response.data.data);
   } catch (error) {
-    console.log('[IMAGE_ERROR]', error);
+
+    if (error.response) {
+      console.log('[IMAGE_ERROR]', error.response.status);
+      console.log('[IMAGE_ERROR]', error.response.data);
+    } else {
+      console.log('[IMAGE_ERROR]', error.message);
+    }
+
     return new NextResponse("Internal Error", { status: 500 });
   }
-};
+}

@@ -83,7 +83,7 @@ export default function Testimonials() {
 	}, [isInview]);
 
 	return (
-		<div className='relative isolate bg-[#111827] pb-32 pt-24 sm:pt-32'>
+		<div className='relative isolate bg-background/70 pb-32 pt-24 sm:pt-32'>
 			<div
 				className='absolute inset-x-0 top-1/2 -z-10 -translate-y-1/2 transform-gpu overflow-hidden opacity-30 blur-3xl'
 				aria-hidden='true'
@@ -117,7 +117,10 @@ export default function Testimonials() {
 						We have worked with thousands of amazing people
 					</p>
 				</div>
-				<div className='mx-auto mt-16 grid max-w-2xl grid-cols-1 grid-rows-1 gap-8 text-sm leading-6 text-zinc-400 sm:mt-20 sm:grid-cols-2 xl:mx-0 xl:max-w-none xl:grid-flow-col xl:grid-cols-4'>
+				<div
+					ref={ref}
+					className='mx-auto mt-16 grid max-w-2xl grid-cols-1 grid-rows-1 gap-8 text-sm leading-6 text-zinc-400 sm:mt-20 sm:grid-cols-2 xl:mx-0 xl:max-w-none xl:grid-flow-col xl:grid-cols-4 px-4 md:px-0'
+				>
 					<motion.figure
 						className='col-span-2 hidden sm:block sm:rounded-2xl sm:bg-[#0e1420] sm:shadow-lg sm:ring-1 sm:ring-gray-900/5 xl:col-start-2 xl:row-end-1 border border-slate-400/10'
 						initial={{ opacity: 0 }}
@@ -151,7 +154,7 @@ export default function Testimonials() {
 							key={columnGroupIdx}
 							className='space-y-8 xl:contents xl:space-y-0'
 						>
-							{columnGroup.map((column, columnIdx) => (
+							{columnGroup.map((column, columnIdx: number) => (
 								<div
 									key={columnIdx}
 									className={classNames(
@@ -167,7 +170,6 @@ export default function Testimonials() {
 										<motion.figure
 											key={testimonial.author.handle}
 											className='rounded-2xl bg-[#0e1420] p-6 shadow-lg ring-1 ring-gray-900/5 border border-slate-400/10'
-											ref={ref}
 											variants={{
 												hidden: { opacity: 0, translateX: 90 },
 												visible: { opacity: 1, translateX: 0 },
