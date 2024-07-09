@@ -10,8 +10,8 @@ import Image from "next/image";
 export const LandingHero = () => {
   const { isSignedIn } = useUser();
   return (
-    <div className="text-white font-bold md:my-4 lg:my-10 py-2 md:py-8 px-8 flex flex-col-reverse md:flex-col items-center justify-around gap-10 md:gap-6 space-y-2 ">
-      <section className="flex flex-col w-[80dvw] items-center lg:justify-around gap-2 md:gap-6">
+    <div className=" text-white font-bold md:my-4 lg:my-10 py-2 md:py-8 px-8 flex flex-col-reverse md:flex-col items-center justify-around gap-10 md:gap-6 space-y-2 ">
+      <section className="flex flex-col  items-center lg:justify-around gap-2 md:gap-6">
         <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl w-full mx-auto text-center space-y-5 font-extrabold">
           <h1>The Best AI Tool for</h1>
           <div className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
