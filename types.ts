@@ -21,6 +21,7 @@ enum fieldEnum {
   textarea = "textarea",
   select = "select",
   radio = "radiogroup",
+  switch = "switch",
 }
 export interface Form {
   label: string;
@@ -29,4 +30,6 @@ export interface Form {
   required?: boolean;
   type?: string;
   options?: Option[];
+  placeholder?: string;
+  value?: boolean;
 }
