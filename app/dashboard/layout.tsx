@@ -4,21 +4,21 @@ import { checkSubscription } from "@/lib/subscription";
 import { getApiLimitCount } from "@/lib/api-limit";
 import { Toaster } from "react-hot-toast";
 const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
-	const apiLimitCount = await getApiLimitCount();
-	const isPro = await checkSubscription();
+  const apiLimitCount = await getApiLimitCount();
+  const isPro = await checkSubscription();
 
-	return (
-		<div className='h-full relative bg-background'>
-			<div className='hidden h-full md:flex md:w-72 md:flex-col md:fixed md:inset-y-0 z-80'>
-				<Sidebar isPro={isPro} apiLimitCount={apiLimitCount} />
-			</div>
-			<main className='md:pl-72 pb-10 '>
-				<Navbar />
-				<Toaster />
-				{children}
-			</main>
-		</div>
-	);
+  return (
+    <div className="relative bg-background flex h-screen ">
+      <div className=" w-72 h-full overflow-y-hidden">
+        <Sidebar isPro={isPro} apiLimitCount={apiLimitCount} />
+      </div>
+      <main className="flex-1 overflow-y-auto  p-4 ">
+        <Navbar />
+        <Toaster />
+        {children}
+      </main>
+    </div>
+  );
 };
 
 export default DashboardLayout;

@@ -1,17 +1,32 @@
+import { ZodSchema } from "zod";
+
 export interface TEMPLATE {
-  name: string,
-  description:string,
-  icon:any,
-  category:string,
-  slug:string,
-  aiPrompt:string,
-  href:string,
-  form:Form[]
+  name: string;
+  description: string;
+  icon: any;
+  category: string;
+  slug: string;
+  aiPrompt: string;
+  href: string;
+  formFields: Form[];
+  validationSchema: ZodSchema;
 }
 
-interface Form {
-	label:string,
-	field:string,
-	name:string,
-	required?:boolean
+interface Option {
+  label: string;
+  value: string;
+}
+enum fieldEnum {
+  input = "input",
+  textarea = "textarea",
+  select = "select",
+  radio = "radiogroup",
+}
+export interface Form {
+  label: string;
+  field: fieldEnum;
+  name: string;
+  required?: boolean;
+  type?: string;
+  options?: Option[];
 }
