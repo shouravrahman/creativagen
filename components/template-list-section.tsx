@@ -36,7 +36,7 @@ const TemplateList = ({ searchInput }) => {
         <Card
           onClick={() => router.push(`/dashboard/content/${tool.slug}`)}
           key={tool.href}
-          className={`w-full bg-background bg-[${tool.bgColor}] text-white hover:backdrop-brightness-200`}
+          className={`w-full bg-card bg-[${tool.bgColor}] text-primary hover:backdrop-brightness-200`}
         >
           <tool.icon className={cn("h-16 w-16 m-4 mr-3", tool.color)} />
           <CardHeader>

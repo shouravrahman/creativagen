@@ -8,6 +8,7 @@ import { CrispProvider } from "@/components/crisp-provider";
 
 import "./globals.css";
 import Footer from "@/components/footer";
+import { ThemeProvider } from "@/components/theme-provider.tsx";
 
 const font = Inter({ subsets: ["latin"] });
 
@@ -22,13 +23,17 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html suppressHydrationWarning>
       <CrispProvider />
       <ClerkProvider>
-        <body className={` ${font.className}`}>
-          <ToasterProvider />
-          <ModalProvider />
-          {children}
+        <body
+          className={`dark:bg-background bg-primary-foreground ${font.className} `}
+        >
+          <ThemeProvider attribute="class">
+            <ToasterProvider />
+            <ModalProvider />
+            {children}
+          </ThemeProvider>
         </body>
       </ClerkProvider>
     </html>

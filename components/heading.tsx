@@ -22,10 +22,8 @@ export const Heading = ({
           <Icon className={cn("w-20 h-20", iconColor)} />
         </div>
         <div>
-          <h2 className="text-2xl mb-2 font-bold">{title}</h2>
-          <p className="hidden lg:flex text-base  text-gray-500">
-            {description}
-          </p>
+          <h2 className="text-2xl mb-2 font-bold text-primary">{title}</h2>
+          <p className="hidden lg:flex text-base  text-accent">{description}</p>
         </div>
       </div>
     </>

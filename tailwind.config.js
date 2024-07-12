@@ -16,18 +16,7 @@ module.exports = {
 			},
 		},
 		extend: {
-			backgroundImage: {
-				"hero-pattern": "url('/svgexport.svg')",
-				//   'footer-texture': "url('/img/footer-texture.png')",
-			},
-			backgroundColor: {
-				"aurora-1": "linear-gradient(135deg, #8E44AD 0%, #3498DB 100%)",
-				"aurora-2": "linear-gradient(135deg, #27AE60 0%, #FF0084 100%)",
-				"aurora-3": "linear-gradient(135deg, #F39C12 0%, #E74C3C 100%)",
-				"aurora-4": "linear-gradient(135deg, #3498DB 0%, #F39C12 100%)",
-				"aurora-5": "linear-gradient(135deg, #9B59B6 0%, #E74C3C 100%)",
-				"aurora-6": "linear-gradient(135deg, #1ABC9C 0%, #F1C40F 100%)",
-			},
+			
 			colors: {
 				border: "hsl(var(--border))",
 				input: "hsl(var(--input))",
@@ -37,6 +26,14 @@ module.exports = {
 				primary: {
 					DEFAULT: "hsl(var(--primary))",
 					foreground: "hsl(var(--primary-foreground))",
+				},
+				dashboard: {
+					DEFAULT: "hsl(var(--dashboard-background))",
+					text: "hsl(var(--dashboard-text))",
+				},
+				landingpage: {
+					DEFAULT: "hsl(var(--landingpage-background))",
+					text: "hsl(var(--landingpage-text))",
 				},
 				secondary: {
 					DEFAULT: "hsl(var(--secondary))",
@@ -61,6 +58,10 @@ module.exports = {
 				card: {
 					DEFAULT: "hsl(var(--card))",
 					foreground: "hsl(var(--card-foreground))",
+				},
+				sidebar: {
+					DEFAULT: "hsl(var(--sidebar-background))",
+					text: "hsl(var(--sidebar-text))",
 				},
 			},
 			borderRadius: {
