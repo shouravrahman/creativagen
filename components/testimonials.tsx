@@ -119,20 +119,20 @@ export default function Testimonials() {
         {/* headng end */}
         <div
           ref={ref}
-          className="mx-auto mt-16 grid max-w-2xl grid-cols-1 grid-rows-1 gap-8 text-sm leading-6 text-zinc-400 sm:mt-20 sm:grid-cols-2 xl:mx-0 xl:max-w-none xl:grid-flow-col xl:grid-cols-4 px-4 md:px-0"
+          className="mx-auto mt-16 grid max-w-2xl grid-cols-1 grid-rows-1 gap-8 text-sm leading-6 text-foreground sm:mt-20 sm:grid-cols-2 xl:mx-0 xl:max-w-none xl:grid-flow-col xl:grid-cols-4 px-4 md:px-0"
         >
           <motion.figure
-            className="col-span-2 hidden sm:block sm:rounded-2xl sm:bg-[#0e1420] sm:shadow-lg sm:ring-1 sm:ring-gray-900/5 xl:col-start-2 xl:row-end-1 border border-slate-400/10"
+            className="col-span-2 hidden sm:block sm:rounded-2xl bg-card sm:shadow-lg sm:ring-1 sm:ring-gray-900/5 xl:col-start-2 xl:row-end-1 border border-border"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 2.5 }}
           >
-            <blockquote className="p-12 text-xl font-semibold leading-8 tracking-tight text-zinc-400">
+            <blockquote className="p-12 text-xl font-semibold leading-8 tracking-tight text-foreground">
               <p>{`“${featuredTestimonial.body}”`}</p>
             </blockquote>
-            <figcaption className="flex items-center gap-x-4 border-t border-gray-900/10 px-6 py-4">
+            <figcaption className="flex items-center gap-x-4 border-t border-border px-6 py-4">
               <img
-                className="h-10 w-10 flex-none rounded-full bg-gray-50"
+                className="h-10 w-10 flex-none rounded-full "
                 src={featuredTestimonial.author.imageUrl}
                 alt=""
               />
@@ -140,7 +140,7 @@ export default function Testimonials() {
                 <div className="font-semibold">
                   {featuredTestimonial.author.name}
                 </div>
-                <div className="text-gray-600">{`@${featuredTestimonial.author.handle}`}</div>
+                <div className="text-foreground/70">{`@${featuredTestimonial.author.handle}`}</div>
               </div>
               <img
                 className="h-10 w-auto flex-none"
@@ -169,7 +169,7 @@ export default function Testimonials() {
                   {column.map((testimonial, i) => (
                     <motion.figure
                       key={testimonial.author.handle}
-                      className="rounded-2xl bg-[#0e1420] p-6 shadow-lg ring-1 ring-gray-900/5 border border-slate-400/10"
+                      className="rounded-2xl bg-card/70 p-6 shadow-lg ring-1 ring-gray-900/5 border border-border"
                       variants={{
                         hidden: { opacity: 0, translateX: 90 },
                         visible: { opacity: 1, translateX: 0 },
@@ -184,12 +184,12 @@ export default function Testimonials() {
                       initial="hidden"
                       animate={controls}
                     >
-                      <blockquote className="text-zinc-400">
+                      <blockquote className="text-foreground">
                         <p>{`“${testimonial.body}”`}</p>
                       </blockquote>
                       <figcaption className="mt-6 flex items-center gap-x-4">
                         <img
-                          className="h-10 w-10 rounded-full bg-gray-50"
+                          className="h-10 w-10 rounded-full "
                           src={testimonial.author.imageUrl}
                           alt=""
                         />
@@ -197,7 +197,7 @@ export default function Testimonials() {
                           <div className="font-semibold">
                             {testimonial.author.name}
                           </div>
-                          <div className="text-gray-600">{`@${testimonial.author.handle}`}</div>
+                          <div className="text-foreground/70">{`@${testimonial.author.handle}`}</div>
                         </div>
                       </figcaption>
                     </motion.figure>

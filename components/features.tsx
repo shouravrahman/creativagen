@@ -1,3 +1,4 @@
+import SectionHeading from "@/app/(landing)/_components/SectionHeading.tsx";
 import {
   ArrowPathIcon,
   CloudArrowUpIcon,
@@ -49,21 +50,12 @@ const features = [
 export default function Features() {
   return (
     <div className="py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl sm:text-center">
-          <h2 className="text-base font-semibold leading-7 text-blue-400">
-            Everything you need
-          </h2>
-          <p className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            No server? No problem.
-          </p>
-          <p className="mt-6 text-lg leading-8 ">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores
-            impedit perferendis suscipit eaque, iste dolor cupiditate
-            blanditiis.
-          </p>
-        </div>
-      </div>
+      <SectionHeading
+        mainTitle="Everything you need"
+        secondaryText="Lorem ipsum, dolor sits suscipit eaque, iste dolor cupiditate blanditiis.
+
+"
+      />
       <div className="relative overflow-hidden pt-16">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <img

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import SectionHeading from "./SectionHeading.tsx";
 
 const faqs = [
   [
@@ -69,31 +70,27 @@ export function Faqs() {
         height={946}
         unoptimized
       /> */}
-      <div className="container mx-auto max-w-2xl lg:mx-0">
-        <h2
-          id="faq-title"
-          className="font-display text-3xl tracking-tight text-landingpage-text sm:text-4xl"
-        >
-          Frequently asked questions
-        </h2>
-        <p className="mt-4 text-lg tracking-tight text-primary">
-          If you can’t find what you’re looking for, email our support team and
-          if you’re lucky someone will get back to you.
-        </p>
-      </div>
+      <SectionHeading
+        mainTitle="Frequently asked questions"
+        secondaryText="If you can’t find what you’re looking for, email our support team and
+           someone will get back to you."
+      />
+
       <ul
         role="list"
-        className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 lg:max-w-none lg:grid-cols-3"
+        className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-12 lg:max-w-none lg:grid-cols-3"
       >
         {faqs.map((column, columnIndex) => (
           <li key={columnIndex}>
             <ul role="list" className="flex flex-col gap-y-8">
               {column.map((faq, faqIndex) => (
                 <li key={faqIndex}>
-                  <h3 className="font-display text-lg leading-7 text-landingpage-text">
+                  <h3 className="font-display text-2xl font-semibold leading-7 text-foreground">
                     {faq.question}
                   </h3>
-                  <p className="mt-4 text-sm text-primary">{faq.answer}</p>
+                  <p className="mt-4 text-md text-foreground/70">
+                    {faq.answer}
+                  </p>
                 </li>
               ))}
             </ul>

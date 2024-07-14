@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Nunito_Sans, Titillium_Web, Quicksand } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 
 import { ToasterProvider } from "@/components/toaster-provider";
@@ -10,7 +10,10 @@ import "./globals.css";
 import Footer from "@/components/footer";
 import { ThemeProvider } from "@/components/theme-provider.tsx";
 
-const font = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] });
+const nunito = Nunito_Sans({ subsets: ["latin"] });
+const quciksand = Quicksand({ subsets: ["latin"], weight: ["400", "600"] });
+const titlium = Titillium_Web({ subsets: ["latin"], weight: "400" });
 
 export const metadata: Metadata = {
   title: "CreativaGen",
@@ -26,9 +29,7 @@ export default async function RootLayout({
     <html suppressHydrationWarning>
       <CrispProvider />
       <ClerkProvider>
-        <body
-          className={`dark:bg-background bg-primary-foreground ${font.className} `}
-        >
+        <body className={`bg-background ${quciksand.className} `}>
           <ThemeProvider attribute="class">
             <ToasterProvider />
             <ModalProvider />

@@ -118,17 +118,14 @@ function Feature({
   return (
     <div
       className={clsx(
-        isActive && "bg-accent",
+        isActive && "bg-primary/80 text-background",
         className,
         !isActive && "opacity-75 hover:opacity-100"
       )}
       {...props}
     >
       <div
-        className={clsx(
-          "w-9 rounded-lg",
-          isActive ? "bg-accent" : "bg-primary"
-        )}
+        className={clsx("w-9 rounded-lg", isActive ? "bg-accent" : "bg-card")}
       >
         <svg aria-hidden="true" className="h-9 w-9" fill="none">
           <feature.icon />
@@ -136,13 +133,13 @@ function Feature({
       </div>
       <h3
         className={clsx(
-          "mt-6 text-sm font-medium outline-none",
-          isActive ? "text-accent" : "text-primary"
+          "mt-6 text-lg font-semibold outline-none",
+          isActive ? "text-background" : "text-primary"
         )}
       >
         {feature.name}
       </h3>
-      <p className="mt-2 font-display text-xl ">{feature.summary}</p>
+      <p className="mt-2 font-display  text-xl ">{feature.summary}</p>
       <p className="mt-4 text-sm ">{feature.description}</p>
     </div>
   );

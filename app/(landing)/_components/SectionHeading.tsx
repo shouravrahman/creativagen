@@ -8,11 +8,14 @@ const SectionHeading = (props: Props) => {
     <div className="mx-auto max-w-3xl  text-center">
       <h2 className="text-2xl">
         <span className="relative whitespace-nowrap">
-          <SwirlyDoodle className="absolute -left-[30%] top-1/2 h-[1em] w-full fill-white" />
-          <span className="relative">{props.mainTitle}</span>
+          <SwirlyDoodle className="absolute -left-[30%] top-1/2 h-[1em] w-full fill-accent" />
+          <span className="relative font-bold">{props.mainTitle}</span>
         </span>
       </h2>
-      <p className="hidden bg-gradient-to-br from-blue-800 to-white bg-clip-text pt-4 text-4xl font-semibold tracking-tight text-transparent dark:to-purple-200 lg:inline-block">
+      {/* <p className="hidden  bg-gradient-to-r from-accent to-black dark:to-white  bg-clip-text pt-4 text-4xl font-semibold tracking-tight text-transparent  lg:inline-block">
+        {props.secondaryText}
+      </p> */}
+      <p className="hidden  bg-foreground/60 dark:bg-primary/60  bg-clip-text pt-4 text-4xl font-semibold tracking-tight text-transparent  lg:inline-block">
         {props.secondaryText}
       </p>
     </div>

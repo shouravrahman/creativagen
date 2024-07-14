@@ -28,7 +28,7 @@ export const LandingNavbar = async () => {
       <div className="flex items-center gap-x-2">
         <ThemeSwitch />
         <Link href={user ? "/dashboard" : "/sign-up"}>
-          <Button variant="outline" className="rounded-full">
+          <Button variant="default" className="rounded-full">
             Get Started
           </Button>
         </Link>

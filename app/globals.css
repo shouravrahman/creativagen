@@ -10,62 +10,63 @@ body,
 
 @layer base {
 	:root {
-		--background: 54 100% 97%; /* General background: #fefae0 */
-		--foreground: 210 100% 12%; /* General text: #001d3d */
-		--sidebar-background: 192 77% 90%; /* Sidebar background: #caf0f8 */
-		--sidebar-text: 210 100% 12%; /* Sidebar text: #001d3d */
-		--muted: 192 77% 90%; /* Muted background: #caf0f8 */
-		--muted-foreground: 224 85% 51%; /* Muted text: #1A4BED */
-		--dashboard-background: 54 100% 97%; /* Dashboard background: #fefae0 */
-		--dashboard-text: 210 100% 12%; /* Dashboard text: #001d3d */
-		--landingpage-background: 54 100% 97%; /* Landing page background: #fefae0 */
-		--landingpage-text: 210 100% 12%; /* Landing page text: #001d3d */
-		--popover: 192 77% 90%; /* Popover background: #caf0f8 */
-		--popover-foreground: 210 100% 12%; /* Popover text: #001d3d */
-		--card: 192 77% 90%; /* Card background: #caf0f8 */
-		--card-foreground: 210 100% 12%; /* Card text: #001d3d */
-		--border: 192 77% 90%; /* Borders: #caf0f8 */
-		--input: 192 77% 90%; /* Input fields: #caf0f8 */
-		--primary: 220 100% 54%; /* Primary elements: #174DFF */
-		--primary-foreground: 54 100% 97%; /* Text on primary elements: #fefae0 */
-		--secondary: 224 85% 51%; /* Secondary elements: #1A4BED */
-		--secondary-foreground: 54 100% 97%; /* Text on secondary elements: #fefae0 */
+		--background: 0 0% 100%; /* General background: white */
+		--foreground: 0 0% 0%; /* General text: black */
+		--sidebar-background: 0 0% 95%; /* Sidebar background: very light grey */
+		--sidebar-text: 0 0% 0%; /* Sidebar text: black */
+		--muted: 0 0% 90%; /* Muted background: light grey */
+		--muted-foreground: 0 0% 40%; /* Muted text: dark grey */
+		--dashboard-background: 0 0% 95%; /* Dashboard background: very light grey */
+		--dashboard-text: 0 0% 0%; /* Dashboard text: black */
+		--landingpage-background: 0 0% 100%; /* Landing page background: white */
+		--landingpage-text: 0 0% 0%; /* Landing page text: black */
+		--popover: 0 0% 95%; /* Popover background: very light grey */
+		--popover-foreground: 0 0% 0%; /* Popover text: black */
+		--card: 0 0% 95%; /* Card background: very light grey */
+		--card-foreground: 0 0% 0%; /* Card text: black */
+		--border: 0 0% 90%; /* Borders: light grey */
+		--input: 0 0% 95%; /* Input fields: very light grey */
+		--primary: 0 0% 0%; /* Primary elements: black */
+		--primary-foreground: 0 0% 100%; /* Text on primary elements: white */
+		--secondary: 0 0% 40%; /* Secondary elements: dark grey */
+		--secondary-foreground: 0 0% 100%; /* Text on secondary elements: white */
 		--accent: 45 100% 65%; /* Accent elements: #ffc300 */
-		--accent-foreground: 210 100% 12%; /* Text on accent elements: #001d3d */
-		--destructive: 0 100% 50%; /* Destructive elements: red for visibility */
-		--destructive-foreground: 54 100% 97%; /* Text on destructive elements: #fefae0 */
-		--ring: 220 100% 54%; /* Focus rings: #174DFF */
+		--accent-foreground: 0 0% 0%; /* Text on accent elements: black */
+		--destructive: 0 100% 50%; /* Destructive elements: red */
+		--destructive-foreground: 0 0% 100%; /* Text on destructive elements: white */
+		--ring: 0 0% 0%; /* Focus rings: black */
 		--radius: 0.5rem; /* Border radius */
-  }
+	 }
+
   
-  .dark {
-    --background: 210 100% 12%; /* Dark mode background: #001d3d */
-    --foreground: 192 77% 90%; /* Dark mode text: #caf0f8 */
-    --sidebar-background: 210 60% 12%; /* Dark mode sidebar background: #001d3d */
-    --sidebar-text: 192 77% 90%; /* Dark mode sidebar text: #caf0f8 */
-    --muted: 210 100% 12%; /* Dark mode muted background: #001d3d */
-    --muted-foreground: 192 77% 90%; /* Dark mode muted text: #caf0f8 */
-    --dashboard-background: 210 100% 12%; /* Dark mode dashboard background: #001d3d */
-    --dashboard-text: 192 77% 90%; /* Dark mode dashboard text: #caf0f8 */
-    --landingpage-background: 210 100% 12%; /* Dark mode landing page background: #001d3d */
-    --landingpage-text: 192 77% 90%; /* Dark mode landing page text: #caf0f8 */
-    --popover: 210 100% 12%; /* Dark mode popover background: #001d3d */
-    --popover-foreground: 192 77% 90%; /* Dark mode popover text: #caf0f8 */
-    --card: 210 60% 12%; /* Dark mode card background: #001d3d */
-    --card-foreground: 192 77% 90%; /* Dark mode card text: #caf0f8 */
-    --border: 210 100% 12%; /* Dark mode borders: #001d3d */
-    --input: 210 100% 20%; /* Dark mode input fields: #001d3d */
-    --primary: 220 100% 54%; /* Dark mode primary elements: #174DFF */
-    --primary-foreground: 210 100% 12%; /* Dark mode text on primary elements: #001d3d */
-    --secondary: 224 85% 51%; /* Dark mode secondary elements: #1A4BED */
-    --secondary-foreground: 210 100% 12%; /* Dark mode text on secondary elements: #001d3d */
-    --accent: 45 100% 65%; /* Dark mode accent elements: #ffc300 */
-    --accent-foreground: 210 100% 12%; /* Dark mode text on accent elements: #001d3d */
-    --destructive: 0 100% 50%; /* Dark mode destructive elements: red for visibility */
-    --destructive-foreground: 210 100% 12%; /* Dark mode text on destructive elements: #001d3d */
-    --ring: 220 100% 54%; /* Dark mode focus rings: #174DFF */
-    --radius: 0.5rem; /* Border radius */
-}
+	 .dark {
+		--background: 0 0% 10%; /* Dark mode background: very dark grey */
+		--foreground: 0 0% 100%; /* Dark mode text: white */
+		--sidebar-background: 0 0% 15%; /* Dark mode sidebar background: dark grey */
+		--sidebar-text: 0 0% 100%; /* Dark mode sidebar text: white */
+		--muted: 0 0% 20%; /* Dark mode muted background: darker grey */
+		--muted-foreground: 0 0% 70%; /* Dark mode muted text: light grey */
+		--dashboard-background: 0 0% 10%; /* Dark mode dashboard background: very dark grey */
+		--dashboard-text: 0 0% 100%; /* Dark mode dashboard text: white */
+		--landingpage-background: 0 0% 10%; /* Dark mode landing page background: very dark grey */
+		--landingpage-text: 0 0% 100%; /* Dark mode landing page text: white */
+		--popover: 0 0% 15%; /* Dark mode popover background: dark grey */
+		--popover-foreground: 0 0% 100%; /* Dark mode popover text: white */
+		--card: 0 0% 20%; /* Dark mode card background: darker grey */
+		--card-foreground: 0 0% 100%; /* Dark mode card text: white */
+		--border: 0 0% 25%; /* Dark mode borders: dark grey */
+		--input: 0 0% 40%; /* Dark mode input fields: darker grey */
+		--primary: 0 0% 100%; /* Dark mode primary elements: white */
+		--primary-foreground: 0 0% 10%; /* Dark mode text on primary elements: very dark grey */
+		--secondary: 0 0% 35%; /* Dark mode secondary elements: dark grey */
+		--secondary-foreground: 0 0% 100%; /* Dark mode text on secondary elements: white */
+		--accent: 45 100% 65%; /* Dark mode accent elements: #ffc300 */
+		--accent-foreground: 0 0% 10%; /* Dark mode text on accent elements: very dark grey */
+		--destructive: 0 100% 50%; /* Dark mode destructive elements: red */
+		--destructive-foreground: 0 0% 100%; /* Dark mode text on destructive elements: white */
+		--ring: 0 0% 100%; /* Dark mode focus rings: white */
+		--radius: 0.5rem; /* Border radius */
+	 }
   
 }
 
