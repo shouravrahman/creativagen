@@ -1,4 +1,6 @@
 "use client";
+import { SwirlyDoodle } from "@/app/(landing)/_components/Pricing.tsx";
+import SectionHeading from "@/app/(landing)/_components/SectionHeading.tsx";
 /* eslint-disable @next/next/no-img-element */
 import { motion, useAnimation, useInView } from "framer-motion";
 import { useEffect, useRef } from "react";
@@ -109,12 +111,12 @@ export default function Testimonials() {
         />
       </div>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-xl text-center">
-          <h2 className="text-lg  ">Testimonials</h2>
-          <p className="hidden bg-gradient-to-br from-blue-800 to-white bg-clip-text pt-4 text-5xl font-semibold tracking-tight text-transparent dark:to-purple-200 lg:inline-block">
-            We have worked with thousands of amazing people
-          </p>
-        </div>
+        {/* heading */}
+        <SectionHeading
+          mainTitle="Testimonials"
+          secondaryText="We have worked with thousands of amazing people"
+        />
+        {/* headng end */}
         <div
           ref={ref}
           className="mx-auto mt-16 grid max-w-2xl grid-cols-1 grid-rows-1 gap-8 text-sm leading-6 text-zinc-400 sm:mt-20 sm:grid-cols-2 xl:mx-0 xl:max-w-none xl:grid-flow-col xl:grid-cols-4 px-4 md:px-0"

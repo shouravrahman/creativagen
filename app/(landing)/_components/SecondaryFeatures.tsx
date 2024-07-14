@@ -8,6 +8,7 @@ import clsx from "clsx";
 import screenshotContacts from "/public/contacts.png";
 import screenshotInventory from "/public/inventory.png";
 import screenshotProfitLoss from "/public/profit-loss.png";
+import SectionHeading from "./SectionHeading.tsx";
 
 interface Feature {
   name: React.ReactNode;
@@ -116,13 +117,17 @@ function Feature({
 }) {
   return (
     <div
-      className={clsx(className, !isActive && "opacity-75 hover:opacity-100")}
+      className={clsx(
+        isActive && "bg-accent",
+        className,
+        !isActive && "opacity-75 hover:opacity-100"
+      )}
       {...props}
     >
       <div
         className={clsx(
           "w-9 rounded-lg",
-          isActive ? "bg-primary" : "bg-secondary"
+          isActive ? "bg-accent" : "bg-primary"
         )}
       >
         <svg aria-hidden="true" className="h-9 w-9" fill="none">
@@ -137,8 +142,8 @@ function Feature({
       >
         {feature.name}
       </h3>
-      <p className="mt-2 font-display text-xl">{feature.summary}</p>
-      <p className="mt-4 text-sm text-secondary">{feature.description}</p>
+      <p className="mt-2 font-display text-xl ">{feature.summary}</p>
+      <p className="mt-4 text-sm ">{feature.description}</p>
     </div>
   );
 }
@@ -171,7 +176,7 @@ function FeaturesDesktop() {
     <TabGroup className="hidden lg:mt-20 lg:block">
       {({ selectedIndex }) => (
         <>
-          <TabList className="grid grid-cols-3 gap-x-8">
+          <TabList className="grid grid-cols-3 gap-x-6">
             {features.map((feature, featureIndex) => (
               <Feature
                 key={feature.summary}
@@ -185,7 +190,7 @@ function FeaturesDesktop() {
                   ),
                 }}
                 isActive={featureIndex === selectedIndex}
-                className="relative"
+                className="relative p-6 border-2 border-border rounded-lg"
               />
             ))}
           </TabList>
@@ -202,7 +207,7 @@ function FeaturesDesktop() {
                   style={{ transform: `translateX(-${selectedIndex * 100}%)` }}
                   aria-hidden={featureIndex !== selectedIndex}
                 >
-                  <div className="w-[52.75rem] overflow-hidden rounded-xl bg-white shadow-lg shadow-slate-900/5 ring-1 ring-slate-500/10">
+                  <div className="w-[52.75rem] overflow-hidden rounded-xl  shadow-lg shadow-slate-900/5 ">
                     <Image
                       className="w-full"
                       src={feature.image}
@@ -228,15 +233,12 @@ export function SecondaryFeatures() {
       aria-label="Features for simplifying everyday business tasks"
       className="pb-14 pt-20 sm:pb-20 sm:pt-32 lg:pb-32"
     >
-      <div className="container mx-auto max-w-2xl md:text-center text-landingpage-text">
-        <h2 className="font-display text-3xl tracking-tight  sm:text-4xl">
-          Simplify everyday business tasks.
-        </h2>
-        <p className="mt-4 text-lg tracking-tight text-primary">
-          Because you’d probably be a little confused if we suggested you
-          complicate your everyday business tasks instead.
-        </p>
-      </div>
+      <SectionHeading
+        mainTitle="Need More?"
+        secondaryText="Because you’d probably be a little confused if we suggested you
+          complicate your everyday business tasks instead."
+      />
+
       <FeaturesMobile />
       <FeaturesDesktop />
     </section>

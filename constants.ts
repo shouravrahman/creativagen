@@ -1,5 +1,6 @@
 import {
   BookUser,
+  Briefcase,
   Handshake,
   Home,
   History,
@@ -62,9 +63,8 @@ const blogSchema = z.object({
     .number()
     .min(100, "Word count should be at least 100")
     .optional(),
-  airplaneMode: z.coerce.boolean().optional(),
   topic: z.string().min(1, "Topic is required"),
-  outline: z.boolean().optional(),
+  // outline: z.boolean().optional(),
   includeImages: z.boolean().optional(),
   includeLinks: z.boolean().optional(),
   realtimeKnowledge: z.boolean().optional(),
@@ -80,8 +80,8 @@ const blogSchema = z.object({
   pointOfView: z.enum(["automatic", "first", "second", "third"], {
     message: "Point of view is required",
   }),
-  blankOutline: z.boolean().optional(),
-  includeVideo: z.boolean().optional(),
+  // blankOutline: z.boolean().optional(),
+  // includeVideo: z.boolean().optional(),
   primaryKeyword: z.string().optional(),
   targetAudience: z.string().optional(),
   outlineInstructions: z.string().optional(),
@@ -114,6 +114,15 @@ const explainLikeImFiveSchema = z.object({
   tone: z.enum(["Default"]),
   language: z.enum(["English (US)"]),
   additionalInstructions: z.string().optional(),
+});
+const jobSearchSchema = z.object({
+  jobDescription: z.string().min(1, "Job description is required"),
+  resume: z.string().optional(),
+  jobTitle: z.string().min(1, "Job title is required"),
+  companyName: z.string().optional(),
+  interviewQuestion: z.string().optional(),
+  specificIndustry: z.string().optional(),
+  bulletPoint: z.string().optional(),
 });
 const dsaLearnerSchema = z.object({
   topic: z.string().min(1, "Topic is required"),
@@ -196,6 +205,48 @@ export const TEMPLATES = [
         placeholder: "Example: Reference links...",
       },
       {
+        label: "Insert Code Snippet",
+        field: "textarea",
+        name: "codeSnippet",
+        required: false,
+        placeholder: "Example: ```js console.log('Hello World'); ```",
+      },
+      {
+        label: "Technical Terms Glossary",
+        field: "textarea",
+        name: "technicalTerms",
+        required: false,
+        placeholder: "Example: JSON: JavaScript Object Notation",
+      },
+      {
+        label: "Markdown Content",
+        field: "textarea",
+        name: "markdownContent",
+        required: false,
+        placeholder: "Example: # Heading \n Content",
+      },
+      {
+        label: "API/Library References",
+        field: "textarea",
+        name: "apiReferences",
+        required: false,
+        placeholder: "Example: React, Next.js",
+      },
+      {
+        label: "Step-by-Step Instructions",
+        field: "textarea",
+        name: "stepByStep",
+        required: false,
+        placeholder: "Example: 1. Step one \n 2. Step two",
+      },
+      {
+        label: "Use Case Scenarios",
+        field: "textarea",
+        name: "useCaseScenarios",
+        required: false,
+        placeholder: "Example: Building a chat app with React",
+      },
+      {
         label: "Select category",
         field: "select",
         name: "category",
@@ -228,20 +279,7 @@ export const TEMPLATES = [
         type: "number",
         placeholder: "Example: 1000",
       },
-      {
-        label: "Airplane Mode",
-        field: "switch",
-        name: "airplaneMode",
-        required: false,
-        value: false,
-      },
-      {
-        label: "Edit Outline?",
-        field: "switch",
-        name: "outline",
-        required: false,
-        value: false,
-      },
+
       {
         label: "Include Images?",
         field: "switch",
@@ -308,20 +346,20 @@ export const TEMPLATES = [
           { label: "Third Person", value: "third" },
         ],
       },
-      {
-        label: "Use Blank Outline?",
-        field: "switch",
-        name: "blankOutline",
-        required: false,
-        value: false,
-      },
-      {
-        label: "Include Relevant Video?",
-        field: "switch",
-        name: "includeVideo",
-        required: false,
-        value: false,
-      },
+      // {
+      //   label: "Use Blank Outline?",
+      //   field: "switch",
+      //   name: "blankOutline",
+      //   required: false,
+      //   value: false,
+      // },
+      // {
+      //   label: "Include Relevant Video?",
+      //   field: "switch",
+      //   name: "includeVideo",
+      //   required: false,
+      //   value: false,
+      // },
       {
         label: "Primary Keyword (optional)",
         field: "input",
@@ -364,6 +402,71 @@ export const TEMPLATES = [
       },
     ],
     validationSchema: blogSchema,
+  },
+  {
+    name: "Job Search Accelerator Tool",
+    description:
+      "Utilize ChatGPT to streamline your job search and land more interviews with these actionable tips.",
+    icon: Briefcase,
+    href: "/job-search-accelerator",
+    color: "text-blue-500",
+    bgColor: "bg-yellow-300",
+    slug: "job-search-accelerator",
+    category: "Career Development",
+    aiPrompt:
+      "Optimize job search materials and preparation using the provided inputs.",
+    formFields: [
+      {
+        label: "Job Description",
+        field: "textarea",
+        name: "jobDescription",
+        required: true,
+        placeholder: "Paste the job description here...",
+      },
+      {
+        label: "Resume",
+        field: "textarea",
+        name: "resume",
+        required: false,
+        placeholder: "Paste your resume here...",
+      },
+      {
+        label: "Job Title",
+        field: "input",
+        name: "jobTitle",
+        required: true,
+        placeholder: "Example: Software Engineer",
+      },
+      {
+        label: "Company Name",
+        field: "input",
+        name: "companyName",
+        required: false,
+        placeholder: "Example: Tech Corp",
+      },
+      {
+        label: "Interview Question",
+        field: "textarea",
+        name: "interviewQuestion",
+        required: false,
+        placeholder: "Paste an interview question here...",
+      },
+      {
+        label: "Specific Industry",
+        field: "input",
+        name: "specificIndustry",
+        required: false,
+        placeholder: "Example: FinTech",
+      },
+      {
+        label: "Bullet Point",
+        field: "textarea",
+        name: "bulletPoint",
+        required: false,
+        placeholder: "Paste a bullet point from your resume here...",
+      },
+    ],
+    validationSchema: jobSearchSchema,
   },
   {
     name: "Freelance Proposal Generator Preview",

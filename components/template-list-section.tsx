@@ -36,7 +36,7 @@ const TemplateList = ({ searchInput }) => {
         <Card
           onClick={() => router.push(`/dashboard/content/${tool.slug}`)}
           key={tool.href}
-          className={`w-full bg-card bg-[${tool.bgColor}] text-primary hover:backdrop-brightness-200`}
+          className={`w-full bg-card text-card-foreground border-accent hover:backdrop-brightness-200`}
         >
           <tool.icon className={cn("h-16 w-16 m-4 mr-3", tool.color)} />
           <CardHeader>
@@ -45,7 +45,7 @@ const TemplateList = ({ searchInput }) => {
           </CardHeader>
 
           <CardFooter className="flex justify-between">
-            <Button variant="secondary">
+            <Button variant="accent">
               <Link href={tool.href}>RUN</Link>
             </Button>
           </CardFooter>

@@ -10,81 +10,63 @@ body,
 
 @layer base {
 	:root {
-		--background: 220 13% 18%;
-		--foreground: 220 13% 95%;
-		--sidebar-background: 220 25% 96%;
-		--sidebar-text: 220 15% 20%;
-		--muted: 220 13% 85%;
-		--muted-foreground: 220 13% 40%;
-		--dashboard-background: 220 15% 90%;
-		--dashboard-text: 220 15% 15%;
-		--landingpage-background: 0 0% 100%;
-		--landingpage-text: 0 0% 0%
-
-		--popover: 220 13% 18%;
-		--popover-foreground: 220 13% 95%;
-
-		--card: 220 13% 25%;
-		--card-foreground: 220 13% 95%;
-
-		--border: 220 13% 30%;
-		--input: 220 13% 20%;
-
-		--primary: 220 13% 45%;
-		--primary-foreground: 220 13% 95%;
-
-		--secondary: 220 13% 30%;
-		--secondary-foreground: 220 13% 95%;
-
-		--accent: 220 13% 50%;
-		--accent-foreground: 220 13% 95%;
-
-		--destructive: 0 62.8% 45%;
-		--destructive-foreground: 0 85.7% 95%;
-
-		--ring: 220 13% 45%;
-
-		--radius: 0.5rem;
-	}
-
-	.dark {
-		--dashboard-background: 220 15% 10%;
-		--dashboard-text: 220 15% 85%;
-		--landingpage-background: 220 15% 10%;
-		--landingpage-text: 220 15% 85%;
-		--background: 200 13% 10%;
-		--foreground: 220 13% 90%;
-
-		--muted: 220 13% 30%;
-		--muted-foreground: 220 13% 70%;
-
-		--popover: 220 13% 10%;
-		--popover-foreground: 220 13% 90%;
-
-		--card: 220 13% 15%;
-		--card-foreground: 220 13% 90%;
-
-		--border: 220 13% 25%;
-		--input: 220 13% 20%;
-
-		--primary: 220 13% 60%;
-		--primary-foreground: 220 13% 10%;
-
-		--secondary: 220 13% 35%;
-		--secondary-foreground: 220 13% 90%;
-
-		--accent: 220 13% 65%;
-		--accent-foreground: 220 13% 10%;
-
-		--destructive: 0 62.8% 50%;
-		--destructive-foreground: 0 85.7% 90%;
-
-		--ring: 220 13% 60%;
-
-		--radius: 0.5rem;
-		--sidebar-background: 220 15% 20%;
-		--sidebar-text: 220 15% 85%;
-	}
+		--background: 54 100% 97%; /* General background: #fefae0 */
+		--foreground: 210 100% 12%; /* General text: #001d3d */
+		--sidebar-background: 192 77% 90%; /* Sidebar background: #caf0f8 */
+		--sidebar-text: 210 100% 12%; /* Sidebar text: #001d3d */
+		--muted: 192 77% 90%; /* Muted background: #caf0f8 */
+		--muted-foreground: 224 85% 51%; /* Muted text: #1A4BED */
+		--dashboard-background: 54 100% 97%; /* Dashboard background: #fefae0 */
+		--dashboard-text: 210 100% 12%; /* Dashboard text: #001d3d */
+		--landingpage-background: 54 100% 97%; /* Landing page background: #fefae0 */
+		--landingpage-text: 210 100% 12%; /* Landing page text: #001d3d */
+		--popover: 192 77% 90%; /* Popover background: #caf0f8 */
+		--popover-foreground: 210 100% 12%; /* Popover text: #001d3d */
+		--card: 192 77% 90%; /* Card background: #caf0f8 */
+		--card-foreground: 210 100% 12%; /* Card text: #001d3d */
+		--border: 192 77% 90%; /* Borders: #caf0f8 */
+		--input: 192 77% 90%; /* Input fields: #caf0f8 */
+		--primary: 220 100% 54%; /* Primary elements: #174DFF */
+		--primary-foreground: 54 100% 97%; /* Text on primary elements: #fefae0 */
+		--secondary: 224 85% 51%; /* Secondary elements: #1A4BED */
+		--secondary-foreground: 54 100% 97%; /* Text on secondary elements: #fefae0 */
+		--accent: 45 100% 65%; /* Accent elements: #ffc300 */
+		--accent-foreground: 210 100% 12%; /* Text on accent elements: #001d3d */
+		--destructive: 0 100% 50%; /* Destructive elements: red for visibility */
+		--destructive-foreground: 54 100% 97%; /* Text on destructive elements: #fefae0 */
+		--ring: 220 100% 54%; /* Focus rings: #174DFF */
+		--radius: 0.5rem; /* Border radius */
+  }
+  
+  .dark {
+    --background: 210 100% 12%; /* Dark mode background: #001d3d */
+    --foreground: 192 77% 90%; /* Dark mode text: #caf0f8 */
+    --sidebar-background: 210 60% 12%; /* Dark mode sidebar background: #001d3d */
+    --sidebar-text: 192 77% 90%; /* Dark mode sidebar text: #caf0f8 */
+    --muted: 210 100% 12%; /* Dark mode muted background: #001d3d */
+    --muted-foreground: 192 77% 90%; /* Dark mode muted text: #caf0f8 */
+    --dashboard-background: 210 100% 12%; /* Dark mode dashboard background: #001d3d */
+    --dashboard-text: 192 77% 90%; /* Dark mode dashboard text: #caf0f8 */
+    --landingpage-background: 210 100% 12%; /* Dark mode landing page background: #001d3d */
+    --landingpage-text: 192 77% 90%; /* Dark mode landing page text: #caf0f8 */
+    --popover: 210 100% 12%; /* Dark mode popover background: #001d3d */
+    --popover-foreground: 192 77% 90%; /* Dark mode popover text: #caf0f8 */
+    --card: 210 60% 12%; /* Dark mode card background: #001d3d */
+    --card-foreground: 192 77% 90%; /* Dark mode card text: #caf0f8 */
+    --border: 210 100% 12%; /* Dark mode borders: #001d3d */
+    --input: 210 100% 20%; /* Dark mode input fields: #001d3d */
+    --primary: 220 100% 54%; /* Dark mode primary elements: #174DFF */
+    --primary-foreground: 210 100% 12%; /* Dark mode text on primary elements: #001d3d */
+    --secondary: 224 85% 51%; /* Dark mode secondary elements: #1A4BED */
+    --secondary-foreground: 210 100% 12%; /* Dark mode text on secondary elements: #001d3d */
+    --accent: 45 100% 65%; /* Dark mode accent elements: #ffc300 */
+    --accent-foreground: 210 100% 12%; /* Dark mode text on accent elements: #001d3d */
+    --destructive: 0 100% 50%; /* Dark mode destructive elements: red for visibility */
+    --destructive-foreground: 210 100% 12%; /* Dark mode text on destructive elements: #001d3d */
+    --ring: 220 100% 54%; /* Dark mode focus rings: #174DFF */
+    --radius: 0.5rem; /* Border radius */
+}
+  
 }
 
 @layer base {

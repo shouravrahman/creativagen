@@ -58,7 +58,8 @@ const FormSection = ({ selectedTemplate }: IFormSection) => {
                 rounded-lg 
                 border py-5 px-1 
                 md:px-6 
-                focus-within:shadow-sm               
+                focus-within:shadow-sm 
+                bg-card              
               "
       >
         {selectedTemplate?.formFields?.map((f) => {

@@ -7,7 +7,7 @@ export default function Dashboard() {
   const [searchInput, setSearchInput] = useState<string>();
 
   return (
-    <div>
+    <div className="">
       <div className="mb-8 px-4">
         <SearchSection onSearchInput={(value) => setSearchInput(value)} />
       </div>

@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button.tsx";
 import clsx from "clsx";
+import SectionHeading from "./SectionHeading.tsx";
 
-function SwirlyDoodle(props: React.ComponentPropsWithoutRef<"svg">) {
+export function SwirlyDoodle(props: React.ComponentPropsWithoutRef<"svg">) {
   return (
     <svg
       aria-hidden="true"
@@ -68,12 +69,17 @@ function Plan({
       className={clsx(
         "flex flex-col rounded-3xl px-6 sm:px-8",
         featured
-          ? "order-first bg-blue-600 py-8 lg:order-none"
-          : "lg:py-8 bg-primary/10"
+          ? "order-first bg-accent text-accent-foreground py-8 lg:order-none"
+          : "lg:py-8 bg-card"
       )}
     >
       <h3 className="mt-5 font-display text-lg ">{name}</h3>
-      <p className={clsx("mt-2 text-base", featured ? "" : "text-slate-400")}>
+      <p
+        className={clsx(
+          "mt-2 text-base",
+          featured ? "text-accent-foreground" : "text-slate-400"
+        )}
+      >
         {description}
       </p>
       <p className="order-first font-display text-5xl font-light tracking-tight ">
@@ -83,14 +89,14 @@ function Plan({
         role="list"
         className={clsx(
           "order-last mt-10 flex flex-col gap-y-3 text-sm",
-          featured ? "text-white" : "text-primary"
+          featured ? "text-accent-foreground" : "text-primary"
         )}
       >
         {features.map((feature) => (
           <li key={feature} className="flex">
             <CheckIcon
               className={
-                featured ? "text-white" : "text-destructive-foreground"
+                featured ? "text-destructive" : "text-destructive-foreground"
               }
             />
             <span className="ml-4">{feature}</span>
@@ -113,19 +119,10 @@ function Plan({
 export function Pricing() {
   return (
     <section id="pricing" aria-label="Pricing" className=" py-20 sm:py-32">
-      <div className="md:text-center container">
-        <h2 className="font-display text-3xl tracking-tight  sm:text-4xl">
-          <span className="relative whitespace-nowrap">
-            <SwirlyDoodle className="absolute left-0 top-1/2 h-[1em] w-full fill-blue-400" />
-            <span className="relative">Simple pricing,</span>
-          </span>{" "}
-          for everyone.
-        </h2>
-        <p className="mt-4 text-lg text-slate-400">
-          It doesn’t matter what size your business is, our software won’t work
-          well for you.
-        </p>
-      </div>
+      <SectionHeading
+        mainTitle="Pricing"
+        secondaryText="It doesn’t matter what size your business is, our software will work well for you."
+      />
       <div className="-mx-4 mt-16 grid max-w-2xl grid-cols-1 gap-y-10 sm:mx-auto lg:-mx-8 lg:max-w-none lg:grid-cols-3 xl:mx-0 xl:gap-x-8">
         <Plan
           name="Starter"

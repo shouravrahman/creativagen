@@ -2,23 +2,23 @@ import { Search } from "lucide-react";
 import { debounce } from "@/lib/utils";
 const SearchSection = ({ onSearchInput }) => {
   return (
-    <div className="px-10 rounded-md py-6 bg-gradient-to-br from-[#131314] to-gray-800 flex flex-col justify-center items-center">
+    <div className="px-10 rounded-md py-6  flex flex-col justify-center items-center">
       <h2 className="text-3xl font-bold">BROWSE All TEMPLATES</h2>
-      <p className="text-zinc-300 hidden lg:block">
+      <p className="text-priamry hidden lg:block">
         Find the right tool for you
       </p>
       <div className="w-full flex items-center justify-center">
         <div className=" mx-auto my-4 w-full md:w-[50%] ">
           <label
             for="default-search"
-            className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+            className="mb-2 text-sm font-medium text-foreground sr-only dark:text-white"
           >
             Search
           </label>
           <div className="relative">
             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
               <svg
-                className="w-4 h-4 text-gray-500 dark:text-gray-400"
+                className="w-4 h-4 text-accent"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
