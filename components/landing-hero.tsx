@@ -8,7 +8,7 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { currentUser } from "@/lib/auth.ts";
 
-export const LandingHero = async () => {
+export const LandingHero = () => {
   // const user = await currentUser();
   return (
     <div className=" text-primary dark:text-white font-bold md:my-4 lg:my-10 py-2 md:py-8 px-8 flex flex-col-reverse md:flex-col items-center justify-around gap-10 md:gap-6 space-y-2 ">
@@ -59,7 +59,6 @@ export const LandingHero = async () => {
           width={1000}
           alt="hero"
           className="rounded-2xl p-2 border border-slate-400/10 text-center"
-          layout="responsive"
         />
       </motion.div>
     </div>

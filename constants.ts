@@ -26,6 +26,7 @@ import {
   Newspaper,
   TypeIcon,
   ListIcon,
+  User,
 } from "lucide-react";
 import { z } from "zod";
 export const MAX_FREE_COUNTS = 10;
@@ -140,7 +141,7 @@ export const routes = [
   {
     label: "Home",
     icon: Home,
-    href: "/home",
+    href: "/",
     color: "text-green-500",
   },
   {
@@ -152,13 +153,19 @@ export const routes = [
   {
     label: "Billing",
     icon: CreditCard,
-    href: "/billing",
+    href: "/dashboard/billing",
     color: "text-red-500",
   },
   {
     label: "Settings",
     icon: Settings,
-    href: "/settings",
+    href: "/dashboard/settings",
+    color: "text-gray-500",
+  },
+  {
+    label: "Profile",
+    icon: User,
+    href: "/dashboard/profile",
     color: "text-gray-500",
   },
 ];

@@ -7,6 +7,9 @@ import { Response, ResponseWithMessage } from "@/types/index.ts";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+export function absoluteUrl(relativeUrl: string) {
+  return `${process.env.NEXT_PUBLIC_APP_URL}${relativeUrl}`;
+}
 
 export async function hashPassword(password: string) {
   return await bcrypt.hash(password, await bcrypt.genSalt());
