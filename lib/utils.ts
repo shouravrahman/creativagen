@@ -1,89 +1,72 @@
 import { type ClassValue, clsx } from "clsx";
-
-import { extendTailwindMerge } from "tailwind-merge";
-
-const COMMON_UNITS = ["small", "medium", "large"];
-
-/**
- * We need to extend the tailwind merge to include NextUI's custom classes.
- *
- * So we can use classes like `text-small` or `text-default-500` and override them.
- */
-const twMerge = extendTailwindMerge({
-  extend: {
-    theme: {
-      opacity: ["disabled"],
-      spacing: ["divider"],
-      borderWidth: COMMON_UNITS,
-      borderRadius: COMMON_UNITS,
-    },
-    classGroups: {
-      shadow: [{ shadow: COMMON_UNITS }],
-      "font-size": [{ text: ["tiny", ...COMMON_UNITS] }],
-      "bg-image": ["bg-stripe-gradient"],
-    },
-  },
-});
+import { twMerge } from "tailwind-merge";
+import { sign, verify, type SignOptions, type Secret } from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+import { Response, ResponseWithMessage } from "@/types/index.ts";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function absoluteUrl(path: string) {
-  return `${process.env.NEXT_PUBLIC_APP_URL}${path}`;
+export async function hashPassword(password: string) {
+  return await bcrypt.hash(password, await bcrypt.genSalt());
 }
 
-export function formatDate(input: string | number | Date): string {
-  const date = new Date(input);
-  return date.toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
+/**
+ * Function to check whether the given value is expired or not.
+ * @param expires The date that want to check
+ * @return true if the value is expired, false otherwise
+ */
+export function isExpired(expires: Date): boolean {
+  return new Date(expires) < new Date();
+}
+
+/**
+ * Function to set token expiration.
+ * @param exp Duration of token expiration, default is 3600 milliseconds or 1 hour
+ * @return Generates datetime for the token expiration
+ */
+export function setTokenExpiration(exp: number = 60 * 60) {
+  return new Date(new Date().getTime() + 1000 * exp);
+}
+
+/**
+ * Function to generate jwt.
+ * @param payload The payload want to generate
+ * @param options The sign options
+ * @return The token generated
+ */
+
+export function signJwt(
+  payload: Record<string, unknown>,
+  options?: SignOptions
+) {
+  return sign(payload, process.env.JWT_SECRET as Secret, {
+    ...options,
+    algorithm: "HS256",
   });
 }
 
-export const formatNumber = (value: number) =>
-  new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  }).format(value);
-
-export const runAsyncFnWithoutBlocking = (
-  fn: (...args: any) => Promise<any>
-) => {
-  fn();
-};
-
-export const sleep = (ms: number) =>
-  new Promise((resolve) => setTimeout(resolve, ms));
-
-export const getStringFromBuffer = (buffer: ArrayBuffer) =>
-  Array.from(new Uint8Array(buffer))
-    .map((b) => b.toString(16).padStart(2, "0"))
-    .join("");
-
-export enum ResultCode {
-  InvalidCredentials = "INVALID_CREDENTIALS",
-  InvalidSubmission = "INVALID_SUBMISSION",
-  UserAlreadyExists = "USER_ALREADY_EXISTS",
-  UnknownError = "UNKNOWN_ERROR",
-  UserCreated = "USER_CREATED",
-  UserLoggedIn = "USER_LOGGED_IN",
-}
-
-export const getMessageFromCode = (resultCode: string) => {
-  switch (resultCode) {
-    case ResultCode.InvalidCredentials:
-      return "Invalid credentials!";
-    case ResultCode.InvalidSubmission:
-      return "Invalid submission, please try again!";
-    case ResultCode.UserAlreadyExists:
-      return "User already exists, please log in!";
-    case ResultCode.UserCreated:
-      return "User created, welcome!";
-    case ResultCode.UnknownError:
-      return "Something went wrong, please try again!";
-    case ResultCode.UserLoggedIn:
-      return "Logged in!";
+export const verifyJwtToken = <T extends object>(token: string) => {
+  try {
+    const decoded = verify(token, process.env.JWT_SECRET as Secret);
+    return {
+      valid: true,
+      decoded: decoded as T,
+    };
+  } catch (error) {
+    return {
+      valid: false,
+      decoded: null,
+    };
   }
 };
+
+// Overload for response status in server action
+export function response(response: ResponseWithMessage): Response;
+export function response<T extends Record<string, unknown>>(
+  response: Response<T>
+): Response<T>;
+export function response<T extends object>(response: T): T {
+  return response;
+}

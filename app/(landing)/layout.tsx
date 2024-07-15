@@ -1,5 +1,3 @@
-import Footer from "@/components/footer";
-
 const LandingLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <main className="">

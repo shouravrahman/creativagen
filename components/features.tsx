@@ -1,4 +1,4 @@
-import SectionHeading from "@/app/(landing)/_components/SectionHeading.tsx";
+import SectionHeading from "@/app/(landing)/_components/SectionHeading";
 import {
   ArrowPathIcon,
   CloudArrowUpIcon,

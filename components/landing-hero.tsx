@@ -2,13 +2,14 @@
 
 import TypewriterComponent from "typewriter-effect";
 import Link from "next/link";
-import { useUser } from "@clerk/nextjs";
-import { motion, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
+import { currentUser } from "@/lib/auth.ts";
 
-export const LandingHero = () => {
-  const { isSignedIn } = useUser();
+export const LandingHero = async () => {
+  // const user = await currentUser();
   return (
     <div className=" text-primary dark:text-white font-bold md:my-4 lg:my-10 py-2 md:py-8 px-8 flex flex-col-reverse md:flex-col items-center justify-around gap-10 md:gap-6 space-y-2 ">
       <section className="flex flex-col  items-center lg:justify-around gap-2 md:gap-6">
@@ -33,7 +34,7 @@ export const LandingHero = () => {
           Create content using AI 10x faster.
         </div>
         <div>
-          <Link href={isSignedIn ? "/dashboard" : "/sign-up"}>
+          <Link href={"/dashboard"}>
             <Button
               variant="accent"
               className="md:text-lg p-4 md:p-6 rounded-full font-semibold"

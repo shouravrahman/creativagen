@@ -2,10 +2,10 @@ import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { useUser } from "@clerk/nextjs";
-import { auth, currentUser } from "@clerk/nextjs/server";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import ThemeSwitch from "./ThemeSwitch.tsx";
+import { currentUser } from "@/lib/auth.ts";
 
 const font = Montserrat({ weight: "600", subsets: ["latin"] });
 
@@ -27,7 +27,7 @@ export const LandingNavbar = async () => {
       </Link>
       <div className="flex items-center gap-x-2">
         <ThemeSwitch />
-        <Link href={user ? "/dashboard" : "/sign-up"}>
+        <Link href={user ? "/dashboard" : "/register"}>
           <Button variant="default" className="rounded-full">
             Get Started
           </Button>

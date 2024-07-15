@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import { Inter, Nunito_Sans, Titillium_Web, Quicksand } from "next/font/google";
-import { ClerkProvider } from "@clerk/nextjs";
 
 import { ToasterProvider } from "@/components/toaster-provider";
 import { ModalProvider } from "@/components/modal-provider";
 import { CrispProvider } from "@/components/crisp-provider";
-
+import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
-import Footer from "@/components/footer";
 import { ThemeProvider } from "@/components/theme-provider.tsx";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -28,15 +26,14 @@ export default async function RootLayout({
   return (
     <html suppressHydrationWarning>
       <CrispProvider />
-      <ClerkProvider>
-        <body className={`bg-background ${quciksand.className} `}>
-          <ThemeProvider attribute="class">
-            <ToasterProvider />
-            <ModalProvider />
-            {children}
-          </ThemeProvider>
-        </body>
-      </ClerkProvider>
+      <body className={`bg-background ${quciksand.className} `}>
+        <ThemeProvider attribute="class">
+          <ToasterProvider />
+          <ModalProvider />
+          {children}
+          <Toaster />
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

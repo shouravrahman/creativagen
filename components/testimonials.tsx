@@ -1,6 +1,6 @@
 "use client";
-import { SwirlyDoodle } from "@/app/(landing)/_components/Pricing.tsx";
-import SectionHeading from "@/app/(landing)/_components/SectionHeading.tsx";
+import { SwirlyDoodle } from "@/app/(landing)/_components/Pricing";
+import SectionHeading from "@/app/(landing)/_components/SectionHeading";
 /* eslint-disable @next/next/no-img-element */
 import { motion, useAnimation, useInView } from "framer-motion";
 import { useEffect, useRef } from "react";

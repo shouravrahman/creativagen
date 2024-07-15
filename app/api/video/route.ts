@@ -1,22 +1,22 @@
 import Replicate from "replicate";
-import { auth } from '@clerk/nextjs/server'; import { NextResponse } from "next/server";
+import { auth } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
 
 import { incrementApiLimit, checkApiLimit } from "@/lib/api-limit";
 import { checkSubscription } from "@/lib/subscription";
+import { currentUser } from "@/lib/auth.ts";
 
 const replicate = new Replicate({
   auth: process.env.REPLICATE_API_TOKEN!,
 });
 
-export async function POST(
-  req: Request
-) {
+export async function POST(req: Request) {
   try {
-    const { userId } = auth();
+    const user = await currentUser();
     const body = await req.json();
     const { prompt } = body;
 
-    if (!userId) {
+    if (!user) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
@@ -28,7 +28,10 @@ export async function POST(
     const isPro = await checkSubscription();
 
     if (!freeTrial && !isPro) {
-      return new NextResponse("Free trial has expired. Please upgrade to pro.", { status: 403 });
+      return new NextResponse(
+        "Free trial has expired. Please upgrade to pro.",
+        { status: 403 }
+      );
     }
 
     const response = await replicate.run(
@@ -36,7 +39,7 @@ export async function POST(
       {
         input: {
           prompt,
-        }
+        },
       }
     );
 
@@ -46,7 +49,7 @@ export async function POST(
 
     return NextResponse.json(response);
   } catch (error) {
-    console.log('[VIDEO_ERROR]', error);
+    console.log("[VIDEO_ERROR]", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
-};
+}
