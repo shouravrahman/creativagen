@@ -5,6 +5,7 @@ import { currentUser } from "./auth.ts";
 
 export const incrementApiLimit = async () => {
   const user = await currentUser();
+  console.log(user);
 
   if (!user) {
     return;

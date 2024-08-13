@@ -5,11 +5,9 @@ import Image from "next/image";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import clsx from "clsx";
 
-import backgroundImage from "/public/background-features.jpg";
 import screenshotExpenses from "/public/payroll.png";
 import screenshotPayroll from "/public/payroll.png";
-import screenshotReporting from "/public/profit-loss.png";
-import screenshotVatReturns from "/public/inventory.png";
+
 import SectionHeading from "./SectionHeading.tsx";
 
 const features = [
@@ -28,14 +26,14 @@ const features = [
 	{
 		title: "VAT handling",
 		description:
-			"We only sell our software to companies who don't deal with VAT at all, so technically we do all the VAT stuff they need.",
-		image: screenshotVatReturns,
+         "We only sell our software to companies who don't deal with VAT at all, we do all the VAT.",
+      image: screenshotPayroll,
 	},
 	{
 		title: "Reporting",
 		description:
-			"Easily export your data into an Excel spreadsheet where you can do whatever the hell you want with it.",
-		image: screenshotReporting,
+         "Easily export your data into an Excel spreadsheet where you can do whatever you want with it.",
+      image: screenshotPayroll,
 	},
 ];
 
@@ -63,16 +61,9 @@ export function PrimaryFeatures() {
 		<section
 			id="features"
 			aria-label="Features for running your books"
-			className="relative overflow-hidden  pb-28 pt-20 sm:py-32"
+         className="relative overflow-hidden  "
 		>
-			{/* <Image
-        className="absolute left-1/2 top-1/2 max-w-none translate-x-[-44%] translate-y-[-42%]"
-        src={backgroundImage}
-        alt=""
-        width={2245}
-        height={1636}
-        unoptimized
-      /> */}
+
 			<SectionHeading
 				mainTitle="Main Features"
 				secondaryText="Well everything you need if you aren’t that picky about minor details
@@ -80,18 +71,18 @@ export function PrimaryFeatures() {
 			/>
 
 			<TabGroup
-				className="mt-16 grid grid-cols-1 items-center gap-y-2 pt-10 sm:gap-y-6 md:mt-20 lg:grid-cols-12 lg:pt-0"
+            className="mt-6 md:mt-10 grid grid-cols-1 items-center gap-y-2 pt-10 sm:gap-y-6 lg:grid-cols-12 lg:pt-0"
 				vertical={tabOrientation === "vertical"}
 			>
 				{({ selectedIndex }) => (
 					<>
 						<div className="-mx-4 flex overflow-x-auto pb-4 sm:mx-0 sm:overflow-visible sm:pb-0 lg:col-span-5">
-							<TabList className="relative z-10 flex gap-x-4 whitespace-nowrap px-4 sm:mx-auto sm:px-0 lg:mx-0 lg:block lg:gap-x-0 lg:gap-y-1 lg:whitespace-normal">
+                     <TabList className="relative z-10 flex  whitespace-nowrap mx-auto lg:mx-0 lg:block lg:gap-x-0 lg:gap-y-1 lg:whitespace-normal">
 								{features.map((feature, featureIndex) => (
 									<div
 										key={feature.title}
 										className={clsx(
-											"group relative rounded-full px-4 py-1 lg:rounded-l-xl lg:rounded-r-none lg:p-6",
+                                 "group relative rounded-full px-3 py-1 lg:rounded-l-xl lg:rounded-r-none lg:p-6",
 											selectedIndex === featureIndex
 												? "bg-muted "
 												: "hover:bg-primary/10"
@@ -100,10 +91,10 @@ export function PrimaryFeatures() {
 										<h3>
 											<Tab
 												className={clsx(
-													"font-display text-lg outline-none",
+                                       "font-display text-sm md:text-lg outline-none",
 													selectedIndex === featureIndex
-														? "dark:text-accent text-primary font-bold"
-														: "text-foreground "
+                                          ? "text-accent font-bold"
+                                          : "text-foreground font-bold"
 												)}
 											>
 												<span className="absolute inset-0  rounded-full lg:rounded-l-xl lg:rounded-r-none" />
@@ -112,10 +103,10 @@ export function PrimaryFeatures() {
 										</h3>
 										<p
 											className={clsx(
-												"mt-2 hidden text-sm lg:block",
+                                    "mt-2 hidden text-base lg:block",
 												selectedIndex === featureIndex
 													? "text-primary"
-													: "text-foreground group-hover:text-landingpage-text"
+                                       : "text-foreground group-hover:text-primary"
 											)}
 										>
 											{feature.description}
@@ -129,15 +120,15 @@ export function PrimaryFeatures() {
 								<TabPanel key={feature.title} unmount={false}>
 									<div className="relative sm:px-6 lg:hidden">
 										<div className="absolute -inset-x-4 bottom-[-4.25rem] top-[-6.5rem]  ring-1 ring-inset ring-white/10 sm:inset-x-0 sm:rounded-t-xl" />
-										<p className="relative mx-auto max-w-2xl text-base  sm:text-center">
+                              <p className="relative mx-auto max-w-2xl px-4 text-base  sm:text-center">
 											{feature.description}
 										</p>
 									</div>
-									<div className="mt-10 w-[45rem] overflow-hidden rounded-xl  shadow-xl  sm:w-auto lg:mt-0 lg:w-[67.8125rem]">
+                           <div className="mt-10 w-[45rem] overflow-hidden rounded-xl  shadow-xl  sm:w-auto lg:mt-0 lg:w-[67.8125rem] h-[400px] sm:h-auto">
 										<Image
 											className="w-full"
 											src={feature.image}
-											alt=""
+                                 alt="feature"
 											priority
 											sizes="(min-width: 1024px) 67.8125rem, (min-width: 640px) 100vw, 45rem"
 										/>

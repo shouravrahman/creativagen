@@ -38,7 +38,7 @@ const CustomSwitch: React.FC<CustomSwitchProps> = ({
           }`}
         />
       </div>
-      {/* <label htmlFor={id} className="text-gray-700">
+        {/* <label htmlFor={id} className=" ">
         {id}
       </label> */}
     </div>

@@ -9,75 +9,41 @@ body,
 }
 
 @layer base {
-	:root {
-		--background: 0 0% 100%; /* General background: white */
-		--foreground: 0 0% 0%; /* General text: black */
-		--sidebar-background: 0 0% 95%; /* Sidebar background: very light grey */
-		--sidebar-text: 0 0% 0%; /* Sidebar text: black */
-		--muted: 0 0% 90%; /* Muted background: light grey */
-		--muted-foreground: 0 0% 40%; /* Muted text: dark grey */
-		--dashboard-background: 0 0% 95%; /* Dashboard background: very light grey */
-		--dashboard-text: 0 0% 0%; /* Dashboard text: black */
-		--landingpage-background: 0 0% 100%; /* Landing page background: white */
-		--landingpage-text: 0 0% 0%; /* Landing page text: black */
-		--popover: 0 0% 95%; /* Popover background: very light grey */
-		--popover-foreground: 0 0% 0%; /* Popover text: black */
-		--card: 0 0% 95%; /* Card background: very light grey */
-		--card-foreground: 0 0% 0%; /* Card text: black */
-		--border: 0 0% 90%; /* Borders: light grey */
-		--input: 0 0% 95%; /* Input fields: very light grey */
-		--primary: 0 0% 0%; /* Primary elements: black */
-		--primary-foreground: 0 0% 100%; /* Text on primary elements: white */
-		--secondary: 0 0% 40%; /* Secondary elements: dark grey */
-		--secondary-foreground: 0 0% 100%; /* Text on secondary elements: white */
-		--accent: 45 100% 65%; /* Accent elements: #ffc300 */
-		--accent-foreground: 0 0% 0%; /* Text on accent elements: black */
-		--destructive: 0 100% 50%; /* Destructive elements: red */
-		--destructive-foreground: 0 0% 100%; /* Text on destructive elements: white */
-		--ring: 0 0% 0%; /* Focus rings: black */
-		--radius: 0.5rem; /* Border radius */
-	 }
+   :root {
+     --background: 0 0% 98%; /* Light mode background: very light grey */
+     --foreground: 0 0% 10%; /* Light mode text: dark grey */
+     --primary: 220 90% 55%; /* Light mode primary elements: blue */
+     --primary-foreground: 0 0% 100%; /* Light mode text on primary elements: white */
+     --accent: 45 100% 50%; /* Light mode accent elements: yellow */
+     --accent-foreground: 0 0% 10%; /* Light mode text on accent elements: dark grey */
+     --sidebar: 0 0% 95%; /* Light mode sidebar background: light grey */
+     --sidebar-text: 0 0% 10%; /* Light mode sidebar text: dark grey */
+     --card: 0 0% 100%; /* Light mode card background: white */
+     --card-foreground: 0 0% 10%; /* Light mode card text: dark grey */
+     --border: 0 0% 85%; /* Light mode borders: light grey */
+     --radius: 0.5rem; /* Border radius */
+   }
 
-  
-	 .dark {
-		--background: 0 0% 10%; /* Dark mode background: very dark grey */
-		--foreground: 0 0% 100%; /* Dark mode text: white */
-		--sidebar-background: 0 0% 15%; /* Dark mode sidebar background: dark grey */
-		--sidebar-text: 0 0% 100%; /* Dark mode sidebar text: white */
-		--muted: 0 0% 20%; /* Dark mode muted background: darker grey */
-		--muted-foreground: 0 0% 70%; /* Dark mode muted text: light grey */
-		--dashboard-background: 0 0% 10%; /* Dark mode dashboard background: very dark grey */
-		--dashboard-text: 0 0% 100%; /* Dark mode dashboard text: white */
-		--landingpage-background: 0 0% 10%; /* Dark mode landing page background: very dark grey */
-		--landingpage-text: 0 0% 100%; /* Dark mode landing page text: white */
-		--popover: 0 0% 15%; /* Dark mode popover background: dark grey */
-		--popover-foreground: 0 0% 100%; /* Dark mode popover text: white */
-		--card: 0 0% 20%; /* Dark mode card background: darker grey */
-		--card-foreground: 0 0% 100%; /* Dark mode card text: white */
-		--border: 0 0% 25%; /* Dark mode borders: dark grey */
-		--input: 0 0% 40%; /* Dark mode input fields: darker grey */
-		--primary: 0 0% 100%; /* Dark mode primary elements: white */
-		--primary-foreground: 0 0% 10%; /* Dark mode text on primary elements: very dark grey */
-		--secondary: 0 0% 35%; /* Dark mode secondary elements: dark grey */
-		--secondary-foreground: 0 0% 100%; /* Dark mode text on secondary elements: white */
-		--accent: 45 100% 65%; /* Dark mode accent elements: #ffc300 */
-		--accent-foreground: 0 0% 10%; /* Dark mode text on accent elements: very dark grey */
-		--destructive: 0 100% 50%; /* Dark mode destructive elements: red */
-		--destructive-foreground: 0 0% 100%; /* Dark mode text on destructive elements: white */
-		--ring: 0 0% 100%; /* Dark mode focus rings: white */
-		--radius: 0.5rem; /* Border radius */
-	 }
-  
-}
+   .dark {
+     --background: 240 10% 10%; /* Dark mode background: dark grey */
+     --foreground: 0 0% 100%; /* Dark mode text: white */
+     --primary: 220 90% 70%; /* Dark mode primary elements: lighter blue */
+     --primary-foreground: 0 0% 10%; /* Dark mode text on primary elements: dark grey */
+     --accent: 45 100% 60%; /* Dark mode accent elements: lighter yellow */
+     --accent-foreground: 0 0% 10%; /* Dark mode text on accent elements: dark grey */
+     --sidebar: 240 10% 15%; /* Dark mode sidebar background: dark grey */
+     --sidebar-text: 0 0% 100%; /* Dark mode sidebar text: white */
+     --card: 240 10% 20%; /* Dark mode card background: darker grey */
+     --card-foreground: 0 0% 100%; /* Dark mode card text: white */
+     --border: 240 5% 25%; /* Dark mode borders: dark grey */
+     --radius: 0.5rem; /* Border radius */
+   }
+ }
 
-@layer base {
-	* {
-		@apply border-border;
-	}
-	body {
-		@apply bg-slate-950 text-foreground;
-	}
-}
+
+
+
+
 select {
 	/* Base styles */
 	display: inline-block;
@@ -92,11 +58,11 @@ select {
 	cursor: pointer;
 	transition: all 0.2s ease-in-out;
  }
- 
+
 select:hover {
 	border-color: #666; /* Slightly darker border on hover */
  }
- 
+
 select:focus {
 	outline: none;
 	border-color: #ccc; /* Lighten border on focus */

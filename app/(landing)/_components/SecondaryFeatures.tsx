@@ -118,30 +118,33 @@ function Feature({
 	return (
 		<div
 			className={clsx(
-				isActive && "bg-accent  dark:text-background text-foreground",
+            isActive && "bg-accent text-background",
 				className,
-				!isActive && "opacity-90 hover:opacity-100"
+            !isActive && "opacity-90 hover:opacity-100",
+            "p-6 rounded-lg"
 			)}
 			{...props}
 		>
-			<div
-				className={clsx(
-					"w-9 rounded-lg",
-					isActive ? "bg-secondary " : "bg-accent"
-				)}
-			>
-				<svg aria-hidden="true" className="h-9 w-9" fill="none">
-					<feature.icon />
-				</svg>
-			</div>
-			<h3
-				className={clsx(
-					"mt-6 text-xl font-semibold outline-none",
-					isActive ? "text-foreground dark:text-black" : "text-primary"
-				)}
-			>
-				{feature.name}
-			</h3>
+         <div className="flex items-center gap-x-2">
+            <div
+               className={clsx(
+                  "w-9 rounded-lg flex justify-between",
+                  isActive ? "bg-accent" : "bg-secondary "
+               )}
+            >
+               <svg aria-hidden="true" className="h-9 w-9" fill="none">
+                  <feature.icon />
+               </svg>
+            </div>
+            <h3
+               className={clsx(
+                  " text-xl font-semibold outline-none",
+                  isActive ? "text-foreground dark:text-black" : "text-primary"
+               )}
+            >
+               {feature.name}
+            </h3>
+         </div>
 			<p className="mt-2 font-display  text-lg ">{feature.summary}</p>
 			<p className="mt-4 text-sm ">{feature.description}</p>
 		</div>
@@ -150,17 +153,17 @@ function Feature({
 
 function FeaturesMobile() {
 	return (
-		<div className="-mx-4 mt-20 flex flex-col gap-y-10 overflow-hidden px-4 sm:-mx-6 sm:px-6 lg:hidden">
+      <div className="-mx-4 mt-6 md:mt-10 flex flex-col  overflow-hidden px-4 sm:-mx-6 sm:px-6 lg:hidden">
 			{features.map((feature) => (
 				<div key={feature.summary}>
-					<Feature feature={feature} className="mx-auto max-w-2xl" isActive />
-					<div className="relative mt-10 pb-10">
+               <Feature feature={feature} className="mx-auto max-w-sm" isActive />
+               <div className="relative  pb-10">
 						<div className="absolute -inset-x-4 bottom-0 top-8  sm:-inset-x-6" />
-						<div className="relative mx-auto w-[52.75rem] overflow-hidden rounded-xl">
+                  <div className="hidden md:block relative mx-auto w-[52.75rem] overflow-hidden rounded-xl">
 							<Image
 								className="w-full"
 								src={feature.image}
-								alt=""
+                        alt={feature.summary}
 								sizes="52.75rem"
 							/>
 						</div>
@@ -211,7 +214,7 @@ function FeaturesDesktop() {
 										<Image
 											className="w-full"
 											src={feature.image}
-											alt=""
+                                 alt={feature.summary}
 											sizes="52.75rem"
 										/>
 									</div>
@@ -230,8 +233,7 @@ export function SecondaryFeatures() {
 	return (
 		<section
 			id="secondary-features"
-			aria-label="Features for simplifying everyday business tasks"
-			className="pb-14 pt-20 sm:pb-20 sm:pt-32 lg:pb-32"
+         aria-label="Features for simplifying everyday business tasks"
 		>
 			<SectionHeading
 				mainTitle="Need More?"

@@ -16,54 +16,28 @@ module.exports = {
 			},
 		},
 		extend: {
-			
-			colors: {
-				border: "hsl(var(--border))", // Borders for all components
-				input: "hsl(var(--input))", // Background for input fields
-				ring: "hsl(var(--ring))", // Focus ring color for interactive elements
-				background: "hsl(var(--background))", // General background color
-				foreground: "hsl(var(--foreground))", // General text color
-				primary: {
-					 DEFAULT: "hsl(var(--primary))", // Primary buttons and links
-					 foreground: "hsl(var(--primary-foreground))", // Text on primary buttons and links
-				},
-				secondary: {
-					 DEFAULT: "hsl(var(--secondary))", // Secondary buttons and links
-					 foreground: "hsl(var(--secondary-foreground))", // Text on secondary buttons and links
-				},
-				accent: {
-					 DEFAULT: "hsl(var(--accent))", // Accent elements like badges or highlights
-					 foreground: "hsl(var(--accent-foreground))", // Text on accent elements
-				},
-				destructive: {
-					 DEFAULT: "hsl(var(--destructive))", // Destructive actions like delete buttons
-					 foreground: "hsl(var(--destructive-foreground))", // Text on destructive elements
-				},
-				muted: {
-					 DEFAULT: "hsl(var(--muted))", // Muted background elements
-					 foreground: "hsl(var(--muted-foreground))", // Text on muted background elements
-				},
-				card: {
-					 DEFAULT: "hsl(var(--card))", // Background for card components
-					 foreground: "hsl(var(--card-foreground))", // Text on card components
-				},
-				sidebar: {
-					 DEFAULT: "hsl(var(--sidebar-background))", // Sidebar background
-					 text: "hsl(var(--sidebar-text))", // Sidebar text
-				},
-				dashboard: {
-					 DEFAULT: "hsl(var(--dashboard-background))", // Dashboard background
-					 text: "hsl(var(--dashboard-text))", // Dashboard text
-				},
-				landingpage: {
-					 DEFAULT: "hsl(var(--landingpage-background))", // Landing page background
-					 text: "hsl(var(--landingpage-text))", // Landing page text
-				},
-				popover: {
-					 DEFAULT: "hsl(var(--popover))", // Popovers and tooltips background
-					 foreground: "hsl(var(--popover-foreground))", // Text on popovers and tooltips
-				},
-		  },
+
+         colors: {
+            background: "hsl(var(--background))",
+            foreground: "hsl(var(--foreground))",
+            primary: {
+              DEFAULT: "hsl(var(--primary))",
+              foreground: "hsl(var(--primary-foreground))",
+            },
+            accent: {
+              DEFAULT: "hsl(var(--accent))",
+              foreground: "hsl(var(--accent-foreground))",
+            },
+            sidebar: {
+              DEFAULT: "hsl(var(--sidebar))",
+              text: "hsl(var(--sidebar-text))",
+            },
+            card: {
+              DEFAULT: "hsl(var(--card))",
+              foreground: "hsl(var(--card-foreground))",
+            },
+            border: "hsl(var(--border))",
+          },
 			borderRadius: {
 				lg: "var(--radius)",
 				md: "calc(var(--radius) - 2px)",
@@ -78,10 +52,15 @@ module.exports = {
 					from: { height: "var(--radix-accordion-content-height)" },
 					to: { height: 0 },
 				},
+				"image-fade": {
+					from: { opacity: "0" },
+					to: { opacity: "1" },
+				},
 			},
 			animation: {
 				"accordion-down": "accordion-down 0.2s ease-out",
 				"accordion-up": "accordion-up 0.2s ease-out",
+				"imagefade":"image-fade  0.2s ease-out"
 			},
 		},
 	},

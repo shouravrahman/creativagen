@@ -39,7 +39,7 @@ const ThemeSwitch = () => {
       <div>
         <button
           type="button"
-          className="flex items-center rounded-full outline-none border-none text-accent focus:outline-none focus:ring-2 focus:ring-grey-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+              className="flex items-center rounded-full outline-none border-none text-accent focus:outline-none focus:ring-1 focus:ring-accent "
           id="menu-button"
           aria-expanded={dropdownOpen}
           aria-haspopup="true"
@@ -52,7 +52,7 @@ const ThemeSwitch = () => {
 
       {dropdownOpen && (
         <div
-          className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white  focus:outline-none"
+              className="absolute right-0 z-10 mt-2 w-56 origin-top-right border-border border rounded-md bg-background  focus:outline-none"
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="menu-button"
@@ -60,8 +60,7 @@ const ThemeSwitch = () => {
         >
           <div className="py-1" role="none">
             <button
-              className={`text-gray-700  px-4 py-2 text-sm w-full text-left flex items-center ${
-                theme === "system" ? "bg-gray-100" : ""
+                    className={`   px-4 py-2 text-sm w-full text-left flex items-center ${theme === "system" ? "bg-primary" : ""
               }`}
               role="menuitem"
               tabIndex={-1}
@@ -70,8 +69,7 @@ const ThemeSwitch = () => {
               <Monitor className="w-5 h-5 mr-2" /> System
             </button>
             <button
-              className={`text-gray-700  px-4 py-2 text-sm w-full text-left flex items-center ${
-                theme === "dark" ? "bg-gray-300" : ""
+                    className={`   px-4 py-2 text-sm w-full text-left flex items-center ${theme === "dark" ? "bg-primary" : ""
               }`}
               role="menuitem"
               tabIndex={-1}
@@ -80,8 +78,7 @@ const ThemeSwitch = () => {
               <Moon className="w-5 h-5 mr-2" /> Dark
             </button>
             <button
-              className={`text-gray-700  px-4 py-2 text-sm w-full text-left flex items-center ${
-                theme === "light" ? "bg-gray-100" : ""
+                    className={`   px-4 py-2 text-sm w-full text-left flex items-center ${theme === "light" ? "bg-primary" : ""
               }`}
               role="menuitem"
               tabIndex={-1}

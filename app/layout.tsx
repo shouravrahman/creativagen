@@ -1,39 +1,38 @@
 import type { Metadata } from "next";
-import { Inter, Nunito_Sans, Titillium_Web, Quicksand } from "next/font/google";
+// import { Nunito_Sans } from "next/font/google";
 
-import { ToasterProvider } from "@/components/toaster-provider";
+
 import { ModalProvider } from "@/components/modal-provider";
-import { CrispProvider } from "@/components/crisp-provider";
+// import { CrispProvider } from "@/components/crisp-provider";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider.tsx";
+import { AuthProvider } from "@/providers/AuthProvider";
 
-const inter = Inter({ subsets: ["latin"] });
-const nunito = Nunito_Sans({ subsets: ["latin"] });
-const quciksand = Quicksand({ subsets: ["latin"], weight: ["400", "600"] });
-const titlium = Titillium_Web({ subsets: ["latin"], weight: "400" });
+// const nunito = Nunito_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "CreativaGen",
-  description: "AI Platform",
+   title: "CreativaGen",
+   description: "AI Platform",
 };
 
 export default async function RootLayout({
-  children,
+   children,
 }: {
-  children: React.ReactNode;
+      children: React.ReactNode;
 }) {
-  return (
-    <html suppressHydrationWarning>
-      <CrispProvider />
-      <body className={`bg-background ${quciksand.className} `}>
-        <ThemeProvider attribute="class">
-          <ToasterProvider />
-          <ModalProvider />
-          {children}
-          <Toaster />
-        </ThemeProvider>
-      </body>
-    </html>
-  );
+   return (
+      <html suppressHydrationWarning>
+         {/* <CrispProvider /> */}
+         <body className={`bg-background  `}>
+            <ThemeProvider attribute="class">
+               <AuthProvider>
+                  <ModalProvider />
+                  {children}
+                  <Toaster />
+               </AuthProvider>
+            </ThemeProvider>
+         </body>
+      </html>
+   );
 }

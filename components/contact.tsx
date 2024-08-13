@@ -1,9 +1,6 @@
-import {
-	BuildingOffice2Icon,
-	EnvelopeIcon,
-	PhoneIcon,
-} from "@heroicons/react/24/outline";
+import { EnvelopeIcon } from "@heroicons/react/24/outline";
 import { Button } from "./ui/button.tsx";
+import Link from "next/link";
 
 export default function Contact() {
 	return (
@@ -13,7 +10,7 @@ export default function Contact() {
 					<div className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
 						<div className="absolute inset-y-0 left-0 -z-10 w-full overflow-hidden">
 							<svg
-								className="absolute inset-0 h-full w-full stroke-yellow-700 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
+                        className="absolute inset-0 h-full w-full stroke-yellow-700/40 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
 								aria-hidden="true"
 							>
 								<defs>
@@ -41,7 +38,7 @@ export default function Contact() {
 								aria-hidden="true"
 							>
 								<div
-									className="aspect-[1155/678] w-[72.1875rem] bg-gradient-to-br from-[#c7ec61] to-[#78f83c9c] opacity-20"
+                           className="aspect-[1155/678] w-[72.1875rem] bg-gradient-to-br from-[#c7ec61] to-[#78f83c9c] opacity-5"
 									style={{
 										clipPath:
 											"polygon(74.1% 56.1%, 100% 38.6%, 97.5% 73.3%, 85.5% 100%, 80.7% 98.2%, 72.5% 67.7%, 60.2% 37.8%, 52.4% 32.2%, 47.5% 41.9%, 45.2% 65.8%, 27.5% 23.5%, 0.1% 35.4%, 17.9% 0.1%, 27.6% 23.5%, 76.1% 2.6%, 74.1% 56.1%)",
@@ -50,7 +47,7 @@ export default function Contact() {
 							</div>
 						</div>
 
-						<h2 className="hidden bg-gradient-to-br from-yellow-800 to-black bg-clip-text pt-4 text-5xl font-semibold tracking-tight text-transparent dark:to-white lg:inline-block">
+                  <h2 className="sm:text-4xl text-3xl font-extrabold text-base-content">
 							We&apos;d love to hear from you.
 						</h2>
 						<p className="mt-6 text-lg leading-8 ">
@@ -64,12 +61,12 @@ export default function Contact() {
 									<EnvelopeIcon className="h-7 w-6 " aria-hidden="true" />
 								</dt>
 								<dd>
-									<a
-										className="hover:text-white"
+                           <Link
+                              className="hover:text-white italic"
 										href="mailto:hello@example.com"
 									>
 										hello@example.com
-									</a>
+                           </Link>
 								</dd>
 							</div>
 						</dl>
@@ -78,13 +75,13 @@ export default function Contact() {
 				<form
 					action="#"
 					method="POST"
-					className="px-10 pt-10 bg-card z-100 rounded-lg"
+               className="border border-border px-10 py-10   z-100 rounded-lg m-4"
 				>
 					<div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 ">
 						<div>
 							<label
 								htmlFor="first-name"
-								className="block text-sm font-semibold leading-6 text-landingpage-text"
+                        className="block text-sm font-semibold leading-6 text-primary-foreground"
 							>
 								First name
 							</label>
@@ -94,14 +91,14 @@ export default function Contact() {
 									name="first-name"
 									id="first-name"
 									autoComplete="given-name"
-									className="block w-full rounded-md border-0 dark:bg-foreground bg-primary/10 px-3.5 py-2 text-landingpage-text shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-yellow-200 sm:text-sm sm:leading-6"
+                           className="block w-full rounded-md border-0  /20 px-3.5 py-2 text-primary-foreground shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-yellow-200 sm:text-sm sm:leading-6"
 								/>
 							</div>
 						</div>
 						<div>
 							<label
 								htmlFor="last-name"
-								className="block text-sm font-semibold leading-6 text-landingpage-text"
+                        className="block text-sm font-semibold leading-6 text-primary-foreground"
 							>
 								Last name
 							</label>
@@ -111,14 +108,14 @@ export default function Contact() {
 									name="last-name"
 									id="last-name"
 									autoComplete="family-name"
-									className="block w-full rounded-md border-0 dark:bg-foreground bg-primary/10 px-3.5 py-2 text-landingpage-text shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-yellow-200 sm:text-sm sm:leading-6"
+                           className="block w-full rounded-md border-0  /40 px-3.5 py-2 text-primary-foreground shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-yellow-200 sm:text-sm sm:leading-6"
 								/>
 							</div>
 						</div>
 						<div className="sm:col-span-2">
 							<label
 								htmlFor="email"
-								className="block text-sm font-semibold leading-6 text-landingpage-text"
+                        className="block text-sm font-semibold leading-6 text-primary-foreground"
 							>
 								Email
 							</label>
@@ -128,14 +125,14 @@ export default function Contact() {
 									name="email"
 									id="email"
 									autoComplete="email"
-									className="block w-full rounded-md border-0 dark:bg-foreground bg-primary/10 px-3.5 py-2 text-landingpage-text shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-yellow-200 sm:text-sm sm:leading-6"
+                           className="block w-full rounded-md border-0  /40 px-3.5 py-2 text-primary-foreground shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-yellow-200 sm:text-sm sm:leading-6"
 								/>
 							</div>
 						</div>
 						<div className="sm:col-span-2">
 							<label
 								htmlFor="phone-number"
-								className="block text-sm font-semibold leading-6 text-landingpage-text"
+                        className="block text-sm font-semibold leading-6 text-primary-foreground"
 							>
 								Phone number
 							</label>
@@ -145,14 +142,14 @@ export default function Contact() {
 									name="phone-number"
 									id="phone-number"
 									autoComplete="tel"
-									className="block w-full rounded-md border-0 dark:bg-foreground bg-primary/10 px-3.5 py-2 text-landingpage-text shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-yellow-200 sm:text-sm sm:leading-6"
+                           className="block w-full rounded-md border-0  /40 px-3.5 py-2 text-primary-foreground shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-yellow-200 sm:text-sm sm:leading-6"
 								/>
 							</div>
 						</div>
 						<div className="sm:col-span-2">
 							<label
 								htmlFor="message"
-								className="block text-sm font-semibold leading-6 text-landingpage-text"
+                        className="block text-sm font-semibold leading-6 text-primary-foreground"
 							>
 								Message
 							</label>
@@ -161,7 +158,7 @@ export default function Contact() {
 									name="message"
 									id="message"
 									rows={4}
-									className="block w-full rounded-md border-0 dark:bg-foreground bg-primary/10 px-3.5 py-2 text-landingpage-text shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-yellow-200 sm:text-sm sm:leading-6"
+                           className="block w-full rounded-md border-0  /40 px-3.5 py-2 text-primary-foreground shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-yellow-200 sm:text-sm sm:leading-6"
 									defaultValue={""}
 								/>
 							</div>

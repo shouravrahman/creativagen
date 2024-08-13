@@ -67,17 +67,17 @@ function Plan({
 	return (
 		<section
 			className={clsx(
-				"flex flex-col rounded-3xl px-6 sm:px-8",
+            "flex flex-col rounded-3xl max-w-sm mx-auto px-6 sm:px-8",
 				featured
-					? "order-first bg-accent text-accent-foreground py-8 lg:order-none shadow-lg border-border"
-					: "lg:py-8 bg-card shadow-md border-border"
+               ? "order-first bg-card py-8 lg:order-none  shadow-sm  "
+               : "py-8    shadow-md border border-border"
 			)}
 		>
 			<h3 className="mt-5 font-display text-lg ">{name}</h3>
 			<p
 				className={clsx(
-					"mt-2 text-base",
-					featured ? "text-accent-foreground" : "text-primary"
+               "mt-2 text-base text-card-foreground",
+
 				)}
 			>
 				{description}
@@ -89,13 +89,13 @@ function Plan({
 				role="list"
 				className={clsx(
 					"order-last mt-10 flex flex-col gap-y-3 text-sm",
-					featured ? "text-accent-foreground" : "text-primary"
+
 				)}
 			>
 				{features.map((feature) => (
 					<li key={feature} className="flex">
 						<CheckIcon
-							className={featured ? "text-destructive" : "text-primary/70"}
+                     className={featured ? "text-accent" : "text-foreground"}
 						/>
 						<span className="ml-4">{feature}</span>
 					</li>
@@ -103,7 +103,7 @@ function Plan({
 			</ul>
 			<Button
 				// href={href}
-				variant={featured ? "default" : "secondary"}
+            variant={featured ? "accent" : "destructive"}
 				color="white"
 				className="mt-8"
 				aria-label={`Get started with the ${name} plan for ${price}`}
@@ -116,7 +116,7 @@ function Plan({
 
 export function Pricing() {
 	return (
-		<section id="pricing" aria-label="Pricing" className=" py-20 sm:py-32">
+      <section id="pricing" aria-label="Pricing">
 			<SectionHeading
 				mainTitle="Pricing"
 				secondaryText="It doesn’t matter what size your business is, our software will work well for you."

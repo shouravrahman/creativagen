@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import SearchSection from "@/components/search-section/search-section";
+
 import TemplateList from "@/components/template-list-section";
+import SearchSection from "@/components/search-section/Search";
 export default function Dashboard() {
   const [searchInput, setSearchInput] = useState<string>();
 

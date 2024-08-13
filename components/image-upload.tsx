@@ -25,7 +25,7 @@ export default function ImageUpload({ handleImageDropped }: Props) {
           className="mx-auto h-12 w-12 text-blue-500"
           aria-hidden="true"
         />
-        <div className="mt-4 flex text-sm leading-6 text-gray-600">
+           <div className="mt-4 flex text-sm leading-6   ">
           <input
             {...getInputProps()}
             id="file-upload"
@@ -42,7 +42,7 @@ export default function ImageUpload({ handleImageDropped }: Props) {
             </>
           )}
         </div>
-        <p className="text-xs leading-5 text-gray-600">image file up to 10MB</p>
+           <p className="text-xs leading-5   ">image file up to 10MB</p>
       </div>
     </div>
   );

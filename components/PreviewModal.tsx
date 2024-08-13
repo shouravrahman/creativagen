@@ -48,7 +48,7 @@ export default function PreviewModal({ html, setHtml }: Props) {
             className="absolute right-3 top-3 p-2 rounded-lg hover:bg-gray-200 focus:outline-none focus:ring"
             onClick={() => setHtml(null)}
           >
-            <XIcon className="w-6 h-6 text-gray-600" />
+                 <XIcon className="w-6 h-6   " />
           </button>
         </header>
 
@@ -58,7 +58,7 @@ export default function PreviewModal({ html, setHtml }: Props) {
           <pre className="overflow-auto relative h-full">
             <button
               onClick={() => copy(html)}
-              className="absolute right-2 top-2 p-2 rounded-lg hover:bg-gray-700"
+                       className="absolute right-2 top-2 p-2 rounded-lg "
             >
               {isCopied ? (
                 <CheckIcon className="w-6 h-6" />

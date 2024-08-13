@@ -138,36 +138,36 @@ const dsaLearnerSchema = z.object({
   additionalResources: z.boolean().default(false),
 });
 export const routes = [
-  {
-    label: "Home",
-    icon: Home,
-    href: "/",
-    color: "text-green-500",
-  },
-  {
-    label: "History",
-    icon: History,
-    href: "/history",
-    color: "text-yellow-500",
-  },
-  {
-    label: "Billing",
-    icon: CreditCard,
-    href: "/dashboard/billing",
-    color: "text-red-500",
-  },
-  {
-    label: "Settings",
-    icon: Settings,
-    href: "/dashboard/settings",
-    color: "text-gray-500",
-  },
-  {
-    label: "Profile",
-    icon: User,
-    href: "/dashboard/profile",
-    color: "text-gray-500",
-  },
+	{
+		label: "Home",
+		icon: Home,
+		href: "/dashboard",
+		color: "text-green-500",
+	},
+	{
+		label: "History",
+		icon: History,
+		href: "/dashboard/history",
+		color: "text-yellow-500",
+	},
+	{
+		label: "Billing",
+		icon: CreditCard,
+		href: "/dashboard/billing",
+		color: "text-red-500",
+	},
+	{
+		label: "Settings",
+		icon: Settings,
+		href: "/dashboard/settings",
+		color: "   ",
+	},
+	{
+		label: "Profile",
+		icon: User,
+		href: "/dashboard/profile",
+		color: "   ",
+	},
 ];
 
 export const TEMPLATES = [
