@@ -22,6 +22,13 @@ body,
      --card-foreground: 0 0% 10%; /* Light mode card text: dark grey */
      --border: 0 0% 85%; /* Light mode borders: light grey */
      --radius: 0.5rem; /* Border radius */
+     --color-desktop:0 0% 10%;
+     --chart-1: 45 100% 50%;
+     --chart-2: 201 99% 25%;
+     --chart-3: 203 98% 22%;
+     --chart-4: 204 100% 18%;
+     --chart-5: 206 100% 15%;
+
    }
 
    .dark {
