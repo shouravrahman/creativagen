@@ -1,87 +1,164 @@
-
 "use client"
-import Link from "next/link"
-import { Card, CardHeader, CardDescription, CardContent, CardTitle } from "@/components/ui/card"
-import { CartesianGrid, XAxis, Line, LineChart, Pie, PieChart } from "recharts"
-import { ChartTooltipContent, ChartTooltip, ChartContainer } from "@/components/ui/chart"
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import { ActivityIcon, ClipboardIcon, ClockIcon, FilePenIcon, LayoutGridIcon, ShareIcon } from "lucide-react";
+import { Bar, BarChart, CartesianGrid, Line, LineChart, Pie, PieChart, XAxis } from "recharts";
+
+
 
 export default function Analytics() {
    return (
-      <div className="flex  w-full flex-col ">
-
-         <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
-            <div className="grid gap-6">
-               <div className="grid md:grid-cols-3 gap-6">
-                  <Card className="flex flex-col">
-                     <CardHeader>
-                        <CardDescription>Credit Usage</CardDescription>
-                     </CardHeader>
-                     <CardContent>
-                        <LinechartChart className="aspect-[4/3]" />
-                     </CardContent>
-                  </Card>
-                  <Card className="flex flex-col">
-                     <CardHeader>
-                        <CardDescription>Content Generated</CardDescription>
-                        <CardTitle>12,345</CardTitle>
-                     </CardHeader>
-                     <CardContent>
-                        <p className="text-muted-foreground">Pieces</p>
-                     </CardContent>
-                  </Card>
-                  <Card className="flex flex-col">
-                     <CardHeader>
-                        <CardDescription>Words Generated</CardDescription>
-                        <CardTitle>1,234,567</CardTitle>
-                     </CardHeader>
-                     <CardContent>
-                        <p className="text-muted-foreground">Words</p>
-                     </CardContent>
-                  </Card>
-               </div>
-               <div className="grid md:grid-cols-3 gap-6">
-                  <Card className="flex flex-col">
-                     <CardHeader>
-                        <CardDescription>Characters Generated</CardDescription>
-                        <CardTitle>12,345,678</CardTitle>
-                     </CardHeader>
-                     <CardContent>
-                        <p className="text-muted-foreground">Characters</p>
-                     </CardContent>
-                  </Card>
-                  <Card className="flex flex-col">
-                     <CardHeader>
-                        <CardDescription>Top Content Types</CardDescription>
-                     </CardHeader>
-                     <CardContent>
-                        <PiechartcustomChart className="aspect-[4/3]" />
-                     </CardContent>
-                  </Card>
-                  <Card className="flex flex-col">
-                     <CardHeader>
-                        <CardDescription>Content Quality</CardDescription>
-                     </CardHeader>
-                     <CardContent className="grid gap-4">
-                        <div className="flex items-center">
-                           <div>Sentiment Score</div>
-                           <div className="font-semibold ml-auto">8.2</div>
-                        </div>
-                        <div className="flex items-center">
-                           <div>Readability Score</div>
-                           <div className="font-semibold ml-auto">85%</div>
-                        </div>
-                        <div className="flex items-center">
-                           <div>Uniqueness Score</div>
-                           <div className="font-semibold ml-auto">92%</div>
-                        </div>
-                     </CardContent>
-                  </Card>
-               </div>
+      <div className="flex flex-col w-full min-h-screen bg-background">
+         {/* <header className="flex items-center h-16 px-4 border-b shrink-0 md:px-6">
+            <nav className="flex flex-row items-center gap-6 text-lg font-medium sm:flex">
+               <a className="flex items-center gap-2 text-lg font-semibold" href="#">
+                  <BarChart className="w-6 h-6" />
+                  <span>Dashboard</span>
+               </a>
+            </nav>
+            <div className="flex items-center w-full gap-4 md:ml-auto md:gap-2 lg:gap-4">
+               <Button className="ml-auto" variant="outline">
+                  Settings
+               </Button>
+               <Button>Export Data</Button>
             </div>
+         </header> */}
+         <main className="flex-1 grid gap-4 p-4 md:gap-8 md:p-10">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+               <Card>
+                  <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+                     <CardTitle className="text-sm font-medium">Total Tokens Used</CardTitle>
+                     <BarChart className="w-4 h-4 text-muted-foreground" />
+                  </CardHeader>
+                  <CardContent>
+                     <div className="text-2xl font-bold">1,234,567</div>
+                     <p className="text-xs text-muted-foreground">+20.1% from last month</p>
+                  </CardContent>
+               </Card>
+               <Card>
+                  <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+                     <CardTitle className="text-sm font-medium">Words Generated</CardTitle>
+                     <LineChart className="w-4 h-4 text-muted-foreground" />
+                  </CardHeader>
+                  <CardContent>
+                     <div className="text-2xl font-bold">987,654</div>
+                     <p className="text-xs text-muted-foreground">+15.2% from last month</p>
+                  </CardContent>
+               </Card>
+               <Card>
+                  <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+                     <CardTitle className="text-sm font-medium">Total Posts</CardTitle>
+                     <BarChart className="w-4 h-4 text-muted-foreground" />
+                  </CardHeader>
+                  <CardContent>
+                     <div className="text-2xl font-bold">3,456</div>
+                     <p className="text-xs text-muted-foreground">+7.3% from last month</p>
+                  </CardContent>
+               </Card>
+               <Card>
+                  <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+                     <CardTitle className="text-sm font-medium">Time Saved</CardTitle>
+                     <LineChart className="w-4 h-4 text-muted-foreground" />
+                  </CardHeader>
+                  <CardContent>
+                     <div className="text-2xl font-bold">256 hours</div>
+                     <p className="text-xs text-muted-foreground">+12.5% from last month</p>
+                  </CardContent>
+               </Card>
+            </div>
+            <div className=" grid gap-4 md:grid-cols-2 lg:grid-cols-4 ">
+               <Card className="col-span-2">
+                  <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+                     <CardTitle className="text-sm font-medium">Tokens Used</CardTitle>
+
+                  </CardHeader>
+                  <CardContent>
+                     <BarchartChart className="w-full" />
+                  </CardContent>
+               </Card>
+
+               <Card className="col-span-2">
+                  <CardHeader className=" flex flex-row items-center justify-between pb-2">
+                     <CardTitle className="text-sm font-medium">Total Posts</CardTitle>
+                     <ClipboardIcon className="w-4 h-4 text-muted-foreground" />
+                  </CardHeader>
+                  <CardContent>
+                     <LinechartChart className="w-full" />
+                  </CardContent>
+               </Card>
+            </div>
+            <Card>
+               <CardHeader className="flex flex-row items-center justify-between pb-2">
+                  <CardTitle className="text-sm font-medium">Time Saved</CardTitle>
+                  <div className="flex items-center gap-2">
+                     <ClockIcon className="w-4 h-4 text-muted-foreground" />
+                     <Button variant="ghost" size="icon" className="rounded-full">
+                        <ShareIcon className="w-4 h-4" />
+                        <span className="sr-only">Share</span>
+                     </Button>
+                  </div>
+               </CardHeader>
+               <CardContent>
+                  <BarchartChart className="" />
+               </CardContent>
+               <CardFooter>
+                  <div className="flex items-center justify-between">
+                     <div className="text-sm text-muted-foreground mr-2">
+                        You've saved <strong>120 hours</strong> so far.
+                     </div>
+                     <Button variant="outline" size="sm">
+                        View Details
+                     </Button>
+                  </div>
+               </CardFooter>
+            </Card>
          </main>
       </div>
    )
 }
+
+
+function BarchartChart(props) {
+   return (
+      <div {...props}>
+         <ChartContainer
+            config={{
+               desktop: {
+                  label: "Desktop",
+                  color: "hsl(var(--chart-1))",
+               },
+            }}
+            className=""
+         >
+            <BarChart
+               accessibilityLayer
+               data={[
+                  { month: "January", desktop: 186 },
+                  { month: "February", desktop: 305 },
+                  { month: "March", desktop: 237 },
+                  { month: "April", desktop: 73 },
+                  { month: "May", desktop: 209 },
+                  { month: "June", desktop: 214 },
+               ]}
+            >
+               <CartesianGrid vertical={false} />
+               <XAxis
+                  dataKey="month"
+                  tickLine={false}
+                  tickMargin={10}
+                  axisLine={false}
+                  tickFormatter={(value) => value.slice(0, 3)}
+               />
+               <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
+               <Bar dataKey="desktop" fill="var(--color-desktop)" radius={8} />
+            </BarChart>
+         </ChartContainer>
+      </div>
+   )
+}
+
+
 
 function LinechartChart(props) {
    return (
@@ -125,27 +202,6 @@ function LinechartChart(props) {
    )
 }
 
-
-function Package2Icon(props) {
-   return (
-      <svg
-         {...props}
-         xmlns="http://www.w3.org/2000/svg"
-         width="24"
-         height="24"
-         viewBox="0 0 24 24"
-         fill="none"
-         stroke="currentColor"
-         strokeWidth="2"
-         strokeLinecap="round"
-         strokeLinejoin="round"
-      >
-         <path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z" />
-         <path d="m3 9 2.45-4.9A2 2 0 0 1 7.24 3h9.52a2 2 0 0 1 1.8 1.1L21 9" />
-         <path d="M12 3v6" />
-      </svg>
-   )
-}
 
 
 function PiechartcustomChart(props) {
