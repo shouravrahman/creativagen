@@ -19,18 +19,24 @@ export const Sidebar = ({
    const pathname = usePathname();
 
    return (
-      <div className="space-y-4 py-4 sm:flex flex-col h-screen bg-sidebar text-sidebar-text">
-         <div className="px-3 py-2 flex-1">
-            <Link href="/" className="flex items-center pl-3 mb-14">
+      <nav className="space-y-4 py-4 sm:flex flex-col justify-between h-screen bg-sidebar text-sidebar-text">
+         <header className="px-3 py-2 ">
+            <Link
+               className="flex items-center gap-2 shrink-0 h-20"
+               href="/"
+               title={` homepage`}
+            >
+
                <Image
-                  height={200}
-                  width={200}
+                  alt="Logo"
+                  src="/creature.svg"
                   className=""
-                  src="/logo-trs.png"
-                  alt="Company name"
+                  width={200}
+                  height={100}
                />
+
             </Link>
-            <div className="space-y-1">
+            <div className="mt-16 flex flex-col gap-2">
                {routes.map((route) => (
                   <Link
                      key={route.href}
@@ -47,8 +53,9 @@ export const Sidebar = ({
                   </Link>
                ))}
             </div>
-         </div>
+         </header>
+
          <CreditCounter apiLimitCount={apiLimitCount} isPro={isPro} />
-      </div>
+      </nav>
    );
 };
