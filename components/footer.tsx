@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const navigation = {
 	solutions: [
@@ -31,17 +32,25 @@ export default function Footer() {
 			</h2>
          <div className="mx-auto max-w-7xl px-6 ">
 				<div className="xl:grid xl:grid-cols-3 xl:gap-8">
-					<Image
-						height={200}
-						width={200}
-                  className=""
-						src="/logo-trs.png"
-						alt="Company name"
-					/>
+               <Link
+                  className="flex items-center gap-2 shrink-0 h-20"
+                  href="/"
+                  title={` homepage`}
+               >
+
+                  <Image
+                     alt="Logo"
+                     src="/creature.svg"
+                     className=""
+                     width={200}
+                     height={100}
+                  />
+
+               </Link>
 					<div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
 						<div className="md:grid md:grid-cols-2 md:gap-8">
 							<div>
-                        <h3 className="text-sm font-semibold leading-6 text-primary-foreground">
+                        <h3 className="text-sm font-semibold leading-6 text-foreground">
 									Solutions
 								</h3>
 								<ul role="list" className="mt-6 space-y-4">
@@ -49,9 +58,9 @@ export default function Footer() {
 										<li key={item.name}>
 											<a
 												href={item.href}
-                                    className="text-sm leading-6 text-primary
+                                    className="text-sm leading-6 text-foreground hover:text-accent
 												hover:text-semibold
-												dark:hover:text-primary-foreground"
+												"
 											>
 												{item.name}
 											</a>
@@ -60,7 +69,7 @@ export default function Footer() {
 								</ul>
 							</div>
 							<div className="mt-10 md:mt-0">
-                        <h3 className="text-sm font-semibold leading-6 text-primary-foreground">
+                        <h3 className="text-sm font-semibold leading-6 text-foreground">
 									Support
 								</h3>
 								<ul role="list" className="mt-6 space-y-4">
@@ -68,9 +77,9 @@ export default function Footer() {
 										<li key={item.name}>
 											<a
 												href={item.href}
-                                    className="text-sm leading-6 text-primary
+                                    className="text-sm leading-6 text-foreground hover:text-accent
 												hover:text-semibold
-												dark:hover:text-primary-foreground"
+												"
 											>
 												{item.name}
 											</a>
@@ -81,7 +90,7 @@ export default function Footer() {
 						</div>
 						<div className="md:grid md:grid-cols-2 md:gap-8">
 							<div>
-                        <h3 className="text-sm font-semibold leading-6 text-primary-foreground">
+                        <h3 className="text-sm font-semibold leading-6 text-foreground">
 									Company
 								</h3>
 								<ul role="list" className="mt-6 space-y-4">
@@ -89,9 +98,9 @@ export default function Footer() {
 										<li key={item.name}>
 											<a
 												href={item.href}
-                                    className="text-sm leading-6 text-primary
+                                    className="text-sm leading-6 text-foreground hover:text-accent
 												hover:text-semibold
-												dark:hover:text-primary-foreground"
+												"
 											>
 												{item.name}
 											</a>
@@ -100,7 +109,7 @@ export default function Footer() {
 								</ul>
 							</div>
 							<div className="mt-10 md:mt-0">
-                        <h3 className="text-sm font-semibold leading-6 text-primary-foreground">
+                        <h3 className="text-sm font-semibold leading-6 text-foreground">
 									Legal
 								</h3>
 								<ul role="list" className="mt-6 space-y-4">
@@ -108,9 +117,9 @@ export default function Footer() {
 										<li key={item.name}>
 											<a
 												href={item.href}
-                                    className="text-sm leading-6 text-primary
+                                    className="text-sm leading-6 text-foreground hover:text-accent
 												hover:text-semibold
-												dark:hover:text-primary-foreground"
+												"
 											>
 												{item.name}
 											</a>
