@@ -1,18 +1,11 @@
 "use client";
-import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
-import { useUser } from "@clerk/nextjs";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import ThemeSwitch from "../../../components/ThemeSwitch.tsx";
-import { currentUser } from "@/lib/auth.ts";
 
 import { useState, useEffect } from "react";
-import type { JSX } from "react";
 import { useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { Avatar } from "@/components/ui/avatar.tsx";
 import IconDropdown from "@/components/IconDropdown.tsx";
 
 const links: {
@@ -50,25 +43,25 @@ const LandingNavbar = () => {
    return (
       <header className="">
          <nav
-            className="container flex items-center justify-between px-2 py-2 md:px-8 md:py-4 mx-auto"
+            className="container flex items-center justify-between px-2 py-2 md:px-8 md:py-6 mx-auto"
             aria-label="Global"
          >
             {/* Your logo/name on large screens */}
             <div className="flex lg:flex-1">
                <Link
-                  className="flex items-center gap-2 shrink-0 "
+                  className="flex items-center gap-2 shrink-0 h-20"
                   href="/"
                   title={` homepage`}
                >
 
                   <Image
                      alt="Logo"
-                     src="/logo-trs.png"
+                     src="/creature.svg"
                      className=""
                      width={200}
-                     height={200}
+                     height={100}
                   />
-                  {/* <span className="font-extrabold text-lg">{config.appName}</span> */}
+
                </Link>
             </div>
             {/* Burger button to open menu on mobile */}
@@ -116,7 +109,7 @@ const LandingNavbar = () => {
                   </div>)
                   :
                   (<div className="hidden lg:flex lg:justify-end lg:flex-1">
-                     <Button variant={"accent"}>
+                     <Button variant={"outline"} size={"lg"}>
                         <Link href={'/login'}>
                            Try now
                         </Link>
