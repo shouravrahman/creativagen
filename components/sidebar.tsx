@@ -19,24 +19,25 @@ export const Sidebar = ({
    const pathname = usePathname();
 
    return (
-      <div className="space-y-4 py-4 sm:flex flex-col justify-between h-screen bg-sidebar text-sidebar-text">
-         <div className="px-3 py-2 ">
-            <Link
-               className="flex items-center gap-2 shrink-0 h-20"
-               href="/"
-               title={` homepage`}
-            >
+      <aside className="flex flex-col w-64 h-screen  py-8 overflow-y-auto  border-r border-border rtl:border-r-0 rtl:border-l">
+         <Link
+            className="flex items-center self-center h-20"
+            href="/"
+            title={` homepage`}
+         >
 
-               <Image
-                  alt="Logo"
-                  src="/creature.svg"
-                  className=""
-                  width={200}
-                  height={100}
-               />
+            <Image
+               alt="Logo"
+               src="/creature.svg"
+               className=""
+               width={200}
+               height={100}
+            />
 
-            </Link>
-            <div className="mt-16">
+         </Link>
+         <div className="flex flex-col justify-between flex-1 mt-6 px-5">
+
+            <nav className="flex-1 -mx-3 space-y-3">
                {routes.map((route) => (
                   <Link
                      key={route.href}
@@ -52,10 +53,10 @@ export const Sidebar = ({
                      </div>
                   </Link>
                ))}
-            </div>
+            </nav>
          </div>
 
          <CreditCounter apiLimitCount={apiLimitCount} isPro={isPro} />
-      </div>
+      </aside>
    );
 };
