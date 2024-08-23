@@ -7,12 +7,15 @@ import { IMenuItem } from './DashboardNavbar'
 import { Avatar, AvatarImage } from './ui/avatar'
 
 
-function classNames(...classes) {
+function classNames(...classes: string[]) {
    return classes.filter(Boolean).join(' ')
 }
+interface Dropdown {
+   menu: { label: string, href: string }[],
+   img: string | undefined
+}
 
-
-export default function IconDropdown({ menu, img }) {
+export default function IconDropdown({ menu, img }: Dropdown) {
    return (
       <Menu as="div" className="relative inline-block text-left">
          <div>
@@ -36,7 +39,7 @@ export default function IconDropdown({ menu, img }) {
                <div className="py-1">
                   {menu?.map((link) => {
                      return (
-                        <MenuItem >
+                        <MenuItem key={link.label}>
                            {({ focus }) => (
                               <a
                                  href={link.href}
