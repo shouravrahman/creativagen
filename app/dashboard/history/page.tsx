@@ -139,7 +139,7 @@ export default function Component() {
    return (
       <div className="flex flex-col gap-4 mt-10">
          <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold">AI Content History</h1>
+            <h1 className="text-2xl font-bold my-2">Content History</h1>
             <div className="flex items-center gap-2">
                <Input
                   type="search"
@@ -169,7 +169,7 @@ export default function Component() {
          </div>
          <div className="overflow-x-auto border border-border">
             <Table>
-               <TableHeader>
+               <TableHeader className="bg-accent text-accent-foreground">
                   <TableRow>
                      <TableHead>Content Type</TableHead>
                      <TableHead>Title</TableHead>
