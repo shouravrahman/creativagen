@@ -19,8 +19,8 @@ export const Sidebar = ({
    const pathname = usePathname();
 
    return (
-      <nav className="space-y-4 py-4 sm:flex flex-col justify-between h-screen bg-sidebar text-sidebar-text">
-         <header className="px-3 py-2 ">
+      <div className="space-y-4 py-4 sm:flex flex-col justify-between h-screen bg-sidebar text-sidebar-text">
+         <div className="px-3 py-2 ">
             <Link
                className="flex items-center gap-2 shrink-0 h-20"
                href="/"
@@ -36,13 +36,13 @@ export const Sidebar = ({
                />
 
             </Link>
-            <div className="mt-16 flex flex-col gap-2">
+            <div className="mt-16">
                {routes.map((route) => (
                   <Link
                      key={route.href}
                      href={route.href}
                      className={cn(
-                        "text-sm group flex p-3 w-full justify-start font-medium cursor-pointer  hover:bg-primary/10 dark:hover:bg-white/10 rounded-lg transition",
+                        "text-sm group flex p-4 w-full justify-start font-medium cursor-pointer  hover:bg-primary/10 dark:hover:bg-white/10 rounded-lg transition",
                         pathname === route.href ? " bg-white/10" : ""
                      )}
                   >
@@ -53,9 +53,9 @@ export const Sidebar = ({
                   </Link>
                ))}
             </div>
-         </header>
+         </div>
 
          <CreditCounter apiLimitCount={apiLimitCount} isPro={isPro} />
-      </nav>
+      </div>
    );
 };
