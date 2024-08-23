@@ -1,11 +1,8 @@
 import { Search } from "lucide-react";
 const SearchSection = ({ onSearchInput }) => {
    return (
-      <div className="px-10 rounded-md py-6  flex flex-col justify-center items-center">
+      <div className="px-10 rounded-md   flex flex-col justify-center items-center">
          <h2 className="text-3xl font-bold">BROWSE All TEMPLATES</h2>
-         <p className="text-priamry hidden lg:block">
-            Find the right tool for you
-         </p>
          <div className="w-full flex items-center justify-center">
             <div className=" mx-auto my-4 w-full md:w-[50%] ">
                <label className="mb-2 text-sm font-medium sr-only ">
