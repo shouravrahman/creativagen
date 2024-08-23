@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-// import { Nunito_Sans } from "next/font/google";
+import { Nunito_Sans } from "next/font/google";
 
 
 import { ModalProvider } from "@/components/modal-provider";
@@ -9,7 +9,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider.tsx";
 import { AuthProvider } from "@/providers/AuthProvider";
 
-// const nunito = Nunito_Sans({ subsets: ["latin"] });
+const nunito = Nunito_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
    title: "CreativaGen",
@@ -24,7 +24,7 @@ export default async function RootLayout({
    return (
       <html suppressHydrationWarning>
          {/* <CrispProvider /> */}
-         <body className={`bg-background  `}>
+         <body className={nunito.className}>
             <ThemeProvider attribute="class">
                <AuthProvider>
                   <ModalProvider />
