@@ -9,7 +9,7 @@ import { Bar, BarChart, CartesianGrid, Line, LineChart, Pie, PieChart, XAxis } f
 
 export default function Analytics() {
    return (
-      <div className="flex flex-col w-full min-h-screen bg-background">
+      <div className="flex flex-col w-full min-h-screen ">
          {/* <header className="flex items-center h-16 px-4 border-b shrink-0 md:px-6">
             <nav className="flex flex-row items-center gap-6 text-lg font-medium sm:flex">
                <a className="flex items-center gap-2 text-lg font-semibold" href="#">
