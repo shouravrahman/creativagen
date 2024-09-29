@@ -1,91 +1,31 @@
+import { VideoCameraIcon } from "@heroicons/react/20/solid";
 import {
 	BarChart4,
 	BookOpen,
-	Handshake,
 	Home,
 	History,
 	CreditCard,
-	Settings,
-	Code,
-	List,
-	ListTodo,
 	Newspaper,
+	Settings,
 	User,
+	Briefcase,
+	Award,
+	Globe,
+	Megaphone,
+	Pencil,
+	Share,
+	Users,
+	Calendar,
+	Star,
+	MessageSquare,
+	TrendingUp,
+	Edit,
+	FileText,
 } from "lucide-react";
+import { FcMoneyTransfer } from "react-icons/fc";
+
 import { z } from "zod";
 export const MAX_FREE_COUNTS = 10;
-
-// Blog Writer Tool Schema
-export const blogSchema = z.object({
-	title: z.string().min(1, "Title is required."),
-	keywords: z
-		.string()
-		.min(1, "At least one keyword is required.")
-		.refine((value) => value.split(",").length <= 5, {
-			message: "Maximum 5 keywords allowed.",
-		}),
-	wordCount: z
-		.number()
-		.min(500, "Minimum word count is 500.")
-		.max(5000, "Maximum word count is 5000."),
-	category: z.string().min(1, "Category is required."),
-	tone: z.string().min(1, "Tone is required."),
-	includeReferences: z.boolean().optional(),
-	additionalInstructions: z.string().optional(),
-});
-
-// Freelance Proposal Generator Schema
-export const freelanceProposalSchema = z.object({
-	clientName: z.string().min(1, "Client name is required."),
-	projectTitle: z.string().min(1, "Project title is required."),
-	projectOverview: z.string().min(1, "Project overview is required."),
-	deliverables: z.string().min(1, "Deliverables are required."),
-	timeline: z.string().min(1, "Timeline is required."),
-	budget: z.string().min(1, "Budget is required."),
-	terms: z.string().min(1, "Terms are required."),
-	additionalNotes: z.string().optional(),
-});
-
-// Newsletter Generator Schema
-export const newsletterSchema = z.object({
-	title: z.string().min(1, "Title is required."),
-	topic: z.string().min(1, "Topic is required."),
-	audience: z.string().min(1, "Audience is required."),
-	callToAction: z.string().min(1, "Call to action is required."),
-	includeImage: z.boolean().optional(),
-	additionalContent: z.string().optional(),
-});
-
-// Course Outline Generator Schema
-export const courseOutlineSchema = z.object({
-	courseName: z.string().min(1, "Course name is required."),
-	duration: z.string().min(1, "Duration is required."),
-	courseType: z.string().min(1, "Course type is required."),
-	targetAudience: z.string().min(1, "Target audience is required."),
-	learningObjectives: z.string().min(1, "Learning objectives are required."),
-	additionalResources: z.string().optional(),
-	courseFormat: z.string().min(1, "Course format is required."),
-	assessmentMethods: z.string().optional(),
-	specialInstructions: z.string().optional(),
-});
-
-// Explain Like I'm Five Tool Schema
-export const explainSchema = z.object({
-	topic: z.string().min(1, "Topic to explain is required."),
-	ageGroup: z.string().min(1, "Target age group is required."),
-	includeExamples: z.boolean().optional(),
-	language: z.string().min(1, "Language is required."),
-	additionalContext: z.string().optional(),
-});
-
-// DSA Learning Tool Schema
-export const dsaSchema = z.object({
-	dsaTopic: z.string().min(1, "Choose a topic is required."),
-	difficultyLevel: z.string().min(1, "Difficulty level is required."),
-	practiceMode: z.string().optional(),
-	includeHints: z.boolean().optional(),
-	preferredLanguage: z.string().min(1, "Preferred language is required."),
-});
 
 export const routes = [
 	{
@@ -128,47 +68,536 @@ export const routes = [
 
 export const TEMPLATES = [
 	{
-		name: "AI Blog Writer Tool",
+		name: "YouTube Tutorial Description",
 		description:
-			"Generate high-quality, SEO-optimized blogs on various topics. Enhance your web presence with content that engages and informs your audience.",
-		icon: List,
+			"This AI tool helps summarize YouTube tutorial scripts by crafting catchy video titles, concise descriptions, and SEO-friendly tags, helping your content reach the right audience.",
+		icon: VideoCameraIcon,
 		features: [
-			"AI-Powered Content",
-			"SEO Optimization",
-			"Real-time Suggestions",
+			"Video Script",
+			"Language",
+			"SEO Tags",
+			"Video Title",
+			"Video Description",
 		],
-		imageUrl: "/blogwriter.jpeg",
-		href: "/ai-blog-writer",
-		color: "text-violet-500",
-		bgColor: "bg-red-300",
-		slug: "ai-blog-writer",
-		category: "Content Generation",
-		aiPrompt: "Write a blog on the given topic",
+		imageUrl: "/youtube-tutorial.jpg",
+		href: "/youtube-tutorial-description",
+		color: "text-red-500",
+		bgColor: "bg-red-200",
+		slug: "youtube-tutorial-description",
+		category: "YouTube Content",
+		aiPrompt:
+			"Summarize the following YouTube tutorial script into a catchy title, description, and SEO-friendly tags. Include relevant keywords for discoverability.",
 		formFields: [
 			{
-				label: "Blog Title",
-				field: "title",
-				name: "title",
+				label: "Video Script",
+				field: "videoScript",
+				name: "videoScript",
 				required: true,
-				placeholder: "Enter the title of your blog",
-				type: "text",
+				placeholder: "Enter your video script",
+				type: "textarea",
 			},
 			{
-				label: "Blog Topic",
-				field: "topic",
-				name: "topic",
+				label: "Language",
+				field: "language",
+				name: "language",
 				required: true,
-				placeholder: "Enter the main topic of your blog",
+				placeholder: "Enter the language (e.g., English, Spanish)",
 				type: "text",
 			},
+		],
+		validationSchema: z.object({
+			videoScript: z.string().min(1, "Video script is required"),
+			language: z.string().min(1, "Language is required"),
+		}),
+      isFavorite: false,
+	},
+	{
+		name: "All-in-One YouTube Content",
+		description:
+			"Streamline your YouTube content creation process with 'All-in-One YT Content' – your go-to tool for crafting engaging titles, scripts, descriptions, and tags, all from one easy-to-use platform.",
+		icon: VideoCameraIcon,
+		features: [
+			"Video Topic",
+			"Key Points to Cover",
+			"Language",
+			"Video Title",
+			"Video Script",
+			"Video Description",
+			"SEO Tags",
+		],
+		imageUrl: "/allinone-youtube.jpg",
+		href: "/all-in-one-yt-content",
+		color: "text-purple-500",
+		bgColor: "bg-purple-200",
+		slug: "all-in-one-yt-content",
+		category: "YouTube Content",
+		aiPrompt: `Generate a comprehensive YouTube content package based on the following details:
+        - Create a compelling video title that grabs attention and includes relevant keywords.
+        - Write a complete video script that incorporates the provided points and engages the audience.
+        - Provide a concise yet informative video description that encourages viewers to watch and includes SEO-friendly keywords.
+        - Suggest a list of SEO-friendly tags that can help the video rank better on YouTube.
+
+        Use a professional tone and ensure the content aligns with the given video topic and points. Generate everything in the specified language.`,
+		formFields: [
 			{
-				label: "Content Length",
-				field: "length",
-				name: "length",
+				label: "Video Topic & Key Points",
+				field: "videoTopic",
+				name: "videoTopic",
 				required: true,
 				placeholder:
-					"Specify the desired length of the blog (e.g., 500-1000 words)",
+					"Enter your video topic & the points you want to cover",
+				type: "textarea",
+			},
+			{
+				label: "Language",
+				field: "language",
+				name: "language",
+				required: true,
+				placeholder: "Enter the language (e.g., English, Spanish)",
 				type: "text",
+			},
+		],
+		validationSchema: z.object({
+			videoTopic: z
+				.string()
+				.min(1, "Video topic and key points are required"),
+			language: z.string().min(1, "Language is required"),
+		}),
+      isFavorite: false,},
+	{
+		name: "Code Documentation",
+		description:
+			"This tool streamlines the creation of clear and concise code documentation, making it easier for developers to understand, maintain, and collaborate on software projects.",
+		icon: FileText,
+		features: [
+			"Source Code Input",
+			"Documentation Type",
+			"Project Goal",
+			"Additional Information",
+			"Generated Documentation",
+		],
+		imageUrl: "/codedocumentation.jpg",
+		href: "/code-documentation",
+		color: "text-indigo-500",
+		bgColor: "bg-indigo-200",
+		slug: "code-documentation",
+		category: "Developer Tools",
+		aiPrompt: `Generate clear and concise code documentation based on the provided source code and selected type of documentation.
+        - Include relevant comments and explanations for functions, methods, and classes.
+        - Provide an overview of how the code works, what it achieves, and any important details regarding its use.
+        - If a project goal is provided, incorporate how the code aligns with the goal.
+        - Include any additional specific information provided by the user, making the documentation detailed and informative for developers working on or maintaining the project.`,
+		formFields: [
+			{
+				label: "Source Code",
+				field: "sourceCode",
+				name: "sourceCode",
+				required: true,
+				placeholder: "Please paste your source code here",
+				type: "textarea",
+			},
+			{
+				label: "Documentation Type",
+				field: "documentationType",
+				name: "documentationType",
+				required: true,
+				placeholder:
+					"Select the type of documentation (e.g., API reference, user guide)",
+				type: "select",
+            options: [
+				{ label: "API Reference", value: "api-reference" },
+				{ label: "User Guide", value: "user-guide" },
+				{ label: "Installation Guide", value: "installation-guide" },
+				{ label: "Troubleshooting Guide", value: "troubleshooting-guide" },
+				{ label: "Best Practices Guide", value: "best-practices-guide" },
+				{ label: "FAQ", value: "faq" },
+				{ label: "Release Notes", value: "release-notes" },
+				{ label: "Changelog", value: "changelog" },
+			],
+			},
+			{
+				label: "Project Goal",
+				field: "projectGoal",
+				name: "projectGoal",
+				required: false,
+				placeholder: "Describe your project's goal (optional)",
+				type: "textarea",
+			},
+			{
+				label: "Additional Information",
+				field: "additionalInfo",
+				name: "additionalInfo",
+				required: false,
+				placeholder:
+					"Include any specific details for the documentation (optional)",
+				type: "textarea",
+			},
+		],
+		validationSchema: z.object({
+			sourceCode: z.string().min(1, "Source code is required"),
+			documentationType: z
+				.string()
+				.min(1, "Documentation type is required"),
+			projectGoal: z.string().optional(),
+			additionalInfo: z.string().optional(),
+		}),
+      isFavorite: false,},
+	{
+		name: "A-I-D-A Model Content Creator",
+		description:
+			"A tool that helps you craft compelling content using the AIDA model. It's designed to grab attention, generate interest, create desire, and provoke action.",
+		icon: FcMoneyTransfer,
+		features: [
+			"Content Type",
+			"Offer/Service Details",
+			"Ideal Customer",
+			"Customer Action Steps",
+		],
+		imageUrl: "/aida-model.jpg",
+		href: "/aida-model-content",
+		color: "text-orange-500",
+		bgColor: "bg-orange-200",
+		slug: "aida-model-content",
+		category: "Marketing Content",
+		aiPrompt: `Create a compelling piece of content using the AIDA model (Attention, Interest, Desire, Action) based on the following details:
+        - Start by grabbing the audience's attention with a bold statement or question.
+        - Generate interest by explaining the offered product/service and highlighting its key benefits.
+        - Create desire by focusing on the value this product/service offers to the ideal customer, addressing their specific pain points or needs.
+        - Conclude with a clear call-to-action that explains the steps the customer needs to take to start working with the business.`,
+		formFields: [
+			{
+				label: "Content Type",
+				field: "contentType",
+				name: "contentType",
+				required: true,
+				placeholder:
+					"Select the type of content (e.g., blog post, email, ad)",
+				type: "select",
+            options: [
+				{ label: "Blog Post", value: "blog-post" },
+				{ label: "Email", value: "email" },
+				{ label: "Ad", value: "ad" },
+				{ label: "Social Media Post", value: "social-media-post" },
+				{ label: "Video Script", value: "video-script" },
+				{ label: "Website Copy", value: "website-copy" },
+				{ label: "Product Description", value: "product-description" },
+				{ label: "Sales Letter", value: "sales-letter" },
+				{ label: "Newsletter", value: "newsletter" },
+
+				],
+			},
+			{
+				label: "Offer/Service",
+				field: "offerService",
+				name: "offerService",
+				required: true,
+				placeholder:
+					"What do you offer or sell? Or what services do you provide?",
+				type: "textarea",
+			},
+			{
+				label: "Ideal Customer",
+				field: "idealCustomer",
+				name: "idealCustomer",
+				required: true,
+				placeholder: "Describe your ideal customer",
+				type: "textarea",
+			},
+			{
+				label: "Customer Action Steps",
+				field: "customerActionSteps",
+				name: "customerActionSteps",
+				required: true,
+				placeholder:
+					"What steps do customers need to take to start working with your business?",
+				type: "textarea",
+			},
+		],
+		validationSchema: z.object({
+			contentType: z.string().min(1, "Content type is required"),
+			offerService: z
+				.string()
+				.min(1, "Offer or service details are required"),
+			idealCustomer: z
+				.string()
+				.min(1, "Ideal customer description is required"),
+			customerActionSteps: z
+				.string()
+				.min(1, "Customer action steps are required"),
+		}),
+      isFavorite: false,},
+	{
+		name: "Creative Home Page",
+		description:
+			"This is your go-to AI for creating high-converting landing pages. It is adept at structuring content, selecting templates, and writing compelling website copy that speaks to your target audience.",
+		icon: Home,
+		features: [
+			"Product/Brand Name",
+			"Product or Service Details",
+			"Ideal Customer",
+			"Landing Page Structure",
+			"Compelling Copy",
+		],
+		imageUrl: "/creative-homepage.jpg",
+		href: "/creative-home-page",
+		color: "text-green-500",
+		bgColor: "bg-green-200",
+		slug: "creative-home-page",
+		category: "Website Content",
+		aiPrompt: `Create a high-converting landing page based on the following details:
+     - Start with a bold, eye-catching headline using the provided product/brand name.
+     - Introduce the product or service, highlighting its key features and benefits.
+     - Tailor the messaging to resonate with the described ideal customer, addressing their specific needs and interests.
+     - Organize the content into sections for ease of reading, and include a strong call-to-action that aligns with the product or service.
+     - Optimize the copy for conversion, ensuring the language is persuasive and engaging.`,
+		formFields: [
+			{
+				label: "Product/Brand Name",
+				field: "brandName",
+				name: "brandName",
+				required: true,
+				placeholder: "Enter your Product/Brand name here",
+				type: "text",
+			},
+			{
+				label: "What are you selling or promoting?",
+				field: "productDetails",
+				name: "productDetails",
+				required: true,
+				placeholder:
+					"Describe what you are selling or promoting, and include key features",
+				type: "textarea",
+			},
+			{
+				label: "Ideal Customer",
+				field: "idealCustomer",
+				name: "idealCustomer",
+				required: true,
+				placeholder: "Describe your ideal customer and their interests",
+				type: "textarea",
+			},
+		],
+		validationSchema: z.object({
+			brandName: z.string().min(1, "Product/Brand name is required"),
+			productDetails: z
+				.string()
+				.min(1, "Product or service details are required"),
+			idealCustomer: z
+				.string()
+				.min(1, "Ideal customer description is required"),
+		}),
+      isFavorite: true,},
+	{
+		name: "Ad Copy",
+		description:
+			"Let us launch your product into the spotlight with ad copies that captivate and compel your audience to click and explore.",
+		icon: Megaphone,
+		features: [
+			"Product Name",
+			"Product Details",
+			"Key Features",
+			"Ad Copy Creation",
+			"Call-to-Action",
+		],
+		imageUrl: "/ad-copy.jpg",
+		href: "/ad-copy",
+		color: "text-yellow-500",
+		bgColor: "bg-yellow-200",
+		slug: "ad-copy",
+		category: "Marketing Content",
+		aiPrompt: `Create a highly engaging and click-worthy ad copy based on the following product details:
+        - Start with a catchy headline that captures attention and highlights the product's main feature or unique selling point.
+        - Craft a concise but compelling description of the product, focusing on its key features and benefits.
+        - Make the copy enticing for the target audience, ensuring it appeals to their needs or pain points.
+        - Include a strong call-to-action that encourages the reader to click and explore the product further.
+        - If more details are needed for the ad copy, prompt the user for additional information about the product's target market, pricing, promotions, or any special offers.`,
+		formFields: [
+			{
+				label: "Product Name",
+				field: "productName",
+				name: "productName",
+				required: true,
+				placeholder:
+					"Enter the product name (e.g., iPhone 12, Samsung Galaxy Note 20)",
+				type: "text",
+			},
+			{
+				label: "Product Details",
+				field: "productDetails",
+				name: "productDetails",
+				required: true,
+				placeholder:
+					"Provide key features, benefits, and any other relevant details about the product",
+				type: "textarea",
+			},
+			{
+				label: "Target Audience (Optional)",
+				field: "targetAudience",
+				name: "targetAudience",
+				required: false,
+				placeholder: "Describe the target audience (optional)",
+				type: "textarea",
+			},
+			{
+				label: "Promotions or Special Offers (Optional)",
+				field: "promotions",
+				name: "promotions",
+				required: false,
+				placeholder:
+					"Include any promotions or special offers (optional)",
+				type: "textarea",
+			},
+		],
+		validationSchema: z.object({
+			productName: z.string().min(1, "Product name is required"),
+			productDetails: z.string().min(1, "Product details are required"),
+			targetAudience: z.string().optional(),
+			promotions: z.string().optional(),
+		}),
+      isFavorite: false,},
+	{
+		name: "All-in-One SEO Tool",
+		description:
+			"This tool generates optimized meta titles, descriptions, and keywords to improve your website's search engine visibility. It also helps create Open Graph images for better social media sharing.",
+		icon: Globe,
+		features: [
+			"Meta Title Generator",
+			"Meta Description Generator",
+			"Keyword Suggestions",
+			"Open Graph Image Creator",
+			"SEO Best Practices",
+		],
+		imageUrl: "/seo-tool.jpg",
+		href: "/all-in-one-seo-tool",
+		color: "text-green-500",
+		bgColor: "bg-green-200",
+		slug: "all-in-one-seo-tool",
+		category: "SEO Tools",
+		aiPrompt: `Generate optimized meta tags and keywords for the following webpage:
+        - Create a compelling meta title that includes the primary keyword and adheres to SEO best practices.
+        - Write a concise meta description that captures the essence of the page and entices clicks while including relevant keywords.
+        - Provide a list of suggested keywords to target for this webpage.
+        - Create a suggestion for an Open Graph image that would enhance the webpage's social media presence, including key visual elements.`,
+		formFields: [
+			{
+				label: "Page Title",
+				field: "pageTitle",
+				name: "pageTitle",
+				required: true,
+				placeholder: "Enter the title of the webpage",
+				type: "text",
+			},
+			{
+				label: "Primary Keyword",
+				field: "primaryKeyword",
+				name: "primaryKeyword",
+				required: true,
+				placeholder: "Enter the primary keyword for SEO",
+				type: "text",
+			},
+			{
+				label: "Page Content Overview",
+				field: "contentOverview",
+				name: "contentOverview",
+				required: true,
+				placeholder: "Provide a brief overview of the page content",
+				type: "textarea",
+			},
+			{
+				label: "Target Audience (Optional)",
+				field: "targetAudience",
+				name: "targetAudience",
+				required: false,
+				placeholder:
+					"Describe the target audience for this page (optional)",
+				type: "textarea",
+			},
+		],
+		validationSchema: z.object({
+			pageTitle: z.string().min(1, "Page title is required"),
+			primaryKeyword: z.string().min(1, "Primary keyword is required"),
+			contentOverview: z.string().min(1, "Content overview is required"),
+			targetAudience: z.string().optional(),
+		}),
+      isFavorite: false,},
+	{
+		name: "Blog Content Calendar",
+		description:
+			"This tool crafts an organized content calendar for your blog, targeting transactional-style search terms to boost your online presence. Stay ahead in content planning and optimize your blogging strategy.",
+		icon: Calendar,
+		features: [
+			"Target Keyword Input",
+			"Content Ideas Generation",
+			"Publishing Schedule",
+			"SEO Optimization Tips",
+			"Analytics Tracking",
+		],
+		imageUrl: "/blog-content-calendar.jpg",
+		href: "/blog-content-calendar",
+		color: "text-blue-500",
+		bgColor: "bg-blue-200",
+		slug: "blog-content-calendar",
+		category: "Blogging Tools",
+		aiPrompt: `Create a detailed blog content calendar based on the provided target keyword:
+        - Generate content ideas that target transactional-style search terms relevant to the keyword.
+        - Organize the ideas into a monthly calendar format, including suggested publishing dates.
+        - Provide SEO optimization tips for each content idea to enhance search engine visibility.
+        - Include suggestions for promoting each blog post on social media and other platforms.`,
+		formFields: [
+			{
+				label: "Target Keyword",
+				field: "targetKeyword",
+				name: "targetKeyword",
+				required: true,
+				placeholder: "Enter your target keyword",
+				type: "text",
+			},
+		],
+		validationSchema: z.object({
+			targetKeyword: z.string().min(1, "Target keyword is required"),
+		}),
+      isFavorite: false,},
+	{
+		name: "LinkedIn Article Writer",
+		description:
+			"Write long-form LinkedIn articles that showcase your expertise and thoughts on industry-related topics, helping you establish authority.",
+		icon: FileText,
+		features: [
+			"Article Writing",
+			"Long-Form Content",
+			"Showcase Expertise",
+		],
+		imageUrl: "/articlewriter.jpg",
+		href: "/linkedin-article-writer",
+		color: "text-gray-500",
+		bgColor: "bg-gray-200",
+		slug: "linkedin-article-writer",
+		category: "LinkedIn Content",
+		aiPrompt: "Write a LinkedIn article on the provided topic",
+		formFields: [
+			{
+				label: "Article Title",
+				field: "articleTitle",
+				name: "articleTitle",
+				required: true,
+				placeholder: "Enter the title of your article",
+				type: "text",
+			},
+			{
+				label: "Article Topic",
+				field: "articleTopic",
+				name: "articleTopic",
+				required: true,
+				placeholder: "Specify the topic of the article",
+				type: "text",
+			},
+			{
+				label: "Article Body",
+				field: "articleBody",
+				name: "articleBody",
+				required: true,
+				placeholder: "Write the main content of the article",
+				type: "textarea",
 			},
 			{
 				label: "Writing Tone",
@@ -178,467 +607,314 @@ export const TEMPLATES = [
 				options: [
 					{ label: "Professional", value: "professional" },
 					{ label: "Casual", value: "casual" },
-					{ label: "Enthusiastic", value: "enthusiastic" },
 					{ label: "Informative", value: "informative" },
 				],
 				type: "select",
 			},
-			{
-				label: "Additional Notes",
-				field: "notes",
-				name: "notes",
-				required: false,
-				placeholder:
-					"Any additional information or specific instructions",
-				type: "textarea",
-			},
-			{
-				label: "Target Keywords",
-				field: "keywords",
-				name: "keywords",
-				required: false,
-				placeholder:
-					"Enter keywords for SEO optimization (comma-separated)",
-				type: "textarea",
-			},
-			{
-				label: "Include Images",
-				field: "includeImages",
-				name: "includeImages",
-				required: false,
-				value: false,
-				type: "switch",
-			},
 		],
-		validationSchema: blogSchema,
-	},
+		validationSchema: z.object({
+			articleTitle: z.string().min(1, "Article title is required"),
+			articleTopic: z.string().min(1, "Article topic is required"),
+			articleBody: z.string().min(1, "Article body is required"),
+			tone: z.enum(["professional", "casual", "informative"]).optional(),
+		}),
+      isFavorite: false,},
 	{
-		name: "Freelance Proposal Generator",
+		name: "SEO-Optimized Blog Post",
 		description:
-			"Create professional, persuasive proposals tailored to your freelance projects. Impress clients with well-structured and clear communication.",
-		icon: Handshake,
+			"This tool helps you create an SEO-optimized, compelling, and reader-friendly blog post using a given title and designated keywords. Enhance your blog's visibility and engagement with expertly crafted content.",
+		icon: Pencil,
 		features: [
-			"Customizable Proposals",
-			"Professional Templates",
-			"Easy Client Communication",
+			"Focus Keyword Input",
+			"Additional Keywords",
+			"Content Structure Suggestions",
+			"SEO Best Practices",
+			"Readability Checks",
 		],
-		imageUrl: "/freelance.jpeg",
-		href: "/freelance-proposal-generator",
-		color: "text-blue-500",
-		bgColor: "bg-blue-300",
-		slug: "freelance-proposal-generator",
-		category: "Proposal Generation",
-		type: "proposal",
+		imageUrl: "/seo-optimized-blog-post.jpg",
+		href: "/seo-optimized-blog-post",
+		color: "text-orange-500",
+		bgColor: "bg-orange-200",
+		slug: "seo-optimized-blog-post",
+		category: "Blogging Tools",
+		aiPrompt: `Generate a comprehensive SEO-optimized blog post based on the following inputs:
+        - Create a compelling introduction that hooks the reader while incorporating the focus keyword.
+        - Structure the post with appropriate headings, subheadings, and bullet points for clarity.
+        - Incorporate the additional keywords seamlessly throughout the content while maintaining readability.
+        - Conclude with a strong call-to-action that encourages reader engagement and sharing.
+        - Provide SEO best practices and readability checks to ensure the post meets current standards.`,
 		formFields: [
 			{
-				label: "Your Name",
-				field: "input",
-				name: "yourName",
+				label: "Focus Keyword",
+				field: "focusKeyword",
+				name: "focusKeyword",
 				required: true,
-				placeholder: "Example: Gunther Smith",
+				placeholder: "Enter your focus keyword",
 				type: "text",
 			},
 			{
-				label: "Client Name",
-				field: "input",
-				name: "clientName",
+				label: "Additional Keywords (Optional)",
+				field: "additionalKeywords",
+				name: "additionalKeywords",
+				required: false,
+				placeholder:
+					"List additional keywords to incorporate (comma-separated)",
+				type: "textarea",
+			},
+		],
+		validationSchema: z.object({
+			focusKeyword: z.string().min(1, "Focus keyword is required"),
+			additionalKeywords: z.string().optional(),
+		}),
+      isFavorite: false,},
+	{
+		name: "All-in-One Social Post",
+		description:
+			"Create effective posts for every social media platform, from Facebook to YouTube. This tool ensures your content fits within the character limits and includes relevant hashtags, emojis, and keywords for maximum engagement.",
+		icon: Share,
+		features: [
+			"Post Content Input",
+			"Character Limit Checks",
+			"Hashtag Suggestions",
+			"Emoji Integration",
+			"Platform-Specific Formatting",
+		],
+		imageUrl: "/social-post.jpg",
+		href: "/all-in-one-social-post",
+		color: "text-pink-500",
+		bgColor: "bg-pink-200",
+		slug: "all-in-one-social-post",
+		category: "Social Media Tools",
+		aiPrompt: `Create optimized social media posts based on the following inputs:
+        - Generate engaging content tailored to the specified social media platform(s).
+        - Ensure the content adheres to character limits and formatting rules for each platform.
+        - Provide relevant hashtags and emojis to enhance engagement and visibility.
+        - Suggest any additional keywords that can improve discoverability on social media.`,
+		formFields: [
+			{
+				label: "Post Topic",
+				field: "postTopic",
+				name: "postTopic",
 				required: true,
-				placeholder: "Example: Central Perk, LLC",
-				type: "text",
+				placeholder: "What is your post about?",
+				type: "textarea",
 			},
 			{
-				label: "Proposed Fee",
-				field: "input",
-				name: "proposedFee",
-				required: true,
-				placeholder: "Example: $2,500",
-				type: "text",
-			},
-			{
-				label: "Deliverables",
-				field: "textarea",
-				name: "deliverables",
+				label: "Target Platforms",
+				field: "targetPlatforms",
+				name: "targetPlatforms",
 				required: true,
 				placeholder:
-					"Example: Creating a website with 5 pages, 10 blog posts, and 3 landing pages.",
+					"Select the platforms (e.g., Facebook, Twitter, Instagram, LinkedIn, YouTube)",
+				type: "select",
+				options: [
+					{ value: "facebook", label: "Facebook" },
+					{ value: "twitter", label: "Twitter" },
+					{ value: "instagram", label: "Instagram" },
+					{ value: "linkedin", label: "LinkedIn" },
+					{ value: "youtube", label: "YouTube" },
+				],
+			},
+			{
+				label: "Preferred Hashtags (Optional)",
+				field: "preferredHashtags",
+				name: "preferredHashtags",
+				required: false,
+				placeholder: "List preferred hashtags (comma-separated)",
 				type: "textarea",
 			},
 			{
-				label: "Tone & Writing Style",
-				field: "select",
-				name: "tone",
-				required: true,
-				options: [
-					{ label: "Professional", value: "professional" },
-					{ label: "Casual", value: "casual" },
-					{ label: "Persuasive", value: "persuasive" },
-				],
-				type: "select",
-			},
-		],
-		validationSchema: freelanceProposalSchema,
-	},
-	{
-		name: "Newsletter Generator",
-		description:
-			"Create engaging newsletters with ease. Keep your audience informed with well-crafted content and seamless distribution.",
-		icon: Newspaper,
-		features: [
-			"Content Curation",
-			"Engaging Templates",
-			"Easy Distribution",
-		],
-		imageUrl: "/newsletter.jpeg",
-		href: "/newsletter-generator",
-		color: "text-green-500",
-		bgColor: "bg-green-300",
-		slug: "newsletter-generator",
-		category: "Newsletter Generation",
-		formFields: [
-			{
-				label: "Points to Convey / Article URL / YouTube Video URL",
-				field: "textarea",
-				name: "pointsToConvey",
-				required: true,
-				placeholder: "Example: Key insights from our latest research",
-				type: "textarea",
-			},
-			{
-				label: "Newsletter Type",
-				field: "select",
-				name: "newsletterType",
-				required: true,
-				options: [
-					{ label: "Automatic", value: "Automatic" },
-					{ label: "Custom", value: "Custom" },
-				],
-				type: "select",
-			},
-			{
-				label: "Include Link?",
-				field: "switch",
-				name: "includeLink",
+				label: "Tone of Voice (Optional)",
+				field: "toneOfVoice",
+				name: "toneOfVoice",
 				required: false,
-				type: "switch",
-			},
-			{
-				label: "Tone & Writing Style",
-				field: "select",
-				name: "tone",
-				required: true,
-				options: [
-					{ label: "Professional", value: "professional" },
-					{ label: "Casual", value: "casual" },
-					{ label: "Engaging", value: "engaging" },
-				],
-				type: "select",
-			},
-			{
-				label: "Language",
-				field: "select",
-				name: "language",
-				required: true,
-				options: [
-					{ label: "English (US)", value: "English (US)" },
-					{ label: "Spanish", value: "Spanish" },
-				],
-				type: "select",
-			},
-			{
-				label: "Target Audience (optional)",
-				field: "input",
-				name: "targetAudience",
-				required: false,
-				placeholder: "Example: People who love camping.",
+				placeholder:
+					"Describe the desired tone (e.g., professional, casual, humorous)",
 				type: "text",
 			},
-			{
-				label: "Point of View",
-				field: "select",
-				name: "pointOfView",
-				required: true,
-				options: [
-					{ label: "First-Person", value: "firstPerson" },
-					{ label: "Third-Person", value: "thirdPerson" },
-				],
-				type: "select",
-			},
-			{
-				label: "Additional Instructions (optional)",
-				field: "textarea",
-				name: "additionalInstructions",
-				required: false,
-				placeholder: "Example: Include a mention of my dog Ralph.",
-				type: "textarea",
-			},
-			{
-				label: "Creativity Level (optional)",
-				field: "textarea",
-				name: "creativity",
-				required: false,
-				placeholder: "",
-				type: "textarea",
-			},
 		],
-		validationSchema: newsletterSchema,
-	},
-
+		validationSchema: z.object({
+			postTopic: z.string().min(1, "Post topic is required"),
+			targetPlatforms: z
+				.string()
+				.min(1, "At least one platform must be selected"),
+			preferredHashtags: z.string().optional(),
+			toneOfVoice: z.string().optional(),
+		}),
+      isFavorite: false,},
 	{
-		name: "Course Outline Generator",
+		name: "Advanced Blog Post",
 		description:
-			"Create comprehensive course outlines for any topic. Ensure structured and well-organized content delivery.",
-		icon: ListTodo,
+			"This tool helps you write engaging, detailed blog posts tailored for specific types of content. It ensures your writing is unique, SEO-friendly, and resonates with your target audience, making it easier to connect with readers and improve search rankings.",
+		icon: BookOpen,
 		features: [
-			"Structured Content",
-			"Customizable Modules",
-			"Comprehensive Outlines",
+			"Blog Title Input",
+			"Target Audience Specification",
+			"Blog Type Selection",
+			"Focus Keyword Integration",
+			"Word Count Selection",
+			"Tone of Voice Customization",
+			"Additional Instructions",
 		],
-		imageUrl: "/course.jpeg",
-		href: "/course-outline-generator",
-		color: "text-yellow-500",
-		bgColor: "bg-yellow-300",
-		slug: "course-outline-generator",
-		category: "Course Outline Generation",
+		imageUrl: "/advanced-blog-post.jpg",
+		href: "/advanced-blog-post",
+		color: "text-purple-500",
+		bgColor: "bg-purple-200",
+		slug: "advanced-blog-post",
+		category: "Blogging Tools",
+		aiPrompt: `Generate a comprehensive and engaging blog post based on the following inputs:
+     - **Blog Type**: The blog type selected will tailor the content appropriately. For instance:
+       - **Affiliate Blog**: Include product recommendations, comparison charts, and links to affiliate products.
+       - **Product Blog**: Provide in-depth product reviews, specifications, and user experiences.
+       - **Coding Blog**: Integrate relevant code snippets, explanations, and best practices.
+     - **Title**: Create a unique and captivating introduction based on the provided blog title.
+     - **Target Audience**: Tailor the language, style, and examples to resonate with the specified audience.
+     - **Focus Keywords**: Incorporate the given keywords naturally throughout the post while maintaining readability and flow.
+     - **Word Count**: Adhere to the specified word count while ensuring the content is comprehensive and engaging.
+     - **Tone of Voice**: Adjust the tone to match the brand's voice, whether it's professional, casual, or informative.
+     - **Additional Instructions**: Incorporate any specific requests or details to enhance the content further, such as SEO optimization strategies, readability enhancements, and style preferences.`,
 		formFields: [
 			{
-				label: "Course Topic",
-				field: "input",
-				name: "courseTopic",
+				label: "Blog Title",
+				field: "blogTitle",
+				name: "blogTitle",
 				required: true,
-				placeholder: "Example: Introduction to Python Programming",
+				placeholder: "What is your blog title?",
 				type: "text",
-			},
-			{
-				label: "Course Length",
-				field: "select",
-				name: "courseLength",
-				required: true,
-				options: [
-					{ label: "Short (1-4 weeks)", value: "short" },
-					{ label: "Standard (5-8 weeks)", value: "standard" },
-					{ label: "Long (9+ weeks)", value: "long" },
-				],
-				type: "select",
-			},
-			{
-				label: "Course Type",
-				field: "select",
-				name: "courseType",
-				required: true,
-				options: [
-					{ label: "Online", value: "online" },
-					{ label: "In-Person", value: "inPerson" },
-					{ label: "Hybrid", value: "hybrid" },
-				],
-				type: "select",
 			},
 			{
 				label: "Target Audience",
-				field: "textarea",
+				field: "targetAudience",
 				name: "targetAudience",
 				required: true,
-				placeholder:
-					"Example: Beginners with no prior programming experience.",
+				placeholder: "Enter your target audience here",
 				type: "textarea",
 			},
 			{
-				label: "Learning Objectives",
-				field: "textarea",
-				name: "learningObjectives",
+				label: "Blog Type",
+				field: "blogType",
+				name: "blogType",
 				required: true,
-				placeholder:
-					"Example: By the end of this course, students will be able to build basic Python programs.",
-				type: "textarea",
-			},
-			{
-				label: "Additional Resources (optional)",
-				field: "textarea",
-				name: "additionalResources",
-				required: false,
-				placeholder:
-					"Example: Recommended textbooks, software tools, or websites.",
-				type: "textarea",
-			},
-			{
-				label: "Course Format",
-				field: "select",
-				name: "courseFormat",
-				required: true,
-				options: [
-					{ label: "Lecture-Based", value: "lectureBased" },
-					{ label: "Project-Based", value: "projectBased" },
-					{ label: "Discussion-Based", value: "discussionBased" },
-				],
+				placeholder: "Select the type of blog content",
 				type: "select",
+				options: [
+					{ value: "affiliate", label: "Affiliate Blog" },
+					{ value: "product", label: "Product Blog" },
+					{ value: "coding", label: "Coding Blog" },
+					{ value: "lifestyle", label: "Lifestyle Blog" },
+					{ value: "travel", label: "Travel Blog" },
+					{ value: "finance", label: "Finance Blog" },
+				],
 			},
 			{
-				label: "Assessment Methods",
-				field: "textarea",
-				name: "assessmentMethods",
-				required: false,
-				placeholder: "Example: Quizzes, exams, project submissions.",
+				label: "Focus Keyword(s)",
+				field: "focusKeywords",
+				name: "focusKeywords",
+				required: true,
+				placeholder:
+					"e.g., Artificial Intelligence, Future (comma-separated)",
 				type: "textarea",
 			},
 			{
-				label: "Special Instructions (optional)",
-				field: "textarea",
-				name: "specialInstructions",
+				label: "Word Count",
+				field: "wordCount",
+				name: "wordCount",
+				required: true,
+				placeholder: "Select your desired word count",
+				type: "select",
+				options: [
+					{ value: "500", label: "500 words" },
+					{ value: "1000", label: "1000 words" },
+					{ value: "1500", label: "1500 words" },
+					{ value: "2000", label: "2000 words" },
+				],
+			},
+			{
+				label: "Tone of Voice",
+				field: "toneOfVoice",
+				name: "toneOfVoice",
 				required: false,
 				placeholder:
-					"Example: Include a final capstone project for students.",
-				type: "textarea",
-			},
-		],
-		validationSchema: courseOutlineSchema,
-	},
-
-	{
-		name: "Explain Like I'm Five Tool",
-		description:
-			"Break down complex topics into simple, easy-to-understand explanations. Ideal for teaching, learning, or simplifying difficult concepts.",
-		icon: BookOpen,
-		features: [
-			"Simple Explanations",
-			"User-Friendly",
-			"Broad Range of Topics",
-		],
-		imageUrl: "/explain.jpeg",
-		href: "/explain-like-im-five",
-		color: "text-yellow-300",
-		bgColor: "bg-yellow-300",
-		slug: "explain-like-im-five",
-		category: "Learning Tools",
-		formFields: [
-			{
-				label: "Topic to Explain",
-				field: "input",
-				name: "topic",
-				required: true,
-				placeholder: "Example: What is Quantum Computing?",
+					"Describe the desired tone (e.g., professional, casual, informative)",
 				type: "text",
 			},
 			{
-				label: "Target Age Group",
-				field: "select",
-				name: "ageGroup",
-				required: true,
-				options: [
-					{ label: "5-7 years old", value: "5-7" },
-					{ label: "8-10 years old", value: "8-10" },
-					{ label: "11-13 years old", value: "11-13" },
-				],
-				type: "select",
-			},
-			{
-				label: "Include Examples",
-				field: "switch",
-				name: "includeExamples",
+				label: "Additional Instructions (Optional)",
+				field: "additionalInstructions",
+				name: "additionalInstructions",
 				required: false,
-				type: "switch",
-			},
-			{
-				label: "Language",
-				field: "select",
-				name: "language",
-				required: true,
-				options: [
-					{ label: "English", value: "English" },
-					{ label: "Spanish", value: "Spanish" },
-				],
-				type: "select",
-			},
-			{
-				label: "Additional Context (optional)",
-				field: "textarea",
-				name: "additionalContext",
-				required: false,
-				placeholder:
-					"Example: Mention how it's different from regular computers.",
+				placeholder: "Any other specific requests or details?",
 				type: "textarea",
 			},
 		],
-		validationSchema: explainSchema,
-	},
+		validationSchema: z.object({
+			blogTitle: z.string().min(1, "Blog title is required"),
+			targetAudience: z.string().min(1, "Target audience is required"),
+			blogType: z.string().min(1, "Blog type must be selected"),
+			focusKeywords: z
+				.string()
+				.min(1, "At least one focus keyword is required"),
+			wordCount: z.string().min(1, "Word count must be selected"),
+			toneOfVoice: z.string().optional(),
+			additionalInstructions: z.string().optional(),
+		}),
+      isFavorite: false,},
 	{
-		name: "DSA Learning Tool",
+		name: "LinkedIn Comment Generator",
 		description:
-			"Learn Data Structures and Algorithms interactively. Practice coding problems and understand core concepts step by step.",
-		icon: Code,
+			"Create thoughtful and engaging comments on LinkedIn posts to build your network, engage with thought leaders, and contribute to discussions.",
+		icon: MessageSquare,
 		features: [
-			"Interactive Learning",
-			"Comprehensive Coverage",
-			"Practice Problems",
+			"Engage with Content",
+			"Networking Opportunities",
+			"Thoughtful Responses",
 		],
-		imageUrl: "/dsa.jpeg",
-		href: "/dsa-learning-tool",
+		imageUrl: "/commentgenerator.jpg",
+		href: "/linkedin-comment-generator",
 		color: "text-red-500",
-		bgColor: "bg-red-300",
-		slug: "dsa-learning-tool",
-		category: "Educational Tools",
+		bgColor: "bg-red-200",
+		slug: "linkedin-comment-generator",
+		category: "LinkedIn Content",
+		aiPrompt:
+			"Generate a thoughtful LinkedIn comment for the following post",
 		formFields: [
 			{
-				label: "Choose Topic",
-				field: "select",
-				name: "dsaTopic",
+				label: "Post Content",
+				field: "postContent",
+				name: "postContent",
 				required: true,
-				options: [
-					{ label: "Arrays", value: "arrays" },
-					{ label: "Linked Lists", value: "linkedLists" },
-					{ label: "Stacks", value: "stacks" },
-					{ label: "Queues", value: "queues" },
-					{ label: "Trees", value: "trees" },
-					{ label: "Graphs", value: "graphs" },
-					{
-						label: "Dynamic Programming",
-						value: "dynamicProgramming",
-					},
-				],
-				type: "select",
+				placeholder:
+					"Enter the content or summary of the LinkedIn post",
+				type: "textarea",
 			},
 			{
-				label: "Difficulty Level",
-				field: "select",
-				name: "difficultyLevel",
+				label: "Comment Intent",
+				field: "commentIntent",
+				name: "commentIntent",
 				required: true,
-				options: [
-					{ label: "Beginner", value: "beginner" },
-					{ label: "Intermediate", value: "intermediate" },
-					{ label: "Advanced", value: "advanced" },
-				],
-				type: "select",
+				placeholder: "What is your goal? (e.g., agree, ask, add value)",
+				type: "text",
 			},
 			{
-				label: "Practice Mode",
-				field: "select",
-				name: "practiceMode",
+				label: "Writing Tone",
+				field: "tone",
+				name: "tone",
 				required: false,
 				options: [
-					{ label: "Practice", value: "practice" },
-					{ label: "Timed Test", value: "timedTest" },
-				],
-				type: "select",
-			},
-			{
-				label: "Include Hints",
-				field: "switch",
-				name: "includeHints",
-				required: false,
-				type: "switch",
-			},
-			{
-				label: "Preferred Language",
-				field: "select",
-				name: "preferredLanguage",
-				required: true,
-				options: [
-					{ label: "JavaScript", value: "javascript" },
-					{ label: "Python", value: "python" },
-					{ label: "C++", value: "cpp" },
-					{ label: "Java", value: "java" },
+					{ label: "Professional", value: "professional" },
+					{ label: "Friendly", value: "friendly" },
+					{ label: "Inquisitive", value: "inquisitive" },
 				],
 				type: "select",
 			},
 		],
-		validationSchema: dsaSchema,
+		validationSchema: z.object({
+			postContent: z.string().min(1, "Post content is required"),
+			commentIntent: z.string().min(1, "Comment intent is required"),
+			tone: z
+				.enum(["professional", "friendly", "inquisitive"])
+				.optional(),
+		}),
+      isFavorite: false,
 	},
 ];

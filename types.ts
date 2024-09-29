@@ -39,19 +39,19 @@ type FieldConfig = TextField | TextareaField | SelectField | SwitchField;
 export interface TEMPLATE {
 	name: string;
 	description: string;
-	icon: any; // assuming you're using an icon library like react-icons
-	href: string;
-	color: string;
-	bgColor: string;
+	icon?: any; // assuming you're using an icon library like react-icons
+	href?: string;
+	color?: string;
+	bgColor?: string;
 	slug: string;
-	category: string;
-	aiPrompt: string;
+	category?: string;
+	aiPrompt?: string;
 	formFields: FieldConfig[]; // array of form field configurations
 	validationSchema: ZodSchema<any>; // using Zod for validation
 }
 export interface FormConfig {
-	name: string;
-	description: string;
+	name?: string;
+	description?: string;
 	formFields: {
 		label: string;
 		field: string;

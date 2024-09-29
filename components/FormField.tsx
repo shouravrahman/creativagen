@@ -25,77 +25,104 @@ export function DynamicFormField({ config }: { config: FieldConfig }) {
    const form = useFormContext()
 
    return (
-      <FormField
-         control={form.control}
-         name={config.name}
-         render={({ field }) => (
-            <FormItem className={config.type === 'switch' && `flex items-center text-center space-y-0 `}>
-               <FormLabel className={config.type === 'switch' && `pb-0`}>{config.label}</FormLabel>
-               {config.type === 'text' && (
-                  <FormControl>
-                     <Input
-                        {...field}
-                        type={config.type || 'text'}
-                        placeholder={config.placeholder}
-                        required={config.required}
-                     />
-                  </FormControl>
-               )}
-               {config.type === 'textarea' && (
-                  <FormControl>
-                     <Textarea
-                        {...field}
-                        placeholder={config.placeholder}
-                        required={config.required}
-                     />
-                  </FormControl>
-               )}
-               {config.type === 'select' && (
-                  <FormControl>
-                     <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <SelectTrigger>
-                           <SelectValue placeholder={config.placeholder} />
-                        </SelectTrigger>
-                        <SelectContent>
-                           {config.options?.map((option) => (
-                              <SelectItem key={option.value} value={option.value}>
-                                 {option.label}
-                              </SelectItem>
-                           ))}
-                        </SelectContent>
-                     </Select>
-                  </FormControl>
-               )}
-               {config.type === 'switch' && (
-                  <FormControl className="ml-3">
-                     <Switch
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                     />
-                  </FormControl>
-               )}
-               {config.type === 'radio' && (
-                  <FormControl>
-                     <RadioGroup
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                        className="flex flex-col space-y-1"
-                     >
-                        {config.options?.map((option) => (
-                           <div key={uuidv4()} className="flex items-center space-x-2">
-                              <RadioGroupItem value={option.value} id={option.value} />
-                              <Label htmlFor={option.value}>{option.label}</Label>
-                           </div>
-                        ))}
-                     </RadioGroup>
-                  </FormControl>
-               )}
-               {/* {config.placeholder && <FormDescription>{config.placeholder}</FormDescription>} */}
+		<FormField
+			control={form.control}
+			name={config.name}
+			render={({ field }) => (
+				<FormItem
+					className={
+						config.type === "switch"
+							? "flex items-center text-center space-y-0"
+							: undefined
+					}
+				>
+					<FormLabel
+						className={
+							config.type === "switch" ? "pb-0" : undefined
+						}
+					>
+						{config.label}
+					</FormLabel>
+					{config.type === "text" && (
+						<FormControl>
+							<Input
+								{...field}
+								type={config.type || "text"}
+								placeholder={config.placeholder}
+								required={config.required}
+							/>
+						</FormControl>
+					)}
+					{config.type === "textarea" && (
+						<FormControl>
+							<Textarea
+								{...field}
+								placeholder={config.placeholder}
+								required={config.required}
+							/>
+						</FormControl>
+					)}
+					{config.type === "select" && (
+						<FormControl>
+							<Select
+								onValueChange={field.onChange}
+								defaultValue={field.value}
+							>
+								<SelectTrigger>
+									<SelectValue
+										placeholder={config.placeholder}
+									/>
+								</SelectTrigger>
+								<SelectContent>
+									{config.options?.map((option) => (
+										<SelectItem
+											key={option.value}
+											value={option.value}
+										>
+											{option.label}
+										</SelectItem>
+									))}
+								</SelectContent>
+							</Select>
+						</FormControl>
+					)}
+					{config.type === "switch" && (
+						<FormControl className="ml-3">
+							<Switch
+								checked={field.value}
+								onCheckedChange={field.onChange}
+							/>
+						</FormControl>
+					)}
+					{config.type === "radio" && (
+						<FormControl>
+							<RadioGroup
+								onValueChange={field.onChange}
+								defaultValue={field.value}
+								className="flex flex-col space-y-1"
+							>
+								{config.options?.map((option) => (
+									<div
+										key={uuidv4()}
+										className="flex items-center space-x-2"
+									>
+										<RadioGroupItem
+											value={option.value}
+											id={option.value}
+										/>
+										<Label htmlFor={option.value}>
+											{option.label}
+										</Label>
+									</div>
+								))}
+							</RadioGroup>
+						</FormControl>
+					)}
+					{/* {config.placeholder && <FormDescription>{config.placeholder}</FormDescription>} */}
 
-
-               <FormMessage />
-            </FormItem>
-         )}
-      />
-   )
+					<FormMessage />
+				</FormItem>
+			)}
+		/>
+   );
 }

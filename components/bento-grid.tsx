@@ -131,11 +131,11 @@ const Card = ({ data, controls }: CardProps) => {
 			</div>
 			<div>
 				<div className='px-6 py-4'>
-					<h1 className='font-bold text-xl mb-2 text-white'>{data.title}</h1>
+               <h1 className='font-bold text-xl mb-2   '>{data.title}</h1>
 					<p className='text-zinc-400 text-base'>{data.desc}</p>
 				</div>
 				<div className='px-6 pt-4 pb-2'>
-					<button className='rounded-md bg-indigo-500 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500'>
+               <button className='rounded-md bg-indigo-500 px-3.5 py-2.5 text-center text-sm font-semibold    shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500'>
 						Learn More
 					</button>
 				</div>

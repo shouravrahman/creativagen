@@ -10,7 +10,7 @@ body,
 
 @layer base {
    :root {
-     --background: 0 0% 98%; /* Light mode background: very light grey */
+     --background: 100% 40% 98%; /* Light mode background: very light grey */
      --foreground: 0 0% 10%; /* Light mode text: dark grey */
      --primary: 220 90% 55%; /* Light mode primary elements: blue */
      --primary-foreground: 0 0% 100%; /* Light mode text on primary elements: white */

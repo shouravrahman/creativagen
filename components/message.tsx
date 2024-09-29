@@ -17,7 +17,7 @@ export default function Message({
         className={cn(
           "relative p-3 rounded-lg inline-block",
           isSameSender ? "mt-2" : "mt-8",
-          isUser ? "ml-16 bg-blue-600 text-white" : "bg-gray-200 text-black"
+           isUser ? "ml-16 bg-blue-600   " : "bg-gray-200 text-black"
         )}
       >
         {children}

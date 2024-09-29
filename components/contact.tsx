@@ -62,7 +62,7 @@ export default function Contact() {
 								</dt>
 								<dd>
                            <Link
-                              className="hover:text-white italic"
+                              className="hover:   italic"
 										href="mailto:hello@example.com"
 									>
 										hello@example.com

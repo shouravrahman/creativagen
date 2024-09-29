@@ -10,7 +10,7 @@ export default function Dashboard() {
   return (
     <div className="">
       <div className="mb-8 px-4">
-        <SearchSection onSearchInput={(value) => setSearchInput(value)} />
+        <SearchSection onSearchInput={(value:string) => setSearchInput(value)} />
       </div>
       <div className="px-4 ">
         <TemplateList searchInput={searchInput} />

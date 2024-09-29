@@ -19,7 +19,7 @@ export const Sidebar = ({
    const pathname = usePathname();
 
    return (
-      <aside className="flex flex-col w-64 h-screen  py-8 overflow-y-auto  border-r border-border rtl:border-r-0 rtl:border-l">
+      <aside className="flex flex-col w-64 h-screen  py-8 overflow-y-auto  border-r border-border/20 rtl:border-r-0 rtl:border-l">
          <Link
             className="flex items-center self-center h-20"
             href="/"
