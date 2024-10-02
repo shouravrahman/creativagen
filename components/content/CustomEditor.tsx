@@ -33,6 +33,7 @@ const CustomEditor: React.FC<EditorProps> = ({ content }) => {
 					backgroundColor: "white",
 					outline: "none",
 					color: "black",
+					minHeight: "500px",
 				}}
 				value={content}
 				modules={modules}

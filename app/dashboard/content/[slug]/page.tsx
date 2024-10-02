@@ -4,46 +4,46 @@ import { useState } from "react";
 import CustomEditor from "@/components/content/CustomEditor";
 import { DynamicForm } from "@/components/DynamicForm";
 import { TEMPLATES } from "@/constants.ts";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Loader2 } from "lucide-react";
 import Link from "next/link";
-import { chatSession } from "@/utils/AIModel";
-import { useSession } from "next-auth/react";
-import { saveGeneratedContent } from "@/services/saveGeneratedContent";
-import { incrementApiLimit } from "@/lib/api-limit";
 
 interface Content {
 	params: { slug: string };
 }
 
 const ContentPage = ({ params }: Content) => {
-	const session = useSession();
 	const [generatedContent, setGeneratedContent] = useState("");
+	const [isLoading, setIsLoading] = useState(false);
 	const selectedTemplate = TEMPLATES?.find(
 		(item) => item.slug === params.slug
 	);
 
 	const generateContent = async (values: Record<string, any>) => {
-		const details = Object.entries(values)
-			.map(([key, value]) => `${key}: ${value}`)
-			.join("\n");
-		const prompt = selectedTemplate?.aiPrompt;
-		const finalPrompt = `${details}, ${prompt} format the response in HTML.`;
-		const result = await chatSession.sendMessage(finalPrompt);
-		const responseText = await result?.response.text();
-		setGeneratedContent(responseText);
-
-		// Save the generated content to the database
-		if (session?.data?.user) {
-			const savedContent = await saveGeneratedContent({
-				formValues: values,
-				aiResponse: responseText,
-				templateSlug: params.slug,
-				userId: session?.data?.user.id!,
+		setIsLoading(true);
+		try {
+			const response = await fetch("/api/generate", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					values,
+					templateSlug: params.slug,
+					aiPrompt: selectedTemplate?.aiPrompt,
+				}),
 			});
-			await incrementApiLimit();
-			console.log("Content saved successfully", savedContent);
-		} else {
-			console.error("User not authenticated");
+
+			if (!response.ok) {
+				throw new Error("Failed to generate content");
+			}
+
+			const data = await response.json();
+			setGeneratedContent(data.content);
+		} catch (error) {
+			console.error("Error generating content:", error);
+			// Handle error (e.g., show an error message to the user)
+		} finally {
+			setIsLoading(false);
 		}
 	};
 
@@ -75,7 +75,13 @@ const ContentPage = ({ params }: Content) => {
 					</div>
 
 					<div className="flex-1 mt-6 h-full">
-						<CustomEditor content={generatedContent} />
+						{isLoading ? (
+							<div className="flex items-center justify-center h-full">
+								<Loader2 className="h-6 w-6 animate-spin" />
+							</div>
+						) : (
+							<CustomEditor content={generatedContent} />
+						)}
 					</div>
 				</div>
 			</div>

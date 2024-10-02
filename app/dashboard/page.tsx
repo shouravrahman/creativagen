@@ -5,7 +5,7 @@ import { useState } from "react";
 import TemplateList from "@/components/template-list-section";
 import SearchSection from "@/components/search-section/Search";
 export default function Dashboard() {
-  const [searchInput, setSearchInput] = useState<string>();
+  const [searchInput, setSearchInput] = useState<string>("");
 
   return (
     <div className="">

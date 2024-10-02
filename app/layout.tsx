@@ -22,17 +22,17 @@ export default async function RootLayout({
       children: React.ReactNode;
 }) {
    return (
-      <html suppressHydrationWarning>
-         {/* <CrispProvider /> */}
-         <body className={nunito.className}>
-            <ThemeProvider attribute="class">
-               <AuthProvider>
-                  <ModalProvider />
-                  {children}
-                  <Toaster />
-               </AuthProvider>
-            </ThemeProvider>
-         </body>
-      </html>
+		<html>
+			{/* <CrispProvider /> */}
+			<body className={nunito.className}>
+				<ThemeProvider attribute="class">
+					<AuthProvider>
+						<ModalProvider />
+						{children}
+						<Toaster />
+					</AuthProvider>
+				</ThemeProvider>
+			</body>
+		</html>
    );
 }

@@ -8,6 +8,7 @@ import { DynamicFormField } from "./FormField";
 import { v4 as uuidv4 } from "uuid";
 import { FormConfig } from "@/types";
 
+
 interface DynamicFormProps {
 	config: FormConfig;
 	submitFn: (values: Record<string, any>) => Promise<void>;
@@ -47,6 +48,7 @@ export function DynamicForm({ config, submitFn }: DynamicFormProps) {
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
+
 		defaultValues: config.formFields.reduce((acc, field) => {
 			acc[field.name] = field.value !== undefined ? field.value : "";
 			return acc;
@@ -54,7 +56,6 @@ export function DynamicForm({ config, submitFn }: DynamicFormProps) {
 	});
 
 	const handleSubmit = async (values: z.infer<typeof formSchema>) => {
-		console.log(values);
 		await submitFn(values);
 	};
 

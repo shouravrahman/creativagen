@@ -1,70 +1,43 @@
-// import { google } from "@ai-sdk/google";
-
-// import { streamText } from "ai";
-
-export const runtime = "edge";
-export const maxDuration = 30;
-
-// export async function POST(req: Request) {
-// 	const { prompt } = await req.json();
-
-// 	const result = await streamText({
-// 		model: google("models/gemini-1.5-pro-latest"),
-// 		prompt,
-// 	});
-
-// 	return result.toDataStreamResponse();
-// }
-import { NextApiRequest, NextApiResponse } from "next";
-import { PromptTemplate } from "@langchain/core/prompts";
-import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { chatSession } from "@/utils/AIModel";
+import { NextRequest, NextResponse } from "next/server";
+import { incrementApiLimit } from "@/lib/api-limit";
+import { auth } from "@/auth";
+import prismadb from "@/lib/prismadb";
 
-// API Route to generate content
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
-	const { aiPrompt, details } = req.body;
+export async function POST(req: NextRequest) {
+	const session = await auth();
+	if (!session?.user) {
+		return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+	}
+
+	const { values, templateSlug, aiPrompt } = await req.json();
 
 	try {
-		// Prepare the dynamic prompt using the aiPrompt passed from the client
-		const promptTemplate = new PromptTemplate({
-			template: `{aiPrompt}\n\nDetails:\n{details}\n\nPlease format the response in markdown.`,
-			inputVariables: ["aiPrompt", "details"],
+		const details = Object.entries(values)
+			.map(([key, value]) => `${key}: ${value}`)
+			.join("\n");
+		const finalPrompt = `${details}, ${aiPrompt} format the response in Markdown.`;
+
+		const result = await chatSession.sendMessage(finalPrompt);
+		const responseText = result.response.text();
+		const savedContent = await prismadb.generatedContent.create({
+			data: {
+				formValues: values,
+				aiResponse: responseText,
+				templateSlug: templateSlug,
+				createdBy: session?.user.id as string,
+			},
 		});
 
-		// Format the final prompt with user details
-		const prompt = await promptTemplate.format({
-			aiPrompt: aiPrompt,
-			details: Object.entries(details)
-				.map(([key, value]) => `${key}: ${value}`)
-				.join("\n"),
-		});
-		const result = await chatSession.sendMessage(prompt);
-		return Response.json(result);
+		// Increment the API limit
+		await incrementApiLimit();
+		console.log("savedContent", savedContent);
+		return NextResponse.json({ content: responseText, savedContent });
 	} catch (error) {
 		console.error("Error generating content:", error);
-		return Response.json({ error: "Failed to generate content" });
+		return NextResponse.json(
+			{ error: "Failed to generate content" },
+			{ status: 500 }
+		);
 	}
 }
-
-// Helper function to format content
-const formatContent = (content: string) => {
-	return content
-		.replace(/\n{2,}/g, "</p><p>") // Convert double line breaks to paragraphs
-		.replace(/\n/g, "<br>") // Convert single line breaks to <br>
-		.replace(/#{1,6}\s?([^\n]+)/g, (match, p1) => {
-			const level = match.trim().startsWith("######")
-				? 6
-				: match.trim().startsWith("#####")
-				? 5
-				: match.trim().startsWith("####")
-				? 4
-				: match.trim().startsWith("###")
-				? 3
-				: match.trim().startsWith("##")
-				? 2
-				: 1;
-			return `<h${level}>${p1.trim()}</h${level}>`;
-		})
-		.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>") // Convert **bold** to <strong>
-		.replace(/\*(.+?)\*/g, "<em>$1</em>"); // Convert *italic* to <em>
-};
