@@ -29,7 +29,7 @@ export const MAX_FREE_COUNTS = 10;
 
 export const routes = [
 	{
-		label: "Home",
+		label: "Dashboard",
 		icon: Home,
 		href: "/dashboard",
 		color: "text-green-500",
@@ -52,12 +52,7 @@ export const routes = [
 		href: "/dashboard/billing",
 		color: "text-red-500",
 	},
-	{
-		label: "Settings",
-		icon: Settings,
-		href: "/dashboard/settings",
-		color: "   ",
-	},
+
 	{
 		label: "Profile",
 		icon: User,

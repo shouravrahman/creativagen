@@ -6,64 +6,66 @@ import { motion, useAnimation, useInView } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 const featuredTestimonial = {
-   body: "Integer id nunc sit semper purus. Bibendum at lacus ut arcu blandit montes vitae auctor libero. Hac condimentum dignissim nibh vulputate ut nunc. Amet nibh orci mi venenatis blandit vel et proin. Non hendrerit in vel ac diam.",
-   author: {
-      name: "Brenna Goyette",
-      handle: "brennagoyette",
-      imageUrl: "/github.svg",
-      logoUrl: "/github.svg",
-   },
+	body: "CreativaGen has transformed the way I create content. The ease of use and the quality of generated emails have significantly improved my outreach efforts. Highly recommended!",
+	author: {
+		name: "Brenna Goyette",
+		handle: "brennagoyette",
+		imageUrl: "/github.svg",
+		logoUrl: "/github.svg",
+	},
 };
-const testimonials = [
-   [
-      [
-         {
-            body: "Laborum quis quam. Dolorum et ut quod quia. Voluptas numquam delectus nihil. Aut enim doloremque et ipsam.",
-            author: {
-               name: "Leslie Alexander",
-               handle: "lesliealexander",
-               imageUrl: "/github.svg",
-            },
-         },
-         // More testimonials...
-      ],
-      [
-         {
-            body: "Aut reprehenderit voluptatem eum asperiores beatae id. Iure molestiae ipsam ut officia rem nulla blanditiis.",
-            author: {
-               name: "Lindsay Walton",
-               handle: "lindsaywalton",
-               imageUrl: "/github.svg",
-            },
-         },
-         // More testimonials...
-      ],
-   ],
-   [
-      [
-         {
-            body: "Voluptas quos itaque ipsam in voluptatem est. Iste eos blanditiis repudiandae. Earum deserunt enim molestiae ipsum perferendis recusandae saepe corrupti.",
-            author: {
-               name: "Tom Cook",
-               handle: "tomcook",
-               imageUrl: "/github.svg",
-            },
-         },
-         // More testimonials...
-      ],
-      [
-         {
-            body: "Molestias ea earum quos nostrum doloremque sed. Quaerat quasi aut velit incidunt excepturi rerum voluptatem minus harum.",
-            author: {
-               name: "Leonard Krasner",
-               handle: "leonardkrasner",
-               imageUrl: "/github.svg",
-            },
-         },
-         // More testimonials...
-      ],
-   ],
-];
+
+ const testimonials = [
+		[
+			[
+				{
+					body: "As a freelancer, CreativaGen saves me so much time! I can generate high-quality content in minutes instead of hours. It's a game changer for my business.",
+					author: {
+						name: "Leslie Alexander",
+						handle: "lesliealexander",
+						imageUrl: "/github.svg",
+					},
+				},
+				// Additional testimonials can be added here...
+			],
+			[
+				{
+					body: "I love how intuitive CreativaGen is! The templates provided are top-notch, and the analytics help me track my engagement. A must-have tool for any marketer.",
+					author: {
+						name: "Lindsay Walton",
+						handle: "lindsaywalton",
+						imageUrl: "/github.svg",
+					},
+				},
+				// Additional testimonials can be added here...
+			],
+		],
+		[
+			[
+				{
+					body: "With CreativaGen, I can generate unlimited content effortlessly. The quality of the emails is fantastic, and it has boosted my conversion rates significantly.",
+					author: {
+						name: "Tom Cook",
+						handle: "tomcook",
+						imageUrl: "/github.svg",
+					},
+				},
+				// Additional testimonials can be added here...
+			],
+			[
+				{
+					body: "The analytics dashboard is incredibly helpful. It provides insights that help me fine-tune my marketing strategy. Highly recommend CreativaGen!",
+					author: {
+						name: "Leonard Krasner",
+						handle: "leonardkrasner",
+						imageUrl: "/github.svg",
+					},
+				},
+				// Additional testimonials can be added here...
+			],
+		],
+ ];
+
 
 function classNames(...classes: string[]) {
    return classes.filter(Boolean).join(" ");

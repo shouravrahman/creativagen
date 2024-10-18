@@ -116,52 +116,53 @@ function Plan({
 
 export function Pricing() {
 	return (
-      <section id="pricing" aria-label="Pricing">
+		<section
+			id="pricing"
+			aria-label="Pricing"
+		>
 			<SectionHeading
 				mainTitle="Pricing"
 				secondaryText="It doesn’t matter what size your business is, our software will work well for you."
 			/>
 			<div className="-mx-4 mt-16 grid max-w-2xl grid-cols-1 gap-y-10 sm:mx-auto lg:-mx-8 lg:max-w-none lg:grid-cols-3 xl:mx-0 xl:gap-x-8">
 				<Plan
-					name="Starter"
+					name="Basic"
 					price="$9"
-					description="Good for anyone who is self-employed and just getting started."
+					description="Ideal for individuals or freelancers just starting to create content."
 					href="/register"
 					features={[
-						"Send 10 quotes and invoices",
-						"Connect up to 2 bank accounts",
-						"Track up to 15 expenses per month",
-						"Manual payroll support",
-						"Export up to 3 reports",
+						"Generate up to 10 emails per month",
+						"Access to basic templates and prompts",
+						"Manual content scheduling",
+						"Track usage analytics",
+						"Community support access",
 					]}
 				/>
 				<Plan
 					featured
-					name="Small business"
+					name="Pro"
 					price="$15"
-					description="Perfect for small / medium sized businesses."
+					description="Perfect for small to medium-sized businesses looking to enhance their marketing."
 					href="/register"
 					features={[
-						"Send 25 quotes and invoices",
-						"Connect up to 5 bank accounts",
-						"Track up to 50 expenses per month",
-						"Automated payroll support",
-						"Export up to 12 reports",
-						"Bulk reconcile transactions",
-						"Track in multiple currencies",
+						"Generate up to 50 emails per month",
+						"Access to premium templates and prompts",
+						"Automated content scheduling",
+						"Advanced usage analytics and insights",
+						"Collaborative features for team members",
 					]}
 				/>
 				<Plan
 					name="Enterprise"
 					price="$39"
-					description="For even the biggest enterprise companies."
+					description="Designed for large enterprises needing robust content generation solutions."
 					href="/register"
 					features={[
-						"Send unlimited quotes and invoices",
-						"Connect up to 15 bank accounts",
-						"Track up to 200 expenses per month",
-						"Automated payroll support",
-						"Export up to 25 reports, including TPS",
+						"Generate unlimited emails and content",
+						"Custom templates and branding options",
+						"API access for automation",
+						"Comprehensive usage analytics and reporting",
+						"Dedicated account manager and priority support",
 					]}
 				/>
 			</div>

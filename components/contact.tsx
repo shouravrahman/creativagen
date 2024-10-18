@@ -10,7 +10,7 @@ export default function Contact() {
 					<div className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
 						<div className="absolute inset-y-0 left-0 -z-10 w-full overflow-hidden">
 							<svg
-                        className="absolute inset-0 h-full w-full stroke-yellow-700/40 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
+								className="absolute inset-0 h-full w-full stroke-yellow-700/40 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
 								aria-hidden="true"
 							>
 								<defs>
@@ -22,7 +22,10 @@ export default function Contact() {
 										y={-1}
 										patternUnits="userSpaceOnUse"
 									>
-										<path d="M130 200V.5M.5 .5H200" fill="none" />
+										<path
+											d="M130 200V.5M.5 .5H200"
+											fill="none"
+										/>
 									</pattern>
 								</defs>
 
@@ -38,7 +41,7 @@ export default function Contact() {
 								aria-hidden="true"
 							>
 								<div
-                           className="aspect-[1155/678] w-[72.1875rem] bg-gradient-to-br from-[#c7ec61] to-[#78f83c9c] opacity-5"
+									className="aspect-[1155/678] w-[72.1875rem] bg-gradient-to-br from-[#c7ec61] to-[#78f83c9c] opacity-5"
 									style={{
 										clipPath:
 											"polygon(74.1% 56.1%, 100% 38.6%, 97.5% 73.3%, 85.5% 100%, 80.7% 98.2%, 72.5% 67.7%, 60.2% 37.8%, 52.4% 32.2%, 47.5% 41.9%, 45.2% 65.8%, 27.5% 23.5%, 0.1% 35.4%, 17.9% 0.1%, 27.6% 23.5%, 76.1% 2.6%, 74.1% 56.1%)",
@@ -47,26 +50,29 @@ export default function Contact() {
 							</div>
 						</div>
 
-                  <h2 className="sm:text-4xl text-3xl font-extrabold text-base-content">
+						<h2 className="sm:text-4xl text-3xl font-extrabold text-base-content">
 							We&apos;d love to hear from you.
 						</h2>
 						<p className="mt-6 text-lg leading-8 ">
-							Please use the contact details below or fill out the form to reach
-							out to us.
+							Please use the contact details below or fill out the
+							form to reach out to us.
 						</p>
 						<dl className="mt-10 space-y-4 text-base leading-7 ">
 							<div className="flex gap-x-4">
 								<dt className="flex-none">
 									<span className="sr-only">Email</span>
-									<EnvelopeIcon className="h-7 w-6 " aria-hidden="true" />
+									<EnvelopeIcon
+										className="h-7 w-6 "
+										aria-hidden="true"
+									/>
 								</dt>
 								<dd>
-                           <Link
-                              className="hover:   italic"
+									<Link
+										className="hover:   italic"
 										href="mailto:hello@example.com"
 									>
 										hello@example.com
-                           </Link>
+									</Link>
 								</dd>
 							</div>
 						</dl>
@@ -75,13 +81,13 @@ export default function Contact() {
 				<form
 					action="#"
 					method="POST"
-               className="border border-border px-10 py-10   z-100 rounded-lg m-4"
+					className="border border-border px-10 py-10   z-100 rounded-lg m-4"
 				>
 					<div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 ">
 						<div>
 							<label
 								htmlFor="first-name"
-                        className="block text-sm font-semibold leading-6 text-primary-foreground"
+								className="block text-sm font-semibold leading-6 text-foreground"
 							>
 								First name
 							</label>
@@ -91,14 +97,14 @@ export default function Contact() {
 									name="first-name"
 									id="first-name"
 									autoComplete="given-name"
-                           className="block w-full rounded-md border-0  /20 px-3.5 py-2 text-primary-foreground shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-yellow-200 sm:text-sm sm:leading-6"
+									className="block w-full rounded-md border-0  /20 px-3.5 py-2 text-foreground shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-yellow-200 sm:text-sm sm:leading-6"
 								/>
 							</div>
 						</div>
 						<div>
 							<label
 								htmlFor="last-name"
-                        className="block text-sm font-semibold leading-6 text-primary-foreground"
+								className="block text-sm font-semibold leading-6 text-foreground"
 							>
 								Last name
 							</label>
@@ -108,14 +114,14 @@ export default function Contact() {
 									name="last-name"
 									id="last-name"
 									autoComplete="family-name"
-                           className="block w-full rounded-md border-0  /40 px-3.5 py-2 text-primary-foreground shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-yellow-200 sm:text-sm sm:leading-6"
+									className="block w-full rounded-md border-0  /40 px-3.5 py-2 text-foreground shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-yellow-200 sm:text-sm sm:leading-6"
 								/>
 							</div>
 						</div>
 						<div className="sm:col-span-2">
 							<label
 								htmlFor="email"
-                        className="block text-sm font-semibold leading-6 text-primary-foreground"
+								className="block text-sm font-semibold leading-6 text-foreground"
 							>
 								Email
 							</label>
@@ -125,14 +131,14 @@ export default function Contact() {
 									name="email"
 									id="email"
 									autoComplete="email"
-                           className="block w-full rounded-md border-0  /40 px-3.5 py-2 text-primary-foreground shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-yellow-200 sm:text-sm sm:leading-6"
+									className="block w-full rounded-md border-0  /40 px-3.5 py-2 text-foreground shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-yellow-200 sm:text-sm sm:leading-6"
 								/>
 							</div>
 						</div>
 						<div className="sm:col-span-2">
 							<label
 								htmlFor="phone-number"
-                        className="block text-sm font-semibold leading-6 text-primary-foreground"
+								className="block text-sm font-semibold leading-6 text-foreground"
 							>
 								Phone number
 							</label>
@@ -142,14 +148,14 @@ export default function Contact() {
 									name="phone-number"
 									id="phone-number"
 									autoComplete="tel"
-                           className="block w-full rounded-md border-0  /40 px-3.5 py-2 text-primary-foreground shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-yellow-200 sm:text-sm sm:leading-6"
+									className="block w-full rounded-md border-0  /40 px-3.5 py-2 text-foreground shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-yellow-200 sm:text-sm sm:leading-6"
 								/>
 							</div>
 						</div>
 						<div className="sm:col-span-2">
 							<label
 								htmlFor="message"
-                        className="block text-sm font-semibold leading-6 text-primary-foreground"
+								className="block text-sm font-semibold leading-6 text-foreground"
 							>
 								Message
 							</label>
@@ -158,7 +164,7 @@ export default function Contact() {
 									name="message"
 									id="message"
 									rows={4}
-                           className="block w-full rounded-md border-0  /40 px-3.5 py-2 text-primary-foreground shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-yellow-200 sm:text-sm sm:leading-6"
+									className="block w-full rounded-md border-0  /40 px-3.5 py-2 text-foreground shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-yellow-200 sm:text-sm sm:leading-6"
 									defaultValue={""}
 								/>
 							</div>

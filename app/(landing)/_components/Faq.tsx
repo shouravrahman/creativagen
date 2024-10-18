@@ -14,24 +14,37 @@ interface FAQItemProps {
 const faqList: FAQItemProps[] = [
 	{
 		question: "What do I get exactly?",
-		answer: <div className="space-y-2 leading-relaxed">Loreum Ipseum</div>,
+		answer: (
+			<div className="space-y-2 leading-relaxed">
+				With CreativaGen, you get access to an AI-powered content
+				generation platform that allows you to create high-quality
+				emails, copywriting, social media posts, and more, all based on
+				a credit system. You'll also receive analytics to track your
+				word and token usage, as well as insights into your previous
+				generations.
+			</div>
+		),
 	},
 	{
 		question: "Can I get a refund?",
 		answer: (
 			<p>
-				Yes! You can request a refund within 7 days of your purchase. Reach out
-				by email.
+				Yes! You can request a refund within 7 days of your purchase.
+				Please reach out to our support team via email for assistance.
 			</p>
 		),
 	},
 	{
-		question: "I have another question",
+		question: "I have another question.",
 		answer: (
-			<div className="space-y-2 leading-relaxed">Cool, contact us by email</div>
+			<div className="space-y-2 leading-relaxed">
+				No problem! Feel free to contact us via email, and we'll be
+				happy to help you with any inquiries you may have.
+			</div>
 		),
 	},
 ];
+
 
 const FaqItem = ({ item }: { item: FAQItemProps }) => {
 	const accordion = useRef<HTMLDivElement>(null);

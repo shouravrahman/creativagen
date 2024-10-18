@@ -8,7 +8,7 @@ import {
 	publicRoutes,
 	adminRoutes,
 } from "@/routes";
-import { NextAuthRequest } from "next-auth/lib";
+
 
 export const { auth } = NextAuth(authConfig);
 

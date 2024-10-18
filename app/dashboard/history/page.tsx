@@ -47,10 +47,13 @@ export default function History() {
 	useEffect(() => {
 		const fetchContent = async () => {
 			if (session?.user) {
-				const response = await fetch("/api/generate/history");
+				const response = await fetch("/api/generate/history", {
+					cache: "no-store",
+				});
 				if (response.ok) {
 					const data = await response.json();
 					setContent(data);
+					console.log(content);
 				}
 			}
 		};
@@ -68,7 +71,7 @@ export default function History() {
 					item.formValues.author?.toLowerCase().includes(searchValue)
 				);
 			})
-			.sort((a, b) => {
+			.sort((a: any, b: any) => {
 				if (sort.order === "asc") {
 					return a[sort.key] > b[sort.key] ? 1 : -1;
 				} else {
@@ -78,7 +81,8 @@ export default function History() {
 			.slice((page - 1) * pageSize, page * pageSize);
 	}, [search, sort, page, pageSize, content]);
 
-	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value);
+	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) =>
+		setSearch(e.target.value);
 	const handleSort = (key: string) => {
 		if (sort.key === key) {
 			setSort({ key, order: sort.order === "asc" ? "desc" : "asc" });
@@ -173,13 +177,7 @@ export default function History() {
 					{Math.min(page * pageSize, filteredContent.length)} of{" "}
 					{filteredContent.length} results
 				</div>
-				<Pagination
-					className="w-full self-end"
-					currentPage={page}
-					totalPages={Math.ceil(filteredContent.length / pageSize)}
-					onPageChange={handlePageChange}
-					onPageSizeChange={handlePageSizeChange}
-				>
+				<Pagination className="w-full self-end">
 					<PaginationContent>
 						<PaginationItem>
 							<PaginationPrevious

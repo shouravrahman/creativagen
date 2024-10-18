@@ -12,30 +12,31 @@ import SectionHeading from "./SectionHeading.tsx";
 
 const features = [
 	{
-		title: "Payroll",
+		title: "AI-Powered Email Generation",
 		description:
-			"Keep track of everyone's salaries and whether or not they've been paid. Direct deposit not supported.",
-		image: screenshotPayroll,
+			"Craft professional emails effortlessly with our AI-driven generator. Personalize your messages to increase engagement and response rates.",
+		image: screenshotExpenses, // Use a relevant screenshot for email generation
 	},
 	{
-		title: "Claim expenses",
+		title: "Dynamic Copywriting Tools",
 		description:
-			"All of your receipts organized into one place, as long as you don't mind typing in the data by hand.",
-		image: screenshotExpenses,
+			"Create compelling copy for ads, landing pages, and more. Our intuitive tools guide you in generating high-converting text.",
+		image: screenshotExpenses, // Use a relevant screenshot for copywriting
 	},
 	{
-		title: "VAT handling",
+		title: "Social Media Post Creation",
 		description:
-         "We only sell our software to companies who don't deal with VAT at all, we do all the VAT.",
-      image: screenshotPayroll,
+			"Generate attention-grabbing posts tailored for various platforms. Schedule your content to maintain a consistent online presence.",
+		image: screenshotExpenses, // Use a relevant screenshot for social media
 	},
 	{
-		title: "Reporting",
+		title: "Analytics Dashboard",
 		description:
-         "Easily export your data into an Excel spreadsheet where you can do whatever you want with it.",
-      image: screenshotPayroll,
+			"Monitor your word usage, token consumption, and past generations with ease. Gain insights to optimize your content strategy.",
+		image: screenshotExpenses, // Use a relevant screenshot for the analytics dashboard
 	},
 ];
+
 
 export function PrimaryFeatures() {
 	let [tabOrientation, setTabOrientation] = useState<"horizontal" | "vertical">(

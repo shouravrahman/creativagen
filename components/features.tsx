@@ -11,42 +11,43 @@ import Image from "next/image";
 
 const features = [
 	{
-		name: "Push to deploy.",
+		name: "Instant Email Deployment",
 		description:
-			"Lorem ipsum, dolor sit amet consectetur adipisicing elit aute id magna.",
-		icon: CloudArrowUpIcon,
+			"Quickly generate and deploy personalized emails with just a click. Streamline your communication process.",
+		icon: CloudArrowUpIcon, // You can keep this or change it to a more fitting icon
 	},
 	{
-		name: "SSL certificates.",
+		name: "Secure SSL Integration",
 		description:
-			"Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.",
-		icon: LockClosedIcon,
+			"Ensure the security of your generated content with SSL certificates, keeping your data safe and encrypted.",
+		icon: LockClosedIcon, // This is suitable for security
 	},
 	{
-		name: "Simple queues.",
+		name: "Effortless Content Queues",
 		description:
-			"Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus.",
-		icon: ArrowPathIcon,
+			"Manage your content effortlessly with simple queues. Organize your generated emails and posts for easy access.",
+		icon: ArrowPathIcon, // This could represent the idea of organization or flow
 	},
 	{
-		name: "Advanced security.",
+		name: "Robust Security Features",
 		description:
-			"Lorem ipsum, dolor sit amet consectetur adipisicing elit aute id magna.",
-		icon: FingerPrintIcon,
+			"Protect your sensitive data with advanced security measures. We prioritize your privacy and content integrity.",
+		icon: FingerPrintIcon, // A good choice for security
 	},
 	{
-		name: "Powerful API.",
+		name: "Powerful API Integration",
 		description:
-			"Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.",
-		icon: Cog6ToothIcon,
+			"Easily integrate with other tools and platforms using our robust API, allowing for seamless automation.",
+		icon: Cog6ToothIcon, // Suitable for API functionality
 	},
 	{
-		name: "Database backups.",
+		name: "Automated Database Backups",
 		description:
-			"Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. ",
-		icon: ServerIcon,
+			"Automatically back up your content and data to ensure nothing is lost, providing peace of mind.",
+		icon: ServerIcon, // This icon represents storage and backups well
 	},
 ];
+
 
 export default function Features() {
 	return (

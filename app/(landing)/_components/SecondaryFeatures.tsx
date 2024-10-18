@@ -20,61 +20,21 @@ interface Feature {
 
 const features: Array<Feature> = [
 	{
-		name: "Reporting",
-		summary: "Stay on top of things with always up-to-date reporting features.",
+		name: "Copywriting Assistant",
+		summary: "Craft high-converting copy in seconds with our AI tools.",
 		description:
-			"We talked about reporting in the section above but we needed three items here, so mentioning it one more time for posterity.",
-		image: screenshotProfitLoss,
-		icon: function ReportingIcon() {
-			let id = useId();
-			return (
-				<>
-					<defs>
-						<linearGradient
-							id={id}
-							x1="11.5"
-							y1={18}
-							x2={36}
-							y2="15.5"
-							gradientUnits="userSpaceOnUse"
-						>
-							<stop offset=".194" stopColor="#fff" />
-							<stop offset={1} stopColor="#6692F1" />
-						</linearGradient>
-					</defs>
-					<path
-						d="m30 15-4 5-4-11-4 18-4-11-4 7-4-5"
-						stroke={`url(#${id})`}
-						strokeWidth={2}
-						strokeLinecap="round"
-						strokeLinejoin="round"
-					/>
-				</>
-			);
-		},
-	},
-	{
-		name: "Inventory",
-		summary:
-			"Never lose track of what’s in stock with accurate inventory tracking.",
-		description:
-			"We don’t offer this as part of our software but that statement is inarguably true. Accurate inventory tracking would help you for sure.",
-		image: screenshotInventory,
-		icon: function InventoryIcon() {
+			"Transform your ideas into powerful marketing copy with our intuitive AI copywriting assistant. Perfect for ads, blogs, and more.",
+		image: screenshotProfitLoss, // Use a relevant screenshot for copywriting
+		icon: function CopywritingIcon() {
 			return (
 				<>
 					<path
 						opacity=".5"
-						d="M8 17a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2Z"
+						d="M12 4h24v8H12V4zm0 12h24v8H12v-8zm-4 0H0v8h8v-8z"
 						fill="#fff"
 					/>
 					<path
-						opacity=".3"
-						d="M8 24a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2Z"
-						fill="#fff"
-					/>
-					<path
-						d="M8 10a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2Z"
+						d="M0 2h24v8H0V2zm0 12h24v8H0v-8z"
 						fill="#fff"
 					/>
 				</>
@@ -82,22 +42,44 @@ const features: Array<Feature> = [
 		},
 	},
 	{
-		name: "Contacts",
-		summary:
-			"Organize all of your contacts, service providers, and invoices in one place.",
+		name: "Social Media Content",
+		summary: "Generate engaging posts for various platforms effortlessly.",
 		description:
-			"This also isn’t actually a feature, it’s just some friendly advice. We definitely recommend that you do this, you’ll feel really organized and professional.",
-		image: screenshotContacts,
-		icon: function ContactsIcon() {
+			"Create customized social media posts that capture attention and drive engagement. Schedule your content for optimal impact.",
+		image: screenshotProfitLoss, // Use a relevant screenshot for social media
+		icon: function SocialMediaIcon() {
 			return (
 				<>
 					<path
 						opacity=".5"
-						d="M25.778 25.778c.39.39 1.027.393 1.384-.028A11.952 11.952 0 0 0 30 18c0-6.627-5.373-12-12-12S6 11.373 6 18c0 2.954 1.067 5.659 2.838 7.75.357.421.993.419 1.384.028.39-.39.386-1.02.036-1.448A9.959 9.959 0 0 1 8 18c0-5.523 4.477-10 10-10s10 4.477 10 10a9.959 9.959 0 0 1-2.258 6.33c-.35.427-.354 1.058.036 1.448Z"
+						d="M10 2h4v8h-4V2zm0 10h4v8h-4v-8z"
 						fill="#fff"
 					/>
 					<path
-						d="M12 28.395V28a6 6 0 0 1 12 0v.395A11.945 11.945 0 0 1 18 30c-2.186 0-4.235-.584-6-1.605ZM21 16.5c0-1.933-.5-3.5-3-3.5s-3 1.567-3 3.5 1.343 3.5 3 3.5 3-1.567 3-3.5Z"
+						d="M4 2h4v8H4V2zm0 10h4v8H4v-8z"
+						fill="#fff"
+					/>
+				</>
+			);
+		},
+	},
+	{
+		name: "Analytics Dashboard",
+		summary:
+			"Monitor your usage and performance with insightful analytics.",
+		description:
+			"Access a comprehensive dashboard to view analytics on words, tokens, and previous generations. Make data-driven decisions to improve your content strategy.",
+		image: screenshotProfitLoss, // Use a relevant screenshot for the analytics dashboard
+		icon: function AnalyticsIcon() {
+			return (
+				<>
+					<path
+						opacity=".5"
+						d="M2 20h24v4H2v-4z"
+						fill="#fff"
+					/>
+					<path
+						d="M8 10h4v10H8V10zm6 0h4v10h-4V10zm6 0h4v10h-4V10z"
 						fill="#fff"
 					/>
 				</>
@@ -105,6 +87,7 @@ const features: Array<Feature> = [
 		},
 	},
 ];
+
 
 function Feature({
 	feature,
