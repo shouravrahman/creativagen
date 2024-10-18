@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Nunito_Sans } from "next/font/google";
-
+import { Open_Sans } from "next/font/google";
 
 import { ModalProvider } from "@/components/modal-provider";
 // import { CrispProvider } from "@/components/crisp-provider";
@@ -9,7 +8,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider.tsx";
 import { AuthProvider } from "@/providers/AuthProvider";
 
-const nunito = Nunito_Sans({ subsets: ["latin"] });
+const OpenSans = Open_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
 	title: "CreativaGen | AI Content Generator for Emails, Copywriting & Social Media",
@@ -53,7 +52,7 @@ export default async function RootLayout({
    return (
 		<html>
 			{/* <CrispProvider /> */}
-			<body className={nunito.className}>
+			<body className={OpenSans.className}>
 				<ThemeProvider attribute="class">
 					<AuthProvider>
 						<ModalProvider />
