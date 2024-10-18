@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
 		const details = Object.entries(values)
 			.map(([key, value]) => `${key}: ${value}`)
 			.join("\n");
-		const finalPrompt = `${details}, ${aiPrompt} format the response in Markdown.`;
+		const finalPrompt = `${details}, ${aiPrompt}`;
 
 		const result = await chatSession.sendMessage(finalPrompt);
 		const responseText = result.response.text();
