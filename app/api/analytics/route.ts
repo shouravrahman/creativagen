@@ -1,21 +1,30 @@
 import { NextResponse } from "next/server";
 import prismadb from "@/lib/prismadb";
-
+const AVERAGE_WRITING_SPEED = 40;
 export async function GET() {
 	try {
-		// Fetch total credits used
 		const totalCreditsUsed = await prismadb.userApiLimit.aggregate({
 			_sum: {
 				count: true,
 			},
 		});
-
-		// Fetch total words generated
-		const totalWordsGenerated = await prismadb.generatedContent.aggregate({
-			_count: {
-				id: true,
+		const generatedContents = await prismadb.generatedContent.findMany({
+			select: {
+				aiResponse: true,
 			},
 		});
+
+		const totalWordsGenerated = generatedContents.reduce(
+			(total, content) => {
+				return (
+					total +
+					(content.aiResponse
+						? content.aiResponse.split(/\s+/).length
+						: 0)
+				);
+			},
+			0
+		);
 
 		// Fetch total content created
 		const totalContentCreated = await prismadb.generatedContent.count();
@@ -28,12 +37,11 @@ export async function GET() {
 			},
 		});
 
-		// Fetch time saved (this could be a calculated field based on your logic)
-		const timeSaved = await calculateTimeSaved(); // Implement this function based on your logic
+		const timeSaved = totalWordsGenerated / AVERAGE_WRITING_SPEED;
 
 		return NextResponse.json({
 			totalCreditsUsed: totalCreditsUsed._sum.count || 0,
-			totalWordsGenerated: totalWordsGenerated._count.id || 0,
+			totalWordsGenerated: totalWordsGenerated || 0,
 			totalContentCreated,
 			contentByType,
 			timeSaved,

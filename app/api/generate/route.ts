@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
 		const details = Object.entries(values)
 			.map(([key, value]) => `${key}: ${value}`)
 			.join("\n");
-		const finalPrompt = `${details}, ${aiPrompt}`;
+         const finalPrompt = `${details}, ${aiPrompt} please format the text in proper HTML format with headings, paragraphs, and breaks. The content should be copyable and pasteable anywhere without losing format.`;
 
 		const result = await chatSession.sendMessage(finalPrompt);
 		const responseText = result.response.text();

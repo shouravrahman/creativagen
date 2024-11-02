@@ -30,28 +30,28 @@ export const CreditCounter = ({
    }
 
    return (
-      <div className="px-3">
-         <Card className="bg-card border-0">
-            <CardContent className="py-8">
-               <div className="text-center text-sm mb-4 space-y-2">
-                  <p>
-                     {apiLimitCount} / {MAX_FREE_COUNTS} Free Generations
-                  </p>
-                  <Progress
-                     className="h-3 bg-foreground"
-                     value={(apiLimitCount / MAX_FREE_COUNTS) * 100}
-                  />
-               </div>
-               <Button
-                  onClick={proModal.onOpen}
-                  variant="default"
-                  className="w-full bg-accent text-accent-foreground"
-               >
-                  Upgrade
-                  <Zap className="w-4 h-4 ml-2 fill-white" />
-               </Button>
-            </CardContent>
-         </Card>
-      </div>
+		<div className="px-3">
+			<Card className="bg-card border-0">
+				<CardContent className="py-8">
+					<div className="text-center text-sm mb-4 space-y-2">
+						<p>
+							{apiLimitCount} / {MAX_FREE_COUNTS} Free Generations
+						</p>
+						<Progress
+							className="h-3 bg-foreground"
+							value={(apiLimitCount / MAX_FREE_COUNTS) * 100}
+						/>
+					</div>
+					<Button
+						onClick={proModal.onOpen}
+						variant="default"
+						className="w-full bg-accent hover:bg-accent/80"
+					>
+						Upgrade
+						<Zap className="w-4 h-4 ml-2 fill-white" />
+					</Button>
+				</CardContent>
+			</Card>
+		</div>
    );
 };

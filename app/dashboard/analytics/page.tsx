@@ -5,14 +5,15 @@ import {
 	ChartTooltipContent,
 } from "@/components/ui/chart";
 import {
-	Bar,
-	BarChart,
+	LineChart,
+	Line,
 	CartesianGrid,
 	XAxis,
 	YAxis,
-	PieChart,
-	Pie,
-	Cell,
+	Tooltip,
+	Legend,
+	BarChart,
+	Bar,
 } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useEffect, useState } from "react";
@@ -28,6 +29,12 @@ type AnalyticsData = {
 	totalContentCreated: number;
 	contentByType: ContentByType[];
 	timeSaved: number;
+	// Add a new field for time series data
+	timeSeriesData: {
+		date: string;
+		totalWords: number;
+		totalContent: number;
+	}[];
 };
 
 export default function Analytics() {
@@ -39,12 +46,58 @@ export default function Analytics() {
 	useEffect(() => {
 		const fetchAnalyticsData = async () => {
 			try {
-				const response = await fetch("/api/analytics");
+				const response = await fetch("/api/analytics", {
+					cache: "no-store",
+				});
 				if (!response.ok) {
 					throw new Error("Failed to fetch analytics data");
 				}
 				const data = await response.json();
-				setAnalyticsData(data);
+				// setAnalyticsData(data);
+				setAnalyticsData({
+					totalCreditsUsed: 10,
+					totalWordsGenerated: 5000,
+					totalContentCreated: 20,
+					contentByType: [],
+					timeSaved: 125,
+					timeSeriesData: [
+						{
+							date: "2023-01-01",
+							totalWords: 1000,
+							totalContent: 5,
+						},
+						{
+							date: "2023-01-02",
+							totalWords: 1500,
+							totalContent: 7,
+						},
+						{
+							date: "2023-01-03",
+							totalWords: 2000,
+							totalContent: 10,
+						},
+						{
+							date: "2023-01-04",
+							totalWords: 2500,
+							totalContent: 12,
+						},
+						{
+							date: "2023-01-05",
+							totalWords: 3000,
+							totalContent: 15,
+						},
+						{
+							date: "2023-01-06",
+							totalWords: 3500,
+							totalContent: 18,
+						},
+						{
+							date: "2023-01-07",
+							totalWords: 4000,
+							totalContent: 20,
+						},
+					],
+				});
 			} catch (error) {
 				console.error("Failed to fetch analytics data", error);
 			} finally {
@@ -103,33 +156,21 @@ export default function Analytics() {
 						</CardHeader>
 						<CardContent>
 							<div className="text-2xl font-bold text-accent">
-								{analyticsData?.timeSaved} hours
+								{analyticsData?.timeSaved} min
 							</div>
 						</CardContent>
 					</Card>
 				</div>
-				<div className="grid gap-4 md:grid-cols-2">
+				<div className="grid gap-4 md:grid-cols-1">
 					<Card className="col-span-1">
 						<CardHeader>
-							<CardTitle>Content Categorized by Type</CardTitle>
+							<CardTitle>Analytics Over Time</CardTitle>
 						</CardHeader>
 						<CardContent>
 							{analyticsData && (
-								<BarchartChart
-									data={analyticsData.contentByType}
-								/>
-							)}
-						</CardContent>
-					</Card>
-					<Card className="col-span-1">
-						<CardHeader>
-							<CardTitle>Content Distribution</CardTitle>
-						</CardHeader>
-						<CardContent>
-							{analyticsData && (
-								<PieChartComponent
-									data={analyticsData.contentByType}
-								/>
+								<BarChartComponent
+                        data={analyticsData.timeSeriesData}
+                     />
 							)}
 						</CardContent>
 					</Card>
@@ -138,40 +179,60 @@ export default function Analytics() {
 		</div>
 	);
 }
-// dummy for test
-// [
-//    {
-//       templateSlug: "Blog Post",
-//       count: 120,
-//    },
-//    {
-//       templateSlug: "Social Media",
-//       count: 80,
-//    },
-//    {
-//       templateSlug: "Email Newsletter",
-//       count: 50,
-//    },
-//    {
-//       templateSlug: "Product Description",
-//       count: 30,
-//    },
-//    {
-//       templateSlug: "Landing Page",
-//       count: 40,
-//    },
-// ]
 
-function BarchartChart({ data }: { data: ContentByType[] }) {
+function BarChartComponent({
+	data,
+}: {
+	data: { date: string; totalWords: number; totalContent: number }[];
+}) {
 	return (
-		<ChartContainer
-			config={{
-				count: {
-					label: "Count",
-					color: "hsl(var(--chart-3))",
-				},
-			}}
-		>
+		<ChartContainer config={{}}>
+			<BarChart
+				data={data}
+				width={600}
+				height={300}
+				margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+			>
+				<CartesianGrid strokeDasharray="3 3" />
+				<XAxis dataKey="date" />
+				<YAxis />
+				<Tooltip />
+				<Legend />
+				<Bar
+					dataKey="totalWords"
+					fill="hsl(var(--accent))"
+				/>
+				<Bar
+					dataKey="totalContent"
+					fill="hsl(var(--secondary))"
+				/>
+			</BarChart>
+		</ChartContainer>
+	);
+}
+function LineChartComponent({ data }: { data: { date: string; totalWords: number; totalContent: number }[] }) {
+	return (
+		<ChartContainer config={{}}>
+			<LineChart
+				data={data}
+				width={600}
+				height={300}
+				margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+			>
+				<CartesianGrid strokeDasharray="3 3" />
+				<XAxis dataKey="date" />
+				<YAxis />
+				<Tooltip />
+				<Legend />
+				<Line type="monotone" dataKey="totalWords" stroke="hsl(var(--accent))" />
+				<Line type="monotone" dataKey="totalContent" stroke="hsl(var(--secondary))" />
+			</LineChart>
+		</ChartContainer>
+	);
+}
+function StackedBarChart({ data }: { data: ContentByType[] }) {
+	return (
+		<ChartContainer config={{}}>
 			<BarChart
 				data={data}
 				width={600}
@@ -181,50 +242,13 @@ function BarchartChart({ data }: { data: ContentByType[] }) {
 				<CartesianGrid vertical={false} />
 				<XAxis dataKey="templateSlug" />
 				<YAxis />
+				<Tooltip />
+				<Legend />
 				<Bar
 					dataKey="count"
 					fill="hsl(var(--accent))"
 				/>
-				<ChartTooltip
-					cursor={false}
-					content={<ChartTooltipContent hideLabel />}
-				/>
 			</BarChart>
-		</ChartContainer>
-	);
-}
-
-function PieChartComponent({ data }: { data: ContentByType[] }) {
-	const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#FF6699"];
-
-	return (
-		<ChartContainer config={{}}>
-			<PieChart
-				width={500}
-				height={500}
-			>
-				<Pie
-					data={data}
-					dataKey="count"
-					nameKey="templateSlug"
-					cx="50%"
-					cy="50%"
-					outerRadius={80}
-					fill="#8884d8"
-					label
-				>
-					{data.map((entry, index) => (
-						<Cell
-							key={`cell-${index}`}
-							fill={COLORS[index % COLORS.length]}
-						/>
-					))}
-				</Pie>
-				<ChartTooltip
-					cursor={false}
-					content={<ChartTooltipContent hideLabel />}
-				/>
-			</PieChart>
 		</ChartContainer>
 	);
 }

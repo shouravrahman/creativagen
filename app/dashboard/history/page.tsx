@@ -48,7 +48,7 @@ export default function History() {
 		const fetchContent = async () => {
 			if (session?.user) {
 				const response = await fetch("/api/generate/history", {
-					cache: "no-store",
+					cache: "no-cache",
 				});
 				if (response.ok) {
 					const data = await response.json();

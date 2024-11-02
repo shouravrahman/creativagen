@@ -79,3 +79,40 @@ select:focus {
  select:at(:-internal-list-box) {
 	background-color: inherit;
 }
+.ql-toolbar.ql-snow{
+   border:none !important;
+   outline: none !important;
+}
+/* editorStyles.css */
+.ql-editor {
+   font-family: 'Arial', sans-serif; /* Change to your preferred font */
+   font-size: 16px; /* Adjust font size */
+   line-height: 1.5; /* Improve line spacing */
+   color: #333; /* Text color */
+}
+
+.ql-editor h1 {
+   font-size: 24px; /* Heading 1 size */
+   margin: 20px 0; /* Margin for headings */
+}
+
+.ql-editor h2 {
+   font-size: 20px; /* Heading 2 size */
+   margin: 18px 0; /* Margin for headings */
+}
+
+.ql-editor p {
+   margin: 10px 0; /* Margin for paragraphs */
+}
+
+.ql-editor blockquote {
+   border-left: 4px solid #ccc; /* Style for blockquotes */
+   padding-left: 10px;
+   color: #666; /* Color for blockquotes */
+   font-style: italic; /* Italicize blockquotes */
+}
+
+.ql-editor ul, .ql-editor ol {
+   margin: 10px 0; /* Margin for lists */
+   padding-left: 20px; /* Indentation for lists */
+}

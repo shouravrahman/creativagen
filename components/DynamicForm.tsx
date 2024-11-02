@@ -65,7 +65,7 @@ export function DynamicForm({ config, submitFn }: DynamicFormProps) {
 				onSubmit={form.handleSubmit(handleSubmit)}
 				className="space-y-8"
 			>
-				<div className="grid grid-cols-1 md:grid-cols-2 w-full gap-6">
+				<div className="grid grid-cols-1  w-full gap-6">
 					{config.formFields.map((fieldConfig) => (
 						<DynamicFormField
 							key={uuidv4()}

@@ -41,7 +41,6 @@ const ContentPage = ({ params }: Content) => {
 			setGeneratedContent(data.content);
 		} catch (error) {
 			console.error("Error generating content:", error);
-			// Handle error (e.g., show an error message to the user)
 		} finally {
 			setIsLoading(false);
 		}
@@ -63,7 +62,7 @@ const ContentPage = ({ params }: Content) => {
 				<p className="mb-8">{selectedTemplate?.description}</p>
 
 				<div className="flex flex-col md:flex-row gap-10 justify-between md:mt-10">
-					<div className="flex-1 h-full">
+					<div className="md:w-[30%]">
 						<DynamicForm
 							config={{
 								name: selectedTemplate?.name,
@@ -74,7 +73,7 @@ const ContentPage = ({ params }: Content) => {
 						/>
 					</div>
 
-					<div className="flex-1 mt-6 h-full">
+					<div className=" mt-6 h-full md:w-[70%]">
 						{isLoading ? (
 							<div className="flex items-center justify-center h-full">
 								<Loader2 className="h-6 w-6 animate-spin" />
