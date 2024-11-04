@@ -79,7 +79,11 @@ const ContentPage = ({ params }: Content) => {
 								<Loader2 className="h-6 w-6 animate-spin" />
 							</div>
 						) : (
-							<CustomEditor content={generatedContent} />
+							<CustomEditor
+								content={generatedContent}
+								// onSave={handleSaveContent}
+								// onSchedule={handleSchedulePost}
+							/>
 						)}
 					</div>
 				</div>

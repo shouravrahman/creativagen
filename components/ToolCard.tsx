@@ -15,6 +15,7 @@ interface ITool {
 	icon: IconType | LucideIcon;
 	isFavorite?: boolean;
 }
+
 const ToolCard = ({
 	tool,
 	onToggleFavorite,
@@ -24,7 +25,7 @@ const ToolCard = ({
 }) => {
 	return (
 		<Link
-			className="w-full max-w-sm overflow-hidden bg-sidebar text-card-foreground rounded-lg shadow-lg relative "
+			className="w-full max-w-sm overflow-hidden bg-sidebar text-card-foreground rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl"
 			href={`/dashboard/content/${tool.slug}`}
 		>
 			<button
@@ -41,7 +42,7 @@ const ToolCard = ({
 				)}
 			</button>
 			<Image
-				className="object-cover   w-full h-56"
+				className="object-cover w-full h-56 transition-transform duration-300 ease-in-out transform hover:scale-110"
 				src={tool.imageUrl}
 				alt={tool.name}
 				width={200}
@@ -49,10 +50,10 @@ const ToolCard = ({
 				quality={100}
 			/>
 
-			<div className={`flex items-center px-6 py-3`}>
+			<div className={`flex items-center px-6 py-4`}>
 				{typeof tool.icon === "function" ? (
 					<tool.icon
-						className={cn("w-6 h-6 fill-current", tool.color)}
+						className={cn("w-6 h-6 text-white", tool.color)}
 					/>
 				) : (
 					<>
@@ -61,15 +62,13 @@ const ToolCard = ({
 						})}
 					</>
 				)}
-				<h1 className="mx-3 mt-2 text-xl font-semibold ">
-					{tool.name}
-				</h1>
+				<h2 className="ml-3 text-lg  font-semibold">{tool.name}</h2>
 			</div>
 			<div className="px-6 pb-4">
-				{/* <h1 className="text-xl font-semibold ">{tool.name}</h1> */}
 				<p className="py-2 text-foreground/70">{tool.description}</p>
 			</div>
 		</Link>
 	);
 };
-export default ToolCard
+
+export default ToolCard;

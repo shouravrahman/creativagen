@@ -1,28 +1,26 @@
-import { VideoCameraIcon } from "@heroicons/react/20/solid";
+import { ChartBarIcon, VideoCameraIcon } from "@heroicons/react/20/solid";
 import {
 	BarChart4,
-	BookOpen,
+
 	Home,
 	History,
 	CreditCard,
-	Newspaper,
-	Settings,
+
 	User,
-	Briefcase,
-	Award,
-	Globe,
-	Megaphone,
-	Pencil,
-	Share,
-	Users,
-	Calendar,
-	Star,
-	MessageSquare,
-	TrendingUp,
-	Edit,
-	FileText,
+   Code,
+   FileText,
+   Mail,
+   TrendingUp,
+   FolderOpen,
+   Briefcase,
+   BarChart,
+   Video,
+   Clock,
+   BookOpen,
+   Gift,
+
 } from "lucide-react";
-import { FcMoneyTransfer } from "react-icons/fc";
+
 
 import { z } from "zod";
 export const MAX_FREE_COUNTS = 10;
@@ -63,853 +61,931 @@ export const routes = [
 
 export const TEMPLATES = [
 	{
-		name: "YouTube Tutorial Description",
+		name: "Developer Portfolio Post",
 		description:
-			"This AI tool helps summarize YouTube tutorial scripts by crafting catchy video titles, concise descriptions, and SEO-friendly tags, helping your content reach the right audience.",
-		icon: VideoCameraIcon,
+			"Create engaging social media posts that showcase your development projects, technical skills, and problem-solving abilities without being overtly promotional.",
+		icon: Code,
 		features: [
-			"Video Script",
-			"Language",
-			"SEO Tags",
-			"Video Title",
-			"Video Description",
+			"Project Showcase",
+			"Technical Details",
+			"Problem-Solution Format",
+			"Social Proof",
+			"Subtle CTA",
 		],
-		imageUrl: "/youtube-tutorial.jpg",
-		href: "/youtube-tutorial-description",
-		color: "text-red-500",
-		bgColor: "bg-red-200",
-		slug: "youtube-tutorial-description",
-		category: "YouTube Content",
-		aiPrompt:
-			"Summarize the following YouTube tutorial script into a catchy title, description, and SEO-friendly tags. Include relevant keywords for discoverability.",
-		formFields: [
-			{
-				label: "Video Script",
-				field: "videoScript",
-				name: "videoScript",
-				required: true,
-				placeholder: "Enter your video script",
-				type: "textarea",
-			},
-			{
-				label: "Language",
-				field: "language",
-				name: "language",
-				required: true,
-				placeholder: "Enter the language (e.g., English, Spanish)",
-				type: "text",
-			},
-		],
-		validationSchema: z.object({
-			videoScript: z.string().min(1, "Video script is required"),
-			language: z.string().min(1, "Language is required"),
-		}),
-      isFavorite: false,
-	},
-	{
-		name: "All-in-One YouTube Content",
-		description:
-			"Streamline your YouTube content creation process with 'All-in-One YT Content' – your go-to tool for crafting engaging titles, scripts, descriptions, and tags, all from one easy-to-use platform.",
-		icon: VideoCameraIcon,
-		features: [
-			"Video Topic",
-			"Key Points to Cover",
-			"Language",
-			"Video Title",
-			"Video Script",
-			"Video Description",
-			"SEO Tags",
-		],
-		imageUrl: "/allinone-youtube.jpg",
-		href: "/all-in-one-yt-content",
-		color: "text-purple-500",
-		bgColor: "bg-purple-200",
-		slug: "all-in-one-yt-content",
-		category: "YouTube Content",
-		aiPrompt: `Generate a comprehensive YouTube content package based on the following details:
-        - Create a compelling video title that grabs attention and includes relevant keywords.
-        - Write a complete video script that incorporates the provided points and engages the audience.
-        - Provide a concise yet informative video description that encourages viewers to watch and includes SEO-friendly keywords.
-        - Suggest a list of SEO-friendly tags that can help the video rank better on YouTube.
+		imageUrl: "/portfolio-post.jpg",
+		href: "/portfolio-post",
+		color: "text-blue-500",
+		bgColor: "bg-blue-200",
+		slug: "portfolio-post",
+		category: "Developer Branding",
+		aiPrompt: `Create an engaging social media post that showcases a development project while establishing authority and encouraging potential clients to reach out. The post should:
 
-        Use a professional tone and ensure the content aligns with the given video topic and points. Generate everything in the specified language.`,
+ 1. Start with an attention-grabbing hook about the technical challenge
+ 2. Describe the problem-solution narrative in a relatable way
+ 3. Highlight key technical skills and technologies used
+ 4. Include relevant metrics or results (if provided)
+ 5. Add social proof elements (if provided)
+ 6. End with a subtle call-to-action that encourages engagement
+ 7. Include relevant hashtags for developer communities
+ 8. Maintain a professional yet conversational tone
+ 9. Format appropriately for the selected platform
+ 10. Focus on value delivery rather than direct selling`,
 		formFields: [
 			{
-				label: "Video Topic & Key Points",
-				field: "videoTopic",
-				name: "videoTopic",
+				label: "Project Type",
+				field: "projectType",
+				name: "projectType",
 				required: true,
-				placeholder:
-					"Enter your video topic & the points you want to cover",
-				type: "textarea",
-			},
-			{
-				label: "Language",
-				field: "language",
-				name: "language",
-				required: true,
-				placeholder: "Enter the language (e.g., English, Spanish)",
-				type: "text",
-			},
-		],
-		validationSchema: z.object({
-			videoTopic: z
-				.string()
-				.min(1, "Video topic and key points are required"),
-			language: z.string().min(1, "Language is required"),
-		}),
-      isFavorite: false,},
-	{
-		name: "Code Documentation",
-		description:
-			"This tool streamlines the creation of clear and concise code documentation, making it easier for developers to understand, maintain, and collaborate on software projects.",
-		icon: FileText,
-		features: [
-			"Source Code Input",
-			"Documentation Type",
-			"Project Goal",
-			"Additional Information",
-			"Generated Documentation",
-		],
-		imageUrl: "/codedocumentation.jpg",
-		href: "/code-documentation",
-		color: "text-indigo-500",
-		bgColor: "bg-indigo-200",
-		slug: "code-documentation",
-		category: "Developer Tools",
-		aiPrompt: `Generate clear and concise code documentation based on the provided source code and selected type of documentation.
-        - Include relevant comments and explanations for functions, methods, and classes.
-        - Provide an overview of how the code works, what it achieves, and any important details regarding its use.
-        - If a project goal is provided, incorporate how the code aligns with the goal.
-        - Include any additional specific information provided by the user, making the documentation detailed and informative for developers working on or maintaining the project.`,
-		formFields: [
-			{
-				label: "Source Code",
-				field: "sourceCode",
-				name: "sourceCode",
-				required: true,
-				placeholder: "Please paste your source code here",
-				type: "textarea",
-			},
-			{
-				label: "Documentation Type",
-				field: "documentationType",
-				name: "documentationType",
-				required: true,
-				placeholder:
-					"Select the type of documentation (e.g., API reference, user guide)",
 				type: "select",
-            options: [
-				{ label: "API Reference", value: "api-reference" },
-				{ label: "User Guide", value: "user-guide" },
-				{ label: "Installation Guide", value: "installation-guide" },
-				{ label: "Troubleshooting Guide", value: "troubleshooting-guide" },
-				{ label: "Best Practices Guide", value: "best-practices-guide" },
-				{ label: "FAQ", value: "faq" },
-				{ label: "Release Notes", value: "release-notes" },
-				{ label: "Changelog", value: "changelog" },
-			],
-			},
-			{
-				label: "Project Goal",
-				field: "projectGoal",
-				name: "projectGoal",
-				required: false,
-				placeholder: "Describe your project's goal (optional)",
-				type: "textarea",
-			},
-			{
-				label: "Additional Information",
-				field: "additionalInfo",
-				name: "additionalInfo",
-				required: false,
-				placeholder:
-					"Include any specific details for the documentation (optional)",
-				type: "textarea",
-			},
-		],
-		validationSchema: z.object({
-			sourceCode: z.string().min(1, "Source code is required"),
-			documentationType: z
-				.string()
-				.min(1, "Documentation type is required"),
-			projectGoal: z.string().optional(),
-			additionalInfo: z.string().optional(),
-		}),
-      isFavorite: false,},
-	{
-		name: "A-I-D-A Model Content Creator",
-		description:
-			"A tool that helps you craft compelling content using the AIDA model. It's designed to grab attention, generate interest, create desire, and provoke action.",
-		icon: FcMoneyTransfer,
-		features: [
-			"Content Type",
-			"Offer/Service Details",
-			"Ideal Customer",
-			"Customer Action Steps",
-		],
-		imageUrl: "/aida-model.jpg",
-		href: "/aida-model-content",
-		color: "text-orange-500",
-		bgColor: "bg-orange-200",
-		slug: "aida-model-content",
-		category: "Marketing Content",
-		aiPrompt: `Create a compelling piece of content using the AIDA model (Attention, Interest, Desire, Action) based on the following details:
-        - Start by grabbing the audience's attention with a bold statement or question.
-        - Generate interest by explaining the offered product/service and highlighting its key benefits.
-        - Create desire by focusing on the value this product/service offers to the ideal customer, addressing their specific pain points or needs.
-        - Conclude with a clear call-to-action that explains the steps the customer needs to take to start working with the business.`,
-		formFields: [
-			{
-				label: "Content Type",
-				field: "contentType",
-				name: "contentType",
-				required: true,
-				placeholder:
-					"Select the type of content (e.g., blog post, email, ad)",
-				type: "select",
-            options: [
-				{ label: "Blog Post", value: "blog-post" },
-				{ label: "Email", value: "email" },
-				{ label: "Ad", value: "ad" },
-				{ label: "Social Media Post", value: "social-media-post" },
-				{ label: "Video Script", value: "video-script" },
-				{ label: "Website Copy", value: "website-copy" },
-				{ label: "Product Description", value: "product-description" },
-				{ label: "Sales Letter", value: "sales-letter" },
-				{ label: "Newsletter", value: "newsletter" },
-
+				options: [
+					{ label: "Web Application", value: "web-app" },
+					{ label: "Mobile App", value: "mobile-app" },
+					{ label: "API Development", value: "api" },
+					{ label: "E-commerce Solution", value: "ecommerce" },
+					{ label: "Custom Integration", value: "integration" },
+					{
+						label: "Performance Optimization",
+						value: "optimization",
+					},
+					{
+						label: "Legacy System Modernization",
+						value: "modernization",
+					},
 				],
 			},
 			{
-				label: "Offer/Service",
-				field: "offerService",
-				name: "offerService",
+				label: "Technical Challenge",
+				field: "challenge",
+				name: "challenge",
 				required: true,
 				placeholder:
-					"What do you offer or sell? Or what services do you provide?",
+					"What was the main technical challenge you solved?",
 				type: "textarea",
 			},
 			{
-				label: "Ideal Customer",
-				field: "idealCustomer",
-				name: "idealCustomer",
+				label: "Technologies Used",
+				field: "technologies",
+				name: "technologies",
 				required: true,
-				placeholder: "Describe your ideal customer",
+				placeholder:
+					"List the key technologies, frameworks, or tools used",
 				type: "textarea",
 			},
 			{
-				label: "Customer Action Steps",
-				field: "customerActionSteps",
-				name: "customerActionSteps",
-				required: true,
+				label: "Results/Metrics",
+				field: "results",
+				name: "results",
+				required: false,
 				placeholder:
-					"What steps do customers need to take to start working with your business?",
+					"Any measurable improvements? (e.g., 40% faster loading time)",
+				type: "textarea",
+			},
+			{
+				label: "Target Platform",
+				field: "platform",
+				name: "platform",
+				required: true,
+				type: "select",
+				options: [
+					{ label: "LinkedIn", value: "linkedin" },
+					{ label: "Facebook", value: "facebook" },
+					{ label: "Twitter", value: "twitter" },
+					{ label: "Dev.to", value: "devto" },
+				],
+			},
+		],
+		validationSchema: z.object({
+			projectType: z.string().min(1, "Project type is required"),
+			challenge: z.string().min(1, "Technical challenge is required"),
+			technologies: z.string().min(1, "Technologies are required"),
+			results: z.string().optional(),
+			platform: z.string().min(1, "Platform is required"),
+		}),
+		isFavorite: false,
+	},
+	{
+		name: "Problem-Solution Case Study",
+		description:
+			"Create compelling case studies that demonstrate your problem-solving abilities and technical expertise to potential clients.",
+		icon: FileText,
+		features: [
+			"Client Problem Analysis",
+			"Technical Solution Details",
+			"Implementation Process",
+			"Results & Benefits",
+			"Technology Stack",
+		],
+		imageUrl: "/case-study.jpg",
+		href: "/case-study",
+		color: "text-purple-500",
+		bgColor: "bg-purple-200",
+		slug: "case-study",
+		category: "Client Acquisition",
+		aiPrompt: `Generate a detailed case study that demonstrates your technical expertise and problem-solving abilities. Structure the content to:
+
+ 1. Begin with a compelling business challenge that resonates with potential clients
+ 2. Break down the technical complexities into understandable business terms
+ 3. Highlight your strategic approach and technology choices
+ 4. Emphasize the value delivered through concrete metrics
+ 5. Include specific technical details that showcase expertise
+ 6. Demonstrate your understanding of business impact
+ 7. Incorporate testimonials or feedback if provided
+ 8. End with a solution-focused call-to-action
+ 9. Use a professional yet engaging tone
+ 10. Include relevant keywords for your target industry`,
+		formFields: [
+			{
+				label: "Industry/Niche",
+				field: "industry",
+				name: "industry",
+				required: true,
+				type: "select",
+				options: [
+					{ label: "E-commerce", value: "ecommerce" },
+					{ label: "Healthcare", value: "healthcare" },
+					{ label: "Finance", value: "finance" },
+					{ label: "Education", value: "education" },
+					{ label: "Real Estate", value: "real-estate" },
+					{ label: "Manufacturing", value: "manufacturing" },
+					{ label: "Technology", value: "technology" },
+				],
+			},
+			{
+				label: "Client Challenge",
+				field: "clientChallenge",
+				name: "clientChallenge",
+				required: true,
+				placeholder: "What business problem did the client face?",
+				type: "textarea",
+			},
+			{
+				label: "Technical Solution",
+				field: "technicalSolution",
+				name: "technicalSolution",
+				required: true,
+				placeholder: "How did you solve it technically?",
+				type: "textarea",
+			},
+			{
+				label: "Technology Stack",
+				field: "techStack",
+				name: "techStack",
+				required: true,
+				placeholder: "What technologies did you use?",
+				type: "textarea",
+			},
+			{
+				label: "Business Impact",
+				field: "businessImpact",
+				name: "businessImpact",
+				required: true,
+				placeholder: "What were the measurable results?",
+				type: "textarea",
+			},
+			{
+				label: "Client Testimonial",
+				field: "testimonial",
+				name: "testimonial",
+				required: false,
+				placeholder: "Any feedback from the client?",
 				type: "textarea",
 			},
 		],
 		validationSchema: z.object({
-			contentType: z.string().min(1, "Content type is required"),
-			offerService: z
+			industry: z.string().min(1, "Industry is required"),
+			clientChallenge: z.string().min(1, "Client challenge is required"),
+			technicalSolution: z
 				.string()
-				.min(1, "Offer or service details are required"),
-			idealCustomer: z
-				.string()
-				.min(1, "Ideal customer description is required"),
-			customerActionSteps: z
-				.string()
-				.min(1, "Customer action steps are required"),
+				.min(1, "Technical solution is required"),
+			techStack: z.string().min(1, "Technology stack is required"),
+			businessImpact: z.string().min(1, "Business impact is required"),
+			testimonial: z.string().optional(),
 		}),
-      isFavorite: false,},
+		isFavorite: false,
+	},
 	{
-		name: "Creative Home Page",
+		name: "Developer Value Proposition",
 		description:
-			"This is your go-to AI for creating high-converting landing pages. It is adept at structuring content, selecting templates, and writing compelling website copy that speaks to your target audience.",
-		icon: Home,
+			"Create compelling outreach messages that highlight your unique value proposition as a developer while maintaining professionalism and authenticity.",
+		icon: Mail,
 		features: [
-			"Product/Brand Name",
-			"Product or Service Details",
-			"Ideal Customer",
-			"Landing Page Structure",
-			"Compelling Copy",
+			"Personalized Approach",
+			"Value Proposition",
+			"Technical Expertise",
+			"Project Examples",
+			"Clear Next Steps",
 		],
-		imageUrl: "/creative-homepage.jpg",
-		href: "/creative-home-page",
+		imageUrl: "/value-prop.jpg",
+		href: "/value-proposition",
 		color: "text-green-500",
 		bgColor: "bg-green-200",
-		slug: "creative-home-page",
-		category: "Website Content",
-		aiPrompt: `Create a high-converting landing page based on the following details:
-     - Start with a bold, eye-catching headline using the provided product/brand name.
-     - Introduce the product or service, highlighting its key features and benefits.
-     - Tailor the messaging to resonate with the described ideal customer, addressing their specific needs and interests.
-     - Organize the content into sections for ease of reading, and include a strong call-to-action that aligns with the product or service.
-     - Optimize the copy for conversion, ensuring the language is persuasive and engaging.`,
+		slug: "value-proposition",
+		category: "Client Outreach",
+		aiPrompt: `Create a personalized outreach message that effectively communicates your value as a developer. The message should:
+
+ 1. Start with a personalized opening that shows research about the recipient
+ 2. Identify a specific business challenge or opportunity
+ 3. Present your relevant technical expertise and experience
+ 4. Provide concrete examples of similar problems you've solved
+ 5. Include specific technologies and methodologies you're proficient in
+ 6. Demonstrate understanding of their industry
+ 7. Highlight your unique approach or methodology
+ 8. Include social proof or relevant achievements
+ 9. End with a clear but low-pressure call-to-action
+ 10. Maintain a professional, confident, yet humble tone`,
 		formFields: [
 			{
-				label: "Product/Brand Name",
-				field: "brandName",
-				name: "brandName",
+				label: "Recipient Details",
+				field: "recipientInfo",
+				name: "recipientInfo",
 				required: true,
-				placeholder: "Enter your Product/Brand name here",
+				placeholder: "What do you know about the recipient/company?",
+				type: "textarea",
+			},
+			{
+				label: "Outreach Type",
+				field: "outreachType",
+				name: "outreachType",
+				required: true,
+				type: "select",
+				options: [
+					{ label: "Cold Email", value: "email" },
+					{ label: "LinkedIn Message", value: "linkedin" },
+					{ label: "Proposal", value: "proposal" },
+					{ label: "Follow-up", value: "followup" },
+				],
+			},
+			{
+				label: "Your Expertise",
+				field: "expertise",
+				name: "expertise",
+				required: true,
+				type: "select",
+				multiple: true,
+				options: [
+					{ label: "Frontend Development", value: "frontend" },
+					{ label: "Backend Development", value: "backend" },
+					{ label: "Full Stack Development", value: "fullstack" },
+					{ label: "Mobile Development", value: "mobile" },
+					{ label: "DevOps", value: "devops" },
+					{ label: "API Development", value: "api" },
+					{ label: "Database Design", value: "database" },
+				],
+			},
+			{
+				label: "Relevant Project Example",
+				field: "projectExample",
+				name: "projectExample",
+				required: true,
+				placeholder: "Describe a similar project you've worked on",
+				type: "textarea",
+			},
+			{
+				label: "Unique Value Proposition",
+				field: "valueProposition",
+				name: "valueProposition",
+				required: true,
+				placeholder: "What makes your approach/expertise unique?",
+				type: "textarea",
+			},
+			{
+				label: "Call-to-Action Type",
+				field: "ctaType",
+				name: "ctaType",
+				required: true,
+				type: "select",
+				options: [
+					{ label: "Discovery Call", value: "call" },
+					{ label: "Portfolio Review", value: "portfolio" },
+					{ label: "Case Study Share", value: "casestudy" },
+					{ label: "Quick Chat", value: "chat" },
+				],
+			},
+		],
+		validationSchema: z.object({
+			recipientInfo: z
+				.string()
+				.min(1, "Recipient information is required"),
+			outreachType: z.string().min(1, "Outreach type is required"),
+			expertise: z
+				.array(z.string())
+				.min(1, "At least one expertise is required"),
+			projectExample: z.string().min(1, "Project example is required"),
+			valueProposition: z
+				.string()
+				.min(1, "Value proposition is required"),
+			ctaType: z.string().min(1, "CTA type is required"),
+		}),
+		isFavorite: false,
+	},
+	{
+		name: "Tech Insights and Trends Post",
+		description:
+			"Create insightful posts to keep your audience updated on the latest industry trends, tech advancements, and future predictions.",
+		icon: TrendingUp,
+		features: [
+			"Trending Technology Overview",
+			"Impact Analysis",
+			"Future Predictions",
+			"Social Proof",
+			"Engagement-Driven CTA",
+		],
+		imageUrl: "/tech-trends-post.jpg",
+		href: "/tech-trends-post",
+		color: "text-green-500",
+		bgColor: "bg-green-200",
+		slug: "tech-trends-post",
+		category: "Industry Updates",
+		aiPrompt: `Create a social media post to share insights on a current tech trend or emerging technology. The post should:
+
+    1. Start with an engaging introduction to the trend
+    2. Explain the trend's relevance to businesses or developers
+    3. Offer predictions on how it might evolve or impact the industry
+    4. Mention any relevant skills, experience, or projects you have related to the trend
+    5. Include a subtle call-to-action to drive engagement
+    6. Use relevant hashtags to reach a wider tech audience
+    7. Maintain a conversational and professional tone`,
+		formFields: [
+			{
+				label: "Tech Trend",
+				field: "trend",
+				name: "trend",
+				required: true,
+				placeholder: "Describe the tech trend or insight",
+				type: "textarea",
+			},
+			{
+				label: "Industry Impact",
+				field: "impact",
+				name: "impact",
+				required: true,
+				placeholder: "How does this trend affect the industry?",
+				type: "textarea",
+			},
+			{
+				label: "Future Predictions",
+				field: "predictions",
+				name: "predictions",
+				required: false,
+				placeholder: "Share any predictions or thoughts on the trend",
+				type: "textarea",
+			},
+			{
+				label: "Target Platform",
+				field: "platform",
+				name: "platform",
+				required: true,
+				type: "select",
+				options: [
+					{ label: "LinkedIn", value: "linkedin" },
+					{ label: "Twitter", value: "twitter" },
+					{ label: "Facebook", value: "facebook" },
+				],
+			},
+		],
+		validationSchema: {
+			trend: "z.string().min(1, 'Tech trend description is required')",
+			impact: "z.string().min(1, 'Industry impact is required')",
+			predictions: "z.string().optional()",
+			platform: "z.string().min(1, 'Platform is required')",
+		},
+		isFavorite: false,
+	},
+	{
+		name: "Case Study Post",
+		description:
+			"Create a post that dives into a project case study, showcasing your process, results, and client impact in a way that resonates with potential clients.",
+		icon: FolderOpen,
+		features: [
+			"Project Background",
+			"Challenges & Solutions",
+			"Technology Stack",
+			"Client Benefits",
+			"Professional CTA",
+		],
+		imageUrl: "/case-study-post.jpg",
+		href: "/case-study-post",
+		color: "text-purple-500",
+		bgColor: "bg-purple-200",
+		slug: "case-study-post",
+		category: "Client Success Stories",
+		aiPrompt: `Craft a social media post that highlights a recent project as a case study. The post should:
+
+    1. Begin with an engaging introduction that captures interest
+    2. Provide context on the project's background and purpose
+    3. Detail the primary challenges faced and the solutions implemented
+    4. Outline the tech stack used in a way that adds credibility
+    5. Include any measurable results or benefits to the client
+    6. Conclude with a professional call-to-action
+    7. Use relevant industry hashtags and maintain a concise, informative tone`,
+		formFields: [
+			{
+				label: "Project Type",
+				field: "projectType",
+				name: "projectType",
+				required: true,
+				type: "select",
+				options: [
+					{ label: "Web Application", value: "web-app" },
+					{ label: "Mobile App", value: "mobile-app" },
+					{ label: "API Development", value: "api" },
+					{ label: "E-commerce Solution", value: "ecommerce" },
+				],
+			},
+			{
+				label: "Challenge",
+				field: "challenge",
+				name: "challenge",
+				required: true,
+				placeholder: "Describe the primary challenge",
+				type: "textarea",
+			},
+			{
+				label: "Solution",
+				field: "solution",
+				name: "solution",
+				required: true,
+				placeholder: "Outline the solution provided",
+				type: "textarea",
+			},
+			{
+				label: "Results/Metrics",
+				field: "results",
+				name: "results",
+				required: false,
+				placeholder: "Any measurable improvements?",
+				type: "textarea",
+			},
+			{
+				label: "Target Platform",
+				field: "platform",
+				name: "platform",
+				required: true,
+				type: "select",
+				options: [
+					{ label: "LinkedIn", value: "linkedin" },
+					{ label: "Facebook", value: "facebook" },
+					{ label: "Twitter", value: "twitter" },
+				],
+			},
+		],
+		validationSchema: {
+			projectType: "z.string().min(1, 'Project type is required')",
+			challenge: "z.string().min(1, 'Challenge description is required')",
+			solution: "z.string().min(1, 'Solution description is required')",
+			results: "z.string().optional()",
+			platform: "z.string().min(1, 'Platform is required')",
+		},
+		isFavorite: false,
+	},
+	{
+		name: "Service Showcase Ad",
+		description:
+			"Create a concise ad to highlight the unique value and benefits of a service you offer, targeting potential clients on social media.",
+		icon: Briefcase,
+		features: [
+			"Service Benefits",
+			"Key Differentiators",
+			"Client Testimonials",
+			"Strong CTA",
+			"Engagement-Oriented Design",
+		],
+		imageUrl: "/service-showcase.jpg",
+		href: "/service-showcase",
+		color: "text-indigo-500",
+		bgColor: "bg-indigo-200",
+		slug: "service-showcase",
+		category: "Client Attraction",
+		aiPrompt: `Compose a compelling social media ad for a specific service that attracts potential clients. The ad should:
+
+    1. Begin with a hook to highlight the problem the service solves
+    2. Briefly describe the service and its unique benefits
+    3. Include a short client testimonial or proof point if available
+    4. End with a clear call-to-action encouraging inquiries or sign-ups
+    5. Use relevant hashtags to broaden reach
+    6. Maintain a concise, persuasive, and professional tone`,
+		formFields: [
+			{
+				label: "Service Name",
+				field: "serviceName",
+				name: "serviceName",
+				required: true,
+				placeholder: "Enter the service you are promoting",
 				type: "text",
 			},
 			{
-				label: "What are you selling or promoting?",
-				field: "productDetails",
-				name: "productDetails",
+				label: "Service Benefits",
+				field: "benefits",
+				name: "benefits",
 				required: true,
-				placeholder:
-					"Describe what you are selling or promoting, and include key features",
+				placeholder: "List the main benefits of this service",
 				type: "textarea",
 			},
 			{
-				label: "Ideal Customer",
-				field: "idealCustomer",
-				name: "idealCustomer",
-				required: true,
-				placeholder: "Describe your ideal customer and their interests",
+				label: "Testimonial",
+				field: "testimonial",
+				name: "testimonial",
+				required: false,
+				placeholder: "Include a short client testimonial (optional)",
 				type: "textarea",
 			},
+			{
+				label: "Target Platform",
+				field: "platform",
+				name: "platform",
+				required: true,
+				type: "select",
+				options: [
+					{ label: "Instagram", value: "instagram" },
+					{ label: "Facebook", value: "facebook" },
+					{ label: "LinkedIn", value: "linkedin" },
+				],
+			},
 		],
-		validationSchema: z.object({
-			brandName: z.string().min(1, "Product/Brand name is required"),
-			productDetails: z
-				.string()
-				.min(1, "Product or service details are required"),
-			idealCustomer: z
-				.string()
-				.min(1, "Ideal customer description is required"),
-		}),
-      isFavorite: true,},
+		validationSchema: {
+			serviceName: "z.string().min(1, 'Service name is required')",
+			benefits: "z.string().min(1, 'Service benefits are required')",
+			testimonial: "z.string().optional()",
+			platform: "z.string().min(1, 'Platform is required')",
+		},
+		isFavorite: false,
+	},
 	{
-		name: "Ad Copy",
+		name: "Client Success Story Ad",
 		description:
-			"Let us launch your product into the spotlight with ad copies that captivate and compel your audience to click and explore.",
-		icon: Megaphone,
+			"Highlight a client’s success story, detailing the impact of your services in a way that appeals to potential clients.",
+		icon: BarChart,
 		features: [
-			"Product Name",
-			"Product Details",
-			"Key Features",
-			"Ad Copy Creation",
-			"Call-to-Action",
+			"Detailed Client Success",
+			"Before-and-After Comparison",
+			"Outcome-Oriented",
+			"Trust-Building Elements",
+			"Encouraging CTA",
 		],
-		imageUrl: "/ad-copy.jpg",
-		href: "/ad-copy",
-		color: "text-yellow-500",
-		bgColor: "bg-yellow-200",
-		slug: "ad-copy",
-		category: "Marketing Content",
-		aiPrompt: `Create a highly engaging and click-worthy ad copy based on the following product details:
-        - Start with a catchy headline that captures attention and highlights the product's main feature or unique selling point.
-        - Craft a concise but compelling description of the product, focusing on its key features and benefits.
-        - Make the copy enticing for the target audience, ensuring it appeals to their needs or pain points.
-        - Include a strong call-to-action that encourages the reader to click and explore the product further.
-        - If more details are needed for the ad copy, prompt the user for additional information about the product's target market, pricing, promotions, or any special offers.`,
+		imageUrl: "/client-success.jpg",
+		href: "/client-success",
+		color: "text-teal-500",
+		bgColor: "bg-teal-200",
+		slug: "client-success",
+		category: "Trust Building",
+		aiPrompt: `Create a social media ad that tells the story of a client’s success due to your service. The post should:
+
+    1. Start by presenting the client's initial challenge or problem
+    2. Briefly describe the service you provided to solve this problem
+    3. Emphasize the measurable outcomes or success metrics
+    4. Add a quote from the client if available for authenticity
+    5. End with a call-to-action encouraging inquiries or visits to your website
+    6. Use a conversational and trust-building tone`,
+		formFields: [
+			{
+				label: "Client Industry",
+				field: "clientIndustry",
+				name: "clientIndustry",
+				required: true,
+				placeholder:
+					"Enter the client's industry (e.g., eCommerce, SaaS)",
+				type: "text",
+			},
+			{
+				label: "Challenge",
+				field: "challenge",
+				name: "challenge",
+				required: true,
+				placeholder:
+					"Describe the client's challenge before your service",
+				type: "textarea",
+			},
+			{
+				label: "Solution",
+				field: "solution",
+				name: "solution",
+				required: true,
+				placeholder: "Describe how you solved the challenge",
+				type: "textarea",
+			},
+			{
+				label: "Results/Metrics",
+				field: "results",
+				name: "results",
+				required: true,
+				placeholder:
+					"List measurable results achieved (e.g., 30% increase in sales)",
+				type: "textarea",
+			},
+			{
+				label: "Testimonial",
+				field: "testimonial",
+				name: "testimonial",
+				required: false,
+				placeholder: "Client quote (optional)",
+				type: "textarea",
+			},
+			{
+				label: "Target Platform",
+				field: "platform",
+				name: "platform",
+				required: true,
+				type: "select",
+				options: [
+					{ label: "LinkedIn", value: "linkedin" },
+					{ label: "Facebook", value: "facebook" },
+					{ label: "Twitter", value: "twitter" },
+				],
+			},
+		],
+		validationSchema: {
+			clientIndustry: "z.string().min(1, 'Client industry is required')",
+			challenge: "z.string().min(1, 'Challenge description is required')",
+			solution: "z.string().min(1, 'Solution description is required')",
+			results: "z.string().min(1, 'Results description is required')",
+			testimonial: "z.string().optional()",
+			platform: "z.string().min(1, 'Platform is required')",
+		},
+		isFavorite: false,
+	},
+	{
+		name: "Product Demo Ad",
+		description:
+			"Showcase your product with a short, engaging ad that highlights its top features and encourages potential clients to try it.",
+		icon: Video,
+		features: [
+			"Feature Highlight",
+			"User-Friendly Description",
+			"Problem-Solution Focus",
+			"Clear CTA",
+			"Platform-Specific Design",
+		],
+		imageUrl: "/product-demo.jpg",
+		href: "/product-demo",
+		color: "text-red-500",
+		bgColor: "bg-red-200",
+		slug: "product-demo",
+		category: "Product Awareness",
+		aiPrompt: `Create a product demo ad that highlights the key features and benefits in a way that encourages viewers to try it out. The ad should:
+
+    1. Start with a hook introducing the product and its primary benefit
+    2. Briefly describe how it solves a specific problem or pain point
+    3. Highlight the main features and unique selling points
+    4. Conclude with a strong call-to-action encouraging viewers to try or sign up
+    5. Use relevant hashtags for your target audience
+    6. Maintain an engaging, informative tone`,
 		formFields: [
 			{
 				label: "Product Name",
 				field: "productName",
 				name: "productName",
 				required: true,
-				placeholder:
-					"Enter the product name (e.g., iPhone 12, Samsung Galaxy Note 20)",
+				placeholder: "Enter the product's name",
 				type: "text",
 			},
 			{
-				label: "Product Details",
-				field: "productDetails",
-				name: "productDetails",
+				label: "Main Benefit",
+				field: "benefit",
+				name: "benefit",
 				required: true,
-				placeholder:
-					"Provide key features, benefits, and any other relevant details about the product",
+				placeholder: "Describe the main benefit of the product",
 				type: "textarea",
 			},
 			{
-				label: "Target Audience (Optional)",
-				field: "targetAudience",
-				name: "targetAudience",
-				required: false,
-				placeholder: "Describe the target audience (optional)",
+				label: "Features",
+				field: "features",
+				name: "features",
+				required: true,
+				placeholder: "List key features",
 				type: "textarea",
 			},
 			{
-				label: "Promotions or Special Offers (Optional)",
-				field: "promotions",
-				name: "promotions",
-				required: false,
-				placeholder:
-					"Include any promotions or special offers (optional)",
-				type: "textarea",
-			},
-		],
-		validationSchema: z.object({
-			productName: z.string().min(1, "Product name is required"),
-			productDetails: z.string().min(1, "Product details are required"),
-			targetAudience: z.string().optional(),
-			promotions: z.string().optional(),
-		}),
-      isFavorite: false,},
-	{
-		name: "All-in-One SEO Tool",
-		description:
-			"This tool generates optimized meta titles, descriptions, and keywords to improve your website's search engine visibility. It also helps create Open Graph images for better social media sharing.",
-		icon: Globe,
-		features: [
-			"Meta Title Generator",
-			"Meta Description Generator",
-			"Keyword Suggestions",
-			"Open Graph Image Creator",
-			"SEO Best Practices",
-		],
-		imageUrl: "/seo-tool.jpg",
-		href: "/all-in-one-seo-tool",
-		color: "text-green-500",
-		bgColor: "bg-green-200",
-		slug: "all-in-one-seo-tool",
-		category: "SEO Tools",
-		aiPrompt: `Generate optimized meta tags and keywords for the following webpage:
-        - Create a compelling meta title that includes the primary keyword and adheres to SEO best practices.
-        - Write a concise meta description that captures the essence of the page and entices clicks while including relevant keywords.
-        - Provide a list of suggested keywords to target for this webpage.
-        - Create a suggestion for an Open Graph image that would enhance the webpage's social media presence, including key visual elements.`,
-		formFields: [
-			{
-				label: "Page Title",
-				field: "pageTitle",
-				name: "pageTitle",
+				label: "Target Platform",
+				field: "platform",
+				name: "platform",
 				required: true,
-				placeholder: "Enter the title of the webpage",
-				type: "text",
-			},
-			{
-				label: "Primary Keyword",
-				field: "primaryKeyword",
-				name: "primaryKeyword",
-				required: true,
-				placeholder: "Enter the primary keyword for SEO",
-				type: "text",
-			},
-			{
-				label: "Page Content Overview",
-				field: "contentOverview",
-				name: "contentOverview",
-				required: true,
-				placeholder: "Provide a brief overview of the page content",
-				type: "textarea",
-			},
-			{
-				label: "Target Audience (Optional)",
-				field: "targetAudience",
-				name: "targetAudience",
-				required: false,
-				placeholder:
-					"Describe the target audience for this page (optional)",
-				type: "textarea",
-			},
-		],
-		validationSchema: z.object({
-			pageTitle: z.string().min(1, "Page title is required"),
-			primaryKeyword: z.string().min(1, "Primary keyword is required"),
-			contentOverview: z.string().min(1, "Content overview is required"),
-			targetAudience: z.string().optional(),
-		}),
-      isFavorite: false,},
-	{
-		name: "Blog Content Calendar",
-		description:
-			"This tool crafts an organized content calendar for your blog, targeting transactional-style search terms to boost your online presence. Stay ahead in content planning and optimize your blogging strategy.",
-		icon: Calendar,
-		features: [
-			"Target Keyword Input",
-			"Content Ideas Generation",
-			"Publishing Schedule",
-			"SEO Optimization Tips",
-			"Analytics Tracking",
-		],
-		imageUrl: "/blog-content-calendar.jpg",
-		href: "/blog-content-calendar",
-		color: "text-blue-500",
-		bgColor: "bg-blue-200",
-		slug: "blog-content-calendar",
-		category: "Blogging Tools",
-		aiPrompt: `Create a detailed blog content calendar based on the provided target keyword:
-        - Generate content ideas that target transactional-style search terms relevant to the keyword.
-        - Organize the ideas into a monthly calendar format, including suggested publishing dates.
-        - Provide SEO optimization tips for each content idea to enhance search engine visibility.
-        - Include suggestions for promoting each blog post on social media and other platforms.`,
-		formFields: [
-			{
-				label: "Target Keyword",
-				field: "targetKeyword",
-				name: "targetKeyword",
-				required: true,
-				placeholder: "Enter your target keyword",
-				type: "text",
-			},
-		],
-		validationSchema: z.object({
-			targetKeyword: z.string().min(1, "Target keyword is required"),
-		}),
-      isFavorite: false,},
-	{
-		name: "LinkedIn Article Writer",
-		description:
-			"Write long-form LinkedIn articles that showcase your expertise and thoughts on industry-related topics, helping you establish authority.",
-		icon: FileText,
-		features: [
-			"Article Writing",
-			"Long-Form Content",
-			"Showcase Expertise",
-		],
-		imageUrl: "/articlewriter.jpg",
-		href: "/linkedin-article-writer",
-		color: "text-gray-500",
-		bgColor: "bg-gray-200",
-		slug: "linkedin-article-writer",
-		category: "LinkedIn Content",
-		aiPrompt: "Write a LinkedIn article on the provided topic",
-		formFields: [
-			{
-				label: "Article Title",
-				field: "articleTitle",
-				name: "articleTitle",
-				required: true,
-				placeholder: "Enter the title of your article",
-				type: "text",
-			},
-			{
-				label: "Article Topic",
-				field: "articleTopic",
-				name: "articleTopic",
-				required: true,
-				placeholder: "Specify the topic of the article",
-				type: "text",
-			},
-			{
-				label: "Article Body",
-				field: "articleBody",
-				name: "articleBody",
-				required: true,
-				placeholder: "Write the main content of the article",
-				type: "textarea",
-			},
-			{
-				label: "Writing Tone",
-				field: "tone",
-				name: "tone",
-				required: false,
-				options: [
-					{ label: "Professional", value: "professional" },
-					{ label: "Casual", value: "casual" },
-					{ label: "Informative", value: "informative" },
-				],
-				type: "select",
-			},
-		],
-		validationSchema: z.object({
-			articleTitle: z.string().min(1, "Article title is required"),
-			articleTopic: z.string().min(1, "Article topic is required"),
-			articleBody: z.string().min(1, "Article body is required"),
-			tone: z.enum(["professional", "casual", "informative"]).optional(),
-		}),
-      isFavorite: false,},
-	{
-		name: "SEO-Optimized Blog Post",
-		description:
-			"This tool helps you create an SEO-optimized, compelling, and reader-friendly blog post using a given title and designated keywords. Enhance your blog's visibility and engagement with expertly crafted content.",
-		icon: Pencil,
-		features: [
-			"Focus Keyword Input",
-			"Additional Keywords",
-			"Content Structure Suggestions",
-			"SEO Best Practices",
-			"Readability Checks",
-		],
-		imageUrl: "/seo-optimized-blog-post.jpg",
-		href: "/seo-optimized-blog-post",
-		color: "text-orange-500",
-		bgColor: "bg-orange-200",
-		slug: "seo-optimized-blog-post",
-		category: "Blogging Tools",
-		aiPrompt: `Generate a comprehensive SEO-optimized blog post based on the following inputs:
-        - Create a compelling introduction that hooks the reader while incorporating the focus keyword.
-        - Structure the post with appropriate headings, subheadings, and bullet points for clarity.
-        - Incorporate the additional keywords seamlessly throughout the content while maintaining readability.
-        - Conclude with a strong call-to-action that encourages reader engagement and sharing.
-        - Provide SEO best practices and readability checks to ensure the post meets current standards.`,
-		formFields: [
-			{
-				label: "Focus Keyword",
-				field: "focusKeyword",
-				name: "focusKeyword",
-				required: true,
-				placeholder: "Enter your focus keyword",
-				type: "text",
-			},
-			{
-				label: "Additional Keywords (Optional)",
-				field: "additionalKeywords",
-				name: "additionalKeywords",
-				required: false,
-				placeholder:
-					"List additional keywords to incorporate (comma-separated)",
-				type: "textarea",
-			},
-		],
-		validationSchema: z.object({
-			focusKeyword: z.string().min(1, "Focus keyword is required"),
-			additionalKeywords: z.string().optional(),
-		}),
-      isFavorite: false,},
-	{
-		name: "All-in-One Social Post",
-		description:
-			"Create effective posts for every social media platform, from Facebook to YouTube. This tool ensures your content fits within the character limits and includes relevant hashtags, emojis, and keywords for maximum engagement.",
-		icon: Share,
-		features: [
-			"Post Content Input",
-			"Character Limit Checks",
-			"Hashtag Suggestions",
-			"Emoji Integration",
-			"Platform-Specific Formatting",
-		],
-		imageUrl: "/social-post.jpg",
-		href: "/all-in-one-social-post",
-		color: "text-pink-500",
-		bgColor: "bg-pink-200",
-		slug: "all-in-one-social-post",
-		category: "Social Media Tools",
-		aiPrompt: `Create optimized social media posts based on the following inputs:
-        - Generate engaging content tailored to the specified social media platform(s).
-        - Ensure the content adheres to character limits and formatting rules for each platform.
-        - Provide relevant hashtags and emojis to enhance engagement and visibility.
-        - Suggest any additional keywords that can improve discoverability on social media.`,
-		formFields: [
-			{
-				label: "Post Topic",
-				field: "postTopic",
-				name: "postTopic",
-				required: true,
-				placeholder: "What is your post about?",
-				type: "textarea",
-			},
-			{
-				label: "Target Platforms",
-				field: "targetPlatforms",
-				name: "targetPlatforms",
-				required: true,
-				placeholder:
-					"Select the platforms (e.g., Facebook, Twitter, Instagram, LinkedIn, YouTube)",
 				type: "select",
 				options: [
-					{ value: "facebook", label: "Facebook" },
-					{ value: "twitter", label: "Twitter" },
-					{ value: "instagram", label: "Instagram" },
-					{ value: "linkedin", label: "LinkedIn" },
-					{ value: "youtube", label: "YouTube" },
+					{ label: "Instagram", value: "instagram" },
+					{ label: "YouTube", value: "youtube" },
+					{ label: "LinkedIn", value: "linkedin" },
 				],
 			},
-			{
-				label: "Preferred Hashtags (Optional)",
-				field: "preferredHashtags",
-				name: "preferredHashtags",
-				required: false,
-				placeholder: "List preferred hashtags (comma-separated)",
-				type: "textarea",
-			},
-			{
-				label: "Tone of Voice (Optional)",
-				field: "toneOfVoice",
-				name: "toneOfVoice",
-				required: false,
-				placeholder:
-					"Describe the desired tone (e.g., professional, casual, humorous)",
-				type: "text",
-			},
 		],
-		validationSchema: z.object({
-			postTopic: z.string().min(1, "Post topic is required"),
-			targetPlatforms: z
-				.string()
-				.min(1, "At least one platform must be selected"),
-			preferredHashtags: z.string().optional(),
-			toneOfVoice: z.string().optional(),
-		}),
-      isFavorite: false,},
-	{
-		name: "Advanced Blog Post",
-		description:
-			"This tool helps you write engaging, detailed blog posts tailored for specific types of content. It ensures your writing is unique, SEO-friendly, and resonates with your target audience, making it easier to connect with readers and improve search rankings.",
-		icon: BookOpen,
-		features: [
-			"Blog Title Input",
-			"Target Audience Specification",
-			"Blog Type Selection",
-			"Focus Keyword Integration",
-			"Word Count Selection",
-			"Tone of Voice Customization",
-			"Additional Instructions",
-		],
-		imageUrl: "/advanced-blog-post.jpg",
-		href: "/advanced-blog-post",
-		color: "text-purple-500",
-		bgColor: "bg-purple-200",
-		slug: "advanced-blog-post",
-		category: "Blogging Tools",
-		aiPrompt: `Generate a comprehensive and engaging blog post based on the following inputs:
-     - **Blog Type**: The blog type selected will tailor the content appropriately. For instance:
-       - **Affiliate Blog**: Include product recommendations, comparison charts, and links to affiliate products.
-       - **Product Blog**: Provide in-depth product reviews, specifications, and user experiences.
-       - **Coding Blog**: Integrate relevant code snippets, explanations, and best practices.
-     - **Title**: Create a unique and captivating introduction based on the provided blog title.
-     - **Target Audience**: Tailor the language, style, and examples to resonate with the specified audience.
-     - **Focus Keywords**: Incorporate the given keywords naturally throughout the post while maintaining readability and flow.
-     - **Word Count**: Adhere to the specified word count while ensuring the content is comprehensive and engaging.
-     - **Tone of Voice**: Adjust the tone to match the brand's voice, whether it's professional, casual, or informative.
-     - **Additional Instructions**: Incorporate any specific requests or details to enhance the content further, such as SEO optimization strategies, readability enhancements, and style preferences.`,
-		formFields: [
-			{
-				label: "Blog Title",
-				field: "blogTitle",
-				name: "blogTitle",
-				required: true,
-				placeholder: "What is your blog title?",
-				type: "text",
-			},
-			{
-				label: "Target Audience",
-				field: "targetAudience",
-				name: "targetAudience",
-				required: true,
-				placeholder: "Enter your target audience here",
-				type: "textarea",
-			},
-			{
-				label: "Blog Type",
-				field: "blogType",
-				name: "blogType",
-				required: true,
-				placeholder: "Select the type of blog content",
-				type: "select",
-				options: [
-					{ value: "affiliate", label: "Affiliate Blog" },
-					{ value: "product", label: "Product Blog" },
-					{ value: "coding", label: "Coding Blog" },
-					{ value: "lifestyle", label: "Lifestyle Blog" },
-					{ value: "travel", label: "Travel Blog" },
-					{ value: "finance", label: "Finance Blog" },
-				],
-			},
-			{
-				label: "Focus Keyword(s)",
-				field: "focusKeywords",
-				name: "focusKeywords",
-				required: true,
-				placeholder:
-					"e.g., Artificial Intelligence, Future (comma-separated)",
-				type: "textarea",
-			},
-			{
-				label: "Word Count",
-				field: "wordCount",
-				name: "wordCount",
-				required: true,
-				placeholder: "Select your desired word count",
-				type: "select",
-				options: [
-					{ value: "500", label: "500 words" },
-					{ value: "1000", label: "1000 words" },
-					{ value: "1500", label: "1500 words" },
-					{ value: "2000", label: "2000 words" },
-				],
-			},
-			{
-				label: "Tone of Voice",
-				field: "toneOfVoice",
-				name: "toneOfVoice",
-				required: false,
-				placeholder:
-					"Describe the desired tone (e.g., professional, casual, informative)",
-				type: "text",
-			},
-			{
-				label: "Additional Instructions (Optional)",
-				field: "additionalInstructions",
-				name: "additionalInstructions",
-				required: false,
-				placeholder: "Any other specific requests or details?",
-				type: "textarea",
-			},
-		],
-		validationSchema: z.object({
-			blogTitle: z.string().min(1, "Blog title is required"),
-			targetAudience: z.string().min(1, "Target audience is required"),
-			blogType: z.string().min(1, "Blog type must be selected"),
-			focusKeywords: z
-				.string()
-				.min(1, "At least one focus keyword is required"),
-			wordCount: z.string().min(1, "Word count must be selected"),
-			toneOfVoice: z.string().optional(),
-			additionalInstructions: z.string().optional(),
-		}),
-      isFavorite: false,},
-	{
-		name: "LinkedIn Comment Generator",
-		description:
-			"Create thoughtful and engaging comments on LinkedIn posts to build your network, engage with thought leaders, and contribute to discussions.",
-		icon: MessageSquare,
-		features: [
-			"Engage with Content",
-			"Networking Opportunities",
-			"Thoughtful Responses",
-		],
-		imageUrl: "/commentgenerator.jpg",
-		href: "/linkedin-comment-generator",
-		color: "text-red-500",
-		bgColor: "bg-red-200",
-		slug: "linkedin-comment-generator",
-		category: "LinkedIn Content",
-		aiPrompt:
-			"Generate a thoughtful LinkedIn comment for the following post",
-		formFields: [
-			{
-				label: "Post Content",
-				field: "postContent",
-				name: "postContent",
-				required: true,
-				placeholder:
-					"Enter the content or summary of the LinkedIn post",
-				type: "textarea",
-			},
-			{
-				label: "Comment Intent",
-				field: "commentIntent",
-				name: "commentIntent",
-				required: true,
-				placeholder: "What is your goal? (e.g., agree, ask, add value)",
-				type: "text",
-			},
-			{
-				label: "Writing Tone",
-				field: "tone",
-				name: "tone",
-				required: false,
-				options: [
-					{ label: "Professional", value: "professional" },
-					{ label: "Friendly", value: "friendly" },
-					{ label: "Inquisitive", value: "inquisitive" },
-				],
-				type: "select",
-			},
-		],
-		validationSchema: z.object({
-			postContent: z.string().min(1, "Post content is required"),
-			commentIntent: z.string().min(1, "Comment intent is required"),
-			tone: z
-				.enum(["professional", "friendly", "inquisitive"])
-				.optional(),
-		}),
-      isFavorite: false,
+		validationSchema: {
+			productName: "z.string().min(1, 'Product name is required')",
+			benefit: "z.string().min(1, 'Main benefit is required')",
+			features: "z.string().min(1, 'Features are required')",
+			platform: "z.string().min(1, 'Platform is required')",
+		},
+		isFavorite: false,
 	},
+   {
+      "name": "Limited-Time Offer Ad",
+      "description": "Drive urgency with a time-sensitive ad that highlights a special offer, encouraging immediate action from potential clients.",
+      "icon": Clock,
+      "features": [
+        "Urgency-Driven CTA",
+        "Clear Offer Description",
+        "End Date/Countdown",
+        "Benefits Highlight",
+        "Visual Impact"
+      ],
+      "imageUrl": "/limited-time-offer.jpg",
+      "href": "/limited-time-offer",
+      "color": "text-orange-500",
+      "bgColor": "bg-orange-200",
+      "slug": "limited-time-offer",
+      "category": "Conversion Boost",
+      "aiPrompt": `Craft an ad for a limited-time offer that prompts immediate action from viewers. The ad should:
+
+    1. Start with an eye-catching announcement of the offer (e.g., "Flash Sale" or "Only 48 Hours Left!")
+    2. Clearly state what the offer includes, such as a discount or free add-ons
+    3. Emphasize the benefits of the service or product being offered
+    4. Mention the end date or a countdown to create urgency
+    5. Finish with a strong call-to-action (e.g., "Sign Up Now," "Get It Before It's Gone")
+    6. Keep the tone persuasive and action-oriented`,
+      "formFields": [
+        {
+          "label": "Offer Description",
+          "field": "offerDescription",
+          "name": "offerDescription",
+          "required": true,
+          "placeholder": "Describe the limited-time offer",
+          "type": "textarea"
+        },
+        {
+          "label": "Benefits",
+          "field": "benefits",
+          "name": "benefits",
+          "required": true,
+          "placeholder": "Highlight the main benefits",
+          "type": "textarea"
+        },
+        {
+          "label": "End Date or Countdown",
+          "field": "endDate",
+          "name": "endDate",
+          "required": true,
+          "placeholder": "Specify the offer's end date or countdown",
+          "type": "text"
+        },
+        {
+          "label": "Target Platform",
+          "field": "platform",
+          "name": "platform",
+          "required": true,
+          "type": "select",
+          "options": [
+            { "label": "Instagram", "value": "instagram" },
+            { "label": "Facebook", "value": "facebook" },
+            { "label": "Twitter", "value": "twitter" }
+          ]
+        }
+      ],
+      "validationSchema": {
+        "offerDescription": "z.string().min(1, 'Offer description is required')",
+        "benefits": "z.string().min(1, 'Benefits are required')",
+        "endDate": "z.string().min(1, 'End date or countdown is required')",
+        "platform": "z.string().min(1, 'Platform is required')"
+      },
+      "isFavorite": false
+    },
+    {
+      "name": "Explainer Ad",
+      "description": "Educate your audience about your service or product in an engaging and simplified way, making complex features easy to understand.",
+      "icon": BookOpen,
+      "features": [
+        "Simplified Explanation",
+        "Problem-Solution Approach",
+        "Highlight of Key Features",
+        "Clear CTA for More Info",
+        "Engagement-Oriented Tone"
+      ],
+      "imageUrl": "/explainer-ad.jpg",
+      "href": "/explainer-ad",
+      "color": "text-purple-500",
+      "bgColor": "bg-purple-200",
+      "slug": "explainer-ad",
+      "category": "Brand Awareness",
+      "aiPrompt": `Compose an explainer ad that educates potential clients on the key benefits and features of your service or product. The ad should:
+
+    1. Start by addressing a common problem or pain point your target audience faces
+    2. Explain in simple terms how your service/product solves this problem
+    3. Highlight the top 2-3 unique features or benefits that make it effective
+    4. End with a call-to-action inviting readers to learn more or try it out
+    5. Use hashtags or tags that increase discoverability
+    6. Maintain an informative, approachable tone`,
+      "formFields": [
+        {
+          "label": "Product or Service Name",
+          "field": "productName",
+          "name": "productName",
+          "required": true,
+          "placeholder": "Enter the name of your product or service",
+          "type": "text"
+        },
+        {
+          "label": "Problem Addressed",
+          "field": "problem",
+          "name": "problem",
+          "required": true,
+          "placeholder": "Describe the problem your service solves",
+          "type": "textarea"
+        },
+        {
+          "label": "Top Features",
+          "field": "features",
+          "name": "features",
+          "required": true,
+          "placeholder": "List the top features or benefits",
+          "type": "textarea"
+        },
+        {
+          "label": "Target Platform",
+          "field": "platform",
+          "name": "platform",
+          "required": true,
+          "type": "select",
+          "options": [
+            { "label": "Facebook", "value": "facebook" },
+            { "label": "Instagram", "value": "instagram" },
+            { "label": "LinkedIn", "value": "linkedin" }
+          ]
+        }
+      ],
+      "validationSchema": {
+        "productName": "z.string().min(1, 'Product or service name is required')",
+        "problem": "z.string().min(1, 'Problem is required')",
+        "features": "z.string().min(1, 'Features are required')",
+        "platform": "z.string().min(1, 'Platform is required')"
+      },
+      "isFavorite": false
+    },
+    {
+      "name": "Free Resource Ad",
+      "description": "Attract potential leads by offering a free resource, such as an ebook or template, with a clear CTA for download or sign-up.",
+      "icon": Gift,
+      "features": [
+        "Resource Description",
+        "Lead-Generating CTA",
+        "Value-Oriented Messaging",
+        "Specific Benefits",
+        "Attractive Design Elements"
+      ],
+      "imageUrl": "/free-resource.jpg",
+      "href": "/free-resource",
+      "color": "text-blue-500",
+      "bgColor": "bg-blue-200",
+      "slug": "free-resource",
+      "category": "Lead Generation",
+      "aiPrompt": `Create an ad promoting a free resource (such as an ebook, checklist, or template) to attract leads. The ad should:
+
+    1. Start with an enticing statement that introduces the free resource
+    2. Briefly describe the value or knowledge the resource provides
+    3. Mention specific benefits or topics covered in the resource
+    4. Include a call-to-action that prompts viewers to download or sign up
+    5. Use relevant hashtags to target the right audience
+    6. Maintain a friendly, helpful tone`,
+      "formFields": [
+        {
+          "label": "Resource Title",
+          "field": "resourceTitle",
+          "name": "resourceTitle",
+          "required": true,
+          "placeholder": "Enter the title of your free resource",
+          "type": "text"
+        },
+        {
+          "label": "Description",
+          "field": "description",
+          "name": "description",
+          "required": true,
+          "placeholder": "Describe the resource's value",
+          "type": "textarea"
+        },
+        {
+          "label": "Benefits",
+          "field": "benefits",
+          "name": "benefits",
+          "required": true,
+          "placeholder": "List the main benefits or topics covered",
+          "type": "textarea"
+        },
+        {
+          "label": "Target Platform",
+          "field": "platform",
+          "name": "platform",
+          "required": true,
+          "type": "select",
+          "options": [
+            { "label": "Instagram", "value": "instagram" },
+            { "label": "LinkedIn", "value": "linkedin" },
+            { "label": "Twitter", "value": "twitter" }
+          ]
+        }
+      ],
+      "validationSchema": {
+        "resourceTitle": "z.string().min(1, 'Resource title is required')",
+        "description": "z.string().min(1, 'Description is required')",
+        "benefits": "z.string().min(1, 'Benefits are required')",
+        "platform": "z.string().min(1, 'Platform is required')"
+      },
+      "isFavorite": false
+    }
 ];
