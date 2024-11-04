@@ -23,11 +23,11 @@ export const metadata: Metadata = {
 		title: "CreativaGen | AI Content Generator",
 		description:
 			"Revolutionize your content strategy with CreativaGen, the AI-driven tool for crafting engaging emails, social media posts, and more.",
-		url: "https://creativagen.com", // Change to your actual URL
+		url: "https://creativagen.vercel.app",
 		siteName: "CreativaGen",
 		images: [
 			{
-				url: "https://creativagen.com/images/og-image.png", // Update with your image URL
+				url: "https://creativagen.vercel.app//og-image.png",
 				width: 1200,
 				height: 630,
 				alt: "CreativaGen - AI Content Generator",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
 		title: "CreativaGen | AI Content Generator",
 		description:
 			"Transform your content creation process with CreativaGen, an AI-powered platform for emails, social media posts, and more.",
-		images: ["https://creativagen.com/images/og-image.png"], // Update with your image URL
+		images: ["https://creativagen.vercel.app/og-image.png"],
 	},
 };
 
