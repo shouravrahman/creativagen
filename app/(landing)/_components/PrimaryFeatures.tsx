@@ -6,9 +6,8 @@ import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import clsx from "clsx";
 
 import screenshotCasestudy from "/public/screenshotCasestudy.png";
-// import screenshotPayment from "/public/payment.png";
-// import screenshotAnalytics from "/public/analytics.png";
-// import screenshotScheduling from "/public/scheduling.png";
+import screenshotAnalytics from "/public/analytics.png";
+import screenshotHistory from "/public/history.png";
 
 import SectionHeading from "./SectionHeading.tsx";
 
@@ -20,16 +19,16 @@ const features = [
 		image: screenshotCasestudy,
 	},
 	{
-		title: "Easy Credit Payment",
+		title: "History",
 		description:
-			"Seamlessly manage your payments with our easy credit payment system, ensuring a hassle-free experience.",
-		image: screenshotCasestudy,
+			"Keep track of all your generated content and access previous versions easily.",
+		image: screenshotHistory,
 	},
 	{
 		title: "Analytics Dashboard",
 		description:
 			"Monitor your word usage, token consumption, and past generations with ease. Gain insights to optimize your content strategy.",
-		image: screenshotCasestudy,
+		image: screenshotAnalytics,
 	},
 	{
 		title: "Content Scheduling (Beta)",
@@ -40,9 +39,7 @@ const features = [
 ];
 
 export function PrimaryFeatures() {
-	let [tabOrientation, setTabOrientation] = useState<
-		"horizontal" | "vertical"
-	>("horizontal");
+	let [tabOrientation, setTabOrientation] = useState<"horizontal" | "vertical">("horizontal");
 
 	useEffect(() => {
 		let lgMediaQuery = window.matchMedia("(min-width: 1024px)");
@@ -60,11 +57,7 @@ export function PrimaryFeatures() {
 	}, []);
 
 	return (
-		<section
-			id="features"
-			aria-label="Features for running your books"
-			className="relative overflow-hidden"
-		>
+		<section id="features" aria-label="Features for running your books" className="relative overflow-hidden">
 			<SectionHeading
 				mainTitle="Main Features"
 				secondaryText="Well everything you need if you aren’t that picky about minor details like tax compliance."
@@ -83,19 +76,14 @@ export function PrimaryFeatures() {
 										key={feature.title}
 										className={clsx(
 											"group relative rounded-full px-3 py-1 lg:rounded-l-xl lg:rounded-r-none lg:p-6",
-											selectedIndex === featureIndex
-												? "bg-muted"
-												: "hover:bg-primary/10"
+											selectedIndex === featureIndex ? "bg-muted" : "hover:bg-primary/10"
 										)}
 									>
 										<h3>
 											<Tab
 												className={clsx(
 													"font-display text-sm md:text-lg outline-none",
-													selectedIndex ===
-														featureIndex
-														? "text-accent font-bold"
-														: "text-foreground font-bold"
+													selectedIndex === featureIndex ? "text-accent font-bold" : "text-foreground font-bold"
 												)}
 											>
 												<span className="absolute inset-0 rounded-full lg:rounded-l-xl lg:rounded-r-none" />
@@ -105,9 +93,7 @@ export function PrimaryFeatures() {
 										<p
 											className={clsx(
 												"mt-2 hidden text-base lg:block",
-												selectedIndex === featureIndex
-													? "text-foreground"
-													: "text-foreground/50 group-hover:text-accent"
+												selectedIndex === featureIndex ? "text-foreground" : "text-foreground/50 group-hover:text-accent"
 											)}
 										>
 											{feature.description}
@@ -118,21 +104,18 @@ export function PrimaryFeatures() {
 						</div>
 						<TabPanels className="lg:col-span-7">
 							{features.map((feature) => (
-								<TabPanel
-									key={feature.title}
-									unmount={false}
-								>
+								<TabPanel key={feature.title} unmount={false} className="h-auto sm:h-[400px]"> {/* Adjusted height for responsiveness */}
 									<div className="relative sm:px-6 lg:hidden">
 										<div className="absolute -inset-x-4 bottom-[-4.25rem] top-[-6.5rem] ring-1 ring-inset ring-white/10 sm:inset-x-0 sm:rounded-t-xl" />
 										<p className="relative mx-auto max-w-2xl px-4 text-base sm:text-center">
 											{feature.description}
 										</p>
 									</div>
-									<div className="mt-10 w-[45rem] overflow-hidden rounded-xl shadow-xl sm:w-auto lg:mt-0 lg:w-[67.8125rem] h-[400px] sm:h-auto">
+									<div className="mt-10 w-full overflow-hidden rounded-xl sm:w-auto lg:mt-0 lg:w-full h-auto sm:h-auto">
 										<Image
-											className="w-full"
+											className="w-full object-cover h-full"
 											src={feature.image}
-											alt="feature"
+											alt={feature.title}
 											priority
 											sizes="(min-width: 1024px) 67.8125rem, (min-width: 640px) 100vw, 45rem"
 										/>

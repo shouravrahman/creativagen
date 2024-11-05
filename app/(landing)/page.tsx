@@ -12,18 +12,18 @@ import Testimonials from "./_components/Testimonials.tsx";
 
 const LandingPage = () => {
    return (
-      <div className="h-full flex flex-col gap-16 md:gap-32 ">
-         <LandingNavbar />
-         <LandingHero />
-         <PrimaryFeatures />
-         <SecondaryFeatures />
-         <Features />
-         <Pricing />
-         <Testimonials />
-         <Contact />
-         <FAQ />
-         <Footer />
-      </div>
+		<div className="h-full flex flex-col gap-16 md:gap-32 ">
+			<LandingNavbar />
+			<LandingHero />
+			{/* <PrimaryFeatures /> */}
+			<SecondaryFeatures />
+			{/* <Features /> */}
+			<Pricing />
+			<Testimonials />
+			<Contact />
+			<FAQ />
+			<Footer />
+		</div>
    );
 };
 

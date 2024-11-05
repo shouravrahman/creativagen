@@ -4,90 +4,62 @@ import { useId } from "react";
 import Image, { type ImageProps } from "next/image";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import clsx from "clsx";
+import {
+	CheckCircleIcon,
 
-import screenshotContacts from "/public/contacts.png";
-import screenshotInventory from "/public/inventory.png";
-import screenshotProfitLoss from "/public/profit-loss.png";
+	ClockIcon,
+} from "lucide-react";
+
+import screenshotCasestudy from "/public/screenshotCasestudy.png";
+import screenshotAnalytics from "/public/analytics.png";
+import screenshotHistory from "/public/history.png";
 import SectionHeading from "./SectionHeading.tsx";
+import { ChartBarIcon } from "@heroicons/react/20/solid";
 
 interface Feature {
 	name: React.ReactNode;
 	summary: string;
 	description: string;
 	image: ImageProps["src"];
-	icon: React.ComponentType;
+	icon: React.ReactNode;
 }
 
 const features: Array<Feature> = [
 	{
-		name: "Copywriting Assistant",
-		summary: "Craft high-converting copy in seconds with our AI tools.",
+		name: "AI-Powered Case Study Generation",
+		summary:
+			"Generate comprehensive case studies that highlight your projects, challenges, and solutions effectively.",
 		description:
-			"Transform your ideas into powerful marketing copy with our intuitive AI copywriting assistant. Perfect for ads, blogs, and more.",
-		image: screenshotProfitLoss, // Use a relevant screenshot for copywriting
-		icon: function CopywritingIcon() {
-			return (
-				<>
-					<path
-						opacity=".5"
-						d="M12 4h24v8H12V4zm0 12h24v8H12v-8zm-4 0H0v8h8v-8z"
-						fill="#fff"
-					/>
-					<path
-						d="M0 2h24v8H0V2zm0 12h24v8H0v-8z"
-						fill="#fff"
-					/>
-				</>
-			);
-		},
+			"Transform your ideas into powerful case studies with our intuitive AI tools.",
+		image: screenshotCasestudy,
+		icon: <CheckCircleIcon className="h-9 w-9 text-accent" />,
 	},
-	{
-		name: "Social Media Content",
-		summary: "Generate engaging posts for various platforms effortlessly.",
-		description:
-			"Create customized social media posts that capture attention and drive engagement. Schedule your content for optimal impact.",
-		image: screenshotProfitLoss, // Use a relevant screenshot for social media
-		icon: function SocialMediaIcon() {
-			return (
-				<>
-					<path
-						opacity=".5"
-						d="M10 2h4v8h-4V2zm0 10h4v8h-4v-8z"
-						fill="#fff"
-					/>
-					<path
-						d="M4 2h4v8H4V2zm0 10h4v8H4v-8z"
-						fill="#fff"
-					/>
-				</>
-			);
-		},
-	},
+	// {
+	// 	name: "History",
+	// 	summary:
+	// 		"Keep track of all your generated content and access previous versions easily.",
+	// 	description: "Access and manage your content history effortlessly.",
+	// 	image: screenshotHistory,
+	// 	icon: <ClockIcon className="h-9 w-9 text-accent" />,
+	// },
 	{
 		name: "Analytics Dashboard",
 		summary:
-			"Monitor your usage and performance with insightful analytics.",
+			"Monitor your word usage, token consumption, and past generations with ease.",
 		description:
-			"Access a comprehensive dashboard to view analytics on words, tokens, and previous generations. Make data-driven decisions to improve your content strategy.",
-		image: screenshotProfitLoss, // Use a relevant screenshot for the analytics dashboard
-		icon: function AnalyticsIcon() {
-			return (
-				<>
-					<path
-						opacity=".5"
-						d="M2 20h24v4H2v-4z"
-						fill="#fff"
-					/>
-					<path
-						d="M8 10h4v10H8V10zm6 0h4v10h-4V10zm6 0h4v10h-4V10z"
-						fill="#fff"
-					/>
-				</>
-			);
-		},
+			"Gain insights to optimize your content strategy with our analytics dashboard.",
+		image: screenshotAnalytics,
+		icon: <ChartBarIcon className="h-9 w-9 text-accent" />,
+	},
+	{
+		name: "Content Scheduling (Beta)",
+		summary: "Schedule your content to be published at optimal times.",
+		description:
+			"Ensure maximum engagement and reach with our content scheduling feature.",
+		image: screenshotCasestudy,
+		icon: <CheckCircleIcon className="h-9 w-9 text-accent" />,
 	},
 ];
-
 
 function Feature({
 	feature,
@@ -101,56 +73,52 @@ function Feature({
 	return (
 		<div
 			className={clsx(
-            isActive && "bg-accent text-background",
+				isActive ? "bg-gray-200 text-black" : "bg-white text-gray-700", // Adjusted active state color
 				className,
-            !isActive && "opacity-90 hover:opacity-100",
-            "p-6 rounded-lg"
+				"opacity-90 hover:opacity-100",
+				"p-6 rounded-lg transition duration-200"
 			)}
 			{...props}
 		>
-         <div className="flex items-center gap-x-2">
-            <div
-               className={clsx(
-                  "w-9 rounded-lg flex justify-between",
-                  isActive ? "bg-accent" : "bg-secondary "
-               )}
-            >
-               <svg aria-hidden="true" className="h-9 w-9" fill="none">
-                  <feature.icon />
-               </svg>
-            </div>
-            <h3
-               className={clsx(
-                  " text-xl font-semibold outline-none",
-                  isActive ? "text-foreground dark:text-black" : "text-primary"
-               )}
-            >
-               {feature.name}
-            </h3>
-         </div>
-			<p className="mt-2 font-display  text-lg ">{feature.summary}</p>
-			<p className="mt-4 text-sm ">{feature.description}</p>
+			<div className="flex items-center gap-x-2">
+				<div
+					className={clsx(
+						"w-9 rounded-lg flex justify-between border-2 border-accent" // Added accent border
+					)}
+				>
+					{feature.icon} {/* Using icon instead of image */}
+				</div>
+				<h3
+					className={clsx(
+						"text-xl font-semibold outline-none",
+						isActive ? "text-black" : "text-gray-700"
+					)}
+				>
+					{feature.name}
+				</h3>
+			</div>
+			<p className="mt-2 font-display text-lg">{feature.summary}</p>
+			<p className="mt-4 text-sm">{feature.description}</p>
+			<Image
+				className="mt-4 w-full rounded-lg shadow-md" // Added shadow and rounded corners
+				src={feature.image}
+				alt={feature.summary}
+				sizes="(max-width: 52.75rem) 100vw, 52.75rem"
+			/>
 		</div>
 	);
 }
 
 function FeaturesMobile() {
 	return (
-      <div className="-mx-4 mt-6 md:mt-10 flex flex-col  overflow-hidden px-4 sm:-mx-6 sm:px-6 lg:hidden">
+		<div className="-mx-4 mt-6 md:mt-10 flex flex-col overflow-hidden px-4 sm:-mx-6 sm:px-6 lg:hidden">
 			{features.map((feature) => (
 				<div key={feature.summary}>
-               <Feature feature={feature} className="mx-auto max-w-sm" isActive />
-               <div className="relative  pb-10">
-						<div className="absolute -inset-x-4 bottom-0 top-8  sm:-inset-x-6" />
-                  <div className="hidden md:block relative mx-auto w-[52.75rem] overflow-hidden rounded-xl">
-							<Image
-								className="w-full"
-								src={feature.image}
-                        alt={feature.summary}
-								sizes="52.75rem"
-							/>
-						</div>
-					</div>
+					<Feature
+						feature={feature}
+						className="mx-auto max-w-sm"
+						isActive
+					/>
 				</div>
 			))}
 		</div>
@@ -176,11 +144,11 @@ function FeaturesDesktop() {
 									),
 								}}
 								isActive={featureIndex === selectedIndex}
-								className="relative p-6 border-2 border-border rounded-lg"
+								className="relative p-6 border-2 border-gray-300 rounded-lg"
 							/>
 						))}
 					</TabList>
-					<TabPanels className="relative mt-20 overflow-hidden rounded-4xl  px-14 py-16 xl:px-16">
+					<TabPanels className="relative mt-20 overflow-hidden rounded-4xl px-14 py-16 xl:px-16">
 						<div className="-mx-5 flex">
 							{features.map((feature, featureIndex) => (
 								<TabPanel
@@ -188,16 +156,21 @@ function FeaturesDesktop() {
 									key={feature.summary}
 									className={clsx(
 										"px-5 transition duration-500 ease-in-out ui-not-focus-visible:outline-none",
-										featureIndex !== selectedIndex && "opacity-60"
+										featureIndex !== selectedIndex &&
+											"opacity-60"
 									)}
-									style={{ transform: `translateX(-${selectedIndex * 100}%)` }}
+									style={{
+										transform: `translateX(-${
+											selectedIndex * 100
+										}%)`,
+									}}
 									aria-hidden={featureIndex !== selectedIndex}
 								>
-									<div className="w-[52.75rem] overflow-hidden rounded-xl  shadow-lg shadow-slate-900/5 ">
+									<div className="w-[52.75rem] overflow-hidden rounded-xl shadow-lg shadow-slate-900/5">
 										<Image
 											className="w-full"
 											src={feature.image}
-                                 alt={feature.summary}
+											alt={feature.summary}
 											sizes="52.75rem"
 										/>
 									</div>
@@ -216,12 +189,11 @@ export function SecondaryFeatures() {
 	return (
 		<section
 			id="secondary-features"
-         aria-label="Features for simplifying everyday business tasks"
+			aria-label="Features for simplifying everyday business tasks"
 		>
 			<SectionHeading
-				mainTitle="Need More?"
-				secondaryText="Because you’d probably be a little confused if we suggested you
-          complicate your everyday business tasks instead."
+				mainTitle="Main Features"
+				secondaryText="Well everything you need if you aren’t that picky about minor details like tax compliance."
 			/>
 
 			<FeaturesMobile />
