@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
-import { Calendar, Copy, Recycle, RefreshCw, Save } from "lucide-react"; // Import additional icons
+import { Calendar, Copy, RefreshCw, Save } from "lucide-react";
 import { toast } from "sonner";
-import DatePicker from "react-datepicker"; // Import DatePicker
-import "react-datepicker/dist/react-datepicker.css"; // Import CSS for DatePicker
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { Button } from "../ui/button";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 interface EditorProps {
-	content: string; // This should be HTML formatted
-	onSave?: (content: string) => void; // Callback to save content
-	onSchedule?: (content: string, scheduledTime: Date) => void; // Callback to schedule content
+	content: string;
+	onSave?: (content: string) => void;
+	onSchedule?: (content: string, scheduledTime: Date) => void;
 }
 
 const CustomEditor: React.FC<EditorProps> = ({
@@ -21,32 +21,55 @@ const CustomEditor: React.FC<EditorProps> = ({
 	onSchedule,
 }) => {
 	const [newContent, setNewContent] = useState<string>(content);
-	const [isEditable, setIsEditable] = useState<boolean>(false);
-	const [scheduledTime, setScheduledTime] = useState<Date | null>(null); // State for scheduled time
+	const [scheduledTime, setScheduledTime] = useState<Date | null>(null);
+	const [loading, setLoading] = useState<boolean>(false);
 
 	const handleChange = (e: any) => {
 		setNewContent(e);
 	};
 
-	// const handleSave = () => {
-	// 	onSave(newContent); // Call the save function passed as a prop
-	// 	toast("Content saved!");
-	// };
+	const handleSave = async () => {
+		if (onSave) {
+			await onSave(newContent);
+			toast("Content saved!");
+		}
+	};
 
-	// const handleSchedule = () => {
-	// 	if (scheduledTime) {
-	// 		onSchedule(newContent, scheduledTime); // Call the schedule function passed as a prop
-	// 		toast("Content scheduled!");
-	// 	} else {
-	// 		toast("Please select a date and time to schedule.");
-	// 	}
-	// };
+	const handleRegenerate = async () => {
+		setLoading(true);
+		toast("Regenerating content...");
+		try {
+			const response = await fetch("/api/generate", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					/* your request body */
+				}),
+			});
+			const data = await response.json();
+			setNewContent(data.content);
+			toast("Content regenerated!");
+		} catch (error) {
+			console.error("Error regenerating content:", error);
+			toast.error("Failed to regenerate content.");
+		} finally {
+			setLoading(false);
+		}
+	};
 
-	// const handleRegenerate = () => {
-	// 	// Logic to regenerate content (placeholder)
-	// 	setNewContent("Regenerated content goes here..."); // Example placeholder
-	// 	toast("Content regenerated!");
-	// };
+	const handleCopyToClipboard = () => {
+		navigator.clipboard
+			.writeText(newContent)
+			.then(() => {
+				toast("Content copied to clipboard!");
+			})
+			.catch((err) => {
+				console.error("Failed to copy: ", err);
+				toast.error("Failed to copy content.");
+			});
+	};
 
 	const modules = {
 		toolbar: [
@@ -64,7 +87,7 @@ const CustomEditor: React.FC<EditorProps> = ({
 			<div className="flex flex-wrap justify-between mb-4">
 				<div className="flex gap-2">
 					<Button
-						// onClick={handleRegenerate}
+						onClick={handleRegenerate}
 						variant="ghost"
 						className="flex items-center gap-2"
 					>
@@ -72,74 +95,80 @@ const CustomEditor: React.FC<EditorProps> = ({
 						<span>Regenerate</span>
 					</Button>
 					<Button
-						// onClick={handleSave}
+						onClick={handleSave}
 						variant="ghost"
 						className="flex items-center gap-2"
 					>
 						<Save size={16} />
 						<span>Save</span>
 					</Button>
-					<Button
-						// onClick={handleSchedule}
+					{/* <Button
+						// onClick={handleSchedule} // Uncomment if scheduling is needed
 						variant="ghost"
 						className="flex items-center gap-2"
 					>
 						<Calendar size={16} />
 						<span>Schedule</span>
-					</Button>
+					</Button> */}
 					<Button
-						onClick={() => setIsEditable(!isEditable)}
+						onClick={handleCopyToClipboard}
 						variant="ghost"
 						className="flex items-center gap-2"
 					>
-						<Recycle size={16} />
-						<span>{isEditable ? "Finish Editing" : "Edit"}</span>
+						<Copy size={16} />
+						<span>Copy to Clipboard</span>
 					</Button>
 				</div>
 			</div>
+			<div className="h-full">
+				<ReactQuill
+					style={{
+						width: "100%",
+						backgroundColor: "white",
+						outline: "none",
+						color: "black",
+						minHeight: "400px",
+						height: "100%",
+						borderRadius: "6px",
+						border: "1px solid #e2e8f0",
+						marginTop: "10px",
+					}}
+					value={newContent}
+					modules={modules}
+					formats={[
+						"header",
+						"font",
+						"size",
+						"bold",
+						"italic",
+						"underline",
+						"strike",
+						"blockquote",
+						"list",
+						"bullet",
+						"link",
+						"image",
+						"video",
+					]}
+					onChange={handleChange}
+					placeholder="Your content will appear here..."
+				/>
+			</div>
 
-			<ReactQuill
-				style={{
-					width: "100%",
-					backgroundColor: "white",
-					outline: "none",
-					color: "black",
-					minHeight: "400px",
-					height: "100%",
-					borderRadius: "6px",
-					border: "1px solid #e2e8f0",
-					marginTop: "10px",
-				}}
-				value={isEditable ? newContent : content}
-				modules={modules}
-				formats={[
-					"header",
-					"font",
-					"size",
-					"bold",
-					"italic",
-					"underline",
-					"strike",
-					"blockquote",
-					"list",
-					"bullet",
-					"link",
-					"image",
-					"video",
-				]}
-				onChange={handleChange}
-				placeholder="Your content will appear here..."
-			/>
+			{loading && (
+				<div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-50">
+					<p>Generating content...</p>
+				</div>
+			)}
 
-			{/* Date Picker for scheduling */}
-			<DatePicker
+			{/* <DatePicker
 				selected={scheduledTime}
 				onChange={(date) => setScheduledTime(date)}
 				showTimeSelect
 				dateFormat="Pp"
-				className="mt-4 w-full p-2 border text-center placeholder:text-black  border-border rounded-lg"
+				className="mt-4 w-full p-2 border text-center placeholder:text-black border-border rounded-lg"
 				placeholderText="Select date and time"
-			/>
+			/> */}
 		</div>
 	);
 };

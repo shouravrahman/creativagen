@@ -9,7 +9,7 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
 	const apiLimitCount = await getApiLimitCount();
 	const isPro = await checkSubscription();
 	const session = await auth();
-	const isAdmin = session?.user && session?.user.role !== "Admin";
+	const isAdmin = session?.user && session?.user.role === "Admin";
 	return (
 		<div className="relative  flex h-screen ">
 			<div className="hidden sm:flex  h-full overflow-y-hidden">

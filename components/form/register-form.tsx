@@ -38,45 +38,53 @@ export const RegisterForm = () => {
   });
 
   return (
-    <CardWrapper
-      headerTitle="Register"
-      headerDescription="Register your account by filling out the form below, make sure the data you enter is correct."
-      backButtonLabel="Already have an account? Login"
-      backButtonHref="/login"
-    >
-      <Form {...form}>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="space-y-4">
-            <FormInput
-              control={form.control}
-              name="name"
-              label="Name"
-              type="text"
-              placeholder="e.g. John Doe"
-              isPending={isPending}
-            />
-            <FormInput
-              control={form.control}
-              name="email"
-              label="Email Address"
-              type="email"
-              placeholder="e.g. johndoe@example.com"
-              isPending={isPending}
-            />
-            <FormInput
-              control={form.control}
-              name="password"
-              label="Password"
-              type="password"
-              placeholder="******"
-              isPending={isPending}
-            />
-          </div>
-          <Button type="submit" disabled={isPending} className="w-full">
-            Create an account
-          </Button>
-        </form>
-      </Form>
-    </CardWrapper>
+		<CardWrapper
+			headerTitle="Register"
+			headerDescription="Register your account by filling out the form below, make sure the data you enter is correct."
+			backButtonLabel="Already have an account? Login"
+			backButtonHref="/login"
+			showSocial={false}
+		>
+			<Form {...form}>
+				<form
+					onSubmit={handleSubmit}
+					className="space-y-6"
+				>
+					<div className="space-y-4">
+						<FormInput
+							control={form.control}
+							name="name"
+							label="Name"
+							type="text"
+							placeholder="e.g. John Doe"
+							isPending={isPending}
+						/>
+						<FormInput
+							control={form.control}
+							name="email"
+							label="Email Address"
+							type="email"
+							placeholder="e.g. johndoe@example.com"
+							isPending={isPending}
+						/>
+						<FormInput
+							control={form.control}
+							name="password"
+							label="Password"
+							type="password"
+							placeholder="******"
+							isPending={isPending}
+						/>
+					</div>
+					<Button
+						type="submit"
+						disabled={isPending}
+						className="w-full"
+					>
+						Create an account
+					</Button>
+				</form>
+			</Form>
+		</CardWrapper>
   );
 };
