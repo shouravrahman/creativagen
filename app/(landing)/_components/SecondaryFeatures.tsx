@@ -4,17 +4,13 @@ import { useId } from "react";
 import Image, { type ImageProps } from "next/image";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import clsx from "clsx";
-import {
-	CheckCircleIcon,
-
-	ClockIcon,
-} from "lucide-react";
+import { CheckCircleIcon, ClockIcon } from "lucide-react";
+import { ChartBarIcon } from "@heroicons/react/20/solid";
 
 import screenshotCasestudy from "/public/screenshotCasestudy.png";
 import screenshotAnalytics from "/public/analytics.png";
 import screenshotHistory from "/public/history.png";
 import SectionHeading from "./SectionHeading.tsx";
-import { ChartBarIcon } from "@heroicons/react/20/solid";
 
 interface Feature {
 	name: React.ReactNode;
@@ -26,22 +22,14 @@ interface Feature {
 
 const features: Array<Feature> = [
 	{
-		name: "AI-Powered Case Study Generation",
+		name: "Content Creation for Developers",
 		summary:
-			"Generate comprehensive case studies that highlight your projects, challenges, and solutions effectively.",
+			"Generate tailored content such as case studies, LinkedIn posts, and technical documentation.",
 		description:
-			"Transform your ideas into powerful case studies with our intuitive AI tools.",
+			"Utilize our AI tools to create engaging and informative content that resonates with your audience.",
 		image: screenshotCasestudy,
-		icon: <CheckCircleIcon className="h-9 w-9 text-accent" />,
+		icon: <CheckCircleIcon className="h-9 w-9" />,
 	},
-	// {
-	// 	name: "History",
-	// 	summary:
-	// 		"Keep track of all your generated content and access previous versions easily.",
-	// 	description: "Access and manage your content history effortlessly.",
-	// 	image: screenshotHistory,
-	// 	icon: <ClockIcon className="h-9 w-9 text-accent" />,
-	// },
 	{
 		name: "Analytics Dashboard",
 		summary:
@@ -49,7 +37,7 @@ const features: Array<Feature> = [
 		description:
 			"Gain insights to optimize your content strategy with our analytics dashboard.",
 		image: screenshotAnalytics,
-		icon: <ChartBarIcon className="h-9 w-9 text-accent" />,
+		icon: <ChartBarIcon className="h-9 w-9" />,
 	},
 	{
 		name: "Content Scheduling (Beta)",
@@ -57,7 +45,7 @@ const features: Array<Feature> = [
 		description:
 			"Ensure maximum engagement and reach with our content scheduling feature.",
 		image: screenshotCasestudy,
-		icon: <CheckCircleIcon className="h-9 w-9 text-accent" />,
+		icon: <ClockIcon className="h-9 w-9" />,
 	},
 ];
 
@@ -73,34 +61,37 @@ function Feature({
 	return (
 		<div
 			className={clsx(
-				isActive ? "bg-gray-200 text-black" : "bg-white text-gray-700", // Adjusted active state color
+				isActive
+					? "bg-accent text-accent-foreground"
+					: "bg-card text-card-foreground",
 				className,
 				"opacity-90 hover:opacity-100",
-				"p-6 rounded-lg transition duration-200"
+				"p-4 rounded-lg transition duration-200"
 			)}
 			{...props}
 		>
 			<div className="flex items-center gap-x-2">
 				<div
 					className={clsx(
-						"w-9 rounded-lg flex justify-between border-2 border-accent" // Added accent border
+						"w-9 rounded-lg flex justify-between",
+						isActive? "fill-white" : "text-accent"
 					)}
 				>
-					{feature.icon} {/* Using icon instead of image */}
+					{feature.icon}
 				</div>
 				<h3
 					className={clsx(
-						"text-xl font-semibold outline-none",
-						isActive ? "text-black" : "text-gray-700"
+						"text-xl font-semibold outline-none"
+						// isActive ? "text-black" : "text-gray-700"
 					)}
 				>
 					{feature.name}
 				</h3>
 			</div>
 			<p className="mt-2 font-display text-lg">{feature.summary}</p>
-			<p className="mt-4 text-sm">{feature.description}</p>
+			<p className="my-3 text-sm">{feature.description}</p>
 			<Image
-				className="mt-4 w-full rounded-lg shadow-md" // Added shadow and rounded corners
+				className="mt-4 w-full rounded-lg  shadow-md"
 				src={feature.image}
 				alt={feature.summary}
 				sizes="(max-width: 52.75rem) 100vw, 52.75rem"
@@ -130,32 +121,32 @@ function FeaturesDesktop() {
 		<TabGroup className="hidden lg:mt-20 lg:block">
 			{({ selectedIndex }) => (
 				<>
-					<TabList className="grid grid-cols-3 gap-x-6">
+					<TabList className="grid grid-cols-3 gap-x-6 outline-none">
 						{features.map((feature, featureIndex) => (
 							<Feature
 								key={feature.summary}
 								feature={{
 									...feature,
 									name: (
-										<Tab className="outline-none">
+										<Tab className="">
 											<span className="absolute inset-0" />
 											{feature.name}
 										</Tab>
 									),
 								}}
 								isActive={featureIndex === selectedIndex}
-								className="relative p-6 border-2 border-gray-300 rounded-lg"
+								className="relative p-4 border-2 border-border rounded-lg"
 							/>
 						))}
 					</TabList>
-					<TabPanels className="relative mt-20 overflow-hidden rounded-4xl px-14 py-16 xl:px-16">
+					<TabPanels className="relative mt-10 overflow-hidden rounded-4xl px-14 py-16 xl:px-16">
 						<div className="-mx-5 flex">
 							{features.map((feature, featureIndex) => (
 								<TabPanel
 									static
 									key={feature.summary}
 									className={clsx(
-										"px-5 transition duration-500 ease-in-out ui-not-focus-visible:outline-none",
+										" px-5 transition duration-500 ease-in-out ui-not-focus-visible:outline-none",
 										featureIndex !== selectedIndex &&
 											"opacity-60"
 									)}
@@ -166,9 +157,9 @@ function FeaturesDesktop() {
 									}}
 									aria-hidden={featureIndex !== selectedIndex}
 								>
-									<div className="w-[52.75rem] overflow-hidden rounded-xl shadow-lg shadow-slate-900/5">
+									<div className="w-[52.75rem] overflow-hidden rounded-xl ">
 										<Image
-											className="w-full"
+											className="w-full rounded-lg border-2 p-1 border-accent"
 											src={feature.image}
 											alt={feature.summary}
 											sizes="52.75rem"
