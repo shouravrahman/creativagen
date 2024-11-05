@@ -102,7 +102,7 @@ function Feature({
 
 function FeaturesMobile() {
 	return (
-		<div className="-mx-4 mt-6 md:mt-10 flex flex-col overflow-hidden px-4 sm:-mx-6 sm:px-6 lg:hidden">
+		<div className="-mx-4 mt-6 md:mt-10 flex flex-col overflow-hidden space-y-4 px-4 sm:-mx-6 sm:px-6 lg:hidden">
 			{features.map((feature) => (
 				<div key={feature.summary}>
 					<Feature
