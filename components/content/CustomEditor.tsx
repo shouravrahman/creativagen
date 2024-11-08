@@ -88,7 +88,7 @@ const CustomEditor: React.FC<EditorProps> = ({
 				<div className="flex gap-2">
 					<Button
 						onClick={handleRegenerate}
-						variant="ghost"
+						variant={"destructive"}
 						className="flex items-center gap-2"
 					>
 						<RefreshCw size={16} />
@@ -96,7 +96,7 @@ const CustomEditor: React.FC<EditorProps> = ({
 					</Button>
 					<Button
 						onClick={handleSave}
-						variant="ghost"
+						variant={"destructive"}
 						className="flex items-center gap-2"
 					>
 						<Save size={16} />
@@ -104,7 +104,7 @@ const CustomEditor: React.FC<EditorProps> = ({
 					</Button>
 					{/* <Button
 						// onClick={handleSchedule} // Uncomment if scheduling is needed
-						variant="ghost"
+						variant={"destructive"}
 						className="flex items-center gap-2"
 					>
 						<Calendar size={16} />
@@ -112,7 +112,7 @@ const CustomEditor: React.FC<EditorProps> = ({
 					</Button> */}
 					<Button
 						onClick={handleCopyToClipboard}
-						variant="ghost"
+						variant={"destructive"}
 						className="flex items-center gap-2"
 					>
 						<Copy size={16} />
@@ -122,12 +122,13 @@ const CustomEditor: React.FC<EditorProps> = ({
 			</div>
 			<div className="h-full">
 				<ReactQuill
+					className="placeholder:text-2xl"
 					style={{
 						width: "100%",
 						backgroundColor: "white",
 						outline: "none",
 						color: "black",
-						minHeight: "400px",
+						// minHeight: "400px",
 						height: "100%",
 						borderRadius: "6px",
 						border: "1px solid #e2e8f0",
@@ -151,7 +152,11 @@ const CustomEditor: React.FC<EditorProps> = ({
 						"video",
 					]}
 					onChange={handleChange}
-					placeholder="Your content will appear here..."
+					placeholder={
+						loading
+							? "Generating content..."
+							: "Your content will appear here..."
+					}
 				/>
 			</div>
 

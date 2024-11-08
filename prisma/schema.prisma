@@ -57,7 +57,25 @@ model ScheduledPost {
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+model ContentPlan {
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  startDate   DateTime
+  endDate     DateTime
 
+  platforms   Platform[] @relation(fields: [platformIds], references: [id])
+  platformIds String[]   @db.ObjectId
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Platform {
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  contentPlans ContentPlan[] @relation(fields: [contentPlanIds], references: [id])
+  contentPlanIds String[]   @db.ObjectId
+}
 model VerificationToken {
   id      String   @id @default(auto()) @map("_id") @db.ObjectId
   email   String

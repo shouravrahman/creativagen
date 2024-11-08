@@ -171,7 +171,7 @@ const LandingNavbar = () => {
 						</div>
 						<div className="divider"></div>
 						<div className="flex flex-col">
-							<Button variant={"accent"}>Try now</Button>
+							<Button variant="destructive">Try now</Button>
 						</div>
 					</div>
 				</div>

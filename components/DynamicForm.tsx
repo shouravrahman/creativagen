@@ -75,7 +75,7 @@ export function DynamicForm({ config, submitFn }: DynamicFormProps) {
 				</div>
 				<Button
 					type="submit"
-					variant={"accent"}
+					variant="destructive"
 					className="w-full text-lg"
 				>
 					Generate

@@ -1,24 +1,22 @@
 import { ChartBarIcon, VideoCameraIcon } from "@heroicons/react/20/solid";
 import {
 	BarChart4,
-
 	Home,
 	History,
 	CreditCard,
-
 	User,
-   Code,
-   FileText,
-   Mail,
-   TrendingUp,
-   FolderOpen,
-   Briefcase,
-   BarChart,
-   Video,
-   Clock,
-   BookOpen,
-   Gift,
-
+	Code,
+	FileText,
+	Mail,
+	TrendingUp,
+	FolderOpen,
+	Briefcase,
+	BarChart,
+	Video,
+	Clock,
+	BookOpen,
+	Gift,
+	Calendar,
 } from "lucide-react";
 
 
@@ -31,6 +29,12 @@ export const routes = [
 		icon: Home,
 		href: "/dashboard",
 		color: "text-green-500",
+	},
+	{
+		label: "Planner",
+		icon: Calendar,
+		href: "/dashboard/planner",
+		color: "text-yellow-500",
 	},
 	{
 		label: "History",
