@@ -62,8 +62,23 @@ export const routes = [
 		color: "   ",
 	},
 ];
-
-export const TEMPLATES = [
+export interface Template {
+	name: string;
+	description: string;
+	icon: any;
+	features: string[];
+	imageUrl: string;
+	href: string;
+	color: string;
+	bgColor: string;
+	slug: string;
+	category: string;
+	aiPrompt: string;
+	formFields: any;
+	validationSchema: any
+	isFavorite: boolean;
+}
+export const TEMPLATES: Template[] = [
 	{
 		name: "Developer Portfolio Post",
 		description:
@@ -779,24 +794,25 @@ export const TEMPLATES = [
 		},
 		isFavorite: false,
 	},
-   {
-      "name": "Limited-Time Offer Ad",
-      "description": "Drive urgency with a time-sensitive ad that highlights a special offer, encouraging immediate action from potential clients.",
-      "icon": Clock,
-      "features": [
-        "Urgency-Driven CTA",
-        "Clear Offer Description",
-        "End Date/Countdown",
-        "Benefits Highlight",
-        "Visual Impact"
-      ],
-      "imageUrl": "/limited-time-offer.jpg",
-      "href": "/limited-time-offer",
-      "color": "text-orange-500",
-      "bgColor": "bg-orange-200",
-      "slug": "limited-time-offer",
-      "category": "Conversion Boost",
-      "aiPrompt": `Craft an ad for a limited-time offer that prompts immediate action from viewers. The ad should:
+	{
+		name: "Limited-Time Offer Ad",
+		description:
+			"Drive urgency with a time-sensitive ad that highlights a special offer, encouraging immediate action from potential clients.",
+		icon: Clock,
+		features: [
+			"Urgency-Driven CTA",
+			"Clear Offer Description",
+			"End Date/Countdown",
+			"Benefits Highlight",
+			"Visual Impact",
+		],
+		imageUrl: "/limited-time-offer.jpg",
+		href: "/limited-time-offer",
+		color: "text-orange-500",
+		bgColor: "bg-orange-200",
+		slug: "limited-time-offer",
+		category: "Conversion Boost",
+		aiPrompt: `Craft an ad for a limited-time offer that prompts immediate action from viewers. The ad should:
 
     1. Start with an eye-catching announcement of the offer (e.g., "Flash Sale" or "Only 48 Hours Left!")
     2. Clearly state what the offer includes, such as a discount or free add-ons
@@ -804,70 +820,72 @@ export const TEMPLATES = [
     4. Mention the end date or a countdown to create urgency
     5. Finish with a strong call-to-action (e.g., "Sign Up Now," "Get It Before It's Gone")
     6. Keep the tone persuasive and action-oriented`,
-      "formFields": [
-        {
-          "label": "Offer Description",
-          "field": "offerDescription",
-          "name": "offerDescription",
-          "required": true,
-          "placeholder": "Describe the limited-time offer",
-          "type": "textarea"
-        },
-        {
-          "label": "Benefits",
-          "field": "benefits",
-          "name": "benefits",
-          "required": true,
-          "placeholder": "Highlight the main benefits",
-          "type": "textarea"
-        },
-        {
-          "label": "End Date or Countdown",
-          "field": "endDate",
-          "name": "endDate",
-          "required": true,
-          "placeholder": "Specify the offer's end date or countdown",
-          "type": "text"
-        },
-        {
-          "label": "Target Platform",
-          "field": "platform",
-          "name": "platform",
-          "required": true,
-          "type": "select",
-          "options": [
-            { "label": "Instagram", "value": "instagram" },
-            { "label": "Facebook", "value": "facebook" },
-            { "label": "Twitter", "value": "twitter" }
-          ]
-        }
-      ],
-      "validationSchema": {
-        "offerDescription": "z.string().min(1, 'Offer description is required')",
-        "benefits": "z.string().min(1, 'Benefits are required')",
-        "endDate": "z.string().min(1, 'End date or countdown is required')",
-        "platform": "z.string().min(1, 'Platform is required')"
-      },
-      "isFavorite": false
-    },
-    {
-      "name": "Explainer Ad",
-      "description": "Educate your audience about your service or product in an engaging and simplified way, making complex features easy to understand.",
-      "icon": BookOpen,
-      "features": [
-        "Simplified Explanation",
-        "Problem-Solution Approach",
-        "Highlight of Key Features",
-        "Clear CTA for More Info",
-        "Engagement-Oriented Tone"
-      ],
-      "imageUrl": "/explainer-ad.jpg",
-      "href": "/explainer-ad",
-      "color": "text-purple-500",
-      "bgColor": "bg-purple-200",
-      "slug": "explainer-ad",
-      "category": "Brand Awareness",
-      "aiPrompt": `Compose an explainer ad that educates potential clients on the key benefits and features of your service or product. The ad should:
+		formFields: [
+			{
+				label: "Offer Description",
+				field: "offerDescription",
+				name: "offerDescription",
+				required: true,
+				placeholder: "Describe the limited-time offer",
+				type: "textarea",
+			},
+			{
+				label: "Benefits",
+				field: "benefits",
+				name: "benefits",
+				required: true,
+				placeholder: "Highlight the main benefits",
+				type: "textarea",
+			},
+			{
+				label: "End Date or Countdown",
+				field: "endDate",
+				name: "endDate",
+				required: true,
+				placeholder: "Specify the offer's end date or countdown",
+				type: "text",
+			},
+			{
+				label: "Target Platform",
+				field: "platform",
+				name: "platform",
+				required: true,
+				type: "select",
+				options: [
+					{ label: "Instagram", value: "instagram" },
+					{ label: "Facebook", value: "facebook" },
+					{ label: "Twitter", value: "twitter" },
+				],
+			},
+		],
+		validationSchema: {
+			offerDescription:
+				"z.string().min(1, 'Offer description is required')",
+			benefits: "z.string().min(1, 'Benefits are required')",
+			endDate: "z.string().min(1, 'End date or countdown is required')",
+			platform: "z.string().min(1, 'Platform is required')",
+		},
+		isFavorite: false,
+	},
+	{
+		name: "Explainer Ad",
+		description:
+			"Educate your audience about your service or product in an engaging and simplified way, making complex features easy to understand.",
+		icon: BookOpen,
+		features: [
+			"Simplified Explanation",
+			"Problem-Solution Approach",
+			"Highlight of Key Features",
+			"Clear CTA for More Info",
+			"Engagement-Oriented Tone",
+		],
+		imageUrl: "/explainer-ad.jpg",
+		href: "/explainer-ad",
+		color: "text-purple-500",
+		bgColor: "bg-purple-200",
+		slug: "explainer-ad",
+		category: "Brand Awareness",
+		aiPrompt: `Compose an explainer ad that educates potential clients on the key benefits and features of your service or product. The ad should:
 
     1. Start by addressing a common problem or pain point your target audience faces
     2. Explain in simple terms how your service/product solves this problem
@@ -875,70 +893,72 @@ export const TEMPLATES = [
     4. End with a call-to-action inviting readers to learn more or try it out
     5. Use hashtags or tags that increase discoverability
     6. Maintain an informative, approachable tone`,
-      "formFields": [
-        {
-          "label": "Product or Service Name",
-          "field": "productName",
-          "name": "productName",
-          "required": true,
-          "placeholder": "Enter the name of your product or service",
-          "type": "text"
-        },
-        {
-          "label": "Problem Addressed",
-          "field": "problem",
-          "name": "problem",
-          "required": true,
-          "placeholder": "Describe the problem your service solves",
-          "type": "textarea"
-        },
-        {
-          "label": "Top Features",
-          "field": "features",
-          "name": "features",
-          "required": true,
-          "placeholder": "List the top features or benefits",
-          "type": "textarea"
-        },
-        {
-          "label": "Target Platform",
-          "field": "platform",
-          "name": "platform",
-          "required": true,
-          "type": "select",
-          "options": [
-            { "label": "Facebook", "value": "facebook" },
-            { "label": "Instagram", "value": "instagram" },
-            { "label": "LinkedIn", "value": "linkedin" }
-          ]
-        }
-      ],
-      "validationSchema": {
-        "productName": "z.string().min(1, 'Product or service name is required')",
-        "problem": "z.string().min(1, 'Problem is required')",
-        "features": "z.string().min(1, 'Features are required')",
-        "platform": "z.string().min(1, 'Platform is required')"
-      },
-      "isFavorite": false
-    },
-    {
-      "name": "Free Resource Ad",
-      "description": "Attract potential leads by offering a free resource, such as an ebook or template, with a clear CTA for download or sign-up.",
-      "icon": Gift,
-      "features": [
-        "Resource Description",
-        "Lead-Generating CTA",
-        "Value-Oriented Messaging",
-        "Specific Benefits",
-        "Attractive Design Elements"
-      ],
-      "imageUrl": "/free-resource.jpg",
-      "href": "/free-resource",
-      "color": "text-blue-500",
-      "bgColor": "bg-blue-200",
-      "slug": "free-resource",
-      "category": "Lead Generation",
-      "aiPrompt": `Create an ad promoting a free resource (such as an ebook, checklist, or template) to attract leads. The ad should:
+		formFields: [
+			{
+				label: "Product or Service Name",
+				field: "productName",
+				name: "productName",
+				required: true,
+				placeholder: "Enter the name of your product or service",
+				type: "text",
+			},
+			{
+				label: "Problem Addressed",
+				field: "problem",
+				name: "problem",
+				required: true,
+				placeholder: "Describe the problem your service solves",
+				type: "textarea",
+			},
+			{
+				label: "Top Features",
+				field: "features",
+				name: "features",
+				required: true,
+				placeholder: "List the top features or benefits",
+				type: "textarea",
+			},
+			{
+				label: "Target Platform",
+				field: "platform",
+				name: "platform",
+				required: true,
+				type: "select",
+				options: [
+					{ label: "Facebook", value: "facebook" },
+					{ label: "Instagram", value: "instagram" },
+					{ label: "LinkedIn", value: "linkedin" },
+				],
+			},
+		],
+		validationSchema: {
+			productName:
+				"z.string().min(1, 'Product or service name is required')",
+			problem: "z.string().min(1, 'Problem is required')",
+			features: "z.string().min(1, 'Features are required')",
+			platform: "z.string().min(1, 'Platform is required')",
+		},
+		isFavorite: false,
+	},
+	{
+		name: "Free Resource Ad",
+		description:
+			"Attract potential leads by offering a free resource, such as an ebook or template, with a clear CTA for download or sign-up.",
+		icon: Gift,
+		features: [
+			"Resource Description",
+			"Lead-Generating CTA",
+			"Value-Oriented Messaging",
+			"Specific Benefits",
+			"Attractive Design Elements",
+		],
+		imageUrl: "/free-resource.jpg",
+		href: "/free-resource",
+		color: "text-blue-500",
+		bgColor: "bg-blue-200",
+		slug: "free-resource",
+		category: "Lead Generation",
+		aiPrompt: `Create an ad promoting a free resource (such as an ebook, checklist, or template) to attract leads. The ad should:
 
     1. Start with an enticing statement that introduces the free resource
     2. Briefly describe the value or knowledge the resource provides
@@ -946,50 +966,50 @@ export const TEMPLATES = [
     4. Include a call-to-action that prompts viewers to download or sign up
     5. Use relevant hashtags to target the right audience
     6. Maintain a friendly, helpful tone`,
-      "formFields": [
-        {
-          "label": "Resource Title",
-          "field": "resourceTitle",
-          "name": "resourceTitle",
-          "required": true,
-          "placeholder": "Enter the title of your free resource",
-          "type": "text"
-        },
-        {
-          "label": "Description",
-          "field": "description",
-          "name": "description",
-          "required": true,
-          "placeholder": "Describe the resource's value",
-          "type": "textarea"
-        },
-        {
-          "label": "Benefits",
-          "field": "benefits",
-          "name": "benefits",
-          "required": true,
-          "placeholder": "List the main benefits or topics covered",
-          "type": "textarea"
-        },
-        {
-          "label": "Target Platform",
-          "field": "platform",
-          "name": "platform",
-          "required": true,
-          "type": "select",
-          "options": [
-            { "label": "Instagram", "value": "instagram" },
-            { "label": "LinkedIn", "value": "linkedin" },
-            { "label": "Twitter", "value": "twitter" }
-          ]
-        }
-      ],
-      "validationSchema": {
-        "resourceTitle": "z.string().min(1, 'Resource title is required')",
-        "description": "z.string().min(1, 'Description is required')",
-        "benefits": "z.string().min(1, 'Benefits are required')",
-        "platform": "z.string().min(1, 'Platform is required')"
-      },
-      "isFavorite": false
-    }
+		formFields: [
+			{
+				label: "Resource Title",
+				field: "resourceTitle",
+				name: "resourceTitle",
+				required: true,
+				placeholder: "Enter the title of your free resource",
+				type: "text",
+			},
+			{
+				label: "Description",
+				field: "description",
+				name: "description",
+				required: true,
+				placeholder: "Describe the resource's value",
+				type: "textarea",
+			},
+			{
+				label: "Benefits",
+				field: "benefits",
+				name: "benefits",
+				required: true,
+				placeholder: "List the main benefits or topics covered",
+				type: "textarea",
+			},
+			{
+				label: "Target Platform",
+				field: "platform",
+				name: "platform",
+				required: true,
+				type: "select",
+				options: [
+					{ label: "Instagram", value: "instagram" },
+					{ label: "LinkedIn", value: "linkedin" },
+					{ label: "Twitter", value: "twitter" },
+				],
+			},
+		],
+		validationSchema: {
+			resourceTitle: "z.string().min(1, 'Resource title is required')",
+			description: "z.string().min(1, 'Description is required')",
+			benefits: "z.string().min(1, 'Benefits are required')",
+			platform: "z.string().min(1, 'Platform is required')",
+		},
+		isFavorite: false,
+	},
 ];

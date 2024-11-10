@@ -128,7 +128,7 @@ const CustomEditor: React.FC<EditorProps> = ({
 						backgroundColor: "white",
 						outline: "none",
 						color: "black",
-						// minHeight: "400px",
+						minHeight: "500px",
 						height: "100%",
 						borderRadius: "6px",
 						border: "1px solid #e2e8f0",
