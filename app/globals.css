@@ -10,44 +10,50 @@ body,
 
 @layer base {
    :root {
-     --background: 100% 40% 98%; /* Light mode background: very light grey */
-     --foreground: 0 0% 10%; /* Light mode text: dark grey */
-     --primary: 220 90% 55%; /* Light mode primary elements: blue */
-     --primary-foreground: 0 0% 100%; /* Light mode text on primary elements: white */
-     --accent: 45 100% 50%; /* Light mode accent elements: yellow */
-     --accent-foreground: 0 0% 10%; /* Light mode text on accent elements: dark grey */
-     --sidebar: 0 0% 95%; /* Light mode sidebar background: light grey */
-     --sidebar-text: 0 0% 10%; /* Light mode sidebar text: dark grey */
-     --card: 0 0% 100%; /* Light mode card background: white */
-     --card-foreground: 0 0% 10%; /* Light mode card text: dark grey */
-     --border: 0 0% 85%; /* Light mode borders: light grey */
-     --radius: 0.5rem; /* Border radius */
-     --color-desktop:0 0% 10%;
-     --chart-1: 45 100% 50%;
-     --chart-2: 201 99% 25%;
-     --chart-3: 203 98% 22%;
-     --chart-4: 204 100% 18%;
-     --chart-5: 206 100% 15%;
-
+       --background: 220 25% 97%;
+       --foreground: 225 25% 20%;
+       --primary: 230 85% 60%;
+       --primary-foreground: 0 0% 100%;
+       --accent: 45 95% 50%;
+       --accent-foreground: 225 25% 20%;
+       --sidebar: 220 30% 95%;
+       --sidebar-text: 225 25% 20%;
+       --card: 0 0% 100%;
+       --card-foreground: 225 25% 20%;
+       --border: 220 20% 90%;
+       --radius: 0.75rem;
+       --color-desktop: 225 25% 20%;
+       --chart-1: 45 95% 50%;
+       --chart-2: 230 85% 60%;
+       --chart-3: 190 90% 50%;
+       --chart-4: 260 85% 55%;
+       --chart-5: 270 85% 45%;
    }
 
    .dark {
-     --background: 240 10% 10%; /* Dark mode background: dark grey */
-     --foreground: 0 0% 100%; /* Dark mode text: white */
-     --primary: 220 90% 70%; /* Dark mode primary elements: lighter blue */
-     --primary-foreground: 0 0% 10%; /* Dark mode text on primary elements: dark grey */
-     --accent: 45 100% 60%; /* Dark mode accent elements: lighter yellow */
-     --accent-foreground: 0 0% 10%; /* Dark mode text on accent elements: dark grey */
-     --sidebar: 240 10% 15%; /* Dark mode sidebar background: dark grey */
-     --sidebar-text: 0 0% 100%; /* Dark mode sidebar text: white */
-     --card: 240 10% 20%; /* Dark mode card background: darker grey */
-     --card-foreground: 0 0% 100%; /* Dark mode card text: white */
-     --border: 240 5% 25%; /* Dark mode borders: dark grey */
-     --radius: 0.5rem; /* Border radius */
+       --background: 225 30% 8%;
+       --foreground: 220 25% 98%;
+       --primary: 230 85% 65%;
+       --primary-foreground: 225 30% 8%;
+       --accent: 45 95% 55%;
+       --accent-foreground: 225 30% 8%;
+       --sidebar: 225 25% 12%;
+       --sidebar-text: 220 25% 98%;
+       --card: 225 25% 15%;
+       --card-foreground: 220 25% 98%;
+       --border: 225 25% 20%;
+       --radius: 0.75rem;
+       --color-desktop: 220 25% 98%;
+       --chart-1: 45 95% 55%;
+       --chart-2: 230 85% 65%;
+       --chart-3: 190 90% 55%;
+       --chart-4: 260 85% 60%;
+       --chart-5: 270 85% 50%;
    }
- }
+}
 
 body{
+
    @apply bg-background
 }
 
