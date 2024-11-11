@@ -50,16 +50,16 @@ export const ProModal = () => {
 						</div>
 					</DialogTitle>
 					<DialogDescription className='text-center pt-2 space-y-2 text-zinc-900 font-medium'>
-						{TEMPLATES.map((tool) => (
+                  {TEMPLATES.map((template) => (
 							<Card
-								key={tool.href}
+                        key={template.href}
 								className='p-3 border-black/5 flex items-center justify-between'
 							>
 								<div className='flex items-center gap-x-4'>
-									<div className={cn("p-2 w-fit rounded-md", tool.bgColor)}>
-										<tool.icon className={cn("w-6 h-6", tool.color)} />
+                           <div className={cn("p-2 w-fit rounded-md", template.bgColor)}>
+                              <template.icon className={cn("w-6 h-6", template.color)} />
 									</div>
-									<div className='font-semibold text-sm'>{tool.label}</div>
+                           <div className='font-semibold text-sm'>{template.label}</div>
 								</div>
 								<Check className='text-primary w-5 h-5' />
 							</Card>

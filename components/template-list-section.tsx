@@ -1,43 +1,44 @@
 "use client";
+
 import { useState, useEffect } from "react";
-import { TEMPLATES } from "@/constants";
-import ToolCard from "./ToolCard";
 
-const TemplateList = ({ searchInput }: { searchInput: string }) => {
-	const [list, setList] = useState(TEMPLATES);
+import { useRouter } from "next/navigation";
+import { Template } from "@/types";
+import TemplateCard from "./TemplateCard";
 
-	useEffect(() => {
-		if (searchInput) {
-			const filteredData = TEMPLATES.filter((item) =>
-				item.name.toLowerCase().includes(searchInput.toLowerCase())
-			);
-			setList(filteredData);
-		} else {
-			setList(TEMPLATES);
-		}
-	}, [searchInput]);
 
-	const toggleFavorite = (slug: string) => {
-		setList((prevList) =>
-			prevList.map((tool) =>
-				tool.slug === slug
-					? { ...tool, isFavorite: !tool.isFavorite }
-					: tool
-			)
-		);
-	};
+interface TemplateListProps {
+   searchInput: string;
+   initialTemplates: Template[];
+   onFavoriteToggle?: (templateId: string) => Promise<void>;
+}
 
-	return (
-		<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-			{list.map((tool) => (
-				<ToolCard
-					key={tool.slug}
-					tool={tool}
-					onToggleFavorite={() => toggleFavorite(tool.slug)}
-				/>
-			))}
-		</div>
-	);
+const TemplateList = ({ searchInput, initialTemplates, onFavoriteToggle }: TemplateListProps) => {
+   const [templates, setTemplates] = useState<Template[]>(initialTemplates);
+   const router = useRouter();
+
+   useEffect(() => {
+      if (searchInput) {
+         const filteredData = initialTemplates.filter(
+            (template) =>
+               template.name.toLowerCase().includes(searchInput.toLowerCase()) ||
+               template?.tags.some(tag => tag.toLowerCase().includes(searchInput.toLowerCase()))
+         );
+         setTemplates(filteredData);
+      } else {
+         setTemplates(initialTemplates);
+      }
+   }, [searchInput, initialTemplates]);
+
+
+   return (
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+         {templates?.map((template, idx) => (
+
+            <TemplateCard template={template} onToggleFavorite={() => { return null }} key={idx} />
+         ))}
+      </div>
+   );
 };
 
 export default TemplateList;
