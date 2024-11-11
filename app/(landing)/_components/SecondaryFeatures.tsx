@@ -66,11 +66,11 @@ function Feature({
 					: "bg-card text-card-foreground",
 				className,
 				"opacity-90 hover:opacity-100",
-				"p-4 rounded-lg transition duration-200"
+            "w-full p-4 rounded-lg transition duration-200 flex-col flex justify-between"
 			)}
 			{...props}
 		>
-			<div className="flex items-center gap-x-2">
+         <div className="flex   items-center gap-x-2">
 				<div
 					className={clsx(
 						"w-9 rounded-lg flex justify-between",
@@ -107,7 +107,7 @@ function FeaturesMobile() {
 				<div key={feature.summary}>
 					<Feature
 						feature={feature}
-						className="mx-auto max-w-sm"
+                  className="mx-auto max-w-sm"
 						isActive
 					/>
 				</div>
@@ -135,7 +135,7 @@ function FeaturesDesktop() {
 									),
 								}}
 								isActive={featureIndex === selectedIndex}
-								className="relative p-4 border-2 border-border rounded-lg"
+                        className="relative p-6 border-2 border-border rounded-lg"
 							/>
 						))}
 					</TabList>
