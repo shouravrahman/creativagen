@@ -1,6 +1,11 @@
 # CreativaGen
 
-![FancyWM_3MPXAKDCjq](https://github.com/shouravrahman/creativagen/assets/73746355/dc03371f-a9a2-453c-86e5-8e4889103b44)
+![Screenshot 2024-11-12 042815](https://github.com/user-attachments/assets/fcc0aa8f-7e8a-4ade-9ab2-96b50fef086f)
+
+![Screenshot 2024-11-12 043113](https://github.com/user-attachments/assets/3ebb33b9-5037-4146-8f63-c35674038afc)
+
+![Screenshot 2024-11-12 043140](https://github.com/user-attachments/assets/cef1a50b-8632-4c5b-bee5-837a06550d80)
+
 
 ## Overview
 
