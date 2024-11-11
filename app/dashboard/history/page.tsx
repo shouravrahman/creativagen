@@ -177,7 +177,7 @@ export default function History() {
 					{Math.min(page * pageSize, filteredContent.length)} of{" "}
 					{filteredContent.length} results
 				</div>
-				<Pagination className="w-full self-end">
+            <Pagination className="w-full justify-end">
 					<PaginationContent>
 						<PaginationItem>
 							<PaginationPrevious
