@@ -72,7 +72,7 @@ function Plan({
 				))}
 			</ul>
 			<Button
-				variant={featured ? "accent" : "link"}
+            variant={featured ? "destructive" : "default"}
 				color="white"
 				className="mt-8"
 				aria-label={`Get started with the ${name} plan for ${price}`}
