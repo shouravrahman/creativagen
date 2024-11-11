@@ -1,26 +1,34 @@
-import { ChartBarIcon, VideoCameraIcon } from "@heroicons/react/20/solid";
+import { MicrophoneIcon, UserGroupIcon } from "@heroicons/react/20/solid";
 import {
 	BarChart4,
+	Box,
+	BrainCircuit,
+	BriefcaseIcon,
+	CloudLightning,
+	CodeIcon,
 	Home,
 	History,
 	CreditCard,
+	MessageCircleQuestionIcon,
 	User,
 	Code,
-	FileText,
-	Mail,
-	TrendingUp,
-	FolderOpen,
+	Leaf,
+	Lightbulb,
+	Linkedin,
+	Rocket,
 	Briefcase,
-	BarChart,
-	Video,
-	Clock,
+	Puzzle,
 	BookOpen,
-	Gift,
 	Calendar,
+	MegaphoneIcon,
+	TargetIcon,
+	Users,
+	WeightIcon,
 } from "lucide-react";
+import { RocketIcon, BrainCircuitIcon, TrendingUpIcon } from "lucide-react";
 
-
-import { z } from "zod";
+import { Template } from "./types";
+import { IoSpeedometer } from "react-icons/io5";
 export const MAX_FREE_COUNTS = 10;
 
 export const routes = [
@@ -62,954 +70,2261 @@ export const routes = [
 		color: "   ",
 	},
 ];
-export interface Template {
-	name: string;
-	description: string;
-	icon: any;
-	features: string[];
-	imageUrl: string;
-	href: string;
-	color: string;
-	bgColor: string;
-	slug: string;
-	category: string;
-	aiPrompt: string;
-	formFields: any;
-	validationSchema: any
-	isFavorite: boolean;
-}
+
 export const TEMPLATES: Template[] = [
 	{
-		name: "Developer Portfolio Post",
+		id: "1",
+		name: "AI Breakthrough Spotlight",
 		description:
-			"Create engaging social media posts that showcase your development projects, technical skills, and problem-solving abilities without being overtly promotional.",
-		icon: Code,
-		features: [
-			"Project Showcase",
-			"Technical Details",
-			"Problem-Solution Format",
-			"Social Proof",
-			"Subtle CTA",
-		],
-		imageUrl: "/portfolio-post.jpg",
-		href: "/portfolio-post",
-		color: "text-blue-500",
-		bgColor: "bg-blue-200",
-		slug: "portfolio-post",
-		category: "Developer Branding",
-		aiPrompt: `Create an engaging social media post that showcases a development project while establishing authority and encouraging potential clients to reach out. The post should:
+			"Create viral LinkedIn posts about latest AI developments and their practical applications for businesses.",
+		slug: "ai-breakthrough-spotlight",
+		category: "Tech Innovation",
+		imageUrl: "/templates/ai-spotlight.jpg",
+		icon: BrainCircuitIcon,
+		color: "text-purple-500",
+		bgColor: "bg-purple-100",
+		aiPrompt: `Create a compelling LinkedIn post about {aiTechnology} and its impact on {industry}.
 
- 1. Start with an attention-grabbing hook about the technical challenge
- 2. Describe the problem-solution narrative in a relatable way
- 3. Highlight key technical skills and technologies used
- 4. Include relevant metrics or results (if provided)
- 5. Add social proof elements (if provided)
- 6. End with a subtle call-to-action that encourages engagement
- 7. Include relevant hashtags for developer communities
- 8. Maintain a professional yet conversational tone
- 9. Format appropriately for the selected platform
- 10. Focus on value delivery rather than direct selling`,
+  Key sections to cover:
+  1. 🚀 Innovation Overview: {keyInnovation}
+  2. 💡 Business Applications: {businessUse}
+  3. 🔮 Future Implications: {futureImpact}
+
+  Include {dataPoint} statistics/case studies.
+  Target audience: {targetAudience}
+  Call-to-action: {cta}
+
+  Tone: {contentStyle}`,
+		features: [
+			"AI trend analysis",
+			"Business impact focus",
+			"Data-backed insights",
+			"Future predictions",
+			"Industry-specific applications",
+		],
+		tags: ["ai", "technology", "innovation", "business", "future-tech"],
 		formFields: [
 			{
-				label: "Project Type",
-				field: "projectType",
-				name: "projectType",
+				label: "AI Technology",
+				name: "aiTechnology",
+				type: "text",
 				required: true,
+				order: 1,
+			},
+			{
+				label: "Industry Focus",
+				name: "industry",
 				type: "select",
+				required: true,
+				order: 2,
 				options: [
-					{ label: "Web Application", value: "web-app" },
-					{ label: "Mobile App", value: "mobile-app" },
-					{ label: "API Development", value: "api" },
-					{ label: "E-commerce Solution", value: "ecommerce" },
-					{ label: "Custom Integration", value: "integration" },
-					{
-						label: "Performance Optimization",
-						value: "optimization",
-					},
-					{
-						label: "Legacy System Modernization",
-						value: "modernization",
-					},
+					{ label: "SaaS", value: "saas" },
+					{ label: "E-commerce", value: "ecommerce" },
+					{ label: "Finance", value: "finance" },
+					{ label: "Healthcare", value: "healthcare" },
 				],
 			},
 			{
-				label: "Technical Challenge",
-				field: "challenge",
-				name: "challenge",
-				required: true,
-				placeholder:
-					"What was the main technical challenge you solved?",
+				label: "Key Innovation",
+				name: "keyInnovation",
 				type: "textarea",
+				required: true,
+				order: 3,
 			},
 			{
-				label: "Technologies Used",
-				field: "technologies",
-				name: "technologies",
-				required: true,
-				placeholder:
-					"List the key technologies, frameworks, or tools used",
+				label: "Business Use Case",
+				name: "businessUse",
 				type: "textarea",
+				required: true,
+				order: 4,
 			},
 			{
-				label: "Results/Metrics",
-				field: "results",
+				label: "Future Impact",
+				name: "futureImpact",
+				type: "textarea",
+				required: true,
+				order: 5,
+			},
+			{
+				label: "Data Point/Case Study",
+				name: "dataPoint",
+				type: "text",
+				required: true,
+				order: 6,
+			},
+			{
+				label: "Target Audience",
+				name: "targetAudience",
+				type: "select",
+				required: true,
+				order: 7,
+				options: [
+					{ label: "C-Suite Executives", value: "executives" },
+					{ label: "Tech Decision Makers", value: "decision-makers" },
+					{ label: "Developers", value: "developers" },
+					{ label: "Entrepreneurs", value: "entrepreneurs" },
+				],
+			},
+			{
+				label: "Call-to-Action",
+				name: "cta",
+				type: "text",
+				required: true,
+				order: 8,
+			},
+			{
+				label: "Content Style",
+				name: "contentStyle",
+				type: "select",
+				required: true,
+				order: 9,
+				options: [
+					{
+						label: "Thought Leadership",
+						value: "thought-leadership",
+					},
+					{ label: "Educational", value: "educational" },
+					{ label: "Visionary", value: "visionary" },
+				],
+			},
+		],
+	},
+	{
+		id: "2",
+		name: "SaaS Launch Rocket",
+		description:
+			"Generate powerful Twitter threads announcing your SaaS product features and updates.",
+		slug: "saas-launch-rocket",
+		category: "Product Marketing",
+		imageUrl: "/templates/saas-launch.jpg",
+		icon: RocketIcon,
+		color: "text-blue-500",
+		bgColor: "bg-blue-100",
+		aiPrompt: `Create a {threadLength}-tweet thread announcing {featureName} for {productName}.
+
+  Hook: {hook}
+
+  Key points to cover:
+  1. 🎯 Problem solved: {problemSolved}
+  2. ⚡️ Core features: {coreFeatures}
+  3. 💪 Benefits: {keyBenefits}
+  4. 🎉 Launch offer: {launchOffer}
+
+  Include {socialProof}
+  End with: {callToAction}
+
+  Style: {threadStyle}`,
+		features: [
+			"Feature announcement",
+			"Problem-solution format",
+			"Social proof integration",
+			"Launch offers",
+			"Engagement hooks",
+		],
+		tags: [
+			"saas",
+			"product-launch",
+			"feature-announcement",
+			"twitter",
+			"marketing",
+		],
+		formFields: [
+			{
+				label: "Feature Name",
+				name: "featureName",
+				type: "text",
+				required: true,
+				order: 1,
+			},
+			{
+				label: "Product Name",
+				name: "productName",
+				type: "text",
+				required: true,
+				order: 2,
+			},
+			{
+				label: "Hook",
+				name: "hook",
+				type: "textarea",
+				required: true,
+				order: 3,
+			},
+			{
+				label: "Problem Solved",
+				name: "problemSolved",
+				type: "textarea",
+				required: true,
+				order: 4,
+			},
+			{
+				label: "Core Features",
+				name: "coreFeatures",
+				type: "textarea",
+				required: true,
+				order: 5,
+			},
+			{
+				label: "Key Benefits",
+				name: "keyBenefits",
+				type: "textarea",
+				required: true,
+				order: 6,
+			},
+			{
+				label: "Launch Offer",
+				name: "launchOffer",
+				type: "text",
+				required: true,
+				order: 7,
+			},
+			{
+				label: "Social Proof",
+				name: "socialProof",
+				type: "text",
+				required: true,
+				order: 8,
+			},
+			{
+				label: "Call to Action",
+				name: "callToAction",
+				type: "text",
+				required: true,
+				order: 9,
+			},
+			{
+				label: "Thread Length",
+				name: "threadLength",
+				type: "select",
+				required: true,
+				order: 10,
+				options: [
+					{ label: "Short (5 tweets)", value: "5" },
+					{ label: "Medium (8 tweets)", value: "8" },
+					{ label: "Long (12 tweets)", value: "12" },
+				],
+			},
+			{
+				label: "Thread Style",
+				name: "threadStyle",
+				type: "select",
+				required: true,
+				order: 11,
+				options: [
+					{ label: "Technical Deep-dive", value: "technical" },
+					{ label: "User-focused Story", value: "story" },
+					{ label: "Problem-Solution", value: "solution" },
+				],
+			},
+		],
+	},
+	{
+		id: "3",
+		name: "Tech Stack Showcase",
+		description:
+			"Create detailed Twitter threads or LinkedIn posts about your development stack and architecture decisions.",
+		slug: "tech-stack-showcase",
+		category: "Technical Content",
+		imageUrl: "/templates/tech-stack.jpg",
+		icon: MessageCircleQuestionIcon,
+		color: "text-emerald-500",
+		bgColor: "bg-emerald-100",
+		aiPrompt: `Create a {contentType} about building {projectType} with {mainTechnology}.
+
+  Architecture Overview:
+  1. 🏗 Infrastructure: {infrastructure}
+  2. 🔧 Core Technologies: {coreTech}
+  3. 📈 Performance Metrics: {metrics}
+
+  Technical Decisions:
+  - Why we chose: {techDecisions}
+  - Challenges faced: {challenges}
+  - Solutions implemented: {solutions}
+
+  Include {codeExample} if relevant
+  Performance Impact: {impact}
+  Call-to-action: {cta}`,
+		features: [
+			"Architecture breakdowns",
+			"Performance metrics",
+			"Code examples",
+			"Decision explanations",
+			"Technical deep-dives",
+		],
+		tags: [
+			"development",
+			"architecture",
+			"tech-stack",
+			"engineering",
+			"performance",
+		],
+		formFields: [
+			{
+				label: "Content Type",
+				name: "contentType",
+				type: "select",
+				required: true,
+				order: 1,
+				options: [
+					{ label: "Twitter Thread", value: "thread" },
+					{ label: "LinkedIn Article", value: "article" },
+				],
+			},
+			{
+				label: "Project Type",
+				name: "projectType",
+				type: "text",
+				required: true,
+				order: 2,
+			},
+			{
+				label: "Main Technology",
+				name: "mainTechnology",
+				type: "text",
+				required: true,
+				order: 3,
+			},
+			{
+				label: "Infrastructure Details",
+				name: "infrastructure",
+				type: "textarea",
+				required: true,
+				order: 4,
+			},
+			{
+				label: "Core Technologies",
+				name: "coreTech",
+				type: "textarea",
+				required: true,
+				order: 5,
+			},
+			{
+				label: "Performance Metrics",
+				name: "metrics",
+				type: "textarea",
+				required: true,
+				order: 6,
+			},
+			{
+				label: "Technical Decisions",
+				name: "techDecisions",
+				type: "textarea",
+				required: true,
+				order: 7,
+			},
+			{
+				label: "Challenges Faced",
+				name: "challenges",
+				type: "textarea",
+				required: true,
+				order: 8,
+			},
+			{
+				label: "Solutions",
+				name: "solutions",
+				type: "textarea",
+				required: true,
+				order: 9,
+			},
+			{
+				label: "Code Example Description",
+				name: "codeExample",
+				type: "text",
+				required: true,
+				order: 10,
+			},
+			{
+				label: "Performance Impact",
+				name: "impact",
+				type: "textarea",
+				required: true,
+				order: 11,
+			},
+			{
+				label: "Call to Action",
+				name: "cta",
+				type: "text",
+				required: true,
+				order: 12,
+			},
+		],
+	},
+	{
+		id: "4",
+		name: "Growth Metrics Mastery",
+		description:
+			"Create data-driven LinkedIn posts showcasing your product's growth metrics and marketing wins.",
+		slug: "growth-metrics-mastery",
+		category: "Marketing Analytics",
+		imageUrl: "/templates/growth-metrics.jpg",
+		icon: TrendingUpIcon,
+		color: "text-red-500",
+		bgColor: "bg-red-100",
+		aiPrompt: `Create a LinkedIn post about {metricType} growth for {timeframe}.
+
+  Key Metrics:
+  📈 Growth Achievement: {achievement}
+  🎯 Strategy Used: {strategy}
+  📊 Key Data Points: {dataPoints}
+
+  Process Breakdown:
+  1. Initial State: {initialState}
+  2. Actions Taken: {actions}
+  3. Results: {results}
+
+  Learnings: {learnings}
+  Next Steps: {nextSteps}
+
+  Style: {postStyle}
+  Include {visualType} visualization description`,
+		features: [
+			"Metric visualization",
+			"Strategy breakdown",
+			"Data storytelling",
+			"Growth insights",
+			"Actionable takeaways",
+		],
+		tags: ["growth", "metrics", "marketing", "analytics", "data"],
+		formFields: [
+			{
+				label: "Metric Type",
+				name: "metricType",
+				type: "select",
+				required: true,
+				order: 1,
+				options: [
+					{ label: "User Acquisition", value: "acquisition" },
+					{ label: "Revenue", value: "revenue" },
+					{ label: "Engagement", value: "engagement" },
+					{ label: "Conversion", value: "conversion" },
+				],
+			},
+			{
+				label: "Timeframe",
+				name: "timeframe",
+				type: "text",
+				required: true,
+				order: 2,
+			},
+			{
+				label: "Achievement",
+				name: "achievement",
+				type: "textarea",
+				required: true,
+				order: 3,
+			},
+			{
+				label: "Strategy",
+				name: "strategy",
+				type: "textarea",
+				required: true,
+				order: 4,
+			},
+			{
+				label: "Data Points",
+				name: "dataPoints",
+				type: "textarea",
+				required: true,
+				order: 5,
+			},
+			{
+				label: "Initial State",
+				name: "initialState",
+				type: "textarea",
+				required: true,
+				order: 6,
+			},
+			{
+				label: "Actions Taken",
+				name: "actions",
+				type: "textarea",
+				required: true,
+				order: 7,
+			},
+			{
+				label: "Results",
 				name: "results",
-				required: false,
-				placeholder:
-					"Any measurable improvements? (e.g., 40% faster loading time)",
 				type: "textarea",
+				required: true,
+				order: 8,
+			},
+			{
+				label: "Key Learnings",
+				name: "learnings",
+				type: "textarea",
+				required: true,
+				order: 9,
+			},
+			{
+				label: "Next Steps",
+				name: "nextSteps",
+				type: "textarea",
+				required: true,
+				order: 10,
+			},
+			{
+				label: "Post Style",
+				name: "postStyle",
+				type: "select",
+				required: true,
+				order: 11,
+				options: [
+					{ label: "Data Story", value: "story" },
+					{ label: "Technical Analysis", value: "technical" },
+					{ label: "Strategic Overview", value: "strategic" },
+				],
+			},
+			{
+				label: "Visualization Type",
+				name: "visualType",
+				type: "select",
+				required: true,
+				order: 12,
+				options: [
+					{ label: "Growth Chart", value: "chart" },
+					{ label: "Comparison Graph", value: "graph" },
+					{ label: "Timeline", value: "timeline" },
+				],
+			},
+		],
+	},
+	{
+		id: "5",
+		name: "AI Breakthrough Spotlight",
+		description:
+			"Create viral LinkedIn posts about latest AI developments and their practical applications for businesses.",
+		slug: "ai-breakthrough-spotlight",
+		category: "Tech Innovation",
+		imageUrl: "/templates/ai-spotlight.jpg",
+		icon: BrainCircuitIcon,
+		color: "text-purple-500",
+		bgColor: "bg-purple-100",
+		aiPrompt: `Create a compelling LinkedIn post about {aiTechnology} and its impact on {industry}.
+
+  Key sections to cover:
+  1. 🚀 Innovation Overview: {keyInnovation}
+  2. 💡 Business Applications: {businessUse}
+  3. 🔮 Future Implications: {futureImpact}
+
+  Include {dataPoint} statistics/case studies.
+  Target audience: {targetAudience}
+  Call-to-action: {cta}
+
+  Tone: {contentStyle}`,
+		features: [
+			"AI trend analysis",
+			"Business impact focus",
+			"Data-backed insights",
+			"Future predictions",
+			"Industry-specific applications",
+		],
+		tags: ["ai", "technology", "innovation", "business", "future-tech"],
+		formFields: [
+			{
+				label: "AI Technology",
+				name: "aiTechnology",
+				type: "text",
+				required: true,
+				order: 1,
+			},
+			{
+				label: "Industry Focus",
+				name: "industry",
+				type: "select",
+				required: true,
+				order: 2,
+				options: [
+					{ label: "SaaS", value: "saas" },
+					{ label: "E-commerce", value: "ecommerce" },
+					{ label: "Finance", value: "finance" },
+					{ label: "Healthcare", value: "healthcare" },
+				],
+			},
+			{
+				label: "Key Innovation",
+				name: "keyInnovation",
+				type: "textarea",
+				required: true,
+				order: 3,
+			},
+			{
+				label: "Business Use Case",
+				name: "businessUse",
+				type: "textarea",
+				required: true,
+				order: 4,
+			},
+			{
+				label: "Future Impact",
+				name: "futureImpact",
+				type: "textarea",
+				required: true,
+				order: 5,
+			},
+			{
+				label: "Data Point/Case Study",
+				name: "dataPoint",
+				type: "text",
+				required: true,
+				order: 6,
+			},
+			{
+				label: "Target Audience",
+				name: "targetAudience",
+				type: "select",
+				required: true,
+				order: 7,
+				options: [
+					{ label: "C-Suite Executives", value: "executives" },
+					{ label: "Tech Decision Makers", value: "decision-makers" },
+					{ label: "Developers", value: "developers" },
+					{ label: "Entrepreneurs", value: "entrepreneurs" },
+				],
+			},
+			{
+				label: "Call-to-Action",
+				name: "cta",
+				type: "text",
+				required: true,
+				order: 8,
+			},
+			{
+				label: "Content Style",
+				name: "contentStyle",
+				type: "select",
+				required: true,
+				order: 9,
+				options: [
+					{
+						label: "Thought Leadership",
+						value: "thought-leadership",
+					},
+					{ label: "Educational", value: "educational" },
+					{ label: "Visionary", value: "visionary" },
+				],
+			},
+		],
+	},
+	{
+		id: "5",
+		name: "AI Tool Evolution",
+		description:
+			"Create engaging Twitter threads comparing different AI tools and their practical applications.",
+		slug: "ai-tool-evolution",
+		category: "AI Analysis",
+		imageUrl: "/templates/ai-tools.jpg",
+		icon: BrainCircuitIcon,
+		color: "text-yellow-500",
+		bgColor: "bg-yellow-100",
+		aiPrompt: `Create a {threadLength}-tweet comparison of {tool1} vs
+    {tool1} vs {tool2} for {useCase}.
+
+Thread Structure:
+1. 🔥 Hook: {attentionGrabber}
+2. 🎯 Use Case Overview: {useCase}
+
+Tool Comparison:
+🤖 {tool1}:
+- Key Features: {features1}
+- Best For: {bestUseCase1}
+- Limitations: {limitations1}
+- Pricing: {pricing1}
+
+🤖 {tool2}:
+- Key Features: {features2}
+- Best For: {bestUseCase2}
+- Limitations: {limitations2}
+- Pricing: {pricing2}
+
+Real-world Example:
+- {tool1} Example: {example1}
+- {tool2} Example: {example2}
+
+Verdict: {comparison}
+Pro Tips: {tips}
+
+#AI #Tools #Tech`,
+		features: [
+			"Tool comparisons",
+			"Use case analysis",
+			"Practical examples",
+			"Price comparison",
+			"Expert insights",
+		],
+		tags: [
+			"ai-tools",
+			"technology",
+			"comparison",
+			"productivity",
+			"software",
+		],
+		formFields: [
+			{
+				label: "First Tool",
+				name: "tool1",
+				type: "text",
+				required: true,
+				order: 1,
+			},
+			{
+				label: "Second Tool",
+				name: "tool2",
+				type: "text",
+				required: true,
+				order: 2,
+			},
+			{
+				label: "Use Case",
+				name: "useCase",
+				type: "text",
+				required: true,
+				order: 3,
+			},
+			{
+				label: "Attention Grabber",
+				name: "attentionGrabber",
+				type: "textarea",
+				required: true,
+				order: 4,
+			},
+			{
+				label: "Tool 1 Features",
+				name: "features1",
+				type: "textarea",
+				required: true,
+				order: 5,
+			},
+			{
+				label: "Tool 1 Best Use Case",
+				name: "bestUseCase1",
+				type: "textarea",
+				required: true,
+				order: 6,
+			},
+			{
+				label: "Tool 1 Limitations",
+				name: "limitations1",
+				type: "textarea",
+				required: true,
+				order: 7,
+			},
+			{
+				label: "Tool 1 Pricing",
+				name: "pricing1",
+				type: "text",
+				required: true,
+				order: 8,
+			},
+			{
+				label: "Tool 2 Features",
+				name: "features2",
+				type: "textarea",
+				required: true,
+				order: 9,
+			},
+			{
+				label: "Tool 2 Best Use Case",
+				name: "bestUseCase2",
+				type: "textarea",
+				required: true,
+				order: 10,
+			},
+			{
+				label: "Tool 2 Limitations",
+				name: "limitations2",
+				type: "textarea",
+				required: true,
+				order: 11,
+			},
+			{
+				label: "Tool 2 Pricing",
+				name: "pricing2",
+				type: "text",
+				required: true,
+				order: 12,
+			},
+			{
+				label: "Example for Tool 1",
+				name: "example1",
+				type: "textarea",
+				required: true,
+				order: 13,
+			},
+			{
+				label: "Example for Tool 2",
+				name: "example2",
+				type: "textarea",
+				required: true,
+				order: 14,
+			},
+			{
+				label: "Comparison Verdict",
+				name: "comparison",
+				type: "textarea",
+				required: true,
+				order: 15,
+			},
+			{
+				label: "Pro Tips",
+				name: "tips",
+				type: "textarea",
+				required: true,
+				order: 16,
+			},
+			{
+				label: "Thread Length",
+				name: "threadLength",
+				type: "select",
+				required: true,
+				order: 17,
+				options: [
+					{ label: "Concise (6 tweets)", value: "6" },
+					{ label: "Detailed (10 tweets)", value: "10" },
+					{ label: "Comprehensive (15 tweets)", value: "15" },
+				],
+			},
+		],
+	},
+	{
+		id: "6",
+		name: "Code Journey Chronicles",
+		description:
+			"Create engaging dev.to or Hashnode articles about your coding journey, challenges, and solutions.",
+		slug: "code-journey-chronicles",
+		category: "Developer Stories",
+		imageUrl: "/templates/code-journey.jpg",
+		icon: CodeIcon,
+		color: "text-indigo-500",
+		bgColor: "bg-indigo-100",
+		aiPrompt: `Create a detailed {articleType} about {challengeType} in {technology}.
+
+Story Structure:
+🎯 Problem Context: {context}
+💭 Initial Approach: {initialApproach}
+🚧 Challenges Faced:
+- {challenge1}
+- {challenge2}
+- {challenge3}
+
+Solution Journey:
+1. Research Phase: {research}
+2. Implementation: {implementation}
+3. Optimization: {optimization}
+
+Code Walkthrough:
+{codeSection}
+
+Key Learnings:
+{learnings}
+
+Future Improvements: {improvements}
+Reader Takeaways: {takeaways}
+
+Style: {contentStyle}
+Technical Level: {techLevel}`,
+		features: [
+			"Problem-solution narrative",
+			"Code explanations",
+			"Learning insights",
+			"Technical deep-dives",
+			"Action steps",
+		],
+		tags: ["coding", "development", "learning", "tutorial", "tech-writing"],
+		formFields: [
+			{
+				label: "Article Type",
+				name: "articleType",
+				type: "select",
+				required: true,
+				order: 1,
+				options: [
+					{ label: "Tutorial", value: "tutorial" },
+					{ label: "Case Study", value: "case-study" },
+					{ label: "Problem-Solution", value: "problem-solution" },
+				],
+			},
+			{
+				label: "Challenge Type",
+				name: "challengeType",
+				type: "text",
+				required: true,
+				order: 2,
+			},
+			{
+				label: "Technology",
+				name: "technology",
+				type: "text",
+				required: true,
+				order: 3,
+			},
+			{
+				label: "Context",
+				name: "context",
+				type: "textarea",
+				required: true,
+				order: 4,
+			},
+			{
+				label: "Initial Approach",
+				name: "initialApproach",
+				type: "textarea",
+				required: true,
+				order: 5,
+			},
+			{
+				label: "Challenge 1",
+				name: "challenge1",
+				type: "textarea",
+				required: true,
+				order: 6,
+			},
+			{
+				label: "Challenge 2",
+				name: "challenge2",
+				type: "textarea",
+				required: true,
+				order: 7,
+			},
+			{
+				label: "Challenge 3",
+				name: "challenge3",
+				type: "textarea",
+				required: true,
+				order: 8,
+			},
+			{
+				label: "Research Phase",
+				name: "research",
+				type: "textarea",
+				required: true,
+				order: 9,
+			},
+			{
+				label: "Implementation Details",
+				name: "implementation",
+				type: "textarea",
+				required: true,
+				order: 10,
+			},
+			{
+				label: "Optimization Steps",
+				name: "optimization",
+				type: "textarea",
+				required: true,
+				order: 11,
+			},
+			{
+				label: "Code Section",
+				name: "codeSection",
+				type: "textarea",
+				required: true,
+				order: 12,
+			},
+			{
+				label: "Key Learnings",
+				name: "learnings",
+				type: "textarea",
+				required: true,
+				order: 13,
+			},
+			{
+				label: "Future Improvements",
+				name: "improvements",
+				type: "textarea",
+				required: true,
+				order: 14,
+			},
+			{
+				label: "Reader Takeaways",
+				name: "takeaways",
+				type: "textarea",
+				required: true,
+				order: 15,
+			},
+			{
+				label: "Content Style",
+				name: "contentStyle",
+				type: "select",
+				required: true,
+				order: 16,
+				options: [
+					{ label: "Conversational", value: "conversational" },
+					{ label: "Technical", value: "technical" },
+					{ label: "Story-based", value: "story" },
+				],
+			},
+			{
+				label: "Technical Level",
+				name: "techLevel",
+				type: "select",
+				required: true,
+				order: 17,
+				options: [
+					{ label: "Beginner", value: "beginner" },
+					{ label: "Intermediate", value: "intermediate" },
+					{ label: "Advanced", value: "advanced" },
+				],
+			},
+		],
+	},
+	{
+		id: "7",
+		name: "Startup Pivot Playbook",
+		description:
+			"Create LinkedIn articles about product pivots, market adaptations, and business strategy shifts.",
+		slug: "startup-pivot-playbook",
+		category: "Business Strategy",
+		imageUrl: "/templates/pivot-playbook.jpg",
+		icon: TargetIcon,
+		color: "text-cyan-500",
+		bgColor: "bg-cyan-100",
+		aiPrompt: `Create a LinkedIn article about pivoting from {originalStrategy} to {newStrategy}.
+
+Story Arc:
+🎯 Initial Vision: {initialVision}
+📊 Market Reality: {marketReality}
+🔄 Pivot Trigger: {pivotTrigger}
+
+Pivot Process:
+1. Data Insights: {dataInsights}
+2. Customer Feedback: {customerFeedback}
+3. Team Alignment: {teamAlignment}
+
+Results:
+- Before: {beforeMetrics}
+- After: {afterMetrics}
+- Key Wins: {keyWins}
+
+Lessons Learned: {lessons}
+Advice for Others: {advice}
+
+Include {dataVisualization} type visualization
+Style: {articleStyle}`,
+		features: [
+			"Pivot analysis",
+			"Data visualization",
+			"Strategic insights",
+			"Result metrics",
+			"Actionable advice",
+		],
+		tags: [
+			"startup",
+			"business-strategy",
+			"pivot",
+			"entrepreneurship",
+			"growth",
+		],
+		formFields: [
+			{
+				label: "Original Strategy",
+				name: "originalStrategy",
+				type: "text",
+				required: true,
+				order: 1,
+			},
+			{
+				label: "New Strategy",
+				name: "newStrategy",
+				type: "text",
+				required: true,
+				order: 2,
+			},
+			{
+				label: "Initial Vision",
+				name: "initialVision",
+				type: "textarea",
+				required: true,
+				order: 3,
+			},
+			{
+				label: "Market Reality",
+				name: "marketReality",
+				type: "textarea",
+				required: true,
+				order: 4,
+			},
+			{
+				label: "Pivot Trigger",
+				name: "pivotTrigger",
+				type: "textarea",
+				required: true,
+				order: 5,
+			},
+			{
+				label: "Data Insights",
+				name: "dataInsights",
+				type: "textarea",
+				required: true,
+				order: 6,
+			},
+			{
+				label: "Customer Feedback",
+				name: "customerFeedback",
+				type: "textarea",
+				required: true,
+				order: 7,
+			},
+			{
+				label: "Team Alignment",
+				name: "teamAlignment",
+				type: "textarea",
+				required: true,
+				order: 8,
+			},
+			{
+				label: "Before Metrics",
+				name: "beforeMetrics",
+				type: "textarea",
+				required: true,
+				order: 9,
+			},
+			{
+				label: "After Metrics",
+				name: "afterMetrics",
+				type: "textarea",
+				required: true,
+				order: 10,
+			},
+			{
+				label: "Key Wins",
+				name: "keyWins",
+				type: "textarea",
+				required: true,
+				order: 11,
+			},
+			{
+				label: "Lessons Learned",
+				name: "lessons",
+				type: "textarea",
+				required: true,
+				order: 12,
+			},
+			{
+				label: "Advice",
+				name: "advice",
+				type: "textarea",
+				required: true,
+				order: 13,
+			},
+			{
+				label: "Data Visualization",
+				name: "dataVisualization",
+				type: "select",
+				required: true,
+				order: 14,
+				options: [
+					{ label: "Before/After Chart", value: "comparison" },
+					{ label: "Growth Timeline", value: "timeline" },
+					{ label: "Metrics Dashboard", value: "dashboard" },
+				],
+			},
+			{
+				label: "Article Style",
+				name: "articleStyle",
+				type: "select",
+				required: true,
+				order: 15,
+				options: [
+					{ label: "Data-Driven", value: "data-driven" },
+					{ label: "Narrative", value: "narrative" },
+					{ label: "Strategic Analysis", value: "analysis" },
+				],
+			},
+		],
+	},
+	{
+		id: "8",
+		name: "API Launch Amplifier",
+		description:
+			"Create comprehensive Twitter threads or technical blog posts about your API launch or updates.",
+		slug: "api-launch-amplifier",
+		category: "API Documentation",
+		imageUrl: "/templates/api-launch.jpg",
+		icon: MegaphoneIcon,
+		color: "text-rose-500",
+		bgColor: "bg-rose-100",
+		aiPrompt: `Create a {contentFormat} announcing {apiName} {contentType}.
+
+Key Sections:
+🚀 Launch Overview: {overview}
+🎯 Target Developers: {targetDevs}
+⚡️ Key Features:
+- {feature1}
+- {feature2}
+- {feature3}
+
+Technical Details:
+1. Authentication: {auth}
+2. Rate Limits: {rateLimits}
+3. Response Format: {responseFormat}
+
+Quick Start:
+{codeExample}
+
+Use Cases:
+- {useCase1}
+- {useCase2}
+- {useCase3}
+
+Documentation: {docs}
+Support: {support}
+Pricing: {pricing}
+
+Style: {contentStyle}`,
+		features: [
+			"API documentation",
+			"Code examples",
+			"Use cases",
+			"Technical specs",
+			"Launch details",
+		],
+		tags: [
+			"api",
+			"development",
+			"documentation",
+			"technical-writing",
+			"launch",
+		],
+		formFields: [
+			{
+				label: "Content Format",
+				name: "contentFormat",
+				type: "select",
+				required: true,
+				order: 1,
+				options: [
+					{ label: "Twitter Thread", value: "thread" },
+					{ label: "Blog Post", value: "blog" },
+					{ label: "Documentation", value: "docs" },
+				],
+			},
+			{
+				label: "API Name",
+				name: "apiName",
+				type: "text",
+				required: true,
+				order: 2,
+			},
+			{
+				label: "Content Type",
+				name: "contentType",
+				type: "select",
+				required: true,
+				order: 3,
+				options: [
+					{ label: "Launch", value: "launch" },
+					{ label: "Update", value: "update" },
+					{ label: "Feature Release", value: "feature" },
+				],
+			},
+			{
+				label: "Overview",
+				name: "overview",
+				type: "textarea",
+				required: true,
+				order: 4,
+			},
+			{
+				label: "Target Developers",
+				name: "targetDevs",
+				type: "textarea",
+				required: true,
+				order: 5,
+			},
+			{
+				label: "Feature 1",
+				name: "feature1",
+				type: "textarea",
+				required: true,
+				order: 6,
+			},
+			{
+				label: "Feature 2",
+				name: "feature2",
+				type: "textarea",
+				required: true,
+				order: 7,
+			},
+			{
+				label: "Feature 3",
+				name: "feature3",
+				type: "textarea",
+				required: true,
+				order: 8,
+			},
+			{
+				label: "Authentication",
+				name: "auth",
+				type: "textarea",
+				required: true,
+				order: 9,
+			},
+			{
+				label: "Rate Limits",
+				name: "rateLimits",
+				type: "textarea",
+				required: true,
+				order: 10,
+			},
+			{
+				label: "Response Format",
+				name: "responseFormat",
+				type: "textarea",
+				required: true,
+				order: 11,
+			},
+			{
+				label: "Code Example",
+				name: "codeExample",
+				type: "textarea",
+				required: true,
+				order: 12,
+			},
+			{
+				label: "Use Case 1",
+				name: "useCase1",
+				type: "textarea",
+				required: true,
+				order: 13,
+			},
+			{
+				label: "Use Case 2",
+				name: "useCase2",
+				type: "textarea",
+				required: true,
+				order: 14,
+			},
+			{
+				label: "Use Case 3",
+				name: "useCase3",
+				type: "textarea",
+				required: true,
+				order: 15,
+			},
+			{
+				label: "Documentation",
+				name: "docs",
+				type: "text",
+				required: true,
+				order: 16,
+			},
+			{
+				label: "Support",
+				name: "support",
+				type: "text",
+				required: true,
+				order: 17,
+			},
+			{
+				label: "Pricing",
+				name: "pricing",
+				type: "textarea",
+				required: true,
+				order: 18,
+			},
+			{
+				label: "Content Style",
+				name: "contentStyle",
+				type: "select",
+				required: true,
+				order: 19,
+				options: [
+					{ label: "Technical", value: "technical" },
+					{ label: "Developer-Friendly", value: "friendly" },
+					{ label: "Business-Focused", value: "business" },
+				],
+			},
+		],
+	},
+	{
+		id: "11",
+		name: "Developer Side Project Showcase",
+		description:
+			"Create engaging social media posts that showcase your personal side projects and highlight your skills.",
+		slug: "side-project-showcase",
+		category: "Developer Branding",
+		imageUrl: "/templates/side-project.jpg",
+		icon: Puzzle,
+		color: "text-red-500",
+		bgColor: "bg-red-100",
+		aiPrompt: `Create a social media post showcasing your {projectName} side project.
+  Project Overview: {projectDescription}
+  Key Features: {keyFeatures}
+  Technologies Used: {techStack}
+  Personal Takeaways: {personalTakeaways}
+  Call to Action: {callToAction}
+  Tone: {tone}
+  Platform: {platform}`,
+		features: [
+			"Side project showcase",
+			"Skill demonstration",
+			"Personal growth sharing",
+			"Engaging format",
+			"Platform-optimized",
+		],
+		tags: [
+			"developer-branding",
+			"portfolio",
+			"social-media",
+			"side-projects",
+			"personal-growth",
+		],
+		formFields: [
+			{
+				label: "Project Name",
+				name: "projectName",
+				type: "text",
+				required: true,
+				order: 1,
+			},
+			{
+				label: "Project Description",
+				name: "projectDescription",
+				type: "textarea",
+				required: true,
+				order: 2,
+			},
+			{
+				label: "Key Features",
+				name: "keyFeatures",
+				type: "textarea",
+				required: true,
+				order: 3,
+			},
+			{
+				label: "Tech Stack",
+				name: "techStack",
+				type: "text",
+				required: true,
+				order: 4,
+			},
+			{
+				label: "Personal Takeaways",
+				name: "personalTakeaways",
+				type: "textarea",
+				required: true,
+				order: 5,
+			},
+			{
+				label: "Call to Action",
+				name: "callToAction",
+				type: "text",
+				required: true,
+				order: 6,
+			},
+			{
+				label: "Writing Tone",
+				name: "tone",
+				type: "select",
+				required: true,
+				order: 7,
+				options: [
+					{ label: "Conversational", value: "conversational" },
+					{ label: "Enthusiastic", value: "enthusiastic" },
+					{ label: "Educational", value: "educational" },
+				],
 			},
 			{
 				label: "Target Platform",
-				field: "platform",
 				name: "platform",
-				required: true,
 				type: "select",
+				required: true,
+				order: 8,
 				options: [
 					{ label: "LinkedIn", value: "linkedin" },
+					{ label: "Twitter/X", value: "twitter" },
+					{ label: "Instagram", value: "instagram" },
 					{ label: "Facebook", value: "facebook" },
-					{ label: "Twitter", value: "twitter" },
-					{ label: "Dev.to", value: "devto" },
 				],
 			},
 		],
-		validationSchema: z.object({
-			projectType: z.string().min(1, "Project type is required"),
-			challenge: z.string().min(1, "Technical challenge is required"),
-			technologies: z.string().min(1, "Technologies are required"),
-			results: z.string().optional(),
-			platform: z.string().min(1, "Platform is required"),
-		}),
-		isFavorite: false,
 	},
 	{
-		name: "Problem-Solution Case Study",
+		id: "12",
+		name: "Developer Tech Stack Showcase",
 		description:
-			"Create compelling case studies that demonstrate your problem-solving abilities and technical expertise to potential clients.",
-		icon: FileText,
+			"Create visually appealing social media posts that highlight your technical skills and expertise.",
+		slug: "tech-stack-showcase",
+		category: "Developer Branding",
+		imageUrl: "/templates/tech-stack.jpg",
+		icon: Box,
+		color: "text-emerald-500",
+		bgColor: "bg-emerald-100",
+		aiPrompt: `Create a social media post showcasing your developer tech stack.
+  Key Technologies: {technologies}
+  Proficiency Levels: {proficiencyLevels}
+  Personal Projects/Experience: {experience}
+  Call to Action: {callToAction}
+  Tone: {tone}
+  Platform: {platform}`,
 		features: [
-			"Client Problem Analysis",
-			"Technical Solution Details",
-			"Implementation Process",
-			"Results & Benefits",
-			"Technology Stack",
+			"Tech stack overview",
+			"Skill demonstration",
+			"Visual appeal",
+			"Engagement-driven",
+			"Platform-optimized",
 		],
-		imageUrl: "/case-study.jpg",
-		href: "/case-study",
-		color: "text-purple-500",
-		bgColor: "bg-purple-200",
-		slug: "case-study",
-		category: "Client Acquisition",
-		aiPrompt: `Generate a detailed case study that demonstrates your technical expertise and problem-solving abilities. Structure the content to:
-
- 1. Begin with a compelling business challenge that resonates with potential clients
- 2. Break down the technical complexities into understandable business terms
- 3. Highlight your strategic approach and technology choices
- 4. Emphasize the value delivered through concrete metrics
- 5. Include specific technical details that showcase expertise
- 6. Demonstrate your understanding of business impact
- 7. Incorporate testimonials or feedback if provided
- 8. End with a solution-focused call-to-action
- 9. Use a professional yet engaging tone
- 10. Include relevant keywords for your target industry`,
+		tags: [
+			"developer-branding",
+			"portfolio",
+			"social-media",
+			"tech-stack",
+			"skills",
+		],
 		formFields: [
 			{
-				label: "Industry/Niche",
-				field: "industry",
-				name: "industry",
+				label: "Key Technologies",
+				name: "technologies",
+				type: "textarea",
 				required: true,
+				order: 1,
+				helpText: "List the key technologies, one per line",
+			},
+			{
+				label: "Proficiency Levels",
+				name: "proficiencyLevels",
+				type: "textarea",
+				required: true,
+				order: 2,
+				helpText:
+					"List the proficiency level for each technology, one per line",
+			},
+			{
+				label: "Personal Experience",
+				name: "experience",
+				type: "textarea",
+				required: true,
+				order: 3,
+				helpText: "Describe your experience with these technologies",
+			},
+			{
+				label: "Call to Action",
+				name: "callToAction",
+				type: "text",
+				required: true,
+				order: 4,
+			},
+			{
+				label: "Writing Tone",
+				name: "tone",
 				type: "select",
+				required: true,
+				order: 5,
 				options: [
-					{ label: "E-commerce", value: "ecommerce" },
-					{ label: "Healthcare", value: "healthcare" },
-					{ label: "Finance", value: "finance" },
-					{ label: "Education", value: "education" },
-					{ label: "Real Estate", value: "real-estate" },
-					{ label: "Manufacturing", value: "manufacturing" },
-					{ label: "Technology", value: "technology" },
+					{ label: "Professional", value: "professional" },
+					{ label: "Confident", value: "confident" },
+					{ label: "Enthusiastic", value: "enthusiastic" },
 				],
 			},
 			{
-				label: "Client Challenge",
-				field: "clientChallenge",
-				name: "clientChallenge",
+				label: "Target Platform",
+				name: "platform",
+				type: "select",
 				required: true,
-				placeholder: "What business problem did the client face?",
+				order: 6,
+				options: [
+					{ label: "LinkedIn", value: "linkedin" },
+					{ label: "Twitter/X", value: "twitter" },
+					{ label: "Instagram", value: "instagram" },
+					{ label: "Facebook", value: "facebook" },
+				],
+			},
+		],
+	},
+	{
+		id: "13",
+		name: "Developer Community Building",
+		description:
+			"Create engaging Twitter/X threads that foster meaningful connections and discussions within the developer community.",
+		slug: "developer-community-building",
+		category: "Community Engagement",
+		imageUrl: "/templates/community-building.jpg",
+		icon: Users,
+		color: "text-violet-500",
+		bgColor: "bg-violet-100",
+		aiPrompt: `Create a {threadLength}-tweet thread to foster community engagement around the topic of "{topic}".
+  Key discussion points:
+  1. {point1}
+  2. {point2}
+  3. {point3}
+  4. {point4}
+  5. {point5}
+  Include prompts for community participation, such as questions or opinions.
+  Encourage authentic interaction and learning.
+  End with a call to action: {callToAction}`,
+		features: [
+			"Community-focused content",
+			"Engagement-driven",
+			"Participatory format",
+			"Authentic interaction",
+			"Educational elements",
+		],
+		tags: [
+			"twitter",
+			"developer-community",
+			"community-building",
+			"engagement",
+			"education",
+		],
+		formFields: [
+			{
+				label: "Topic",
+				name: "topic",
+				type: "text",
+				required: true,
+				order: 1,
+			},
+			{
+				label: "Discussion Point 1",
+				name: "point1",
 				type: "textarea",
+				required: true,
+				order: 2,
+			},
+			{
+				label: "Discussion Point 2",
+				name: "point2",
+				type: "textarea",
+				required: true,
+				order: 3,
+			},
+			{
+				label: "Discussion Point 3",
+				name: "point3",
+				type: "textarea",
+				required: true,
+				order: 4,
+			},
+			{
+				label: "Discussion Point 4",
+				name: "point4",
+				type: "textarea",
+				required: true,
+				order: 5,
+			},
+			{
+				label: "Discussion Point 5",
+				name: "point5",
+				type: "textarea",
+				required: true,
+				order: 6,
+			},
+			{
+				label: "Thread Length",
+				name: "threadLength",
+				type: "select",
+				required: true,
+				order: 7,
+				options: [
+					{ label: "Short (5 tweets)", value: "5" },
+					{ label: "Medium (10 tweets)", value: "10" },
+					{ label: "Long (15 tweets)", value: "15" },
+				],
+			},
+			{
+				label: "Call to Action",
+				name: "callToAction",
+				type: "text",
+				required: true,
+				order: 8,
+			},
+		],
+	},
+	{
+		id: "14",
+		name: "Developer Sustainability Spotlight",
+		description:
+			"Create LinkedIn posts that highlight how developers are contributing to sustainable tech solutions.",
+		slug: "developer-sustainability-spotlight",
+		category: "Social Impact",
+		imageUrl: "/templates/sustainability.jpg",
+		icon: Leaf,
+		color: "text-green-500",
+		bgColor: "bg-green-100",
+		aiPrompt: `Create a LinkedIn post showcasing how developers can contribute to sustainable tech solutions.
+  Highlight the project: {projectName}
+  Key sustainable features: {sustainableFeatures}
+  Impact and benefits: {impact}
+  Personal motivation: {personalMotivation}
+  Call to action: {callToAction}
+  Tone: {tone}`,
+		features: [
+			"Sustainability-focused",
+			"Positive impact showcase",
+			"Personal motivation sharing",
+			"Engagement-driven",
+			"Professional branding",
+		],
+		tags: [
+			"linkedin",
+			"sustainability",
+			"social-impact",
+			"tech-for-good",
+			"developer-community",
+		],
+		formFields: [
+			{
+				label: "Project Name",
+				name: "projectName",
+				type: "text",
+				required: true,
+				order: 1,
+			},
+			{
+				label: "Sustainable Features",
+				name: "sustainableFeatures",
+				type: "textarea",
+				required: true,
+				order: 2,
+			},
+			{
+				label: "Impact and Benefits",
+				name: "impact",
+				type: "textarea",
+				required: true,
+				order: 3,
+			},
+			{
+				label: "Personal Motivation",
+				name: "personalMotivation",
+				type: "textarea",
+				required: true,
+				order: 4,
+			},
+			{
+				label: "Call to Action",
+				name: "callToAction",
+				type: "text",
+				required: true,
+				order: 5,
+			},
+			{
+				label: "Writing Tone",
+				name: "tone",
+				type: "select",
+				required: true,
+				order: 6,
+				options: [
+					{ label: "Inspirational", value: "inspirational" },
+					{ label: "Informative", value: "informative" },
+					{ label: "Passionate", value: "passionate" },
+				],
+			},
+		],
+	},
+	{
+		id: "15",
+		name: "Developer Sustainability Spotlight",
+		description:
+			"Create LinkedIn posts that highlight how developers are contributing to sustainable tech solutions.",
+		slug: "developer-sustainability-spotlight",
+		category: "Social Impact",
+		imageUrl: "/templates/sustainability.jpg",
+		icon: Leaf,
+		color: "text-green-500",
+		bgColor: "bg-green-100",
+		aiPrompt: `Create a LinkedIn post showcasing how developers can contribute to sustainable tech solutions.
+  Highlight the project: {projectName}
+  Key sustainable features: {sustainableFeatures}
+  Impact and benefits: {impact}
+  Personal motivation: {personalMotivation}
+  Call to action: {callToAction}
+  Tone: {tone}`,
+		features: [
+			"Sustainability-focused",
+			"Positive impact showcase",
+			"Personal motivation sharing",
+			"Engagement-driven",
+			"Professional branding",
+		],
+		tags: [
+			"linkedin",
+			"sustainability",
+			"social-impact",
+			"tech-for-good",
+			"developer-community",
+		],
+		formFields: [
+			{
+				label: "Project Name",
+				name: "projectName",
+				type: "text",
+				required: true,
+				order: 1,
+			},
+			{
+				label: "Sustainable Features",
+				name: "sustainableFeatures",
+				type: "textarea",
+				required: true,
+				order: 2,
+			},
+			{
+				label: "Impact and Benefits",
+				name: "impact",
+				type: "textarea",
+				required: true,
+				order: 3,
+			},
+			{
+				label: "Personal Motivation",
+				name: "personalMotivation",
+				type: "textarea",
+				required: true,
+				order: 4,
+			},
+			{
+				label: "Call to Action",
+				name: "callToAction",
+				type: "text",
+				required: true,
+				order: 5,
+			},
+			{
+				label: "Writing Tone",
+				name: "tone",
+				type: "select",
+				required: true,
+				order: 6,
+				options: [
+					{ label: "Inspirational", value: "inspirational" },
+					{ label: "Informative", value: "informative" },
+					{ label: "Passionate", value: "passionate" },
+				],
+			},
+		],
+	},
+	{
+		id: "16",
+		name: "Developer Mental Health Awareness",
+		description:
+			"Create LinkedIn posts that raise awareness about mental health challenges faced by developers and offer supportive resources.",
+		slug: "developer-mental-health",
+		category: "Social Impact",
+		imageUrl: "/templates/mental-health.jpg",
+		icon: BrainCircuit,
+		color: "text-sky-500",
+		bgColor: "bg-sky-100",
+		aiPrompt: `Create a LinkedIn post to raise awareness about mental health in the developer community.
+  Key topics to cover:
+  - {topic1}
+  - {topic2}
+  - {topic3}
+  Include personal experiences, statistics, or industry insights.
+  Provide supportive resources and actionable tips.
+  Tone: {tone}`,
+		features: [
+			"Mental health awareness",
+			"Personal stories",
+			"Data-driven insights",
+			"Supportive resources",
+			"Actionable guidance",
+		],
+		tags: [
+			"linkedin",
+			"mental-health",
+			"developer-wellness",
+			"self-care",
+			"community-support",
+		],
+		formFields: [
+			{
+				label: "Topic 1",
+				name: "topic1",
+				type: "text",
+				required: true,
+				order: 1,
+			},
+			{
+				label: "Topic 2",
+				name: "topic2",
+				type: "text",
+				required: true,
+				order: 2,
+			},
+			{
+				label: "Topic 3",
+				name: "topic3",
+				type: "text",
+				required: true,
+				order: 3,
+			},
+			{
+				label: "Writing Tone",
+				name: "tone",
+				type: "select",
+				required: true,
+				order: 4,
+				options: [
+					{ label: "Compassionate", value: "compassionate" },
+					{ label: "Informative", value: "informative" },
+					{ label: "Encouraging", value: "encouraging" },
+				],
+			},
+		],
+	},
+	{
+		id: "17",
+		name: "Developer Entrepreneurship Showcase",
+		description:
+			"Create LinkedIn posts that highlight developers who have started their own successful tech ventures.",
+		slug: "developer-entrepreneurship",
+		category: "Professional Development",
+		imageUrl: "/templates/entrepreneurship.jpg",
+		icon: Lightbulb,
+		color: "text-amber-500",
+		bgColor: "bg-amber-100",
+		aiPrompt: `Create a LinkedIn post showcasing a developer entrepreneur and their tech venture.
+  Entrepreneur Name: {entrepreneurName}
+  Company Name: {companyName}
+  Product/Service: {productDescription}
+  Key Achievements: {achievements}
+  Entrepreneurial Journey: {journey}
+  Call to Action: {callToAction}
+  Tone: {tone}`,
+		features: [
+			"Entrepreneurship spotlight",
+			"Inspirational stories",
+			"Product/service showcase",
+			"Key achievements highlights",
+			"Engagement-driven",
+		],
+		tags: [
+			"linkedin",
+			"developer-entrepreneurship",
+			"tech-startups",
+			"founder-stories",
+			"professional-development",
+		],
+		formFields: [
+			{
+				label: "Entrepreneur Name",
+				name: "entrepreneurName",
+				type: "text",
+				required: true,
+				order: 1,
+			},
+			{
+				label: "Company Name",
+				name: "companyName",
+				type: "text",
+				required: true,
+				order: 2,
+			},
+			{
+				label: "Product/Service Description",
+				name: "productDescription",
+				type: "textarea",
+				required: true,
+				order: 3,
+			},
+			{
+				label: "Key Achievements",
+				name: "achievements",
+				type: "textarea",
+				required: true,
+				order: 4,
+			},
+			{
+				label: "Entrepreneurial Journey",
+				name: "journey",
+				type: "textarea",
+				required: true,
+				order: 5,
+			},
+			{
+				label: "Call to Action",
+				name: "callToAction",
+				type: "text",
+				required: true,
+				order: 6,
+			},
+			{
+				label: "Writing Tone",
+				name: "tone",
+				type: "select",
+				required: true,
+				order: 7,
+				options: [
+					{ label: "Inspirational", value: "inspirational" },
+					{ label: "Informative", value: "informative" },
+					{ label: "Conversational", value: "conversational" },
+				],
+			},
+		],
+	},
+	{
+		id: "18",
+		name: "Developer Freelancing Spotlight",
+		description:
+			"Create LinkedIn posts that highlight the experiences and successes of developer freelancers.",
+		slug: "developer-freelancing",
+		category: "Professional Development",
+		imageUrl: "/templates/freelancing.jpg",
+		icon: Briefcase,
+		color: "text-lime-500",
+		bgColor: "bg-lime-100",
+		aiPrompt: `Create a LinkedIn post showcasing the freelance experience of a developer.
+  Freelancer Name: {freelancerName}
+  Freelance Services: {services}
+  Key Clients/Projects: {clientsProjects}
+  Freelancing Journey: {journey}
+  Advice for Other Developers: {advice}
+  Call to Action: {callToAction}
+  Tone: {tone}`,
+		features: [
+			"Freelancing spotlight",
+			"Client/project showcase",
+			"Personal journey sharing",
+			"Actionable advice",
+			"Engagement-driven",
+		],
+		tags: [
+			"linkedin",
+			"developer-freelancing",
+			"professional-development",
+			"entrepreneurship",
+			"career-advice",
+		],
+		formFields: [
+			{
+				label: "Freelancer Name",
+				name: "freelancerName",
+				type: "text",
+				required: true,
+				order: 1,
+			},
+			{
+				label: "Freelance Services",
+				name: "services",
+				type: "textarea",
+				required: true,
+				order: 2,
+			},
+			{
+				label: "Key Clients/Projects",
+				name: "clientsProjects",
+				type: "textarea",
+				required: true,
+				order: 3,
+			},
+			{
+				label: "Freelancing Journey",
+				name: "journey",
+				type: "textarea",
+				required: true,
+				order: 4,
+			},
+			{
+				label: "Advice for Developers",
+				name: "advice",
+				type: "textarea",
+				required: true,
+				order: 5,
+			},
+			{
+				label: "Call to Action",
+				name: "callToAction",
+				type: "text",
+				required: true,
+				order: 6,
+			},
+			{
+				label: "Writing Tone",
+				name: "tone",
+				type: "select",
+				required: true,
+				order: 7,
+				options: [
+					{ label: "Inspirational", value: "inspirational" },
+					{ label: "Informative", value: "informative" },
+					{ label: "Conversational", value: "conversational" },
+				],
+			},
+		],
+	},
+	{
+		id: "19",
+		name: "Developer Upskilling Recommendations",
+		description:
+			"Create LinkedIn posts that provide guidance and resources for developers to continually upskill and grow their careers.",
+		slug: "developer-upskilling",
+		category: "Professional Development",
+		imageUrl: "/templates/upskilling.jpg",
+		icon: CloudLightning,
+		color: "text-rose-500",
+		bgColor: "bg-rose-100",
+		aiPrompt: `Create a LinkedIn post with recommendations for developers to upskill and grow their careers.
+  Key topics to cover:
+  - {topic1}
+  - {topic2}
+  - {topic3}
+  Include resources, tools, or online learning platforms.
+  Provide actionable steps or advice.
+  Tone: {tone}`,
+		features: [
+			"Career development guidance",
+			"Upskilling recommendations",
+			"Resource and tool suggestions",
+			"Actionable advice",
+			"Engagement-driven",
+		],
+		tags: [
+			"linkedin",
+			"developer-upskilling",
+			"professional-development",
+			"career-growth",
+			"life-long-learning",
+		],
+		formFields: [
+			{
+				label: "Topic 1",
+				name: "topic1",
+				type: "text",
+				required: true,
+				order: 1,
+			},
+			{
+				label: "Topic 2",
+				name: "topic2",
+				type: "text",
+				required: true,
+				order: 2,
+			},
+			{
+				label: "Topic 3",
+				name: "topic3",
+				type: "text",
+				required: true,
+				order: 3,
+			},
+			{
+				label: "Writing Tone",
+				name: "tone",
+				type: "select",
+				required: true,
+				order: 4,
+				options: [
+					{ label: "Informative", value: "informative" },
+					{ label: "Motivational", value: "motivational" },
+					{ label: "Practical", value: "practical" },
+				],
+			},
+		],
+	},
+	{
+		id: "20",
+		name: "Developer Technical Blogging",
+		description:
+			"Create a detailed technical blog post that educates and inspires other developers.",
+		slug: "developer-technical-blogging",
+		category: "Technical Content",
+		imageUrl: "/templates/technical-blogging.jpg",
+		icon: BookOpen,
+		color: "text-gray-500",
+		bgColor: "bg-gray-100",
+		aiPrompt: `Create a comprehensive technical blog post on the topic of "{topic}".
+  Outline:
+  1. Introduction: {introduction}
+  2. Problem/Challenge: {problem}
+  3. Technical Solution: {solution}
+  4. Implementation Details: {implementation}
+  5. Results and Learnings: {resultsLearnings}
+  6. Conclusion and Next Steps: {conclusion}
+  Include relevant code samples, diagrams, or references.
+  Aim to educate and inspire other developers.
+  Tone: {tone}`,
+		features: [
+			"In-depth technical content",
+			"Educational format",
+			"Comprehensive coverage",
+			"Practical guidance",
+			"Visuals and references",
+		],
+		tags: [
+			"technical-blogging",
+			"developer-education",
+			"technical-content",
+			"problem-solving",
+			"best-practices",
+		],
+		formFields: [
+			{
+				label: "Topic",
+				name: "topic",
+				type: "text",
+				required: true,
+				order: 1,
+			},
+			{
+				label: "Introduction",
+				name: "introduction",
+				type: "textarea",
+				required: true,
+				order: 2,
+			},
+			{
+				label: "Problem/Challenge",
+				name: "problem",
+				type: "textarea",
+				required: true,
+				order: 3,
 			},
 			{
 				label: "Technical Solution",
-				field: "technicalSolution",
-				name: "technicalSolution",
-				required: true,
-				placeholder: "How did you solve it technically?",
-				type: "textarea",
-			},
-			{
-				label: "Technology Stack",
-				field: "techStack",
-				name: "techStack",
-				required: true,
-				placeholder: "What technologies did you use?",
-				type: "textarea",
-			},
-			{
-				label: "Business Impact",
-				field: "businessImpact",
-				name: "businessImpact",
-				required: true,
-				placeholder: "What were the measurable results?",
-				type: "textarea",
-			},
-			{
-				label: "Client Testimonial",
-				field: "testimonial",
-				name: "testimonial",
-				required: false,
-				placeholder: "Any feedback from the client?",
-				type: "textarea",
-			},
-		],
-		validationSchema: z.object({
-			industry: z.string().min(1, "Industry is required"),
-			clientChallenge: z.string().min(1, "Client challenge is required"),
-			technicalSolution: z
-				.string()
-				.min(1, "Technical solution is required"),
-			techStack: z.string().min(1, "Technology stack is required"),
-			businessImpact: z.string().min(1, "Business impact is required"),
-			testimonial: z.string().optional(),
-		}),
-		isFavorite: false,
-	},
-	{
-		name: "Developer Value Proposition",
-		description:
-			"Create compelling outreach messages that highlight your unique value proposition as a developer while maintaining professionalism and authenticity.",
-		icon: Mail,
-		features: [
-			"Personalized Approach",
-			"Value Proposition",
-			"Technical Expertise",
-			"Project Examples",
-			"Clear Next Steps",
-		],
-		imageUrl: "/value-prop.jpg",
-		href: "/value-proposition",
-		color: "text-green-500",
-		bgColor: "bg-green-200",
-		slug: "value-proposition",
-		category: "Client Outreach",
-		aiPrompt: `Create a personalized outreach message that effectively communicates your value as a developer. The message should:
-
- 1. Start with a personalized opening that shows research about the recipient
- 2. Identify a specific business challenge or opportunity
- 3. Present your relevant technical expertise and experience
- 4. Provide concrete examples of similar problems you've solved
- 5. Include specific technologies and methodologies you're proficient in
- 6. Demonstrate understanding of their industry
- 7. Highlight your unique approach or methodology
- 8. Include social proof or relevant achievements
- 9. End with a clear but low-pressure call-to-action
- 10. Maintain a professional, confident, yet humble tone`,
-		formFields: [
-			{
-				label: "Recipient Details",
-				field: "recipientInfo",
-				name: "recipientInfo",
-				required: true,
-				placeholder: "What do you know about the recipient/company?",
-				type: "textarea",
-			},
-			{
-				label: "Outreach Type",
-				field: "outreachType",
-				name: "outreachType",
-				required: true,
-				type: "select",
-				options: [
-					{ label: "Cold Email", value: "email" },
-					{ label: "LinkedIn Message", value: "linkedin" },
-					{ label: "Proposal", value: "proposal" },
-					{ label: "Follow-up", value: "followup" },
-				],
-			},
-			{
-				label: "Your Expertise",
-				field: "expertise",
-				name: "expertise",
-				required: true,
-				type: "select",
-				multiple: true,
-				options: [
-					{ label: "Frontend Development", value: "frontend" },
-					{ label: "Backend Development", value: "backend" },
-					{ label: "Full Stack Development", value: "fullstack" },
-					{ label: "Mobile Development", value: "mobile" },
-					{ label: "DevOps", value: "devops" },
-					{ label: "API Development", value: "api" },
-					{ label: "Database Design", value: "database" },
-				],
-			},
-			{
-				label: "Relevant Project Example",
-				field: "projectExample",
-				name: "projectExample",
-				required: true,
-				placeholder: "Describe a similar project you've worked on",
-				type: "textarea",
-			},
-			{
-				label: "Unique Value Proposition",
-				field: "valueProposition",
-				name: "valueProposition",
-				required: true,
-				placeholder: "What makes your approach/expertise unique?",
-				type: "textarea",
-			},
-			{
-				label: "Call-to-Action Type",
-				field: "ctaType",
-				name: "ctaType",
-				required: true,
-				type: "select",
-				options: [
-					{ label: "Discovery Call", value: "call" },
-					{ label: "Portfolio Review", value: "portfolio" },
-					{ label: "Case Study Share", value: "casestudy" },
-					{ label: "Quick Chat", value: "chat" },
-				],
-			},
-		],
-		validationSchema: z.object({
-			recipientInfo: z
-				.string()
-				.min(1, "Recipient information is required"),
-			outreachType: z.string().min(1, "Outreach type is required"),
-			expertise: z
-				.array(z.string())
-				.min(1, "At least one expertise is required"),
-			projectExample: z.string().min(1, "Project example is required"),
-			valueProposition: z
-				.string()
-				.min(1, "Value proposition is required"),
-			ctaType: z.string().min(1, "CTA type is required"),
-		}),
-		isFavorite: false,
-	},
-	{
-		name: "Tech Insights and Trends Post",
-		description:
-			"Create insightful posts to keep your audience updated on the latest industry trends, tech advancements, and future predictions.",
-		icon: TrendingUp,
-		features: [
-			"Trending Technology Overview",
-			"Impact Analysis",
-			"Future Predictions",
-			"Social Proof",
-			"Engagement-Driven CTA",
-		],
-		imageUrl: "/tech-trends-post.jpg",
-		href: "/tech-trends-post",
-		color: "text-green-500",
-		bgColor: "bg-green-200",
-		slug: "tech-trends-post",
-		category: "Industry Updates",
-		aiPrompt: `Create a social media post to share insights on a current tech trend or emerging technology. The post should:
-
-    1. Start with an engaging introduction to the trend
-    2. Explain the trend's relevance to businesses or developers
-    3. Offer predictions on how it might evolve or impact the industry
-    4. Mention any relevant skills, experience, or projects you have related to the trend
-    5. Include a subtle call-to-action to drive engagement
-    6. Use relevant hashtags to reach a wider tech audience
-    7. Maintain a conversational and professional tone`,
-		formFields: [
-			{
-				label: "Tech Trend",
-				field: "trend",
-				name: "trend",
-				required: true,
-				placeholder: "Describe the tech trend or insight",
-				type: "textarea",
-			},
-			{
-				label: "Industry Impact",
-				field: "impact",
-				name: "impact",
-				required: true,
-				placeholder: "How does this trend affect the industry?",
-				type: "textarea",
-			},
-			{
-				label: "Future Predictions",
-				field: "predictions",
-				name: "predictions",
-				required: false,
-				placeholder: "Share any predictions or thoughts on the trend",
-				type: "textarea",
-			},
-			{
-				label: "Target Platform",
-				field: "platform",
-				name: "platform",
-				required: true,
-				type: "select",
-				options: [
-					{ label: "LinkedIn", value: "linkedin" },
-					{ label: "Twitter", value: "twitter" },
-					{ label: "Facebook", value: "facebook" },
-				],
-			},
-		],
-		validationSchema: {
-			trend: "z.string().min(1, 'Tech trend description is required')",
-			impact: "z.string().min(1, 'Industry impact is required')",
-			predictions: "z.string().optional()",
-			platform: "z.string().min(1, 'Platform is required')",
-		},
-		isFavorite: false,
-	},
-	{
-		name: "Case Study Post",
-		description:
-			"Create a post that dives into a project case study, showcasing your process, results, and client impact in a way that resonates with potential clients.",
-		icon: FolderOpen,
-		features: [
-			"Project Background",
-			"Challenges & Solutions",
-			"Technology Stack",
-			"Client Benefits",
-			"Professional CTA",
-		],
-		imageUrl: "/case-study-post.jpg",
-		href: "/case-study-post",
-		color: "text-purple-500",
-		bgColor: "bg-purple-200",
-		slug: "case-study-post",
-		category: "Client Success Stories",
-		aiPrompt: `Craft a social media post that highlights a recent project as a case study. The post should:
-
-    1. Begin with an engaging introduction that captures interest
-    2. Provide context on the project's background and purpose
-    3. Detail the primary challenges faced and the solutions implemented
-    4. Outline the tech stack used in a way that adds credibility
-    5. Include any measurable results or benefits to the client
-    6. Conclude with a professional call-to-action
-    7. Use relevant industry hashtags and maintain a concise, informative tone`,
-		formFields: [
-			{
-				label: "Project Type",
-				field: "projectType",
-				name: "projectType",
-				required: true,
-				type: "select",
-				options: [
-					{ label: "Web Application", value: "web-app" },
-					{ label: "Mobile App", value: "mobile-app" },
-					{ label: "API Development", value: "api" },
-					{ label: "E-commerce Solution", value: "ecommerce" },
-				],
-			},
-			{
-				label: "Challenge",
-				field: "challenge",
-				name: "challenge",
-				required: true,
-				placeholder: "Describe the primary challenge",
-				type: "textarea",
-			},
-			{
-				label: "Solution",
-				field: "solution",
 				name: "solution",
-				required: true,
-				placeholder: "Outline the solution provided",
 				type: "textarea",
+				required: true,
+				order: 4,
 			},
 			{
-				label: "Results/Metrics",
-				field: "results",
-				name: "results",
-				required: false,
-				placeholder: "Any measurable improvements?",
+				label: "Implementation Details",
+				name: "implementation",
 				type: "textarea",
+				required: true,
+				order: 5,
 			},
 			{
-				label: "Target Platform",
-				field: "platform",
-				name: "platform",
+				label: "Results and Learnings",
+				name: "resultsLearnings",
+				type: "textarea",
 				required: true,
+				order: 6,
+			},
+			{
+				label: "Conclusion and Next Steps",
+				name: "conclusion",
+				type: "textarea",
+				required: true,
+				order: 7,
+			},
+			{
+				label: "Writing Tone",
+				name: "tone",
 				type: "select",
+				required: true,
+				order: 8,
 				options: [
-					{ label: "LinkedIn", value: "linkedin" },
-					{ label: "Facebook", value: "facebook" },
-					{ label: "Twitter", value: "twitter" },
+					{ label: "Educational", value: "educational" },
+					{ label: "Authoritative", value: "authoritative" },
+					{ label: "Conversational", value: "conversational" },
 				],
 			},
 		],
-		validationSchema: {
-			projectType: "z.string().min(1, 'Project type is required')",
-			challenge: "z.string().min(1, 'Challenge description is required')",
-			solution: "z.string().min(1, 'Solution description is required')",
-			results: "z.string().optional()",
-			platform: "z.string().min(1, 'Platform is required')",
-		},
-		isFavorite: false,
-	},
-	{
-		name: "Service Showcase Ad",
-		description:
-			"Create a concise ad to highlight the unique value and benefits of a service you offer, targeting potential clients on social media.",
-		icon: Briefcase,
-		features: [
-			"Service Benefits",
-			"Key Differentiators",
-			"Client Testimonials",
-			"Strong CTA",
-			"Engagement-Oriented Design",
-		],
-		imageUrl: "/service-showcase.jpg",
-		href: "/service-showcase",
-		color: "text-indigo-500",
-		bgColor: "bg-indigo-200",
-		slug: "service-showcase",
-		category: "Client Attraction",
-		aiPrompt: `Compose a compelling social media ad for a specific service that attracts potential clients. The ad should:
-
-    1. Begin with a hook to highlight the problem the service solves
-    2. Briefly describe the service and its unique benefits
-    3. Include a short client testimonial or proof point if available
-    4. End with a clear call-to-action encouraging inquiries or sign-ups
-    5. Use relevant hashtags to broaden reach
-    6. Maintain a concise, persuasive, and professional tone`,
-		formFields: [
-			{
-				label: "Service Name",
-				field: "serviceName",
-				name: "serviceName",
-				required: true,
-				placeholder: "Enter the service you are promoting",
-				type: "text",
-			},
-			{
-				label: "Service Benefits",
-				field: "benefits",
-				name: "benefits",
-				required: true,
-				placeholder: "List the main benefits of this service",
-				type: "textarea",
-			},
-			{
-				label: "Testimonial",
-				field: "testimonial",
-				name: "testimonial",
-				required: false,
-				placeholder: "Include a short client testimonial (optional)",
-				type: "textarea",
-			},
-			{
-				label: "Target Platform",
-				field: "platform",
-				name: "platform",
-				required: true,
-				type: "select",
-				options: [
-					{ label: "Instagram", value: "instagram" },
-					{ label: "Facebook", value: "facebook" },
-					{ label: "LinkedIn", value: "linkedin" },
-				],
-			},
-		],
-		validationSchema: {
-			serviceName: "z.string().min(1, 'Service name is required')",
-			benefits: "z.string().min(1, 'Service benefits are required')",
-			testimonial: "z.string().optional()",
-			platform: "z.string().min(1, 'Platform is required')",
-		},
-		isFavorite: false,
-	},
-	{
-		name: "Client Success Story Ad",
-		description:
-			"Highlight a client’s success story, detailing the impact of your services in a way that appeals to potential clients.",
-		icon: BarChart,
-		features: [
-			"Detailed Client Success",
-			"Before-and-After Comparison",
-			"Outcome-Oriented",
-			"Trust-Building Elements",
-			"Encouraging CTA",
-		],
-		imageUrl: "/client-success.jpg",
-		href: "/client-success",
-		color: "text-teal-500",
-		bgColor: "bg-teal-200",
-		slug: "client-success",
-		category: "Trust Building",
-		aiPrompt: `Create a social media ad that tells the story of a client’s success due to your service. The post should:
-
-    1. Start by presenting the client's initial challenge or problem
-    2. Briefly describe the service you provided to solve this problem
-    3. Emphasize the measurable outcomes or success metrics
-    4. Add a quote from the client if available for authenticity
-    5. End with a call-to-action encouraging inquiries or visits to your website
-    6. Use a conversational and trust-building tone`,
-		formFields: [
-			{
-				label: "Client Industry",
-				field: "clientIndustry",
-				name: "clientIndustry",
-				required: true,
-				placeholder:
-					"Enter the client's industry (e.g., eCommerce, SaaS)",
-				type: "text",
-			},
-			{
-				label: "Challenge",
-				field: "challenge",
-				name: "challenge",
-				required: true,
-				placeholder:
-					"Describe the client's challenge before your service",
-				type: "textarea",
-			},
-			{
-				label: "Solution",
-				field: "solution",
-				name: "solution",
-				required: true,
-				placeholder: "Describe how you solved the challenge",
-				type: "textarea",
-			},
-			{
-				label: "Results/Metrics",
-				field: "results",
-				name: "results",
-				required: true,
-				placeholder:
-					"List measurable results achieved (e.g., 30% increase in sales)",
-				type: "textarea",
-			},
-			{
-				label: "Testimonial",
-				field: "testimonial",
-				name: "testimonial",
-				required: false,
-				placeholder: "Client quote (optional)",
-				type: "textarea",
-			},
-			{
-				label: "Target Platform",
-				field: "platform",
-				name: "platform",
-				required: true,
-				type: "select",
-				options: [
-					{ label: "LinkedIn", value: "linkedin" },
-					{ label: "Facebook", value: "facebook" },
-					{ label: "Twitter", value: "twitter" },
-				],
-			},
-		],
-		validationSchema: {
-			clientIndustry: "z.string().min(1, 'Client industry is required')",
-			challenge: "z.string().min(1, 'Challenge description is required')",
-			solution: "z.string().min(1, 'Solution description is required')",
-			results: "z.string().min(1, 'Results description is required')",
-			testimonial: "z.string().optional()",
-			platform: "z.string().min(1, 'Platform is required')",
-		},
-		isFavorite: false,
-	},
-	{
-		name: "Product Demo Ad",
-		description:
-			"Showcase your product with a short, engaging ad that highlights its top features and encourages potential clients to try it.",
-		icon: Video,
-		features: [
-			"Feature Highlight",
-			"User-Friendly Description",
-			"Problem-Solution Focus",
-			"Clear CTA",
-			"Platform-Specific Design",
-		],
-		imageUrl: "/product-demo.jpg",
-		href: "/product-demo",
-		color: "text-red-500",
-		bgColor: "bg-red-200",
-		slug: "product-demo",
-		category: "Product Awareness",
-		aiPrompt: `Create a product demo ad that highlights the key features and benefits in a way that encourages viewers to try it out. The ad should:
-
-    1. Start with a hook introducing the product and its primary benefit
-    2. Briefly describe how it solves a specific problem or pain point
-    3. Highlight the main features and unique selling points
-    4. Conclude with a strong call-to-action encouraging viewers to try or sign up
-    5. Use relevant hashtags for your target audience
-    6. Maintain an engaging, informative tone`,
-		formFields: [
-			{
-				label: "Product Name",
-				field: "productName",
-				name: "productName",
-				required: true,
-				placeholder: "Enter the product's name",
-				type: "text",
-			},
-			{
-				label: "Main Benefit",
-				field: "benefit",
-				name: "benefit",
-				required: true,
-				placeholder: "Describe the main benefit of the product",
-				type: "textarea",
-			},
-			{
-				label: "Features",
-				field: "features",
-				name: "features",
-				required: true,
-				placeholder: "List key features",
-				type: "textarea",
-			},
-			{
-				label: "Target Platform",
-				field: "platform",
-				name: "platform",
-				required: true,
-				type: "select",
-				options: [
-					{ label: "Instagram", value: "instagram" },
-					{ label: "YouTube", value: "youtube" },
-					{ label: "LinkedIn", value: "linkedin" },
-				],
-			},
-		],
-		validationSchema: {
-			productName: "z.string().min(1, 'Product name is required')",
-			benefit: "z.string().min(1, 'Main benefit is required')",
-			features: "z.string().min(1, 'Features are required')",
-			platform: "z.string().min(1, 'Platform is required')",
-		},
-		isFavorite: false,
-	},
-	{
-		name: "Limited-Time Offer Ad",
-		description:
-			"Drive urgency with a time-sensitive ad that highlights a special offer, encouraging immediate action from potential clients.",
-		icon: Clock,
-		features: [
-			"Urgency-Driven CTA",
-			"Clear Offer Description",
-			"End Date/Countdown",
-			"Benefits Highlight",
-			"Visual Impact",
-		],
-		imageUrl: "/limited-time-offer.jpg",
-		href: "/limited-time-offer",
-		color: "text-orange-500",
-		bgColor: "bg-orange-200",
-		slug: "limited-time-offer",
-		category: "Conversion Boost",
-		aiPrompt: `Craft an ad for a limited-time offer that prompts immediate action from viewers. The ad should:
-
-    1. Start with an eye-catching announcement of the offer (e.g., "Flash Sale" or "Only 48 Hours Left!")
-    2. Clearly state what the offer includes, such as a discount or free add-ons
-    3. Emphasize the benefits of the service or product being offered
-    4. Mention the end date or a countdown to create urgency
-    5. Finish with a strong call-to-action (e.g., "Sign Up Now," "Get It Before It's Gone")
-    6. Keep the tone persuasive and action-oriented`,
-		formFields: [
-			{
-				label: "Offer Description",
-				field: "offerDescription",
-				name: "offerDescription",
-				required: true,
-				placeholder: "Describe the limited-time offer",
-				type: "textarea",
-			},
-			{
-				label: "Benefits",
-				field: "benefits",
-				name: "benefits",
-				required: true,
-				placeholder: "Highlight the main benefits",
-				type: "textarea",
-			},
-			{
-				label: "End Date or Countdown",
-				field: "endDate",
-				name: "endDate",
-				required: true,
-				placeholder: "Specify the offer's end date or countdown",
-				type: "text",
-			},
-			{
-				label: "Target Platform",
-				field: "platform",
-				name: "platform",
-				required: true,
-				type: "select",
-				options: [
-					{ label: "Instagram", value: "instagram" },
-					{ label: "Facebook", value: "facebook" },
-					{ label: "Twitter", value: "twitter" },
-				],
-			},
-		],
-		validationSchema: {
-			offerDescription:
-				"z.string().min(1, 'Offer description is required')",
-			benefits: "z.string().min(1, 'Benefits are required')",
-			endDate: "z.string().min(1, 'End date or countdown is required')",
-			platform: "z.string().min(1, 'Platform is required')",
-		},
-		isFavorite: false,
-	},
-	{
-		name: "Explainer Ad",
-		description:
-			"Educate your audience about your service or product in an engaging and simplified way, making complex features easy to understand.",
-		icon: BookOpen,
-		features: [
-			"Simplified Explanation",
-			"Problem-Solution Approach",
-			"Highlight of Key Features",
-			"Clear CTA for More Info",
-			"Engagement-Oriented Tone",
-		],
-		imageUrl: "/explainer-ad.jpg",
-		href: "/explainer-ad",
-		color: "text-purple-500",
-		bgColor: "bg-purple-200",
-		slug: "explainer-ad",
-		category: "Brand Awareness",
-		aiPrompt: `Compose an explainer ad that educates potential clients on the key benefits and features of your service or product. The ad should:
-
-    1. Start by addressing a common problem or pain point your target audience faces
-    2. Explain in simple terms how your service/product solves this problem
-    3. Highlight the top 2-3 unique features or benefits that make it effective
-    4. End with a call-to-action inviting readers to learn more or try it out
-    5. Use hashtags or tags that increase discoverability
-    6. Maintain an informative, approachable tone`,
-		formFields: [
-			{
-				label: "Product or Service Name",
-				field: "productName",
-				name: "productName",
-				required: true,
-				placeholder: "Enter the name of your product or service",
-				type: "text",
-			},
-			{
-				label: "Problem Addressed",
-				field: "problem",
-				name: "problem",
-				required: true,
-				placeholder: "Describe the problem your service solves",
-				type: "textarea",
-			},
-			{
-				label: "Top Features",
-				field: "features",
-				name: "features",
-				required: true,
-				placeholder: "List the top features or benefits",
-				type: "textarea",
-			},
-			{
-				label: "Target Platform",
-				field: "platform",
-				name: "platform",
-				required: true,
-				type: "select",
-				options: [
-					{ label: "Facebook", value: "facebook" },
-					{ label: "Instagram", value: "instagram" },
-					{ label: "LinkedIn", value: "linkedin" },
-				],
-			},
-		],
-		validationSchema: {
-			productName:
-				"z.string().min(1, 'Product or service name is required')",
-			problem: "z.string().min(1, 'Problem is required')",
-			features: "z.string().min(1, 'Features are required')",
-			platform: "z.string().min(1, 'Platform is required')",
-		},
-		isFavorite: false,
-	},
-	{
-		name: "Free Resource Ad",
-		description:
-			"Attract potential leads by offering a free resource, such as an ebook or template, with a clear CTA for download or sign-up.",
-		icon: Gift,
-		features: [
-			"Resource Description",
-			"Lead-Generating CTA",
-			"Value-Oriented Messaging",
-			"Specific Benefits",
-			"Attractive Design Elements",
-		],
-		imageUrl: "/free-resource.jpg",
-		href: "/free-resource",
-		color: "text-blue-500",
-		bgColor: "bg-blue-200",
-		slug: "free-resource",
-		category: "Lead Generation",
-		aiPrompt: `Create an ad promoting a free resource (such as an ebook, checklist, or template) to attract leads. The ad should:
-
-    1. Start with an enticing statement that introduces the free resource
-    2. Briefly describe the value or knowledge the resource provides
-    3. Mention specific benefits or topics covered in the resource
-    4. Include a call-to-action that prompts viewers to download or sign up
-    5. Use relevant hashtags to target the right audience
-    6. Maintain a friendly, helpful tone`,
-		formFields: [
-			{
-				label: "Resource Title",
-				field: "resourceTitle",
-				name: "resourceTitle",
-				required: true,
-				placeholder: "Enter the title of your free resource",
-				type: "text",
-			},
-			{
-				label: "Description",
-				field: "description",
-				name: "description",
-				required: true,
-				placeholder: "Describe the resource's value",
-				type: "textarea",
-			},
-			{
-				label: "Benefits",
-				field: "benefits",
-				name: "benefits",
-				required: true,
-				placeholder: "List the main benefits or topics covered",
-				type: "textarea",
-			},
-			{
-				label: "Target Platform",
-				field: "platform",
-				name: "platform",
-				required: true,
-				type: "select",
-				options: [
-					{ label: "Instagram", value: "instagram" },
-					{ label: "LinkedIn", value: "linkedin" },
-					{ label: "Twitter", value: "twitter" },
-				],
-			},
-		],
-		validationSchema: {
-			resourceTitle: "z.string().min(1, 'Resource title is required')",
-			description: "z.string().min(1, 'Description is required')",
-			benefits: "z.string().min(1, 'Benefits are required')",
-			platform: "z.string().min(1, 'Platform is required')",
-		},
-		isFavorite: false,
 	},
 ];
+
+// Export helper functions for template management
+export const getTemplateBySlug = (slug: string): Template | undefined => {
+	return TEMPLATES.find((template) => template.slug === slug);
+};
+
+export const getTemplatesByCategory = (category: string): Template[] => {
+	return TEMPLATES.filter((template) => template.category === category);
+};
+
+export const getTemplatesByTag = (tag: string): Template[] => {
+	return TEMPLATES?.filter(
+		(template) => template.tags && template.tags.includes(tag)
+	);
+};
