@@ -94,7 +94,7 @@ const TemplateCard = ({
                {/* Bottom Action Indicator */}
                <div className="mt-6 flex items-center justify-end text-sm text-foreground/50">
                   <span className="flex items-center gap-1 group-hover:text-primary transition-colors duration-200">
-                     use template
+                     Use Template
                      <ChevronRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-200" />
                   </span>
                </div>
