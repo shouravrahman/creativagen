@@ -45,7 +45,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </Button>
 
-        <AnimatePresence mode="wait">
+         <AnimatePresence mode="sync">
            {(isOpen || typeof window !== "undefined" && window.innerWidth >= 768) && (
               <motion.aside
                  initial={{ x: -100, opacity: 0 }}
@@ -53,20 +53,20 @@ export const Sidebar: React.FC<SidebarProps> = ({
                  exit={{ x: -100, opacity: 0 }}
                  transition={{ duration: 0.2 }}
                  className={cn(
-               "flex flex-col bg-sidebar/50 backdrop-blur-md h-full py-6",
+                    "flex flex-col bg-sidebar/50  backdrop-blur-md h-full py-6",
                "border-r border-border/10",
-               "w-72 px-4",
+                    "w-64 px-4",
                "fixed md:relative z-40",
                isOpen ? "block" : "hidden md:flex"
             )}
               >
                  {/* Logo Section */}
                  <Link
-                    className="flex items-center justify-center h-16 mb-6 relative group"
+                     className="mt-10 flex items-center justify-center h-16 mb-6 relative group"
                     href="/"
                     title="homepage"
                  >
-                    <div className="absolute inset-0 bg-primary/5 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-200" />
+                     {/* <div className="absolute inset-0 bg-primary/5 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-200" /> */}
                     <Image
                        alt="Logo"
                        src="/creature.svg"
@@ -77,7 +77,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                  </Link>
 
                  {/* Navigation Section */}
-                 <div className="flex-1 px-2">
+                  <div className="mt-4 flex-1 px-2">
                     <nav className="space-y-1.5">
                        {routes.map((route) => (
                           <Link
