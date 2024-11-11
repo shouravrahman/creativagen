@@ -1,10 +1,11 @@
 "use client";
-
-import * as React from "react";
+import { useState, useEffect } from "react";
 import { eachDayOfInterval, startOfMonth, endOfMonth, format } from "date-fns";
 import { ContentPlannerHeader } from "@/components/planner/ContentPlannerHeader";
 import { ContentDay } from "@/components/planner/ContentDay";
 import { ScrollArea } from "@/components/ui/scroll-area";
+
+import axios from "axios";
 
 interface ContentItem {
 	id: string;
@@ -16,44 +17,73 @@ interface ContentItem {
 }
 
 export default function ContentPlanner() {
-	const [currentDate, setCurrentDate] = React.useState(new Date());
-	// const [contentItems, setContentItems] = React.useState<ContentItem[]>([]);
-	const [contentItems, setContentItems] = React.useState<ContentItem[]>([
-		{
-			id: "1",
-			title: "Launch Campaign",
-			description: "Launch the new product campaign on social media.",
-			platform: "twitter",
-			contentType: "post",
-			date: format(new Date(), "yyyy-MM-dd"),
-		},
-		{
-			id: "2",
-			title: "Blog Post",
-			description: "Write a blog post about the latest industry trends.",
-			platform: "linkedin",
-			contentType: "article",
-			date: format(new Date(), "yyyy-MM-dd"),
-		},
-	]);
-	const [platformFilter, setPlatformFilter] = React.useState<string>("all");
-	const [contentTypeFilter, setContentTypeFilter] =
-		React.useState<string>("all");
+   const [currentDate, setCurrentDate] = useState(new Date());
+   const [contentItems, setContentItems] = useState<ContentItem[]>([]);
+   const [platformFilter, setPlatformFilter] = useState<string>("all");
+   const [contentTypeFilter, setContentTypeFilter] = useState<string>("all");
+   const handleGenerateContentPlan = (values: any) => { console.log(values) };
+   useEffect(() => {
+      // Fetch content plan from backend
+      const fetchContentPlan = async () => {
+         try {
+            const response = await axios.get("/api/content-plan");
+            setContentItems(response.data);
+         } catch (error) {
+            console.error("Error fetching content plan:", error);
+         }
+      };
+      fetchContentPlan();
+   }, []);
 
 	const handleAddContent = (newContent: ContentItem) => {
-		setContentItems((prev) => [...prev, newContent]);
+      // Save new content item to backend
+      const saveContentItem = async () => {
+         try {
+            const response = await axios.post(
+               "/api/content-plan",
+               newContent
+            );
+            setContentItems((prev) => [...prev, response.data]);
+         } catch (error) {
+            console.error("Error saving content item:", error);
+         }
+      };
+      saveContentItem();
 	};
 
 	const handleEditContent = (editedContent: ContentItem) => {
-		setContentItems((prev) =>
-			prev.map((item) =>
-				item.id === editedContent.id ? editedContent : item
-			)
-		);
+      // Update content item in backend
+      const updateContentItem = async () => {
+         try {
+            await axios.put(
+               `/api/content-plan/${editedContent.id}`,
+               editedContent
+            );
+            setContentItems((prev) =>
+               prev.map((item) =>
+                  item.id === editedContent.id ? editedContent : item
+               )
+            );
+         } catch (error) {
+            console.error("Error updating content item:", error);
+         }
+      };
+      updateContentItem();
 	};
 
 	const handleDeleteContent = (contentId: string) => {
-		setContentItems((prev) => prev.filter((item) => item.id !== contentId));
+      // Delete content item from backend
+      const deleteContentItem = async () => {
+         try {
+            await axios.delete(`/api/content-plan/${contentId}`);
+            setContentItems((prev) =>
+               prev.filter((item) => item.id !== contentId)
+            );
+         } catch (error) {
+            console.error("Error deleting content item:", error);
+         }
+      };
+      deleteContentItem();
 	};
 
 	const filteredContent = contentItems.filter(
@@ -62,6 +92,7 @@ export default function ContentPlanner() {
 			(contentTypeFilter === "all" ||
 				item.contentType === contentTypeFilter)
 	);
+
 	return (
 		<div className="h-screen flex flex-col">
 			<ContentPlannerHeader
@@ -71,7 +102,11 @@ export default function ContentPlanner() {
 				setPlatformFilter={setPlatformFilter}
 				contentTypeFilter={contentTypeFilter}
 				setContentTypeFilter={setContentTypeFilter}
+            handleGenerateContentPlan={handleGenerateContentPlan}
 			/>
+
+
+
 			<ScrollArea className="flex-grow px-4 pb-4">
 				<div className="grid grid-cols-7 gap-4">
 					{["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(
