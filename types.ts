@@ -1,69 +1,131 @@
-import { ZodSchema } from "zod";
-import { IconType } from "react-icons";
-
-// Define a general field interface
-interface BaseField {
-	label: string;
-	name: string;
-	field: string;
-	required: boolean;
-	placeholder?: string;
+// Types for Enums
+enum UserRole {
+	Admin = "Admin",
+	User = "User",
 }
 
-// Text input field interface
-interface TextField extends BaseField {
-	type: "text";
+enum AiModel {
+	GPT4 = "GPT4",
+	GROQ = "GROQ",
+	GEMINI = "GEMINI",
+	CLAUDE = "CLAUDE",
+}
+// Account Interface (related to User)
+interface Account {
+	id: string;
+	userId: string;
+	type: string;
+	provider: string;
+	providerAccountId: string;
+	refreshToken?: string;
+	accessToken?: string;
+	expiresAt?: number;
+	tokenType?: string;
+	scope?: string;
+	idToken?: string;
+	sessionState?: string;
 }
 
-// Textarea field interface
-interface TextareaField extends BaseField {
-	type: "textarea";
+// GeneratedContent Interface (related to User and Template)
+interface GeneratedContent {
+	id: string;
+	formValues: Record<string, unknown>; // JSON object for form values
+	aiResponse: string;
+	templateId: string;
+	aiModel: AiModel;
+	createdBy: string;
+	createdAt: Date;
+	temperature: number;
+	maxTokens: number;
 }
 
-// Select field interface
-interface SelectField extends BaseField {
-	type: "select";
-	options: Array<{ label: string; value: string }>;
+// FavoritedTemplate Interface (relation between User and Template)
+interface FavoritedTemplate {
+	id: string;
+	userId: string;
+	templateId: string;
+	createdAt: Date;
 }
 
-// Switch field interface
-interface SwitchField extends BaseField {
-	type: "switch";
-	value?: boolean;
+// ContentPlan Interface (related to User)
+interface ContentPlan {
+	id: string;
+	title: string;
+	description: string;
+	startDate: Date;
+	endDate: Date;
+	userId: string;
+	createdAt: Date;
+	updatedAt: Date;
+	platforms: ContentPlanPlatform[];
 }
 
-// Union type to cover all possible field configurations
-type FieldConfig = TextField | TextareaField | SelectField | SwitchField;
+// ContentPlanPlatform Interface (relation between ContentPlan and Platform)
+interface ContentPlanPlatform {
+	id: string;
+	contentPlanId: string;
+	platformId: string;
+}
 
-// Main configuration interface
-export interface TEMPLATE {
+// User Interface
+interface User {
+	id: string;
+	name?: string;
+	email?: string;
+	emailVerified?: Date;
+	image?: string;
+	password?: string;
+	role: UserRole;
+	isTwoFactorEnabled: boolean;
+	accounts?: Account[];
+	generatedContents?: GeneratedContent[];
+	favoritedTemplates?: FavoritedTemplate[];
+	scheduledPosts?: any;
+	contentPlans?: ContentPlan[];
+}
+
+// Template Interface
+export interface Template {
+	id: string;
 	name: string;
 	description: string;
-	icon?: any; // assuming you're using an icon library like react-icons
-	href?: string;
-	color?: string;
-	bgColor?: string;
 	slug: string;
-	category?: string;
-	aiPrompt?: string;
-	formFields: FieldConfig[]; // array of form field configurations
-	validationSchema: ZodSchema<any>; // using Zod for validation
+	category: string;
+	imageUrl: string;
+	icon: any;
+	color: string;
+	bgColor: string;
+	aiPrompt: string;
+	features: string[];
+	tags: string[];
+	aiModel?: any;
+	formFields: FormField[];
+	favoritedBy?: FavoritedTemplate[];
+	generatedContents?: GeneratedContent[];
 }
-export interface FormConfig {
-	name?: string;
-	description?: string;
-	formFields: {
-		label: string;
-		field: string;
-		name: string;
-		required: boolean;
-		placeholder?: string;
-		options?: { label: string; value: string }[];
-		type?: string;
-		value?: boolean;
-	}[];
-}
-interface Option {
+
+export type FormFieldType =
+	| "text"
+	| "textarea"
+	| "select"
+	| "radio"
+	| "slider"
+	| "number";
+
+export interface Option {
 	label: string;
 	value: string;
+}
+
+export interface FormField {
+	label: string;
+	name: string;
+	type: FormFieldType;
+	required: boolean;
+	order: number;
+	options?: Option[];
+	helpText?: string;
+	min?: number;
+	max?: number;
+	step?: number;
 }
