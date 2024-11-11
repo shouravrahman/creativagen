@@ -81,24 +81,29 @@ const TemplatePage = () => {
    };
 
    return (
-      <div className="w-full">
-         <div className="flex items-center justify-between mb-2">
-            <Link href="/dashboard" className="flex items-center">
-               <ArrowLeft className="h-6 w-6 mr-1" />
-               <span className="text-lg">Back</span>
+
+
+
+      <div className="w-full max-w-9xl mx-auto px-4 sm:px-6 lg:px-8">
+         <div className="py-6 space-y-6">
+            {/* Back Button */}
+            <Link
+               href="/dashboard"
+               className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors group"
+            >
+               <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+               <span className="text-sm font-medium">Back to Dashboard</span>
             </Link>
-         </div>
 
-         <div className="flex flex-col mt-10 md:px-10">
-            <div className="flex items-center self-start gap-4 justify-center">
-               <div className="flex flex-col">
-                  <Sparkles className="w-8 h-8 text-accent animate-pulse" />{template?.name}
-                  {/* <Image width={10} height={10} src={template?.} alt="" className="text-white" /> */}
-
-                  <p className="mb-8 text-sm ">{template?.description}</p>
-               </div>
-
-               <Sheet>
+            {/* Title and Settings Section */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b pb-6">
+               <div className="space-y-1">
+                  <div className="flex items-center gap-3">
+                     <div className="p-2 bg-primary/10 rounded-lg">
+                        <Sparkles className="w-6 h-6 text-primary" />
+                     </div>
+                     <h1 className="text-2xl font-semibold tracking-tight">{template?.name}</h1>
+                     <Sheet>
                   <SheetTrigger asChild>
                      <Button variant="outline" size="icon">
                         <Settings2 className="h-4 w-4" />
@@ -170,6 +175,11 @@ const TemplatePage = () => {
                   </SheetContent>
                </Sheet>
             </div>
+                  <p className="text-muted-foreground text-sm leading-relaxed max-w-2xl">
+                     {template?.description}
+                  </p>
+               </div>
+            </div>
             <div className="flex flex-col justify-around md:flex-row gap-6  ">
 
                <DynamicForm
@@ -187,7 +197,7 @@ const TemplatePage = () => {
                </div>
             </div>
          </div>
-      </div >
+      </div>
    );
 };
 
