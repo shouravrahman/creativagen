@@ -91,6 +91,7 @@ export const LoginForm = () => {
 						type="submit"
 						disabled={isPending}
 						className="w-full"
+                  variant={"destructive"}
 					>
 						Login
 					</Button>
@@ -98,6 +99,7 @@ export const LoginForm = () => {
 						type="button"
 						onClick={handleDemoUser}
 						className="w-full"
+                  variant={"link"}
 					>
 						Login as Demo User
 					</Button>

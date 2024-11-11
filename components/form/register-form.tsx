@@ -80,6 +80,7 @@ export const RegisterForm = () => {
 						type="submit"
 						disabled={isPending}
 						className="w-full"
+                 variant={"destructive"}
 					>
 						Create an account
 					</Button>
