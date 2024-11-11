@@ -69,13 +69,13 @@ export function PrimaryFeatures() {
 			>
 				{({ selectedIndex }) => (
 					<>
-						<div className="-mx-4 flex overflow-x-auto pb-4 sm:mx-0 sm:overflow-visible sm:pb-0 lg:col-span-5">
-							<TabList className="relative z-10 flex whitespace-nowrap mx-auto lg:mx-0 lg:block lg:gap-x-0 lg:gap-y-1 lg:whitespace-normal">
+                  <div className="-mx-4 flex overflow-x-auto pb-4 sm:mx-0 sm:overflow-visible sm:pb-0 lg:col-span-5 ">
+                     <TabList className="relative z-10 flex whitespace-nowrap mx-auto lg:mx-0 lg:block lg:gap-x-0 lg:gap-y-1 lg:whitespace-normal">
 								{features.map((feature, featureIndex) => (
 									<div
 										key={feature.title}
 										className={clsx(
-											"group relative rounded-full px-3 py-1 lg:rounded-l-xl lg:rounded-r-none lg:p-6",
+                                 "px-6 py-3  group relative rounded-full lg:rounded-l-xl lg:rounded-r-none lg:p-6",
 											selectedIndex === featureIndex ? "bg-muted" : "hover:bg-primary/10"
 										)}
 									>
@@ -104,8 +104,8 @@ export function PrimaryFeatures() {
 						</div>
 						<TabPanels className="lg:col-span-7">
 							{features.map((feature) => (
-								<TabPanel key={feature.title} unmount={false} className="h-auto sm:h-[400px]"> {/* Adjusted height for responsiveness */}
-									<div className="relative sm:px-6 lg:hidden">
+                        <TabPanel key={feature.title} unmount={false} className="h-auto sm:h-[400px] "> {/* Adjusted height for responsiveness */}
+                           <div className="relative sm:px-6 lg:hidden ">
 										<div className="absolute -inset-x-4 bottom-[-4.25rem] top-[-6.5rem] ring-1 ring-inset ring-white/10 sm:inset-x-0 sm:rounded-t-xl" />
 										<p className="relative mx-auto max-w-2xl px-4 text-base sm:text-center">
 											{feature.description}
