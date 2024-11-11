@@ -115,7 +115,7 @@ export const ContentForm: React.FC<ContentFormProps> = ({
 				</Select>
 			</div>
 			<div className="flex justify-between">
-				<Button type="submit">
+            <Button type="submit" variant="destructive">
 					{initialContent ? "Update" : "Add"} Content
 				</Button>
 				{onDelete && (

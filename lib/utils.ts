@@ -24,8 +24,9 @@ import {
 } from "date-fns";
 import { DateRange } from "react-day-picker";
 
-import { Appointment } from "@/models/Appointment";
 import { ContentPlan } from "@prisma/client";
+import { FormField } from "@/types";
+import { z } from "zod";
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
 }
@@ -68,61 +69,6 @@ export const calculateNewDates = (
 	return { start, end };
 };
 
-export const filterAppointments = (
-	appt: Appointment,
-	index: number,
-	dateRange: DateRange,
-	viewMode: string
-): boolean => {
-	const apptDate = new Date(appt.start);
-	if (
-		!dateRange.from ||
-		!dateRange.to ||
-		!isWithinInterval(apptDate, {
-			start: dateRange.from,
-			end: dateRange.to,
-		})
-	) {
-		return false;
-	}
-	return isAppointmentInSlot(apptDate, index, viewMode, dateRange);
-};
-// Helper function to determine if an appointment should be displayed in a specific slot
-const isAppointmentInSlot = (
-	apptDate: Date,
-	index: number,
-	viewMode: string,
-	dateRange: DateRange
-): boolean => {
-	if (!dateRange.from) return false;
-
-	switch (viewMode) {
-		case "day":
-			return (
-				apptDate.getHours() === index &&
-				isSameDay(apptDate, dateRange.from)
-			);
-		case "week":
-			return (
-				apptDate.getDay() -
-					(6 -
-						differenceInDays(
-							new Date(dateRange.to!),
-							new Date(dateRange.from)
-						)) ===
-					index && isSameWeek(apptDate, dateRange.from)
-			);
-		case "month":
-			return (
-				getWeekOfMonth(apptDate) === index &&
-				isSameMonth(apptDate, dateRange.from)
-			);
-		case "year":
-			return apptDate.getMonth() === index;
-		default:
-			return false;
-	}
-};
 
 export const getLabelsForView = (
 	viewMode: "day" | "week" | "month" | "year",
@@ -199,7 +145,10 @@ export function setTokenExpiration(exp: number = 60 * 60) {
  * @return The token generated
  */
 
-export function signJwt(payload: Record<string, unknown>, options?: SignOptions) {
+export function signJwt(
+	payload: Record<string, unknown>,
+	options?: SignOptions
+) {
 	return sign(payload, process.env.JWT_SECRET as Secret, {
 		...options,
 		algorithm: "HS256",
@@ -229,3 +178,30 @@ export function response<T extends Record<string, unknown>>(
 export function response<T extends object>(response: T): T {
 	return response;
 }
+
+export const createSchema = (formFields: FormField[]) => {
+	console.log(formFields);
+	const schema = formFields?.reduce((acc, field) => {
+		let fieldSchema = z.string();
+		if (field.required) {
+			fieldSchema = fieldSchema.nonempty(`${field.label} is required`);
+		}
+
+		if (field.type === "number") {
+			fieldSchema = z
+				.number()
+				.min(field.min || 0)
+				.max(field.max || 100);
+		} else if (field.type === "slider") {
+			fieldSchema = z
+				.number()
+				.min(field.min || 0)
+				.max(field.max || 100);
+		}
+
+		acc[field.name] = fieldSchema;
+		return acc;
+	}, {} as Record<string, z.ZodTypeAny>);
+
+	return z.object(schema);
+};

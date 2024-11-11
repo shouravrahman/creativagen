@@ -9,6 +9,8 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { format, addMonths, subMonths } from "date-fns";
+import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
+import { CreateContentPlanForm } from "./CreateContentPlanForm";
 
 interface ContentPlannerHeaderProps {
 	currentDate: Date;
@@ -17,6 +19,7 @@ interface ContentPlannerHeaderProps {
 	setPlatformFilter: React.Dispatch<React.SetStateAction<string>>;
 	contentTypeFilter: string;
 	setContentTypeFilter: React.Dispatch<React.SetStateAction<string>>;
+   handleGenerateContentPlan: () => void
 }
 
 export const ContentPlannerHeader: React.FC<ContentPlannerHeaderProps> = ({
@@ -26,6 +29,7 @@ export const ContentPlannerHeader: React.FC<ContentPlannerHeaderProps> = ({
 	setPlatformFilter,
 	contentTypeFilter,
 	setContentTypeFilter,
+   handleGenerateContentPlan
 }) => {
 	const handlePreviousMonth = () => setCurrentDate(subMonths(currentDate, 1));
 	const handleNextMonth = () => setCurrentDate(addMonths(currentDate, 1));
@@ -95,6 +99,18 @@ export const ContentPlannerHeader: React.FC<ContentPlannerHeaderProps> = ({
 				>
 					<Calendar className="mr-2 h-4 w-4" /> Today
 				</Button>
+            <Dialog>
+               <DialogTrigger>
+                  <Button size={"lg"} variant={"destructive"}>
+                     Create Plan
+                  </Button>
+               </DialogTrigger>
+               <DialogContent className="max-w-4xl w-full ">
+                  <CreateContentPlanForm
+                     onSubmit={handleGenerateContentPlan}
+                  />
+               </DialogContent>
+            </Dialog>
 			</div>
 		</header>
 	);
