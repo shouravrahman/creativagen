@@ -3,8 +3,7 @@
 import { useState } from "react";
 import TemplateList from "@/components/template-list-section";
 import SearchSection from "@/components/search-section/Search";
-import CustomEditor from "@/components/content/CustomEditor";
-import SchedulePost from "@/components/content/SchedulePost";
+import { TEMPLATES } from "@/constants";
 
 export default function Dashboard() {
 	const [searchInput, setSearchInput] = useState<string>("");
@@ -30,7 +29,7 @@ export default function Dashboard() {
 				/>
 			</div>
 			<div className="px-4 ">
-				<TemplateList searchInput={searchInput} />
+            <TemplateList searchInput={searchInput} initialTemplates={TEMPLATES} />
 			</div>
 		</div>
 	);
