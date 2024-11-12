@@ -26,7 +26,7 @@ export const SubscriptionButton = ({ isPro = false }: { isPro: boolean }) => {
 
   return (
     <Button
-      variant={isPro ? "default" : "accent"}
+        variant={isPro ? "default" : "destructive"}
       disabled={loading}
       onClick={onClick}
     >
