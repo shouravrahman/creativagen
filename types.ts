@@ -1,3 +1,5 @@
+import { IconType } from "react-icons/lib";
+
 // Types for Enums
 enum UserRole {
 	Admin = "Admin",
@@ -68,7 +70,7 @@ interface ContentPlanPlatform {
 }
 
 // User Interface
-interface User {
+export interface User {
 	id: string;
 	name?: string;
 	email?: string;
@@ -84,37 +86,30 @@ interface User {
 	contentPlans?: ContentPlan[];
 }
 
-// Template Interface
+type FormFieldType =
+	| "text"
+	| "textarea"
+	| "select"
+	| "multiselect"
+	| "radio"
+	| "checkbox"
+	| "slider"
+	| "number"
+	| "date";
+
 export interface Template {
 	id: string;
 	name: string;
 	description: string;
 	slug: string;
 	category: string;
-	imageUrl: string;
-	icon: any;
+	icon: string;
 	color: string;
-	bgColor: string;
 	aiPrompt: string;
 	features: string[];
 	tags: string[];
-	aiModel?: any;
 	formFields: FormField[];
-	favoritedBy?: FavoritedTemplate[];
 	generatedContents?: GeneratedContent[];
-}
-
-export type FormFieldType =
-	| "text"
-	| "textarea"
-	| "select"
-	| "radio"
-	| "slider"
-	| "number";
-
-export interface Option {
-	label: string;
-	value: string;
 }
 
 export interface FormField {
@@ -123,9 +118,54 @@ export interface FormField {
 	type: FormFieldType;
 	required: boolean;
 	order: number;
-	options?: Option[];
+	options?: Array<{ label: string; value: string }>;
+	validation?: Record<string, any>;
 	helpText?: string;
-	min?: number;
-	max?: number;
-	step?: number;
+	default?: string;
+	min?: number; // For number/slider inputs
+	max?: number; // For number/slider inputs
+	step?: number; // For number/slider inputs
 }
+
+export interface Option {
+	label: string;
+	value: string;
+}
+export interface ContentItem {
+	id: string;
+	title: string;
+	description: string;
+	platform: string;
+	contentType: string;
+	date: string;
+}
+
+export const demoContentPlan: ContentItem[] = [
+	{
+		id: "1",
+		title: "Product Launch Announcement",
+		description:
+			"Exciting new features coming to our platform! Join us for the live demo.",
+		platform: "linkedin",
+		contentType: "post",
+		date: "2024-11-15",
+	},
+	{
+		id: "2",
+		title: "Behind the Scenes",
+		description:
+			"Take a peek at our development team working on the new features!",
+		platform: "instagram",
+		contentType: "story",
+		date: "2024-11-15",
+	},
+	{
+		id: "3",
+		title: "User Success Story",
+		description:
+			"How Company X increased their productivity by 200% using our platform",
+		platform: "twitter",
+		contentType: "article",
+		date: "2024-11-20",
+	},
+];
