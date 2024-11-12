@@ -28,15 +28,15 @@ const SearchSection = ({ onSearchInput }) => {
                      onChange={(e) => onSearchInput(e.target.value)}
                      type="search"
                      className="block w-full px-12 py-4 text-base bg-transparent border-none focus:ring-2 focus:ring-primary/20 rounded-xl placeholder:text-foreground/50 transition-all duration-200"
-                     placeholder="Search templates, categories, styles..."
+                     placeholder="Try searching:  Blog Post, Social Media, Email Template..."
                      required
                   />
                </div>
             </div>
 
-            <div className="absolute -bottom-1 translate-y-full  px-4 w-full text-xs text-foreground/60">
+            {/* <div className="absolute -bottom-1 translate-y-full  px-4 w-full text-xs text-foreground/60">
                Try searching: "Blog Post", "Social Media", "Email Template"
-            </div>
+            </div> */}
          </div>
       </div>
    );
