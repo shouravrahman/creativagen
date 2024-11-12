@@ -19,7 +19,7 @@ interface ContentPlannerHeaderProps {
 	setPlatformFilter: React.Dispatch<React.SetStateAction<string>>;
 	contentTypeFilter: string;
 	setContentTypeFilter: React.Dispatch<React.SetStateAction<string>>;
-   handleGenerateContentPlan: () => void
+	handleGenerateContentPlan: any;
 }
 
 export const ContentPlannerHeader: React.FC<ContentPlannerHeaderProps> = ({

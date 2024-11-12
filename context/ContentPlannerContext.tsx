@@ -1,102 +1,81 @@
-// ContentPlannerContext.tsx
-import React, { createContext, ReactNode, useState, useEffect } from 'react';
-import axios from 'axios';
+"use client";
+import { ContentItem, demoContentPlan } from "@/types";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
-interface ContentItem {
-   id: string;
-   title: string;
-   description: string;
-   platform: string;
-   contentType: string;
-   date: string;
-   hashtags?: string[];
-   mentions?: string[];
-   images?: string[];
-   videos?: string[];
-   callToAction?: string;
-   utmSource?: string;
-   utmMedium?: string;
-   utmCampaign?: string;
+interface ContentContextType {
+	contentItems: ContentItem[];
+	addContent: (content: ContentItem) => void;
+	editContent: (content: ContentItem) => void;
+	deleteContent: (id: string) => void;
+	setAllContent?: (items: ContentItem[]) => void;
 }
 
-interface ContentPlannerContextType {
-   contentItems: ContentItem[];
-   platformFilter: string;
-   contentTypeFilter: string;
-   currentDate: Date;
-   addContentItem: (newContent: ContentItem) => void;
-   updateContentItem: (updatedContent: ContentItem) => void;
-   deleteContentItem: (id: string) => void;
-   setPlatformFilter: (filter: string) => void;
-   setContentTypeFilter: (filter: string) => void;
-   setCurrentDate: (date: Date) => void;
-}
+const ContentContext = createContext<ContentContextType | undefined>(undefined);
 
-export const ContentPlannerContext = createContext<ContentPlannerContextType | null>(null);
+export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({
+	children,
+}) => {
+	const [contentItems, setContentItems] =
+		useState<ContentItem[]>(demoContentPlan);
 
-export const ContentPlannerProvider = ({ children }: { children: ReactNode }) => {
-   const [contentItems, setContentItems] = useState<ContentItem[]>([]);
-   const [platformFilter, setPlatformFilter] = useState<string>('all');
-   const [contentTypeFilter, setContentTypeFilter] = useState<string>('all');
-   const [currentDate, setCurrentDate] = useState<Date>(new Date());
+	useEffect(() => {
+		const storedContent = localStorage.getItem("contentPlan");
 
-   useEffect(() => {
-      const fetchContentPlan = async () => {
-         try {
-            const response = await axios.get('/api/content-plan');
-            setContentItems(response.data);
-         } catch (error) {
-            console.error('Error fetching content plan:', error);
-         }
-      };
-      fetchContentPlan();
-   }, []);
+		if (storedContent && storedContent.length > 0) {
+			setContentItems(JSON.parse(storedContent));
+		}
+		//  else {
+		// 	setContentItems(demoContentPlan);
+		// }
+	}, []);
 
-   const addContentItem = async (newContent: ContentItem) => {
-      try {
-         const response = await axios.post('/api/content-plan', newContent);
-         setContentItems((prev) => [...prev, response.data]);
-      } catch (error) {
-         console.error('Error saving content item:', error);
-      }
-   };
+	useEffect(() => {
+		localStorage.setItem("contentPlan", JSON.stringify(contentItems));
+	}, [contentItems]);
 
-   const updateContentItem = async (updatedContent: ContentItem) => {
-      try {
-         await axios.put(`/api/content-plan/${updatedContent.id}`, updatedContent);
-         setContentItems((prev) =>
-            prev.map((item) => (item.id === updatedContent.id ? updatedContent : item))
-         );
-      } catch (error) {
-         console.error('Error updating content item:', error);
-      }
-   };
+	const addContent = (newContent: ContentItem) => {
+		const updatedItems = [
+			...contentItems,
+			{ ...newContent, id: Date.now().toString() },
+		];
+		setContentItems(updatedItems);
+	};
 
-   const deleteContentItem = async (id: string) => {
-      try {
-         await axios.delete(`/api/content-plan/${id}`);
-         setContentItems((prev) => prev.filter((item) => item.id !== id));
-      } catch (error) {
-         console.error('Error deleting content item:', error);
-      }
-   };
+	const editContent = (editedContent: ContentItem) => {
+		const updatedItems = contentItems.map((item) =>
+			item.id === editedContent.id ? editedContent : item
+		);
+		setContentItems(updatedItems);
+	};
 
-   return (
-      <ContentPlannerContext.Provider
-         value={{
-            contentItems,
-            platformFilter,
-            contentTypeFilter,
-            currentDate,
-            addContentItem,
-            updateContentItem,
-            deleteContentItem,
-            setPlatformFilter,
-            setContentTypeFilter,
-            setCurrentDate,
-         }}
-      >
-         {children}
-      </ContentPlannerContext.Provider>
-   );
+	const deleteContent = (id: string) => {
+		const updatedItems = contentItems.filter((item) => item.id !== id);
+		setContentItems(updatedItems);
+	};
+
+	const setAllContent = (items: ContentItem[]) => {
+		setContentItems(items);
+	};
+
+	return (
+		<ContentContext.Provider
+			value={{
+				contentItems,
+				addContent,
+				editContent,
+				deleteContent,
+				setAllContent,
+			}}
+		>
+			{children}
+		</ContentContext.Provider>
+	);
+};
+
+export const useContent = () => {
+	const context = useContext(ContentContext);
+	if (context === undefined) {
+		throw new Error("useContent must be used within a ContentProvider");
+	}
+	return context;
 };
