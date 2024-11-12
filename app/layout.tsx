@@ -7,6 +7,8 @@ import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider.tsx";
 import { AuthProvider } from "@/providers/AuthProvider";
+import { GenerationSettingsProvider } from "@/context/GenerationSettingsContext";
+import { ContentProvider } from "@/context/ContentPlannerContext";
 
 const OpenSans = Open_Sans({ subsets: ["latin"] });
 
@@ -55,9 +57,13 @@ export default async function RootLayout({
 			<body className={OpenSans.className}>
 				<ThemeProvider attribute="class">
 					<AuthProvider>
-						<ModalProvider />
-						{children}
-						<Toaster />
+						<ContentProvider>
+							<GenerationSettingsProvider>
+								<ModalProvider />
+								{children}
+								<Toaster />
+							</GenerationSettingsProvider>
+						</ContentProvider>
 					</AuthProvider>
 				</ThemeProvider>
 			</body>
