@@ -147,12 +147,11 @@ model Template {
   slug        String   @unique
   category    String
   icon        String
+  aiPrompt    String
   color       String
   features    String[]
   tags        String[]
-  formConfig  Json
-
-  formFields        FormField[]
+  formFields  FormField[]  // Relation to FormField
   generatedContents GeneratedContent[]
 }
 
@@ -163,14 +162,14 @@ model FormField {
   name       String
   type       FormFieldType
   required   Boolean       @default(false)
-  order      Int          @default(0)
-  options    Json?        // For select, radio, checkbox fields
-  validation Json?        // Store Zod validation rules as JSON
+  order      Int           @default(0)
+  options    Json?         // For select, radio, checkbox fields
+  validation Json?         // Store Zod validation rules as JSON
   helpText   String?
   default    String?
-  min        Float?       // For number/slider inputs
-  max        Float?       // For number/slider inputs
-  step       Float?       // For number/slider inputs
+  min        Float?        // For number/slider inputs
+  max        Float?        // For number/slider inputs
+  step       Float?        // For number/slider inputs
 
   template Template @relation(fields: [templateId], references: [id], onDelete: Cascade)
 }
