@@ -6,11 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "prisma:push": "prisma db push",
+   "lint": "next lint",
     "postinstall": "prisma generate",
+   "type-check": "tsc --noEmit",
+   "push": "prisma db push",
+   "generate": " prisma generate",
     "studio": "prisma studio"
   },
+"prisma": {
+   "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+},
   "dependencies": {
     "@atlaskit/pragmatic-drag-and-drop": "^1.4.0",
     "@auth/prisma-adapter": "^1.0.14",
@@ -85,9 +90,11 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
+   "@snaplet/copycat": "^5.1.0",
+   "@snaplet/seed": "^0.98.0",
     "@types/bcryptjs": "^2.4.6",
     "@types/jsonwebtoken": "^9.0.5",
-    "@types/node": "20.12.12",
+   "@types/node": "^20.12.12",
     "@types/nodemailer": "^6.4.15",
     "@types/react": "18.3.2",
     "@types/react-dom": "18.3.0",
@@ -98,6 +105,10 @@
     "postcss": "^8",
     "prisma": "^5.22.0",
     "tailwindcss": "^3.3.0",
-    "typescript": "^5"
+   "ts-node": "^10.9.2",
+   "typescript": "^5.6.3"
+},
+"@snaplet/seed": {
+   "config": "prisma/seed/seed.config.ts"
   }
 }
