@@ -1,97 +1,65 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { eachDayOfInterval, startOfMonth, endOfMonth, format } from "date-fns";
 import { ContentPlannerHeader } from "@/components/planner/ContentPlannerHeader";
 import { ContentDay } from "@/components/planner/ContentDay";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { ContentProvider, useContent } from "@/context/ContentPlannerContext";
+import { useFilters } from "@/hooks/useFilters";
 
-import axios from "axios";
+// const generateContentPlan = (formData: any) => {
+// 	// This is where you'd implement your content generation logic
+// 	const startDate = new Date();
+// 	const generatedContent = [];
 
-interface ContentItem {
-	id: string;
-	title: string;
-	description: string;
-	platform: string;
-	contentType: string;
-	date: string;
-}
+// 	// Example: Generate content for the next 30 days
+// 	for (let i = 0; i < 30; i++) {
+// 		const date = new Date(startDate);
+// 		date.setDate(date.getDate() + i);
+
+// 		// Generate content based on frequency
+// 		if (
+// 			formData.frequency === "daily" ||
+// 			(formData.frequency === "weekly" && i % 7 === 0) ||
+// 			(formData.frequency === "bi-weekly" && i % 14 === 0) ||
+// 			(formData.frequency === "monthly" && i === 0)
+// 		) {
+// 			// Rotate through platforms and content types
+// 			const platformIndex = i % formData.platforms.length;
+// 			const contentTypeIndex = i % formData.contentType.length;
+
+// 			generatedContent.push({
+// 				id: `generated-${Date.now()}-${i}`,
+// 				title: `${formData.platforms[platformIndex]} ${formData.contentType[contentTypeIndex]}`,
+// 				description: `Generated content for ${formData.targetAudience} with ${formData.tone} tone`,
+// 				platform: formData.platforms[platformIndex],
+// 				contentType: formData.contentType[contentTypeIndex],
+// 				date: format(date, "yyyy-MM-dd"),
+// 			});
+// 		}
+// 	}
+
+// 	return generatedContent;
+// };
 
 export default function ContentPlanner() {
-   const [currentDate, setCurrentDate] = useState(new Date());
-   const [contentItems, setContentItems] = useState<ContentItem[]>([]);
-   const [platformFilter, setPlatformFilter] = useState<string>("all");
-   const [contentTypeFilter, setContentTypeFilter] = useState<string>("all");
-   const handleGenerateContentPlan = (values: any) => { console.log(values) };
-   useEffect(() => {
-      // Fetch content plan from backend
-      const fetchContentPlan = async () => {
-         try {
-            const response = await axios.get("/api/content-plan");
-            setContentItems(response.data);
-         } catch (error) {
-            console.error("Error fetching content plan:", error);
-         }
-      };
-      fetchContentPlan();
-   }, []);
+	const [currentDate, setCurrentDate] = useState(new Date());
+	const { contentItems, addContent, editContent, deleteContent } =
+		useContent();
+	const {
+		platformFilter,
+		setPlatformFilter,
+		contentTypeFilter,
+		setContentTypeFilter,
+		filterContent,
+	} = useFilters();
 
-	const handleAddContent = (newContent: ContentItem) => {
-      // Save new content item to backend
-      const saveContentItem = async () => {
-         try {
-            const response = await axios.post(
-               "/api/content-plan",
-               newContent
-            );
-            setContentItems((prev) => [...prev, response.data]);
-         } catch (error) {
-            console.error("Error saving content item:", error);
-         }
-      };
-      saveContentItem();
+	const handleGenerateContentPlan = (formData: any) => {
+		// const generatedContent = generateContentPlan(formData);
+		// setAllContent(generatedContent);
 	};
 
-	const handleEditContent = (editedContent: ContentItem) => {
-      // Update content item in backend
-      const updateContentItem = async () => {
-         try {
-            await axios.put(
-               `/api/content-plan/${editedContent.id}`,
-               editedContent
-            );
-            setContentItems((prev) =>
-               prev.map((item) =>
-                  item.id === editedContent.id ? editedContent : item
-               )
-            );
-         } catch (error) {
-            console.error("Error updating content item:", error);
-         }
-      };
-      updateContentItem();
-	};
-
-	const handleDeleteContent = (contentId: string) => {
-      // Delete content item from backend
-      const deleteContentItem = async () => {
-         try {
-            await axios.delete(`/api/content-plan/${contentId}`);
-            setContentItems((prev) =>
-               prev.filter((item) => item.id !== contentId)
-            );
-         } catch (error) {
-            console.error("Error deleting content item:", error);
-         }
-      };
-      deleteContentItem();
-	};
-
-	const filteredContent = contentItems.filter(
-		(item) =>
-			(platformFilter === "all" || item.platform === platformFilter) &&
-			(contentTypeFilter === "all" ||
-				item.contentType === contentTypeFilter)
-	);
+	const filteredContent = filterContent(contentItems);
 
 	return (
 		<div className="h-screen flex flex-col">
@@ -102,10 +70,8 @@ export default function ContentPlanner() {
 				setPlatformFilter={setPlatformFilter}
 				contentTypeFilter={contentTypeFilter}
 				setContentTypeFilter={setContentTypeFilter}
-            handleGenerateContentPlan={handleGenerateContentPlan}
+				handleGenerateContentPlan={handleGenerateContentPlan}
 			/>
-
-
 
 			<ScrollArea className="flex-grow px-4 pb-4">
 				<div className="grid grid-cols-7 gap-4">
@@ -132,9 +98,9 @@ export default function ContentPlanner() {
 								date={date}
 								currentDate={currentDate}
 								dayContentItems={dayContentItems}
-								handleAddContent={handleAddContent}
-								handleEditContent={handleEditContent}
-								handleDeleteContent={handleDeleteContent}
+								handleAddContent={addContent}
+								handleEditContent={editContent}
+								handleDeleteContent={deleteContent}
 							/>
 						);
 					})}
@@ -142,4 +108,4 @@ export default function ContentPlanner() {
 			</ScrollArea>
 		</div>
 	);
-}
+};
