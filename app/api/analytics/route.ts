@@ -31,7 +31,7 @@ export async function GET() {
 
 		// Fetch content categorized by type
 		const contentByType = await prismadb.generatedContent.groupBy({
-			by: ["templateSlug"], // Assuming templateSlug represents the type of content
+			by: ["templateId"], // Assuming templateSlug represents the type of content
 			_count: {
 				id: true,
 			},
