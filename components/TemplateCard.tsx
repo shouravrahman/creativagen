@@ -1,10 +1,12 @@
 import Link from "next/link";
-import { Star, Sparkles, ChevronRight } from "lucide-react";
+import { Sparkle, Star, Sparkles, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Template } from "@/types";
 import React from "react";
+import { IconType } from "react-icons/lib";
+import { getIconComponent } from "./IconMap";
 
 
 const TemplateCard = ({
@@ -13,7 +15,8 @@ const TemplateCard = ({
 }: {
    template: Template;
    onToggleFavorite: () => void;
-}) => {
+   }) => {
+   const IconComponent: IconType | undefined = getIconComponent(template.icon!);
    return (
       <Card className="group relative overflow-hidden hover:shadow-lg transition-all duration-300 border border-border/50">
          <Link href={`/dashboard/content/${template.slug}`} className="block">
@@ -24,17 +27,13 @@ const TemplateCard = ({
                      <div
                         className={cn(
                            "absolute inset-0 rounded-xl opacity-20",
-                           template.bgColor
+                           template.color
                         )}
                      />
-                     {typeof template.icon === "function" ? (
-                        <template.icon
-                           className={cn("w-8 h-8 relative z-10", template.color)}
-                        />
+                     {IconComponent ? (
+                        <IconComponent className={cn("w-8 h-8 relative z-10", template.color)} />
                      ) : (
-                        React.createElement(template.icon, {
-                           className: cn("w-8 h-8 relative z-10", template.color),
-                        })
+                           <Sparkle className={cn("w-8 h-8 relative z-10", template.color)} />
                      )}
                   </div>
                   <button
@@ -45,12 +44,12 @@ const TemplateCard = ({
                      }}
                   >
                      <Star
-                        className={cn(
-                           "w-5 h-5 transition-colors duration-200",
-                           template.favoritedBy?.length! > 0
-                              ? "text-yellow-500 fill-yellow-500"
-                              : "text-foreground/50 hover:text-yellow-500"
-                        )}
+                        // className={cn(
+                        //    "w-5 h-5 transition-colors duration-200",
+                        //    template.favoritedBy?.length! > 0
+                        //       ? "text-yellow-500 fill-yellow-500"
+                        //       : "text-foreground/50 hover:text-yellow-500"
+                        // )}
                      />
                   </button>
                </div>
