@@ -1,22 +1,20 @@
 "use client";
-import {
-	ChartContainer,
-	ChartTooltip,
-	ChartTooltipContent,
-} from "@/components/ui/chart";
+import React from "react";
 import {
 	LineChart,
 	Line,
+   BarChart,
+   Bar,
 	CartesianGrid,
 	XAxis,
 	YAxis,
 	Tooltip,
 	Legend,
-	BarChart,
-	Bar,
+   ResponsiveContainer,
 } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useEffect, useState } from "react";
+import { ChartContainer } from "@/components/ui/chart";
+import { ArrowUpRight, Clock, FileText, CreditCard } from "lucide-react";
 
 type ContentByType = {
 	templateSlug: string;
@@ -28,8 +26,7 @@ type AnalyticsData = {
 	totalWordsGenerated: number;
 	totalContentCreated: number;
 	contentByType: ContentByType[];
-	timeSaved: number;
-	// Add a new field for time series data
+   timeSaved: number;
 	timeSeriesData: {
 		date: string;
 		totalWords: number;
@@ -37,13 +34,30 @@ type AnalyticsData = {
 	}[];
 };
 
-export default function Analytics() {
-	const [analyticsData, setAnalyticsData] = useState<AnalyticsData | null>(
-		null
-	);
-	const [loading, setLoading] = useState(true);
+const StatCard = ({ title, value, icon, suffix = "" }: { title: string, value: number, icon: any, suffix?: string }) => (
+   <Card className="overflow-hidden">
+      <CardHeader className="flex flex-row items-center justify-between pb-2">
+         <CardTitle className="text-sm font-medium">{title}</CardTitle>
+         {icon}
+      </CardHeader>
+      <CardContent>
+         <div className="text-2xl font-bold">
+            {value.toLocaleString()}
+            {suffix}
+         </div>
+         <p className="text-xs text-muted-foreground">
+            +20.1% from last month
+         </p>
+      </CardContent>
+   </Card>
+);
 
-	useEffect(() => {
+export function Analytics() {
+   const [analyticsData, setAnalyticsData] =
+      React.useState<AnalyticsData | null>(null);
+   const [loading, setLoading] = React.useState(true);
+
+   React.useEffect(() => {
 		const fetchAnalyticsData = async () => {
 			try {
 				const response = await fetch("/api/analytics", {
@@ -52,8 +66,7 @@ export default function Analytics() {
 				if (!response.ok) {
 					throw new Error("Failed to fetch analytics data");
 				}
-				const data = await response.json();
-				// setAnalyticsData(data);
+            const data = await response.json();
 				setAnalyticsData({
 					totalCreditsUsed: 10,
 					totalWordsGenerated: 5000,
@@ -68,7 +81,7 @@ export default function Analytics() {
 						},
 						{
 							date: "2023-01-02",
-							totalWords: 1500,
+                     totalWords: 500,
 							totalContent: 7,
 						},
 						{
@@ -78,17 +91,17 @@ export default function Analytics() {
 						},
 						{
 							date: "2023-01-04",
-							totalWords: 2500,
+                     totalWords: 1500,
 							totalContent: 12,
 						},
 						{
 							date: "2023-01-05",
-							totalWords: 3000,
+                     totalWords: 700,
 							totalContent: 15,
 						},
 						{
 							date: "2023-01-06",
-							totalWords: 3500,
+                     totalWords: 1300,
 							totalContent: 18,
 						},
 						{
@@ -111,144 +124,133 @@ export default function Analytics() {
 	if (loading) {
 		return (
 			<div className="flex justify-center items-center h-screen">
-				Loading...
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent"></div>
 			</div>
 		);
 	}
 
+   if (!analyticsData) return null;
+
 	return (
-		<div className="flex flex-col w-full min-h-screen">
-			<main className="flex-1 grid gap-4 p-4 md:gap-8 md:p-10">
-				<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-					<Card>
-						<CardHeader>
-							<CardTitle>Total Credits Used</CardTitle>
-						</CardHeader>
-						<CardContent>
-							<div className="text-2xl font-bold text-accent">
-								{analyticsData?.totalCreditsUsed}
-							</div>
-						</CardContent>
-					</Card>
-					<Card>
-						<CardHeader>
-							<CardTitle>Total Words Generated</CardTitle>
-						</CardHeader>
-						<CardContent>
-							<div className="text-2xl font-bold text-accent">
-								{analyticsData?.totalWordsGenerated}
-							</div>
-						</CardContent>
-					</Card>
-					<Card>
-						<CardHeader>
-							<CardTitle>Total Content Created</CardTitle>
-						</CardHeader>
-						<CardContent>
-							<div className="text-2xl font-bold text-accent">
-								{analyticsData?.totalContentCreated}
-							</div>
-						</CardContent>
-					</Card>
-					<Card>
-						<CardHeader>
-							<CardTitle>Time Saved</CardTitle>
-						</CardHeader>
-						<CardContent>
-							<div className="text-2xl font-bold text-accent">
-								{analyticsData?.timeSaved} min
-							</div>
-						</CardContent>
-					</Card>
-				</div>
-				<div className="grid gap-4 md:grid-cols-1">
-					<Card className="col-span-1">
-						<CardHeader>
-							<CardTitle>Analytics Over Time</CardTitle>
-						</CardHeader>
-						<CardContent>
-							{analyticsData && (
-								<BarChartComponent
-                        data={analyticsData.timeSeriesData}
-                     />
-							)}
-						</CardContent>
-					</Card>
-				</div>
-			</main>
-		</div>
+      <div className="flex flex-col w-full space-y-4 p-4 md:p-8">
+         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <StatCard
+               title="Total Credits Used"
+               value={analyticsData.totalCreditsUsed}
+               icon={
+                  <CreditCard className="h-4 w-4 text-muted-foreground" />
+               }
+            />
+            <StatCard
+               title="Words Generated"
+               value={analyticsData.totalWordsGenerated}
+               icon={
+                  <FileText className="h-4 w-4 text-muted-foreground" />
+               }
+            />
+            <StatCard
+               title="Content Created"
+               value={analyticsData.totalContentCreated}
+               icon={
+                  <ArrowUpRight className="h-4 w-4 text-muted-foreground" />
+               }
+            />
+            <StatCard
+               title="Time Saved"
+               value={analyticsData.timeSaved}
+               suffix=" min"
+               icon={<Clock className="h-4 w-4 text-muted-foreground" />}
+            />
+         </div>
+
+         <div className="grid gap-4 md:grid-cols-2">
+            <Card>
+               <CardHeader>
+                  <CardTitle>Words Generated Over Time</CardTitle>
+               </CardHeader>
+               <CardContent className="h-[400px]">
+                  <ResponsiveContainer
+                     width="100%"
+                     height="100%"
+                  >
+                     <LineChart data={analyticsData.timeSeriesData}>
+                        <CartesianGrid
+                           strokeDasharray="3 3"
+                           className="stroke-muted"
+                        />
+                        <XAxis
+                           dataKey="date"
+                           className="text-xs"
+                           tickFormatter={(date) =>
+                              new Date(date).toLocaleDateString()
+                           }
+                        />
+                        <YAxis className="text-xs" />
+                        <Tooltip
+                           contentStyle={{
+                              backgroundColor:
+                                 "hsl(var(--background))",
+                              border: "1px solid hsl(var(--border))",
+                           }}
+                        />
+                        <Legend />
+                        <Line
+                           type="monotone"
+                           dataKey="totalWords"
+                           name="Words"
+                           stroke="hsl(var(--accent))"
+                           strokeWidth={2}
+                           dot={false}
+                        />
+                     </LineChart>
+                  </ResponsiveContainer>
+               </CardContent>
+            </Card>
+
+            <Card>
+               <CardHeader>
+                  <CardTitle>Contents Generated Per Day</CardTitle>
+               </CardHeader>
+               <CardContent className="h-[400px]">
+                  <ResponsiveContainer
+                     width="100%"
+                     height="100%"
+                  >
+                     <BarChart data={analyticsData.timeSeriesData}>
+                        <CartesianGrid
+                           strokeDasharray="3 3"
+                           className="stroke-muted"
+                        />
+                        <XAxis
+                           dataKey="date"
+                           className="text-xs"
+                           tickFormatter={(date) =>
+                              new Date(date).toLocaleDateString()
+                           }
+                        />
+                        <YAxis className="text-xs" />
+                        <Tooltip
+                           contentStyle={{
+                              backgroundColor:
+                                 "hsl(var(--background))",
+                              border: "1px solid hsl(var(--border))",
+                           }}
+                        />
+                        <Legend />
+                        <Bar
+                           dataKey="totalContent"
+                           name="Content"
+                           fill="hsl(var(--accent))"
+                           className="hover:bg-black"
+                           radius={[4, 4, 0, 0]}
+                        />
+                     </BarChart>
+                  </ResponsiveContainer>
+               </CardContent>
+            </Card>
+         </div>
+      </div>
 	);
 }
 
-function BarChartComponent({
-	data,
-}: {
-	data: { date: string; totalWords: number; totalContent: number }[];
-}) {
-	return (
-		<ChartContainer config={{}}>
-			<BarChart
-				data={data}
-				width={600}
-				height={300}
-				margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-			>
-				<CartesianGrid strokeDasharray="3 3" />
-				<XAxis dataKey="date" />
-				<YAxis />
-				<Tooltip />
-				<Legend />
-				<Bar
-					dataKey="totalWords"
-					fill="hsl(var(--accent))"
-				/>
-				<Bar
-					dataKey="totalContent"
-					fill="hsl(var(--secondary))"
-				/>
-			</BarChart>
-		</ChartContainer>
-	);
-}
-function LineChartComponent({ data }: { data: { date: string; totalWords: number; totalContent: number }[] }) {
-	return (
-		<ChartContainer config={{}}>
-			<LineChart
-				data={data}
-				width={600}
-				height={300}
-				margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-			>
-				<CartesianGrid strokeDasharray="3 3" />
-				<XAxis dataKey="date" />
-				<YAxis />
-				<Tooltip />
-				<Legend />
-				<Line type="monotone" dataKey="totalWords" stroke="hsl(var(--accent))" />
-				<Line type="monotone" dataKey="totalContent" stroke="hsl(var(--secondary))" />
-			</LineChart>
-		</ChartContainer>
-	);
-}
-function StackedBarChart({ data }: { data: ContentByType[] }) {
-	return (
-		<ChartContainer config={{}}>
-			<BarChart
-				data={data}
-				width={600}
-				height={300}
-				margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-			>
-				<CartesianGrid vertical={false} />
-				<XAxis dataKey="templateSlug" />
-				<YAxis />
-				<Tooltip />
-				<Legend />
-				<Bar
-					dataKey="count"
-					fill="hsl(var(--accent))"
-				/>
-			</BarChart>
-		</ChartContainer>
-	);
-}
+export default Analytics;
