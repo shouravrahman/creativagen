@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
-
+import PlausibleProvider from 'next-plausible'
 import { ModalProvider } from "@/components/modal-provider";
 // import { CrispProvider } from "@/components/crisp-provider";
 import { Toaster } from "@/components/ui/sonner";
@@ -9,6 +9,8 @@ import { ThemeProvider } from "@/components/theme-provider.tsx";
 import { AuthProvider } from "@/providers/AuthProvider";
 import { GenerationSettingsProvider } from "@/context/GenerationSettingsContext";
 import { ContentProvider } from "@/context/ContentPlannerContext";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { TemplateProvider } from "@/context/TemplateContext";
 
 const OpenSans = Open_Sans({ subsets: ["latin"] });
 
@@ -54,16 +56,23 @@ export default async function RootLayout({
    return (
 		<html>
 			{/* <CrispProvider /> */}
+         <head>
+            <PlausibleProvider domain="example.com" />
+         </head>
 			<body className={OpenSans.className}>
 				<ThemeProvider attribute="class">
 					<AuthProvider>
+                  <TemplateProvider>
 						<ContentProvider>
 							<GenerationSettingsProvider>
 								<ModalProvider />
+                           <TooltipProvider>
 								{children}
+                           </TooltipProvider>
 								<Toaster />
 							</GenerationSettingsProvider>
 						</ContentProvider>
+                  </TemplateProvider>
 					</AuthProvider>
 				</ThemeProvider>
 			</body>
