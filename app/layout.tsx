@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import PlausibleProvider from 'next-plausible'
-import { ModalProvider } from "@/components/modal-provider";
+import { ModalProvider } from "@/components/ModalProvider";
 // import { CrispProvider } from "@/components/crisp-provider";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider.tsx";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import { AuthProvider } from "@/providers/AuthProvider";
 import { GenerationSettingsProvider } from "@/context/GenerationSettingsContext";
 import { ContentProvider } from "@/context/ContentPlannerContext";

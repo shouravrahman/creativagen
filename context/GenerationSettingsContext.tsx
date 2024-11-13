@@ -1,11 +1,7 @@
 "use client"
+import { GenerationSettings, ModelTypeEnum } from "@/types";
 import React, { createContext, ReactNode, useContext, useState } from "react";
 
-interface GenerationSettings {
-   model: "GROQ" | "GEMINI";
-   temperature: number;
-   maxTokens: number;
-}
 
 interface GenerationSettingsContextType {
    settings: GenerationSettings;
@@ -16,7 +12,7 @@ const GenerationSettingsContext = createContext<GenerationSettingsContextType | 
 
 export const GenerationSettingsProvider = ({ children }: { children: ReactNode }) => {
    const [settings, setSettings] = useState<GenerationSettings>({
-      model: "GEMINI",
+      model: ModelTypeEnum.GEMINI,
       temperature: 0.7,
       maxTokens: 2000,
    });

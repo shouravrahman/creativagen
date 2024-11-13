@@ -1,7 +1,7 @@
 import { DollarSign } from "lucide-react";
 
-import { Heading } from "@/components/heading";
-import { SubscriptionButton } from "@/components/subscription-button";
+import { Heading } from "@/components/Heading";
+import { SubscriptionButton } from "@/components/SubscriptionButton";
 import { checkSubscription } from "@/lib/subscription";
 
 const SettingsPage = async () => {

@@ -179,218 +179,238 @@ export function response<T extends object>(response: T): T {
 	return response;
 }
 
-
+const commonOptionsSchema = z.object({
+	includeWebSearch: z.boolean().default(false),
+	includeLinks: z.boolean().default(false),
+	useFormalTone: z.boolean().default(false),
+	generateMultipleVariants: z.boolean().default(false),
+});
 
 export const createValidationSchema = (fields: FormField[]) => {
-	const schemaFields: Record<string, z.ZodTypeAny> = {};
+	const templateFieldsSchema = createTemplateFieldsSchema(fields);
 
-	fields.forEach((field) => {
-		let fieldSchema: z.ZodTypeAny;
-
-		switch (field.type) {
-			case "text":
-				fieldSchema = z.string().min(1, "This field is required");
-				break;
-
-			case "textarea":
-				fieldSchema = z.string().min(1, "This field is required");
-				break;
-
-			case "select":
-				if (field.options) {
-					const validValues = field.options.map(
-						(opt) => opt.value
-					) as [string, ...string[]];
-					fieldSchema = z.enum(validValues, {
-						required_error: "Please select an option",
-						invalid_type_error: "Please select a valid option",
-					});
-				} else {
-					fieldSchema = z.string().min(1, "This field is required");
-				}
-				break;
-
-			case "multiselect":
-				if (field.options) {
-					const validValues = field.options.map(
-						(opt) => opt.value
-					) as [string, ...string[]];
-					fieldSchema = z
-						.array(
-							z.enum(validValues, {
-								invalid_type_error:
-									"Please select valid options",
-							})
-						)
-						.min(1, "Please select at least one option");
-				} else {
-					fieldSchema = z
-						.array(z.string())
-						.min(1, "Please select at least one option");
-				}
-				break;
-
-			case "radio":
-				if (field.options) {
-					const validValues = field.options.map(
-						(opt) => opt.value
-					) as [string, ...string[]];
-					fieldSchema = z.enum(validValues, {
-						required_error: "Please select an option",
-						invalid_type_error: "Please select a valid option",
-					});
-				} else {
-					fieldSchema = z.string().min(1, "This field is required");
-				}
-				break;
-
-			case "checkbox":
-				if (field.options) {
-					// Multiple checkboxes
-					const validValues = field.options.map(
-						(opt) => opt.value
-					) as [string, ...string[]];
-					fieldSchema = z
-						.array(z.enum(validValues))
-						.min(1, "Please select at least one option");
-				} else {
-					// Single checkbox
-					fieldSchema = z.boolean({
-						required_error: "This field is required",
-						invalid_type_error: "This field must be a boolean",
-					});
-
-					if (field.required) {
-						fieldSchema = fieldSchema.refine(
-							(val) => val === true,
-							{
-								message: "This field must be checked",
-							}
-						);
-					}
-				}
-				break;
-
-			case "slider":
-				{
-					let numberSchema = z.number({
-						required_error: "This field is required",
-						invalid_type_error: "Please enter a valid number",
-					});
-
-					if (typeof field.min === "number") {
-						numberSchema = numberSchema.gte(
-							field.min,
-							`Value must be at least ${field.min}`
-						);
-					}
-
-					if (typeof field.max === "number") {
-						numberSchema = numberSchema.lte(
-							field.max,
-							`Value must be at most ${field.max}`
-						);
-					}
-
-					if (field.step && typeof field.step === "number") {
-						const multipleOf = field.step;
-						numberSchema = numberSchema.multipleOf(
-							multipleOf,
-							`Value must be a multiple of ${multipleOf}`
-						);
-					}
-
-					fieldSchema = numberSchema;
-				}
-				break;
-
-			case "number":
-				{
-					let numberSchema = z.coerce.number({
-						required_error: "This field is required",
-						invalid_type_error: "Please enter a valid number",
-					});
-
-					if (typeof field.min === "number") {
-						numberSchema = numberSchema.gte(
-							field.min,
-							`Value must be at least ${field.min}`
-						);
-					}
-
-					if (typeof field.max === "number") {
-						numberSchema = numberSchema.lte(
-							field.max,
-							`Value must be at most ${field.max}`
-						);
-					}
-
-					if (field.step && typeof field.step === "number") {
-						const multipleOf = field.step;
-						numberSchema = numberSchema.multipleOf(
-							multipleOf,
-							`Value must be a multiple of ${multipleOf}`
-						);
-					}
-
-					fieldSchema = numberSchema;
-				}
-				break;
-
-			case "date":
-				fieldSchema = z.date({
-					required_error: "Please select a date",
-					invalid_type_error: "Please enter a valid date",
-				});
-				break;
-
-			default:
-				fieldSchema = z.string();
-		}
-
-		// Apply custom validation if provided
-		if (field.validation) {
-			if (
-				typeof fieldSchema === "object" &&
-				fieldSchema instanceof z.ZodString
-			) {
-				Object.entries(field.validation).forEach(([key, value]) => {
-					switch (key) {
-						case "min":
-							if (typeof value === "number") {
-								fieldSchema = (fieldSchema as z.ZodString).min(
-									value,
-									`Minimum ${value} characters required`
-								);
-							}
-							break;
-						case "max":
-							if (typeof value === "number") {
-								fieldSchema = (fieldSchema as z.ZodString).max(
-									value,
-									`Maximum ${value} characters allowed`
-								);
-							}
-							break;
-						case "pattern":
-							if (value instanceof RegExp) {
-								fieldSchema = (
-									fieldSchema as z.ZodString
-								).regex(value, "Invalid format");
-							}
-							break;
-					}
-				});
-			}
-		}
-
-		// Make field optional if not required
-		if (!field.required) {
-			fieldSchema = fieldSchema.optional();
-		}
-
-		schemaFields[field.name] = fieldSchema;
-	});
-
-	return z.object(schemaFields);
+	// Merge template-specific fields with common options
+	return templateFieldsSchema.merge(commonOptionsSchema);
 };
+
+ export const createTemplateFieldsSchema = (fields: FormField[]) => {
+   const schemaFields: Record<string, z.ZodTypeAny> = {};
+
+		fields.forEach((field) => {
+			let fieldSchema: z.ZodTypeAny;
+
+			switch (field.type) {
+				case "text":
+					fieldSchema = z.string().min(1, "This field is required");
+					break;
+
+				case "textarea":
+					fieldSchema = z.string().min(1, "This field is required");
+					break;
+
+				case "select":
+					if (field.options) {
+						const validValues = field.options.map(
+							(opt) => opt.value
+						) as [string, ...string[]];
+						fieldSchema = z.enum(validValues, {
+							required_error: "Please select an option",
+							invalid_type_error: "Please select a valid option",
+						});
+					} else {
+						fieldSchema = z
+							.string()
+							.min(1, "This field is required");
+					}
+					break;
+
+				case "multiselect":
+					if (field.options) {
+						const validValues = field.options.map(
+							(opt) => opt.value
+						) as [string, ...string[]];
+						fieldSchema = z
+							.array(
+								z.enum(validValues, {
+									invalid_type_error:
+										"Please select valid options",
+								})
+							)
+							.min(1, "Please select at least one option");
+					} else {
+						fieldSchema = z
+							.array(z.string())
+							.min(1, "Please select at least one option");
+					}
+					break;
+
+				case "radio":
+					if (field.options) {
+						const validValues = field.options.map(
+							(opt) => opt.value
+						) as [string, ...string[]];
+						fieldSchema = z.enum(validValues, {
+							required_error: "Please select an option",
+							invalid_type_error: "Please select a valid option",
+						});
+					} else {
+						fieldSchema = z
+							.string()
+							.min(1, "This field is required");
+					}
+					break;
+
+				case "checkbox":
+					if (field.options) {
+						// Multiple checkboxes
+						const validValues = field.options.map(
+							(opt) => opt.value
+						) as [string, ...string[]];
+						fieldSchema = z
+							.array(z.enum(validValues))
+							.min(1, "Please select at least one option");
+					} else {
+						// Single checkbox
+						fieldSchema = z.boolean({
+							required_error: "This field is required",
+							invalid_type_error: "This field must be a boolean",
+						});
+
+						if (field.required) {
+							fieldSchema = fieldSchema.refine(
+								(val) => val === true,
+								{
+									message: "This field must be checked",
+								}
+							);
+						}
+					}
+					break;
+
+				case "slider":
+					{
+						let numberSchema = z.number({
+							required_error: "This field is required",
+							invalid_type_error: "Please enter a valid number",
+						});
+
+						if (typeof field.min === "number") {
+							numberSchema = numberSchema.gte(
+								field.min,
+								`Value must be at least ${field.min}`
+							);
+						}
+
+						if (typeof field.max === "number") {
+							numberSchema = numberSchema.lte(
+								field.max,
+								`Value must be at most ${field.max}`
+							);
+						}
+
+						if (field.step && typeof field.step === "number") {
+							const multipleOf = field.step;
+							numberSchema = numberSchema.multipleOf(
+								multipleOf,
+								`Value must be a multiple of ${multipleOf}`
+							);
+						}
+
+						fieldSchema = numberSchema;
+					}
+					break;
+
+				case "number":
+					{
+						let numberSchema = z.coerce.number({
+							required_error: "This field is required",
+							invalid_type_error: "Please enter a valid number",
+						});
+
+						if (typeof field.min === "number") {
+							numberSchema = numberSchema.gte(
+								field.min,
+								`Value must be at least ${field.min}`
+							);
+						}
+
+						if (typeof field.max === "number") {
+							numberSchema = numberSchema.lte(
+								field.max,
+								`Value must be at most ${field.max}`
+							);
+						}
+
+						if (field.step && typeof field.step === "number") {
+							const multipleOf = field.step;
+							numberSchema = numberSchema.multipleOf(
+								multipleOf,
+								`Value must be a multiple of ${multipleOf}`
+							);
+						}
+
+						fieldSchema = numberSchema;
+					}
+					break;
+
+				case "date":
+					fieldSchema = z.date({
+						required_error: "Please select a date",
+						invalid_type_error: "Please enter a valid date",
+					});
+					break;
+
+				default:
+					fieldSchema = z.string();
+			}
+
+			// Apply custom validation if provided
+			if (field.validation) {
+				if (
+					typeof fieldSchema === "object" &&
+					fieldSchema instanceof z.ZodString
+				) {
+					Object.entries(field.validation).forEach(([key, value]) => {
+						switch (key) {
+							case "min":
+								if (typeof value === "number") {
+									fieldSchema = (
+										fieldSchema as z.ZodString
+									).min(
+										value,
+										`Minimum ${value} characters required`
+									);
+								}
+								break;
+							case "max":
+								if (typeof value === "number") {
+									fieldSchema = (
+										fieldSchema as z.ZodString
+									).max(
+										value,
+										`Maximum ${value} characters allowed`
+									);
+								}
+								break;
+							case "pattern":
+								if (value instanceof RegExp) {
+									fieldSchema = (
+										fieldSchema as z.ZodString
+									).regex(value, "Invalid format");
+								}
+								break;
+						}
+					});
+				}
+			}
+
+			// Make field optional if not required
+			if (!field.required) {
+				fieldSchema = fieldSchema.optional();
+			}
+
+			schemaFields[field.name] = fieldSchema;
+		});
+
+		return z.object(schemaFields);
+ };

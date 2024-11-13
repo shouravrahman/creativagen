@@ -34,8 +34,9 @@ import {
 	PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, Hammer } from "lucide-react";
 import { Label } from "./ui/label";
+import CommonFormOptions from "./CommonFormOptions";
 
 interface DynamicFormProps {
 	formFields: FormField[];
@@ -53,21 +54,24 @@ const DynamicForm: React.FC<DynamicFormProps> = ({
 	// Generate the validation schema based on form fields
 	const formSchema = createValidationSchema(formFields);
 
-	// Create default values for the form
-	const defaultValues = formFields.reduce(
-		(acc, field) => ({
-			...acc,
-			[field.name]:
-				field.default !== undefined
-					? field.default
-					: field.type === "checkbox"
-					? []
-					: field.type === "date"
-					? null
-					: "",
-		}),
-		{}
-	);
+   const defaultValues = {
+      ...formFields.reduce(
+         (acc, field) => ({
+            ...acc,
+            [field.name]:
+               field.default !== undefined
+                  ? field.default
+                  : field.type === "checkbox"
+                     ? []
+                     : field.type === "date"
+                        ? null
+                        : "",
+         }),
+         {}
+      ),
+
+
+   };
 
 	const form = useForm({
 		resolver: zodResolver(formSchema),
@@ -456,11 +460,14 @@ const DynamicForm: React.FC<DynamicFormProps> = ({
 									)}
 								/>
 							))}
+                  <CommonFormOptions form={form} />
 						<Button
 							type="submit"
-							className="bg-accent text-xl font-semibold w-full"
+                     variant={"destructive"}
+                     className="w-full text-lg"
 						>
 							Generate Content
+                     <Hammer fill="white" className="w-9 h-9" />
 						</Button>
 					</form>
 				</Form>

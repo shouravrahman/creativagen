@@ -46,12 +46,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
    return (
       <>
          <Button
-            variant="ghost"
+            variant="default"
             size="icon"
             className="sm:hidden fixed top-4 left-4 z-50 bg-background/80 backdrop-blur-sm"
             onClick={toggleSidebar}
          >
-            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {isOpen ? <X className="w-10 h-10" /> : <Menu className="w-10 h-10" />}
          </Button>
 
          <aside

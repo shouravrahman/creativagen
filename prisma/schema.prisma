@@ -140,62 +140,62 @@ model UserSubscription {
   stripeCurrentPeriodEnd DateTime? @map(name: "stripe_current_period_end")
 }
 
-model Template {
-  id          String   @id @default(cuid())
-  name        String
-  description String
-  slug        String   @unique
-  category    String
-  icon        String
-  aiPrompt    String
-  color       String
-  features    String[]
-  tags        String[]
-  formFields  FormField[]  // Relation to FormField
-  generatedContents GeneratedContent[]
-}
+// model Template {
+//   id          String   @id @default(cuid())
+//   name        String
+//   description String
+//   slug        String   @unique
+//   category    String
+//   icon        String
+//   aiPrompt    String
+//   color       String
+//   features    String[]
+//   tags        String[]
+//   formFields  FormField[]
+//   generatedContents GeneratedContent[]
+// }
 
-model FormField {
-  id         String        @id @default(cuid())
-  templateId String
-  label      String
-  name       String
-  type       FormFieldType
-  required   Boolean       @default(false)
-  order      Int           @default(0)
-  options    Json?         // For select, radio, checkbox fields
-  validation Json?         // Store Zod validation rules as JSON
-  helpText   String?
-  default    String?
-  min        Float?        // For number/slider inputs
-  max        Float?        // For number/slider inputs
-  step       Float?        // For number/slider inputs
+// model FormField {
+//   id         String        @id @default(cuid())
+//   templateId String
+//   label      String
+//   name       String
+//   type       FormFieldType
+//   required   Boolean       @default(false)
+//   order      Int           @default(0)
+//   options    Json?         // For select, radio, checkbox fields
+//   validation Json?         // Store Zod validation rules as JSON
+//   helpText   String?
+//   default    String?
+//   min        Float?        // For number/slider inputs
+//   max        Float?        // For number/slider inputs
+//   step       Float?        // For number/slider inputs
 
-  template Template @relation(fields: [templateId], references: [id], onDelete: Cascade)
-}
+//   template Template @relation(fields: [templateId], references: [id], onDelete: Cascade)
+// }
 
-enum FormFieldType {
-  TEXT
-  TEXTAREA
-  SELECT
-  MULTISELECT
-  RADIO
-  CHECKBOX
-  SLIDER
-  NUMBER
-  DATE
-}
+// enum FormFieldType {
+//   TEXT
+//   TEXTAREA
+//   SELECT
+//   MULTISELECT
+//   RADIO
+//   CHECKBOX
+//   SLIDER
+//   NUMBER
+//   DATE
+// }
 
 model GeneratedContent {
   id           String   @id @default(cuid())
-  formValues   Json
+  formValues   String
   aiResponse   String
-  templateId   String
+  templateSlug   String
   createdBy    String
   createdAt    DateTime @default(now())
   temperature  Float    @default(0.7)
   maxTokens    Int      @default(2000)
 
   user     User     @relation(fields: [createdBy], references: [id], onDelete: Cascade)
-  template Template @relation(fields: [templateId], references: [id], onDelete: Cascade)
+//   template Template @relation(fields: [templateSlug], references: [slug], onDelete: Cascade)
 }

@@ -1,14 +1,19 @@
-import { ChartBarIcon, MicrophoneIcon, UserGroupIcon } from "@heroicons/react/20/solid";
+import { ChartBarIcon, ChartPieIcon, MicrophoneIcon, UserGroupIcon } from "@heroicons/react/20/solid";
 import {
    BarChart4,
    Box,
+   Brain,
    BrainCircuit,
    BriefcaseIcon,
+   Clipboard,
    CloudLightning,
    CodeIcon,
+   Headphones,
    Home,
    History,
    CreditCard,
+   Layers,
+   Magnet,
    MessageCircleQuestionIcon,
    User,
    Code,
@@ -20,8 +25,15 @@ import {
    Puzzle,
    BookOpen,
    Calendar,
+   Mail,
+   Map,
    MegaphoneIcon,
+   PenTool,
+   Server,
+   Target,
    TargetIcon,
+   Telescope,
+   TrendingUp,
    Trophy,
    Users,
    WeightIcon,
@@ -60,16 +72,29 @@ const lucideIconMap = {
    Calendar,
    MegaphoneIcon,
    TargetIcon,
+   Telescope,
+   TrendingUp,
+   Map,
+   Magnet,
    Users,
+   Layers,
    WeightIcon,
    RocketIcon,
    BrainCircuitIcon,
    TrendingUpIcon,
    Trophy,
-   ChartBarIcon
+   ChartBarIcon,
+   Mail,
+   Target,
+   Clipboard,
+   Headphones,
+   Brain,
+   PenTool,
+   Server,
+
 };
 const heroIconMap = {
-   MicrophoneIcon, UserGroupIcon
+   MicrophoneIcon, UserGroupIcon, ChartPieIcon
 };
 
 // Combine both maps into a single map for easier access

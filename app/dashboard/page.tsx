@@ -1,36 +1,44 @@
 "use client";
 
-import { useState } from "react";
-import TemplateList from "@/components/template-list-section";
-import SearchSection from "@/components/search-section/Search";
-import { TEMPLATES } from "@/constants";
+
+import TemplateList from "@/components/TemplateList";
+import SearchInput from "@/components/search-section/Search";
+import CategoryFilter from "@/components/CategoryFilter";
+
+import { useTemplate } from "@/context/TemplateContext";
 
 export default function Dashboard() {
-	const [searchInput, setSearchInput] = useState<string>("");
-	const [content, setContent] = useState<string>("");
+   const { templates, searchText, selectedCategory, setSearchText, setSelectedCategory } = useTemplate();
+   // const [content, setContent] = useState<string>("");
 
-	const handleSaveContent = (newContent: string) => {
-		setContent(newContent);
-	};
+   // const handleSaveContent = (newContent: string) => {
+   //    setContent(newContent);
+   // };
 
-	const handleSchedulePost = (content: string, scheduledTime: Date) => {
-		fetch("/api/schedule", {
-			method: "POST",
-			body: JSON.stringify({ content, scheduledTime }),
-			headers: { "Content-Type": "application/json" },
-		});
-	};
+   // const handleSchedulePost = async (content: string, scheduledTime: Date) => {
+   //    try {
+   //       await fetch("/api/schedule", {
+   //          method: "POST",
+   //          body: JSON.stringify({ content, scheduledTime }),
+   //          headers: { "Content-Type": "application/json" },
+   //       });
+   //    } catch (error) {
+   //       console.error("Error scheduling post:", error);
+   //    }
+   // };
 
-	return (
-		<div className="">
-			<div className="mb-8 px-4">
-				<SearchSection
-					onSearchInput={(value: string) => setSearchInput(value)}
-				/>
-			</div>
-			<div className="px-4 ">
-            <TemplateList searchInput={searchInput} initialTemplates={TEMPLATES} />
-			</div>
-		</div>
-	);
+   return (
+      <div>
+         <div className="mb-8 px-4">
+            <CategoryFilter
+               categories={[...new Set(templates.map((t) => t.category))]}
+
+            />
+
+         </div>
+         <div className="px-4">
+            <TemplateList />
+         </div>
+      </div>
+   );
 }

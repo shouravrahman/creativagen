@@ -1,7 +1,7 @@
 "use client";
 import { TEMPLATE } from "@/types.ts";
 import React from "react";
-import { Heading } from "../heading.tsx";
+import { Heading } from "../Heading.tsx";
 import { Code } from "lucide-react";
 import { FieldError, FieldErrorsImpl, Merge, useForm } from "react-hook-form";
 import { z } from "zod";

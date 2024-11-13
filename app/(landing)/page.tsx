@@ -1,12 +1,12 @@
 
-import Footer from "@/components/footer";
-import Features from "@/components/features.tsx";
+import Footer from "@/components/Footer.tsx";
+import Features from "@/components/Features.tsx";
 import { PrimaryFeatures } from "./_components/PrimaryFeatures.tsx";
 import { SecondaryFeatures } from "./_components/SecondaryFeatures.tsx";
 import { Pricing } from "./_components/Pricing.tsx";
 import { LandingHero } from "./_components/LandingHero.tsx";
 import FAQ from "./_components/Faq.tsx";
-import Contact from "@/components/contact.tsx";
+import Contact from "@/components/Contact.tsx";
 import LandingNavbar from "./_components/LandingNavbar.tsx";
 import Testimonials from "./_components/Testimonials.tsx";
 

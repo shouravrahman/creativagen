@@ -4,7 +4,7 @@ import { Zap, Sparkles, Crown } from "lucide-react";
 import { MAX_FREE_COUNTS } from "@/constants";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { useProModal } from "@/hooks/use-pro-modal";
+import { useProModal } from "@/hooks/useProModal";
 import { getApiLimitCount } from "@/lib/api-limit";
 
 const CircularProgress = ({

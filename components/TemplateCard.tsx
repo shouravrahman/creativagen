@@ -14,11 +14,12 @@ const TemplateCard = ({
    onToggleFavorite,
 }: {
    template: Template;
-   onToggleFavorite: () => void;
+      onToggleFavorite?: () => void;
    }) => {
+   console.log("color", template.color)
    const IconComponent: IconType | undefined = getIconComponent(template.icon!);
    return (
-      <Card className="group relative overflow-hidden hover:shadow-lg transition-all duration-300 border border-border/50">
+      <Card className="group relative overflow-hidden hover:shadow-sm transition-all duration-300 border border-border/50">
          <Link href={`/dashboard/content/${template.slug}`} className="block">
             <CardContent className="p-6">
                {/* Top Section with Icon and Favorite Button */}
@@ -31,16 +32,17 @@ const TemplateCard = ({
                         )}
                      />
                      {IconComponent ? (
-                        <IconComponent className={cn("w-8 h-8 relative z-10", template.color)} />
+                        <IconComponent className={`w-8 h-8 relative z-10 text-[${template.color}]`} />
                      ) : (
                            <Sparkle className={cn("w-8 h-8 relative z-10", template.color)} />
                      )}
+
                   </div>
                   <button
                      className="p-2 rounded-full hover:bg-accent/10 transition-colors duration-200"
                      onClick={(e) => {
                         e.preventDefault();
-                        onToggleFavorite();
+                        // onToggleFavorite();
                      }}
                   >
                      <Star

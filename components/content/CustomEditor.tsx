@@ -1,241 +1,148 @@
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useState, useCallback, useMemo, useEffect } from "react";
 import dynamic from "next/dynamic";
-import "react-quill/dist/quill.snow.css";
-import { Copy, RefreshCw, Save } from "lucide-react";
+import { Copy, Edit, Save } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import 'react-quill/dist/quill.snow.css';
 
-// Dynamically import ReactQuill with loading optimization
 const ReactQuill = dynamic(() => import("react-quill"), {
    ssr: false,
    loading: () => (
-      <Skeleton className="w-full h-[500px] rounded-lg" />
+      <Skeleton className="w-full h-[400px] rounded-lg" />
    ),
 });
 
 interface EditorProps {
    content: string;
    onSave?: (content: string) => void;
-   onSchedule?: (content: string, scheduledTime: Date) => void;
+   isLoading?: boolean;
 }
 
 const CustomEditor: React.FC<EditorProps> = ({
    content,
    onSave,
-   onSchedule,
+   isLoading = false,
 }) => {
-   const [newContent, setNewContent] = useState<string>(content);
-   const [loading, setLoading] = useState<boolean>(false);
+   const [editorContent, setEditorContent] = useState<string>("");
 
-   // Memoize toolbar configuration
-   const modules = useMemo(() => ({
-      toolbar: [
-         [{ header: [1, 2, false] }],
-         ["bold", "italic", "underline", "strike"],
-         [{ list: "ordered" }, { list: "bullet" }],
-         ["link", "image", "video"],
-         [{ color: [] }, { background: [] }],
-         ["clean"],
+   useEffect(() => {
+      if (content) {
+         setEditorContent(content);
+      }
+   }, [content]);
+
+   const modules = useMemo(
+      () => ({
+         toolbar: [
+            [{ header: [2, 3, false] }],
+            ["bold", "italic", "underline"],
+            [{ list: "ordered" }, { list: "bullet" }],
+            ["link"],
+            ["clean"],
+         ],
+         clipboard: {
+            matchVisual: false,
+         },
+      }),
+      []
+   );
+
+   const formats = useMemo(
+      () => [
+         "header",
+         "bold",
+         "italic",
+         "underline",
+         "list",
+         "bullet",
+         "link",
       ],
-      clipboard: {
-         matchVisual: false, // Improves paste performance
-      },
-   }), []);
+      []
+   );
 
-   // Memoize formats
-   const formats = useMemo(() => [
-      "header",
-      "font",
-      "size",
-      "bold",
-      "italic",
-      "underline",
-      "strike",
-      "blockquote",
-      "list",
-      "bullet",
-      "link",
-      "image",
-      "video",
-   ], []);
-
-   // Optimize handlers with useCallback
    const handleChange = useCallback((value: string) => {
-      setNewContent(value);
+      setEditorContent(value);
    }, []);
 
    const handleSave = useCallback(async () => {
       if (!onSave) return;
 
       try {
-         await onSave(newContent);
-         toast.success("Content saved successfully!", {
+         await onSave(editorContent);
+         toast.success("Changes saved successfully", {
             duration: 2000,
          });
       } catch (error) {
-         toast.error("Failed to save content. Please try again.");
+         toast.error("Failed to save changes");
       }
-   }, [newContent, onSave]);
-
-   const handleRegenerate = useCallback(async () => {
-      setLoading(true);
-      toast("Regenerating content...");
-
-      try {
-         const response = await fetch("/api/generate", {
-            method: "POST",
-            headers: {
-               "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-               /* your request body */
-            }),
-         });
-
-        if (!response.ok) throw new Error("Failed to regenerate");
-
-        const data = await response.json();
-        setNewContent(data.content);
-        toast.success("Content regenerated successfully!");
-     } catch (error) {
-        console.error("Error regenerating content:", error);
-        toast.error("Failed to regenerate content.");
-     } finally {
-        setLoading(false);
-     }
-   }, []);
+   }, [editorContent, onSave]);
 
    const handleCopyToClipboard = useCallback(async () => {
       try {
-         await navigator.clipboard.writeText(newContent);
-         toast.success("Content copied to clipboard!");
+         await navigator.clipboard.writeText(editorContent);
+         toast.success("Content copied to clipboard");
       } catch (err) {
-         console.error("Failed to copy:", err);
-         toast.error("Failed to copy content.");
+         toast.error("Failed to copy content");
       }
-   }, [newContent]);
+   }, [editorContent]);
 
    return (
-      <Card className="w-full bg-white shadow-lg transition-shadow duration-200 hover:shadow-xl">
-         <CardContent className="p-6">
-            {/* Toolbar Section */}
-            <div className="flex flex-wrap gap-3 mb-6">
-               <Button
-                  onClick={handleRegenerate}
-                  variant="default"
-                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white transition-all duration-200 transform hover:scale-105"
-                  disabled={loading}
-               >
-                  <RefreshCw size={16} className={`mr-2 ${loading ? "animate-spin" : ""}`} />
-                  Regenerate
-               </Button>
-
-               <Button
-                  onClick={handleSave}
-                  variant="default"
-                  className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white transition-all duration-200 transform hover:scale-105"
-                  disabled={loading}
-               >
-                  <Save size={16} className="mr-2" />
-                  Save
-               </Button>
-
-               <Button
-                  onClick={handleCopyToClipboard}
-                  variant="default"
-                  className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white transition-all duration-200 transform hover:scale-105"
-                  disabled={loading}
-               >
-                  <Copy size={16} className="mr-2" />
-                  Copy
-               </Button>
-            </div>
-
-            {/* Editor Section */}
-            <div className="relative rounded-lg border border-gray-200 transition-all duration-200 focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-transparent">
-               <ReactQuill
-                  value={newContent}
-                  onChange={handleChange}
-                  modules={modules}
-                  formats={formats}
-                  className="editor-container"
-                  placeholder={loading ? "Generating content..." : "Start writing something amazing..."}
-                  theme="snow"
-               />
-            </div>
-
-            {/* Loading Overlay */}
-            {loading && (
-               <div className="absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center rounded-lg">
-                  <div className="flex flex-col items-center gap-4">
-                     <RefreshCw className="w-8 h-8 animate-spin text-blue-600" />
-                     <p className="text-gray-700 font-medium">Generating your content...</p>
+      <div className="w-full max-w-4xl mx-auto">
+         <Card className="bg-white shadow-sm border-0">
+            <CardContent className="p-0">
+               <div className=" p-4 flex items-center justify-between">
+                  <h2 className="text-lg font-semibold text-background flex gap-2">Editor<Edit /></h2>
+                  <div className="flex gap-2">
+                     <Button
+                        onClick={handleCopyToClipboard}
+                        variant="outline"
+                        size="sm"
+                        disabled={isLoading}
+                     >
+                        <Copy className="w-4 h-4 mr-2" />
+                        Copy
+                     </Button>
+                     <Button
+                        onClick={handleSave}
+                        size="sm"
+                        variant="outline"
+                        disabled={isLoading}
+                     >
+                        <Save className="w-4 h-4 mr-2" />
+                        Save
+                     </Button>
                   </div>
                </div>
-            )}
-         </CardContent>
-      </Card>
+
+               <div className="relative">
+                  <ReactQuill
+                     value={editorContent}
+                     onChange={handleChange}
+                     modules={modules}
+                     formats={formats}
+                     className="editor-container"
+                     placeholder="Your content will appear here"
+                     theme="snow"
+                  />
+
+                  {isLoading && (
+                     <div className="absolute inset-0 bg-white/80 backdrop-blur-[2px] flex items-center justify-center">
+                        <div className="flex items-center gap-2">
+                           <div className="w-2 h-2 bg-accent rounded-full animate-bounce [animation-delay:-0.3s]" />
+                           <div className="w-2 h-2 bg-accent rounded-full animate-bounce [animation-delay:-0.15s]" />
+                           <div className="w-2 h-2 bg-accent rounded-full animate-bounce" />
+                        </div>
+                     </div>
+                  )}
+               </div>
+            </CardContent>
+         </Card>
+
+
+      </div>
    );
 };
 
-// Add custom styles to improve Quill editor appearance
-const styles = `
-  .editor-container {
-    min-height: 500px;
-    height: 100%;
-  }
-
-  .editor-container .ql-editor {
-    font-size: 1rem;
-    line-height: 1.75;
-    padding: 1rem;
-    min-height: 500px;
-  }
-
-  .editor-container .ql-toolbar {
-    border-top-left-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
-    border-bottom: 1px solid #e5e7eb;
-    padding: 0.75rem;
-    background-color: #f9fafb;
-  }
-
-  .editor-container .ql-container {
-    border-bottom-left-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
-    border: none;
-  }
-
-  .editor-container .ql-snow.ql-toolbar button:hover,
-  .editor-container .ql-snow .ql-toolbar button:hover {
-    color: #2563eb;
-  }
-
-  .editor-container .ql-snow.ql-toolbar button.ql-active,
-  .editor-container .ql-snow .ql-toolbar button.ql-active {
-    color: #2563eb;
-  }
-
-  @media (max-width: 640px) {
-    .editor-container .ql-toolbar {
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .editor-container .ql-formats {
-      margin-right: 0;
-      margin-bottom: 0.5rem;
-    }
-  }
-`;
-
-export default function EnhancedEditor(props: EditorProps) {
-   return (
-      <>
-         <style>{styles}</style>
-         <CustomEditor {...props} />
-      </>
-   );
-}
+export default CustomEditor;

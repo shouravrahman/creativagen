@@ -85,7 +85,7 @@ select:focus {
  select:at(:-internal-list-box) {
 	background-color: inherit;
 }
-.ql-toolbar.ql-snow{
+.ql-toolbar .ql-snow{
    border:none !important;
    outline: none !important;
 }
@@ -122,3 +122,45 @@ select:focus {
    margin: 10px 0; /* Margin for lists */
    padding-left: 20px; /* Indentation for lists */
 }
+.editor-container {
+   min-height: 400px;
+ }
+
+ .editor-container .ql-editor {
+   min-height: 400px;
+   font-size: 1rem;
+   line-height: 1.75;
+   padding: 1.5rem;
+   color: #374151;
+ }
+
+ .editor-container .ql-toolbar {
+   padding: 0.75rem 0rem;
+   border: none;
+   border-bottom: 1px solid #f3f4f6;
+   background-color: white;
+ }
+ .ql-container.ql-snow {
+   border: none !important;
+}
+ .editor-container .ql-container {
+   border: none !important;
+ }
+
+ .editor-container .ql-toolbar button {
+   width: 28px;
+   height: 28px;
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   border-radius: 4px;
+ }
+
+ .editor-container .ql-toolbar button:hover {
+   background-color: #f3f4f6;
+ }
+
+ .editor-container .ql-toolbar button.ql-active {
+   background-color: #f3f4f6;
+   color: #b6eb25;
+ }
