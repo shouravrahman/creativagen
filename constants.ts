@@ -1,34 +1,13 @@
-import { MicrophoneIcon, UserGroupIcon } from "@heroicons/react/20/solid";
 import {
 	BarChart4,
-	Box,
-	BrainCircuit,
-	BriefcaseIcon,
-	CloudLightning,
-	CodeIcon,
 	Home,
 	History,
 	CreditCard,
-	MessageCircleQuestionIcon,
 	User,
-	Code,
-	Leaf,
-	Lightbulb,
-	Linkedin,
-	Rocket,
-	Briefcase,
-	Puzzle,
-	BookOpen,
 	Calendar,
-	MegaphoneIcon,
-	TargetIcon,
-	Users,
-	WeightIcon,
 } from "lucide-react";
-import { RocketIcon, BrainCircuitIcon, TrendingUpIcon } from "lucide-react";
 
 import { Template } from "./types";
-import { IoSpeedometer } from "react-icons/io5";
 export const MAX_FREE_COUNTS = 10;
 
 export const routes = [
@@ -73,28 +52,274 @@ export const routes = [
 
 export const TEMPLATES: Template[] = [
 	{
-		id: "1",
+		id: "controversial-takes",
+		name: "Controversial Takes Generator",
+		description:
+			"Spark debate and engagement with thought-provoking, contrarian viewpoints in your niche. Great for LinkedIn posts, blog articles, or even YouTube video topics.",
+		slug: "controversial-takes",
+		category: "Content Ideas",
+		icon: "Zap",
+		color: "#FF5733",
+		aiPrompt:
+			"Give me 5 controversial takes in the niche of {niche}. Ensure the takes are well-reasoned but challenge common assumptions.",
+		features: [
+			"Generates debate-worthy content ideas",
+			"Helps stand out from the crowd",
+			"Boosts engagement and discussion",
+			"Identifies untapped content angles",
+		],
+		tags: [
+			"content-ideas",
+			"controversial",
+			"engagement",
+			"thought-leadership",
+			"debate",
+		],
+		formFields: [
+			{
+				label: "Your Niche",
+				name: "niche",
+				type: "text",
+				required: true,
+				order: 1,
+				helpText: "e.g., Web Design, SaaS Development",
+				validation: {
+					maxLength: 50,
+				},
+			},
+		],
+	},
+	{
+		id: "untapped-topics",
+		name: "Untapped Topics Finder",
+		description:
+			"Uncover hidden gems and fresh perspectives that no one else is talking about in your industry. Perfect for carving out a unique content niche and establishing thought leadership.",
+		slug: "untapped-topics",
+		category: "Content Ideas",
+		icon: "EyeOff",
+		color: "#007BFF",
+		aiPrompt:
+			"What are 10 things no one is talking about in the niche of {niche}? Focus on emerging trends, overlooked aspects, or counterintuitive insights.",
+		features: [
+			"Finds fresh, unexplored content angles",
+			"Identifies niche opportunities",
+			"Positions you as a thought leader",
+			"Sparks original content creation",
+		],
+		tags: [
+			"content-ideas",
+			"untapped",
+			"niche",
+			"thought-leadership",
+			"originality",
+		],
+		formFields: [
+			{
+				label: "Your Niche",
+				name: "niche",
+				type: "text",
+				required: true,
+				order: 1,
+				helpText: "e.g., Web Design, SaaS Development",
+				validation: {
+					maxLength: 50,
+				},
+			},
+		],
+	},
+	{
+		id: "monetization-planner",
+		name: "Monetization Blueprint",
+		description:
+			"Craft a strategic roadmap for monetizing your online business, outlining key platforms, content strategies, and revenue streams tailored to your niche.",
+		slug: "monetization-planner",
+		category: "Business Strategy",
+		icon: "CreditCard",
+		color: "#28A745",
+		aiPrompt:
+			"Create a comprehensive monetization strategy for a business in the niche of {niche}. Include recommended platforms, content pillars, initial monetization methods (months 0-3), short-term methods (months 3-6), and long-term methods (6+ months). Also, suggest 10 content ideas tailored to each stage.",
+		features: [
+			"Develops a multi-stage monetization plan",
+			"Identifies suitable platforms and content strategies",
+			"Outlines short-term and long-term revenue streams",
+			"Provides actionable content ideas for each phase",
+		],
+		tags: [
+			"monetization",
+			"business-strategy",
+			"content-strategy",
+			"revenue",
+			"growth",
+		],
+		formFields: [
+			{
+				label: "Your Niche",
+				name: "niche",
+				type: "text",
+				required: true,
+				order: 1,
+				helpText: "e.g., Web Design, SaaS Development",
+				validation: {
+					maxLength: 50,
+				},
+			},
+		],
+	},
+	{
+		id: "content-machine",
+		name: "AI Content Machine",
+		description:
+			"Generate a detailed content plan complete with sub-niches, keyword ideas, article outlines, and even paragraph drafts, all tailored to your chosen topic.",
+		slug: "content-machine",
+		category: "Content Creation",
+		icon: "Robot",
+		color: "#DC3545",
+		aiPrompt:
+			"I want to create a content plan for the niche of {niche}. \
+       1. **Identify Sub-Niches:** Suggest 5 sub-niches within {niche}. \
+       2. **Keyword Research:**  For each sub-niche, provide 2 pillar post titles and 15 informational keyword ideas and 5 transactional keyword ideas.  \
+       3. **Outline Generator:** Let me choose a keyword from the list, and you'll create a detailed outline for an article on that topic. \
+       4. **Paragraph Writer:**  I'll provide a heading from the outline, and you'll write a paragraph of content for it.",
+		features: [
+			"Identifies relevant sub-niches",
+			"Generates targeted keyword ideas",
+			"Creates detailed article outlines",
+			"Writes content paragraphs based on headings",
+		],
+		tags: [
+			"content-creation",
+			"content-plan",
+			"keywords",
+			"outlines",
+			"blog-posts",
+			"articles",
+		],
+		formFields: [
+			{
+				label: "Your Niche",
+				name: "niche",
+				type: "text",
+				required: true,
+				order: 1,
+				helpText: "e.g., Web Design, SaaS Development",
+				validation: {
+					maxLength: 50,
+				},
+			},
+		],
+	},
+	{
+		id: "expert-proof-showcase",
+		name: "Expert Proof Showcase",
+		description:
+			"Demonstrate your expertise through detailed breakdowns and analysis of your field, showing rather than telling your capabilities",
+		slug: "expert-proof-showcase",
+		category: "social-media",
+		icon: "BarChart2",
+		color: "#0A66C2",
+		aiPrompt:
+			"Create a detailed LinkedIn post that demonstrates expertise in {expertiseArea} through analysis of {caseStudyTopic}, highlighting specific insights and actionable takeaways.",
+		features: [
+			"Expertise demonstration",
+			"Practical analysis",
+			"Industry insights",
+			"Actionable takeaways",
+			"Professional credibility building",
+		],
+		tags: [
+			"expertise",
+			"analysis",
+			"industry-insights",
+			"professional-tips",
+		],
+		formFields: [
+			{
+				label: "Area of Expertise",
+				name: "expertiseArea",
+				type: "select",
+				required: true,
+				order: 1,
+				options: [
+					{ label: "CFO/Financial Analysis", value: "finance" },
+					{ label: "Wealth Management", value: "wealth-management" },
+					{ label: "Design", value: "design" },
+					{ label: "Content Writing", value: "writing" },
+					{ label: "CRO/Conversion", value: "cro" },
+					{ label: "Business Coaching", value: "business-coaching" },
+					{ label: "Other", value: "other" },
+				],
+			},
+			{
+				label: "Case Study Topic",
+				name: "caseStudyTopic",
+				type: "textarea",
+				required: true,
+				order: 2,
+				helpText: "What specific example or case will you analyze?",
+				validation: {
+					maxLength: 300,
+				},
+			},
+			{
+				label: "Key Findings",
+				name: "keyFindings",
+				type: "textarea",
+				required: true,
+				order: 3,
+				helpText: "List 3-5 key insights from your analysis",
+				validation: {
+					maxLength: 500,
+				},
+			},
+			{
+				label: "Include Technical Details",
+				name: "includeTechnical",
+				type: "checkbox",
+				required: false,
+				order: 4,
+				helpText: "Include specific technical analysis in your post?",
+			},
+			{
+				label: "Call-to-Action Type",
+				name: "ctaType",
+				type: "select",
+				required: true,
+				order: 5,
+				options: [
+					{ label: "Request Consultation", value: "consult" },
+					{ label: "Download Resource", value: "resource" },
+					{ label: "Follow for More", value: "follow" },
+					{ label: "Connect", value: "connect" },
+				],
+			},
+		],
+	},
+	{
+		id: "ai-breakthrough-spotlight",
 		name: "AI Breakthrough Spotlight",
 		description:
 			"Create viral LinkedIn posts about latest AI developments and their practical applications for businesses.",
 		slug: "ai-breakthrough-spotlight",
 		category: "Tech Innovation",
-		imageUrl: "/templates/ai-spotlight.jpg",
-		icon: BrainCircuitIcon,
+		icon: "BrainCircuit",
 		color: "text-purple-500",
-		bgColor: "bg-purple-100",
 		aiPrompt: `Create a compelling LinkedIn post about {aiTechnology} and its impact on {industry}.
 
-  Key sections to cover:
-  1. 🚀 Innovation Overview: {keyInnovation}
-  2. 💡 Business Applications: {businessUse}
-  3. 🔮 Future Implications: {futureImpact}
+ Key sections to cover:
 
-  Include {dataPoint} statistics/case studies.
-  Target audience: {targetAudience}
-  Call-to-action: {cta}
+ 1. 🚀 Innovation Overview: {keyInnovation}
 
-  Tone: {contentStyle}`,
+ 2. 💡 Business Applications: {businessUse}
+
+ 3. 🔮 Future Implications: {futureImpact}
+
+ Include {dataPoint} statistics/case studies.
+
+ Target audience: {targetAudience}
+
+ Call-to-action: {cta}
+
+ Tone: {contentStyle}`,
 		features: [
 			"AI trend analysis",
 			"Business impact focus",
@@ -190,184 +415,457 @@ export const TEMPLATES: Template[] = [
 		],
 	},
 	{
-		id: "2",
-		name: "SaaS Launch Rocket",
+		id: "7",
+		name: "Micro-SaaS Opportunity Scanner",
 		description:
-			"Generate powerful Twitter threads announcing your SaaS product features and updates.",
-		slug: "saas-launch-rocket",
-		category: "Product Marketing",
-		imageUrl: "/templates/saas-launch.jpg",
-		icon: RocketIcon,
-		color: "text-blue-500",
-		bgColor: "bg-blue-100",
-		aiPrompt: `Create a {threadLength}-tweet thread announcing {featureName} for {productName}.
+			"Identify untapped micro-SaaS opportunities by analyzing friction points in existing workflows and processes within specific industries.",
+		slug: "micro-saas-scanner",
+		category: "Business Opportunities",
+		icon: "Telescope",
+		color: "#9B59B6",
+		aiPrompt: `Analyze the {industry} industry to identify potential micro-SaaS opportunities:
 
-  Hook: {hook}
-
-  Key points to cover:
-  1. 🎯 Problem solved: {problemSolved}
-  2. ⚡️ Core features: {coreFeatures}
-  3. 💪 Benefits: {keyBenefits}
-  4. 🎉 Launch offer: {launchOffer}
-
-  Include {socialProof}
-  End with: {callToAction}
-
-  Style: {threadStyle}`,
+  1. Pain Points Analysis: List 5 common workflow frustrations in {specificRole}
+  2. Market Gap Assessment: For each pain point, evaluate existing solutions and their limitations
+  3. Solution Blueprint: Outline a potential micro-SaaS product addressing the most promising gap
+  4. MVP Features: List core features for a minimum viable product
+  5. Growth Strategy: Suggest distribution channels and initial marketing approaches
+  6. Revenue Model: Propose pricing structure and potential revenue streams`,
 		features: [
-			"Feature announcement",
-			"Problem-solution format",
-			"Social proof integration",
-			"Launch offers",
-			"Engagement hooks",
+			"Identifies niche market opportunities",
+			"Analyzes competitor gaps",
+			"Provides MVP roadmap",
+			"Suggests go-to-market strategies",
+			"Outlines revenue models",
 		],
 		tags: [
-			"saas",
-			"product-launch",
-			"feature-announcement",
-			"twitter",
-			"marketing",
+			"micro-saas",
+			"business-opportunities",
+			"market-analysis",
+			"mvp",
+			"startup",
 		],
 		formFields: [
 			{
-				label: "Feature Name",
-				name: "featureName",
+				label: "Industry",
+				name: "industry",
+				type: "select",
+				required: true,
+				order: 1,
+				options: [
+					{ label: "Real Estate", value: "real-estate" },
+					{ label: "Legal", value: "legal" },
+					{ label: "Healthcare", value: "healthcare" },
+					{ label: "Education", value: "education" },
+					{ label: "Retail", value: "retail" },
+				],
+			},
+			{
+				label: "Specific Role/Position",
+				name: "specificRole",
+				type: "text",
+				required: true,
+				order: 2,
+				helpText: "e.g., Real Estate Agent, Legal Assistant, Teacher",
+			},
+		],
+	},
+	{
+		id: "8",
+		name: "Viral Hook Matrix",
+		description:
+			"Generate powerful hook variations for your content using proven psychological triggers and viral mechanics.",
+		slug: "viral-hook-matrix",
+		category: "Content Strategy",
+		icon: "Magnet",
+		color: "#E74C3C",
+		aiPrompt: `Create a matrix of viral hooks for {contentTopic} using these frameworks:
+
+  1. Curiosity Gaps: Generate 5 hooks using information asymmetry
+  2. Pattern Interrupts: Create 5 hooks that challenge common beliefs
+  3. Identity Triggers: Develop 5 hooks that resonate with {targetIdentity}
+  4. Status Play: Design 5 hooks leveraging social proof or status
+  5. Transformation Promise: Craft 5 hooks showcasing before/after scenarios
+
+  Format each hook for {platform} with appropriate tone and style.`,
+		features: [
+			"Psychological trigger mapping",
+			"Platform-specific formatting",
+			"Identity-based messaging",
+			"Social proof integration",
+			"Multiple hook variations",
+		],
+		tags: [
+			"viral-content",
+			"hooks",
+			"psychology",
+			"social-media",
+			"engagement",
+		],
+		formFields: [
+			{
+				label: "Content Topic",
+				name: "contentTopic",
 				type: "text",
 				required: true,
 				order: 1,
 			},
 			{
-				label: "Product Name",
-				name: "productName",
+				label: "Target Identity",
+				name: "targetIdentity",
 				type: "text",
 				required: true,
 				order: 2,
+				helpText:
+					"e.g., Ambitious Entrepreneurs, Working Parents, Tech Leaders",
 			},
 			{
-				label: "Hook",
-				name: "hook",
-				type: "textarea",
+				label: "Platform",
+				name: "platform",
+				type: "select",
 				required: true,
 				order: 3,
-			},
-			{
-				label: "Problem Solved",
-				name: "problemSolved",
-				type: "textarea",
-				required: true,
-				order: 4,
-			},
-			{
-				label: "Core Features",
-				name: "coreFeatures",
-				type: "textarea",
-				required: true,
-				order: 5,
-			},
-			{
-				label: "Key Benefits",
-				name: "keyBenefits",
-				type: "textarea",
-				required: true,
-				order: 6,
-			},
-			{
-				label: "Launch Offer",
-				name: "launchOffer",
-				type: "text",
-				required: true,
-				order: 7,
-			},
-			{
-				label: "Social Proof",
-				name: "socialProof",
-				type: "text",
-				required: true,
-				order: 8,
-			},
-			{
-				label: "Call to Action",
-				name: "callToAction",
-				type: "text",
-				required: true,
-				order: 9,
-			},
-			{
-				label: "Thread Length",
-				name: "threadLength",
-				type: "select",
-				required: true,
-				order: 10,
 				options: [
-					{ label: "Short (5 tweets)", value: "5" },
-					{ label: "Medium (8 tweets)", value: "8" },
-					{ label: "Long (12 tweets)", value: "12" },
-				],
-			},
-			{
-				label: "Thread Style",
-				name: "threadStyle",
-				type: "select",
-				required: true,
-				order: 11,
-				options: [
-					{ label: "Technical Deep-dive", value: "technical" },
-					{ label: "User-focused Story", value: "story" },
-					{ label: "Problem-Solution", value: "solution" },
+					{ label: "Twitter/X", value: "twitter" },
+					{ label: "LinkedIn", value: "linkedin" },
+					{ label: "TikTok", value: "tiktok" },
+					{ label: "Instagram", value: "instagram" },
 				],
 			},
 		],
 	},
 	{
-		id: "3",
-		name: "Tech Stack Showcase",
+		id: "9",
+		name: "Future Skills Roadmap",
 		description:
-			"Create detailed Twitter threads or LinkedIn posts about your development stack and architecture decisions.",
-		slug: "tech-stack-showcase",
-		category: "Technical Content",
-		imageUrl: "/templates/tech-stack.jpg",
-		icon: MessageCircleQuestionIcon,
-		color: "text-emerald-500",
-		bgColor: "bg-emerald-100",
-		aiPrompt: `Create a {contentType} about building {projectType} with {mainTechnology}.
+			"Create a personalized learning pathway to future-proof your career based on industry trends and emerging technologies.",
+		slug: "future-skills-roadmap",
+		category: "Career Development",
+		icon: "Map",
+		color: "#3498DB",
+		aiPrompt: `Design a future skills roadmap for {currentRole} transitioning into {futureRole}:
 
-  Architecture Overview:
-  1. 🏗 Infrastructure: {infrastructure}
-  2. 🔧 Core Technologies: {coreTech}
-  3. 📈 Performance Metrics: {metrics}
-
-  Technical Decisions:
-  - Why we chose: {techDecisions}
-  - Challenges faced: {challenges}
-  - Solutions implemented: {solutions}
-
-  Include {codeExample} if relevant
-  Performance Impact: {impact}
-  Call-to-action: {cta}`,
+  1. Skills Gap Analysis: Compare current skills vs. future requirements
+  2. Technology Trends: Identify emerging tools and technologies in {industry}
+  3. Learning Pathway: Create 6-month, 1-year, and 2-year milestone plans
+  4. Resource Guide: Recommend specific courses, certifications, and projects
+  5. Application Strategy: Suggest real-world practice opportunities
+  6. Network Building: Identify key communities and connections to develop`,
 		features: [
-			"Architecture breakdowns",
-			"Performance metrics",
-			"Code examples",
-			"Decision explanations",
-			"Technical deep-dives",
+			"Personalized skill assessment",
+			"Trend-based planning",
+			"Structured learning paths",
+			"Resource curation",
+			"Network development strategy",
 		],
 		tags: [
-			"development",
-			"architecture",
-			"tech-stack",
-			"engineering",
-			"performance",
+			"career-development",
+			"skills",
+			"learning",
+			"future-proof",
+			"professional-growth",
 		],
 		formFields: [
 			{
-				label: "Content Type",
-				name: "contentType",
+				label: "Current Role",
+				name: "currentRole",
+				type: "text",
+				required: true,
+				order: 1,
+			},
+			{
+				label: "Desired Future Role",
+				name: "futureRole",
+				type: "text",
+				required: true,
+				order: 2,
+			},
+			{
+				label: "Industry",
+				name: "industry",
+				type: "select",
+				required: true,
+				order: 3,
+				options: [
+					{ label: "Technology", value: "tech" },
+					{ label: "Finance", value: "finance" },
+					{ label: "Healthcare", value: "healthcare" },
+					{ label: "Creative", value: "creative" },
+				],
+			},
+		],
+	},
+	{
+		id: "10",
+		name: "AI Tool Stack Architect",
+		description:
+			"Design a customized AI tool stack that automates and enhances your workflow, maximizing productivity while minimizing costs.",
+		slug: "ai-stack-architect",
+		category: "Productivity",
+		icon: "Layers",
+		color: "#1ABC9C",
+		aiPrompt: `Create an optimized AI tool stack for {roleType} in {industry}:
+
+  1. Workflow Analysis: Map current workflow and identify automation opportunities
+  2. Tool Categories: Break down required AI capabilities for {keyTasks}
+  3. Tool Selection: Recommend specific AI tools for each category with pricing
+  4. Integration Plan: Design workflow connecting selected tools
+  5. Cost-Benefit Analysis: Calculate potential time savings vs. tool costs
+  6. Implementation Roadmap: Prioritized adoption schedule
+  7. Backup Options: Alternative tools for each category`,
+		features: [
+			"Personalized tool recommendations",
+			"Cost optimization",
+			"Workflow integration",
+			"ROI calculation",
+			"Implementation strategy",
+		],
+		tags: [
+			"ai-tools",
+			"productivity",
+			"automation",
+			"workflow",
+			"technology",
+		],
+		formFields: [
+			{
+				label: "Role Type",
+				name: "roleType",
+				type: "text",
+				required: true,
+				order: 1,
+				helpText: "e.g., Content Creator, Sales Manager, Developer",
+			},
+			{
+				label: "Industry",
+				name: "industry",
+				type: "select",
+				required: true,
+				order: 2,
+				options: [
+					{ label: "Marketing", value: "marketing" },
+					{ label: "Software", value: "software" },
+					{ label: "Creative", value: "creative" },
+					{ label: "Business", value: "business" },
+				],
+			},
+			{
+				label: "Key Tasks",
+				name: "keyTasks",
+				type: "textarea",
+				required: true,
+				order: 3,
+				helpText: "List your main recurring tasks",
+			},
+		],
+	},
+	{
+		id: "11",
+		name: "Community Catalyst Blueprint",
+		description:
+			"Create a strategic plan to build and nurture a thriving community around your brand or product, focusing on organic growth and engagement.",
+		slug: "community-catalyst",
+		category: "Community Building",
+		icon: "Users",
+		color: "#F39C12",
+		aiPrompt: `Design a community building strategy for {communityType} with {communityGoal}:
+
+  1. Community Identity: Define core values, mission, and unique positioning
+  2. Platform Strategy: Select and optimize primary and secondary platforms
+  3. Content Calendar: Design engagement-focused content themes and cadence
+  4. Ritual Design: Create community rituals and recurring events
+  5. Growth Mechanics: Develop organic growth and referral systems
+  6. Value Loop: Map value creation for both community and business
+  7. Moderation Framework: Establish guidelines and processes
+  8. Metrics Dashboard: Define success metrics and tracking methods`,
+		features: [
+			"Community strategy development",
+			"Platform selection",
+			"Engagement planning",
+			"Growth optimization",
+			"Governance framework",
+		],
+		tags: ["community", "engagement", "growth", "brand-building", "social"],
+		formFields: [
+			{
+				label: "Community Type",
+				name: "communityType",
 				type: "select",
 				required: true,
 				order: 1,
 				options: [
-					{ label: "Twitter Thread", value: "thread" },
-					{ label: "LinkedIn Article", value: "article" },
+					{ label: "Product Users", value: "product" },
+					{ label: "Professional Network", value: "professional" },
+					{ label: "Learning Community", value: "learning" },
+					{ label: "Creator Community", value: "creator" },
+				],
+			},
+			{
+				label: "Primary Community Goal",
+				name: "communityGoal",
+				type: "select",
+				required: true,
+				order: 2,
+				options: [
+					{ label: "Product Feedback", value: "feedback" },
+					{ label: "Knowledge Sharing", value: "knowledge" },
+					{ label: "Network Building", value: "network" },
+					{ label: "Support System", value: "support" },
+				],
+			},
+		],
+	},
+	{
+		id: "12",
+		name: "Narrative Intelligence Engine",
+		description:
+			"Transform complex data and insights into compelling narratives that capture attention and drive action.",
+		slug: "narrative-intelligence",
+		category: "Communication",
+		icon: "BookOpen",
+		color: "#8E44AD",
+		aiPrompt: `Create a narrative framework for {dataType} targeting {audience}:
+
+  1. Story Architecture: Structure data narrative with clear arc
+  2. Data Visualization: Recommend visualization approaches for key metrics
+  3. Emotional Hooks: Identify human elements in the data
+  4. Insight Layering: Structure insights from surface to deep analysis
+  5. Action Triggers: Create compelling calls-to-action
+  6. Format Variations: Adapt story for {contentFormat}
+  7. Supporting Elements: Suggest metaphors, analogies, and examples
+  8. Distribution Strategy: Map channels and timing for maximum impact`,
+		features: [
+			"Data storytelling",
+			"Visual narrative design",
+			"Emotional engagement",
+			"Multi-format adaptation",
+			"Distribution planning",
+		],
+		tags: [
+			"storytelling",
+			"data",
+			"communication",
+			"content-strategy",
+			"engagement",
+		],
+		formFields: [
+			{
+				label: "Data Type",
+				name: "dataType",
+				type: "select",
+				required: true,
+				order: 1,
+				options: [
+					{ label: "Business Metrics", value: "business" },
+					{ label: "Research Findings", value: "research" },
+					{ label: "Market Trends", value: "market" },
+					{ label: "User Behavior", value: "user" },
+				],
+			},
+			{
+				label: "Target Audience",
+				name: "audience",
+				type: "text",
+				required: true,
+				order: 2,
+				helpText: "e.g., Executive Team, Investors, Customers",
+			},
+			{
+				label: "Content Format",
+				name: "contentFormat",
+				type: "select",
+				required: true,
+				order: 3,
+				options: [
+					{ label: "Presentation", value: "presentation" },
+					{ label: "Report", value: "report" },
+					{ label: "Social Media", value: "social" },
+					{ label: "Newsletter", value: "newsletter" },
+				],
+			},
+		],
+	},
+	{
+		id: "13",
+		name: "SaaS Growth Architect",
+		description:
+			"Develop a strategic blueprint to drive user acquisition, engagement, and retention for your SaaS product, emphasizing organic and cost-efficient growth strategies.",
+		slug: "saas-growth-architect",
+		category: "Growth Strategy",
+		icon: "TrendingUp",
+		color: "#27AE60",
+		aiPrompt:
+			"Design a SaaS growth strategy for {productType} in {targetMarket}:\n\n1. Audience Profiling: Identify target personas and pain points\n2. Value Proposition: Distill product’s unique selling points (USPs)\n3. Onboarding Flow: Optimize onboarding steps for user activation\n4. Retention Tactics: Recommend tactics to boost user retention\n5. Viral Loops: Develop strategies for organic referral growth\n6. Feedback Loop: Create mechanisms for user feedback integration\n7. Performance Metrics: Define key metrics for tracking growth success\n8. Expansion Roadmap: Outline stages for scaling in {targetMarket}",
+		features: [
+			"Audience analysis",
+			"Onboarding optimization",
+			"Retention tactics",
+			"Growth hacking",
+			"Performance tracking",
+		],
+		tags: [
+			"saas",
+			"growth-strategy",
+			"user-acquisition",
+			"engagement",
+			"retention",
+		],
+		formFields: [
+			{
+				label: "Product Type",
+				name: "productType",
+				type: "text",
+				required: true,
+				order: 1,
+				helpText: "e.g., CRM tool, Analytics software",
+			},
+			{
+				label: "Target Market",
+				name: "targetMarket",
+				type: "text",
+				required: true,
+				order: 2,
+				helpText: "e.g., Small businesses, Enterprises",
+			},
+		],
+	},
+	{
+		id: "14",
+		name: "Developer Productivity Enhancer",
+		description:
+			"Create a tailored productivity stack for developers that automates repetitive tasks, streamlines workflows, and maximizes focus time.",
+		slug: "dev-productivity-enhancer",
+		category: "Productivity",
+		icon: "Code",
+		color: "#3498DB",
+		aiPrompt:
+			"Develop a productivity optimization stack for {devRole} working on {projectType}:\n\n1. Workflow Analysis: Map current workflow and identify bottlenecks\n2. Task Automation: Recommend tools to automate repetitive coding tasks\n3. Code Quality: Suggest tools and practices to enhance code quality\n4. Knowledge Management: Implement systems for knowledge sharing and documentation\n5. Time Management: Recommend strategies and tools for deep work sessions\n6. Collaboration Tools: Identify tools to improve team collaboration\n7. Performance Tracking: Define productivity metrics and tracking tools\n8. Resource Optimization: Ensure minimal costs while maximizing productivity",
+		features: [
+			"Workflow mapping",
+			"Task automation",
+			"Code quality enhancement",
+			"Time management",
+			"Collaboration tools",
+		],
+		tags: [
+			"developer-tools",
+			"productivity",
+			"automation",
+			"workflow",
+			"code-quality",
+		],
+		formFields: [
+			{
+				label: "Developer Role",
+				name: "devRole",
+				type: "select",
+				required: true,
+				order: 1,
+				options: [
+					{ label: "Frontend Developer", value: "frontend" },
+					{ label: "Backend Developer", value: "backend" },
+					{ label: "Full Stack Developer", value: "fullstack" },
+					{ label: "DevOps Engineer", value: "devops" },
 				],
 			},
 			{
@@ -376,1942 +874,376 @@ export const TEMPLATES: Template[] = [
 				type: "text",
 				required: true,
 				order: 2,
-			},
-			{
-				label: "Main Technology",
-				name: "mainTechnology",
-				type: "text",
-				required: true,
-				order: 3,
-			},
-			{
-				label: "Infrastructure Details",
-				name: "infrastructure",
-				type: "textarea",
-				required: true,
-				order: 4,
-			},
-			{
-				label: "Core Technologies",
-				name: "coreTech",
-				type: "textarea",
-				required: true,
-				order: 5,
-			},
-			{
-				label: "Performance Metrics",
-				name: "metrics",
-				type: "textarea",
-				required: true,
-				order: 6,
-			},
-			{
-				label: "Technical Decisions",
-				name: "techDecisions",
-				type: "textarea",
-				required: true,
-				order: 7,
-			},
-			{
-				label: "Challenges Faced",
-				name: "challenges",
-				type: "textarea",
-				required: true,
-				order: 8,
-			},
-			{
-				label: "Solutions",
-				name: "solutions",
-				type: "textarea",
-				required: true,
-				order: 9,
-			},
-			{
-				label: "Code Example Description",
-				name: "codeExample",
-				type: "text",
-				required: true,
-				order: 10,
-			},
-			{
-				label: "Performance Impact",
-				name: "impact",
-				type: "textarea",
-				required: true,
-				order: 11,
-			},
-			{
-				label: "Call to Action",
-				name: "cta",
-				type: "text",
-				required: true,
-				order: 12,
-			},
-		],
-	},
-	{
-		id: "4",
-		name: "Growth Metrics Mastery",
-		description:
-			"Create data-driven LinkedIn posts showcasing your product's growth metrics and marketing wins.",
-		slug: "growth-metrics-mastery",
-		category: "Marketing Analytics",
-		imageUrl: "/templates/growth-metrics.jpg",
-		icon: TrendingUpIcon,
-		color: "text-red-500",
-		bgColor: "bg-red-100",
-		aiPrompt: `Create a LinkedIn post about {metricType} growth for {timeframe}.
-
-  Key Metrics:
-  📈 Growth Achievement: {achievement}
-  🎯 Strategy Used: {strategy}
-  📊 Key Data Points: {dataPoints}
-
-  Process Breakdown:
-  1. Initial State: {initialState}
-  2. Actions Taken: {actions}
-  3. Results: {results}
-
-  Learnings: {learnings}
-  Next Steps: {nextSteps}
-
-  Style: {postStyle}
-  Include {visualType} visualization description`,
-		features: [
-			"Metric visualization",
-			"Strategy breakdown",
-			"Data storytelling",
-			"Growth insights",
-			"Actionable takeaways",
-		],
-		tags: ["growth", "metrics", "marketing", "analytics", "data"],
-		formFields: [
-			{
-				label: "Metric Type",
-				name: "metricType",
-				type: "select",
-				required: true,
-				order: 1,
-				options: [
-					{ label: "User Acquisition", value: "acquisition" },
-					{ label: "Revenue", value: "revenue" },
-					{ label: "Engagement", value: "engagement" },
-					{ label: "Conversion", value: "conversion" },
-				],
-			},
-			{
-				label: "Timeframe",
-				name: "timeframe",
-				type: "text",
-				required: true,
-				order: 2,
-			},
-			{
-				label: "Achievement",
-				name: "achievement",
-				type: "textarea",
-				required: true,
-				order: 3,
-			},
-			{
-				label: "Strategy",
-				name: "strategy",
-				type: "textarea",
-				required: true,
-				order: 4,
-			},
-			{
-				label: "Data Points",
-				name: "dataPoints",
-				type: "textarea",
-				required: true,
-				order: 5,
-			},
-			{
-				label: "Initial State",
-				name: "initialState",
-				type: "textarea",
-				required: true,
-				order: 6,
-			},
-			{
-				label: "Actions Taken",
-				name: "actions",
-				type: "textarea",
-				required: true,
-				order: 7,
-			},
-			{
-				label: "Results",
-				name: "results",
-				type: "textarea",
-				required: true,
-				order: 8,
-			},
-			{
-				label: "Key Learnings",
-				name: "learnings",
-				type: "textarea",
-				required: true,
-				order: 9,
-			},
-			{
-				label: "Next Steps",
-				name: "nextSteps",
-				type: "textarea",
-				required: true,
-				order: 10,
-			},
-			{
-				label: "Post Style",
-				name: "postStyle",
-				type: "select",
-				required: true,
-				order: 11,
-				options: [
-					{ label: "Data Story", value: "story" },
-					{ label: "Technical Analysis", value: "technical" },
-					{ label: "Strategic Overview", value: "strategic" },
-				],
-			},
-			{
-				label: "Visualization Type",
-				name: "visualType",
-				type: "select",
-				required: true,
-				order: 12,
-				options: [
-					{ label: "Growth Chart", value: "chart" },
-					{ label: "Comparison Graph", value: "graph" },
-					{ label: "Timeline", value: "timeline" },
-				],
-			},
-		],
-	},
-	{
-		id: "5",
-		name: "AI Breakthrough Spotlight",
-		description:
-			"Create viral LinkedIn posts about latest AI developments and their practical applications for businesses.",
-		slug: "ai-breakthrough-spotlight",
-		category: "Tech Innovation",
-		imageUrl: "/templates/ai-spotlight.jpg",
-		icon: BrainCircuitIcon,
-		color: "text-purple-500",
-		bgColor: "bg-purple-100",
-		aiPrompt: `Create a compelling LinkedIn post about {aiTechnology} and its impact on {industry}.
-
-  Key sections to cover:
-  1. 🚀 Innovation Overview: {keyInnovation}
-  2. 💡 Business Applications: {businessUse}
-  3. 🔮 Future Implications: {futureImpact}
-
-  Include {dataPoint} statistics/case studies.
-  Target audience: {targetAudience}
-  Call-to-action: {cta}
-
-  Tone: {contentStyle}`,
-		features: [
-			"AI trend analysis",
-			"Business impact focus",
-			"Data-backed insights",
-			"Future predictions",
-			"Industry-specific applications",
-		],
-		tags: ["ai", "technology", "innovation", "business", "future-tech"],
-		formFields: [
-			{
-				label: "AI Technology",
-				name: "aiTechnology",
-				type: "text",
-				required: true,
-				order: 1,
-			},
-			{
-				label: "Industry Focus",
-				name: "industry",
-				type: "select",
-				required: true,
-				order: 2,
-				options: [
-					{ label: "SaaS", value: "saas" },
-					{ label: "E-commerce", value: "ecommerce" },
-					{ label: "Finance", value: "finance" },
-					{ label: "Healthcare", value: "healthcare" },
-				],
-			},
-			{
-				label: "Key Innovation",
-				name: "keyInnovation",
-				type: "textarea",
-				required: true,
-				order: 3,
-			},
-			{
-				label: "Business Use Case",
-				name: "businessUse",
-				type: "textarea",
-				required: true,
-				order: 4,
-			},
-			{
-				label: "Future Impact",
-				name: "futureImpact",
-				type: "textarea",
-				required: true,
-				order: 5,
-			},
-			{
-				label: "Data Point/Case Study",
-				name: "dataPoint",
-				type: "text",
-				required: true,
-				order: 6,
-			},
-			{
-				label: "Target Audience",
-				name: "targetAudience",
-				type: "select",
-				required: true,
-				order: 7,
-				options: [
-					{ label: "C-Suite Executives", value: "executives" },
-					{ label: "Tech Decision Makers", value: "decision-makers" },
-					{ label: "Developers", value: "developers" },
-					{ label: "Entrepreneurs", value: "entrepreneurs" },
-				],
-			},
-			{
-				label: "Call-to-Action",
-				name: "cta",
-				type: "text",
-				required: true,
-				order: 8,
-			},
-			{
-				label: "Content Style",
-				name: "contentStyle",
-				type: "select",
-				required: true,
-				order: 9,
-				options: [
-					{
-						label: "Thought Leadership",
-						value: "thought-leadership",
-					},
-					{ label: "Educational", value: "educational" },
-					{ label: "Visionary", value: "visionary" },
-				],
-			},
-		],
-	},
-	{
-		id: "5",
-		name: "AI Tool Evolution",
-		description:
-			"Create engaging Twitter threads comparing different AI tools and their practical applications.",
-		slug: "ai-tool-evolution",
-		category: "AI Analysis",
-		imageUrl: "/templates/ai-tools.jpg",
-		icon: BrainCircuitIcon,
-		color: "text-yellow-500",
-		bgColor: "bg-yellow-100",
-		aiPrompt: `Create a {threadLength}-tweet comparison of {tool1} vs
-    {tool1} vs {tool2} for {useCase}.
-
-Thread Structure:
-1. 🔥 Hook: {attentionGrabber}
-2. 🎯 Use Case Overview: {useCase}
-
-Tool Comparison:
-🤖 {tool1}:
-- Key Features: {features1}
-- Best For: {bestUseCase1}
-- Limitations: {limitations1}
-- Pricing: {pricing1}
-
-🤖 {tool2}:
-- Key Features: {features2}
-- Best For: {bestUseCase2}
-- Limitations: {limitations2}
-- Pricing: {pricing2}
-
-Real-world Example:
-- {tool1} Example: {example1}
-- {tool2} Example: {example2}
-
-Verdict: {comparison}
-Pro Tips: {tips}
-
-#AI #Tools #Tech`,
-		features: [
-			"Tool comparisons",
-			"Use case analysis",
-			"Practical examples",
-			"Price comparison",
-			"Expert insights",
-		],
-		tags: [
-			"ai-tools",
-			"technology",
-			"comparison",
-			"productivity",
-			"software",
-		],
-		formFields: [
-			{
-				label: "First Tool",
-				name: "tool1",
-				type: "text",
-				required: true,
-				order: 1,
-			},
-			{
-				label: "Second Tool",
-				name: "tool2",
-				type: "text",
-				required: true,
-				order: 2,
-			},
-			{
-				label: "Use Case",
-				name: "useCase",
-				type: "text",
-				required: true,
-				order: 3,
-			},
-			{
-				label: "Attention Grabber",
-				name: "attentionGrabber",
-				type: "textarea",
-				required: true,
-				order: 4,
-			},
-			{
-				label: "Tool 1 Features",
-				name: "features1",
-				type: "textarea",
-				required: true,
-				order: 5,
-			},
-			{
-				label: "Tool 1 Best Use Case",
-				name: "bestUseCase1",
-				type: "textarea",
-				required: true,
-				order: 6,
-			},
-			{
-				label: "Tool 1 Limitations",
-				name: "limitations1",
-				type: "textarea",
-				required: true,
-				order: 7,
-			},
-			{
-				label: "Tool 1 Pricing",
-				name: "pricing1",
-				type: "text",
-				required: true,
-				order: 8,
-			},
-			{
-				label: "Tool 2 Features",
-				name: "features2",
-				type: "textarea",
-				required: true,
-				order: 9,
-			},
-			{
-				label: "Tool 2 Best Use Case",
-				name: "bestUseCase2",
-				type: "textarea",
-				required: true,
-				order: 10,
-			},
-			{
-				label: "Tool 2 Limitations",
-				name: "limitations2",
-				type: "textarea",
-				required: true,
-				order: 11,
-			},
-			{
-				label: "Tool 2 Pricing",
-				name: "pricing2",
-				type: "text",
-				required: true,
-				order: 12,
-			},
-			{
-				label: "Example for Tool 1",
-				name: "example1",
-				type: "textarea",
-				required: true,
-				order: 13,
-			},
-			{
-				label: "Example for Tool 2",
-				name: "example2",
-				type: "textarea",
-				required: true,
-				order: 14,
-			},
-			{
-				label: "Comparison Verdict",
-				name: "comparison",
-				type: "textarea",
-				required: true,
-				order: 15,
-			},
-			{
-				label: "Pro Tips",
-				name: "tips",
-				type: "textarea",
-				required: true,
-				order: 16,
-			},
-			{
-				label: "Thread Length",
-				name: "threadLength",
-				type: "select",
-				required: true,
-				order: 17,
-				options: [
-					{ label: "Concise (6 tweets)", value: "6" },
-					{ label: "Detailed (10 tweets)", value: "10" },
-					{ label: "Comprehensive (15 tweets)", value: "15" },
-				],
-			},
-		],
-	},
-	{
-		id: "6",
-		name: "Code Journey Chronicles",
-		description:
-			"Create engaging dev.to or Hashnode articles about your coding journey, challenges, and solutions.",
-		slug: "code-journey-chronicles",
-		category: "Developer Stories",
-		imageUrl: "/templates/code-journey.jpg",
-		icon: CodeIcon,
-		color: "text-indigo-500",
-		bgColor: "bg-indigo-100",
-		aiPrompt: `Create a detailed {articleType} about {challengeType} in {technology}.
-
-Story Structure:
-🎯 Problem Context: {context}
-💭 Initial Approach: {initialApproach}
-🚧 Challenges Faced:
-- {challenge1}
-- {challenge2}
-- {challenge3}
-
-Solution Journey:
-1. Research Phase: {research}
-2. Implementation: {implementation}
-3. Optimization: {optimization}
-
-Code Walkthrough:
-{codeSection}
-
-Key Learnings:
-{learnings}
-
-Future Improvements: {improvements}
-Reader Takeaways: {takeaways}
-
-Style: {contentStyle}
-Technical Level: {techLevel}`,
-		features: [
-			"Problem-solution narrative",
-			"Code explanations",
-			"Learning insights",
-			"Technical deep-dives",
-			"Action steps",
-		],
-		tags: ["coding", "development", "learning", "tutorial", "tech-writing"],
-		formFields: [
-			{
-				label: "Article Type",
-				name: "articleType",
-				type: "select",
-				required: true,
-				order: 1,
-				options: [
-					{ label: "Tutorial", value: "tutorial" },
-					{ label: "Case Study", value: "case-study" },
-					{ label: "Problem-Solution", value: "problem-solution" },
-				],
-			},
-			{
-				label: "Challenge Type",
-				name: "challengeType",
-				type: "text",
-				required: true,
-				order: 2,
-			},
-			{
-				label: "Technology",
-				name: "technology",
-				type: "text",
-				required: true,
-				order: 3,
-			},
-			{
-				label: "Context",
-				name: "context",
-				type: "textarea",
-				required: true,
-				order: 4,
-			},
-			{
-				label: "Initial Approach",
-				name: "initialApproach",
-				type: "textarea",
-				required: true,
-				order: 5,
-			},
-			{
-				label: "Challenge 1",
-				name: "challenge1",
-				type: "textarea",
-				required: true,
-				order: 6,
-			},
-			{
-				label: "Challenge 2",
-				name: "challenge2",
-				type: "textarea",
-				required: true,
-				order: 7,
-			},
-			{
-				label: "Challenge 3",
-				name: "challenge3",
-				type: "textarea",
-				required: true,
-				order: 8,
-			},
-			{
-				label: "Research Phase",
-				name: "research",
-				type: "textarea",
-				required: true,
-				order: 9,
-			},
-			{
-				label: "Implementation Details",
-				name: "implementation",
-				type: "textarea",
-				required: true,
-				order: 10,
-			},
-			{
-				label: "Optimization Steps",
-				name: "optimization",
-				type: "textarea",
-				required: true,
-				order: 11,
-			},
-			{
-				label: "Code Section",
-				name: "codeSection",
-				type: "textarea",
-				required: true,
-				order: 12,
-			},
-			{
-				label: "Key Learnings",
-				name: "learnings",
-				type: "textarea",
-				required: true,
-				order: 13,
-			},
-			{
-				label: "Future Improvements",
-				name: "improvements",
-				type: "textarea",
-				required: true,
-				order: 14,
-			},
-			{
-				label: "Reader Takeaways",
-				name: "takeaways",
-				type: "textarea",
-				required: true,
-				order: 15,
-			},
-			{
-				label: "Content Style",
-				name: "contentStyle",
-				type: "select",
-				required: true,
-				order: 16,
-				options: [
-					{ label: "Conversational", value: "conversational" },
-					{ label: "Technical", value: "technical" },
-					{ label: "Story-based", value: "story" },
-				],
-			},
-			{
-				label: "Technical Level",
-				name: "techLevel",
-				type: "select",
-				required: true,
-				order: 17,
-				options: [
-					{ label: "Beginner", value: "beginner" },
-					{ label: "Intermediate", value: "intermediate" },
-					{ label: "Advanced", value: "advanced" },
-				],
-			},
-		],
-	},
-	{
-		id: "7",
-		name: "Startup Pivot Playbook",
-		description:
-			"Create LinkedIn articles about product pivots, market adaptations, and business strategy shifts.",
-		slug: "startup-pivot-playbook",
-		category: "Business Strategy",
-		imageUrl: "/templates/pivot-playbook.jpg",
-		icon: TargetIcon,
-		color: "text-cyan-500",
-		bgColor: "bg-cyan-100",
-		aiPrompt: `Create a LinkedIn article about pivoting from {originalStrategy} to {newStrategy}.
-
-Story Arc:
-🎯 Initial Vision: {initialVision}
-📊 Market Reality: {marketReality}
-🔄 Pivot Trigger: {pivotTrigger}
-
-Pivot Process:
-1. Data Insights: {dataInsights}
-2. Customer Feedback: {customerFeedback}
-3. Team Alignment: {teamAlignment}
-
-Results:
-- Before: {beforeMetrics}
-- After: {afterMetrics}
-- Key Wins: {keyWins}
-
-Lessons Learned: {lessons}
-Advice for Others: {advice}
-
-Include {dataVisualization} type visualization
-Style: {articleStyle}`,
-		features: [
-			"Pivot analysis",
-			"Data visualization",
-			"Strategic insights",
-			"Result metrics",
-			"Actionable advice",
-		],
-		tags: [
-			"startup",
-			"business-strategy",
-			"pivot",
-			"entrepreneurship",
-			"growth",
-		],
-		formFields: [
-			{
-				label: "Original Strategy",
-				name: "originalStrategy",
-				type: "text",
-				required: true,
-				order: 1,
-			},
-			{
-				label: "New Strategy",
-				name: "newStrategy",
-				type: "text",
-				required: true,
-				order: 2,
-			},
-			{
-				label: "Initial Vision",
-				name: "initialVision",
-				type: "textarea",
-				required: true,
-				order: 3,
-			},
-			{
-				label: "Market Reality",
-				name: "marketReality",
-				type: "textarea",
-				required: true,
-				order: 4,
-			},
-			{
-				label: "Pivot Trigger",
-				name: "pivotTrigger",
-				type: "textarea",
-				required: true,
-				order: 5,
-			},
-			{
-				label: "Data Insights",
-				name: "dataInsights",
-				type: "textarea",
-				required: true,
-				order: 6,
-			},
-			{
-				label: "Customer Feedback",
-				name: "customerFeedback",
-				type: "textarea",
-				required: true,
-				order: 7,
-			},
-			{
-				label: "Team Alignment",
-				name: "teamAlignment",
-				type: "textarea",
-				required: true,
-				order: 8,
-			},
-			{
-				label: "Before Metrics",
-				name: "beforeMetrics",
-				type: "textarea",
-				required: true,
-				order: 9,
-			},
-			{
-				label: "After Metrics",
-				name: "afterMetrics",
-				type: "textarea",
-				required: true,
-				order: 10,
-			},
-			{
-				label: "Key Wins",
-				name: "keyWins",
-				type: "textarea",
-				required: true,
-				order: 11,
-			},
-			{
-				label: "Lessons Learned",
-				name: "lessons",
-				type: "textarea",
-				required: true,
-				order: 12,
-			},
-			{
-				label: "Advice",
-				name: "advice",
-				type: "textarea",
-				required: true,
-				order: 13,
-			},
-			{
-				label: "Data Visualization",
-				name: "dataVisualization",
-				type: "select",
-				required: true,
-				order: 14,
-				options: [
-					{ label: "Before/After Chart", value: "comparison" },
-					{ label: "Growth Timeline", value: "timeline" },
-					{ label: "Metrics Dashboard", value: "dashboard" },
-				],
-			},
-			{
-				label: "Article Style",
-				name: "articleStyle",
-				type: "select",
-				required: true,
-				order: 15,
-				options: [
-					{ label: "Data-Driven", value: "data-driven" },
-					{ label: "Narrative", value: "narrative" },
-					{ label: "Strategic Analysis", value: "analysis" },
-				],
-			},
-		],
-	},
-	{
-		id: "8",
-		name: "API Launch Amplifier",
-		description:
-			"Create comprehensive Twitter threads or technical blog posts about your API launch or updates.",
-		slug: "api-launch-amplifier",
-		category: "API Documentation",
-		imageUrl: "/templates/api-launch.jpg",
-		icon: MegaphoneIcon,
-		color: "text-rose-500",
-		bgColor: "bg-rose-100",
-		aiPrompt: `Create a {contentFormat} announcing {apiName} {contentType}.
-
-Key Sections:
-🚀 Launch Overview: {overview}
-🎯 Target Developers: {targetDevs}
-⚡️ Key Features:
-- {feature1}
-- {feature2}
-- {feature3}
-
-Technical Details:
-1. Authentication: {auth}
-2. Rate Limits: {rateLimits}
-3. Response Format: {responseFormat}
-
-Quick Start:
-{codeExample}
-
-Use Cases:
-- {useCase1}
-- {useCase2}
-- {useCase3}
-
-Documentation: {docs}
-Support: {support}
-Pricing: {pricing}
-
-Style: {contentStyle}`,
-		features: [
-			"API documentation",
-			"Code examples",
-			"Use cases",
-			"Technical specs",
-			"Launch details",
-		],
-		tags: [
-			"api",
-			"development",
-			"documentation",
-			"technical-writing",
-			"launch",
-		],
-		formFields: [
-			{
-				label: "Content Format",
-				name: "contentFormat",
-				type: "select",
-				required: true,
-				order: 1,
-				options: [
-					{ label: "Twitter Thread", value: "thread" },
-					{ label: "Blog Post", value: "blog" },
-					{ label: "Documentation", value: "docs" },
-				],
-			},
-			{
-				label: "API Name",
-				name: "apiName",
-				type: "text",
-				required: true,
-				order: 2,
-			},
-			{
-				label: "Content Type",
-				name: "contentType",
-				type: "select",
-				required: true,
-				order: 3,
-				options: [
-					{ label: "Launch", value: "launch" },
-					{ label: "Update", value: "update" },
-					{ label: "Feature Release", value: "feature" },
-				],
-			},
-			{
-				label: "Overview",
-				name: "overview",
-				type: "textarea",
-				required: true,
-				order: 4,
-			},
-			{
-				label: "Target Developers",
-				name: "targetDevs",
-				type: "textarea",
-				required: true,
-				order: 5,
-			},
-			{
-				label: "Feature 1",
-				name: "feature1",
-				type: "textarea",
-				required: true,
-				order: 6,
-			},
-			{
-				label: "Feature 2",
-				name: "feature2",
-				type: "textarea",
-				required: true,
-				order: 7,
-			},
-			{
-				label: "Feature 3",
-				name: "feature3",
-				type: "textarea",
-				required: true,
-				order: 8,
-			},
-			{
-				label: "Authentication",
-				name: "auth",
-				type: "textarea",
-				required: true,
-				order: 9,
-			},
-			{
-				label: "Rate Limits",
-				name: "rateLimits",
-				type: "textarea",
-				required: true,
-				order: 10,
-			},
-			{
-				label: "Response Format",
-				name: "responseFormat",
-				type: "textarea",
-				required: true,
-				order: 11,
-			},
-			{
-				label: "Code Example",
-				name: "codeExample",
-				type: "textarea",
-				required: true,
-				order: 12,
-			},
-			{
-				label: "Use Case 1",
-				name: "useCase1",
-				type: "textarea",
-				required: true,
-				order: 13,
-			},
-			{
-				label: "Use Case 2",
-				name: "useCase2",
-				type: "textarea",
-				required: true,
-				order: 14,
-			},
-			{
-				label: "Use Case 3",
-				name: "useCase3",
-				type: "textarea",
-				required: true,
-				order: 15,
-			},
-			{
-				label: "Documentation",
-				name: "docs",
-				type: "text",
-				required: true,
-				order: 16,
-			},
-			{
-				label: "Support",
-				name: "support",
-				type: "text",
-				required: true,
-				order: 17,
-			},
-			{
-				label: "Pricing",
-				name: "pricing",
-				type: "textarea",
-				required: true,
-				order: 18,
-			},
-			{
-				label: "Content Style",
-				name: "contentStyle",
-				type: "select",
-				required: true,
-				order: 19,
-				options: [
-					{ label: "Technical", value: "technical" },
-					{ label: "Developer-Friendly", value: "friendly" },
-					{ label: "Business-Focused", value: "business" },
-				],
-			},
-		],
-	},
-	{
-		id: "11",
-		name: "Developer Side Project Showcase",
-		description:
-			"Create engaging social media posts that showcase your personal side projects and highlight your skills.",
-		slug: "side-project-showcase",
-		category: "Developer Branding",
-		imageUrl: "/templates/side-project.jpg",
-		icon: Puzzle,
-		color: "text-red-500",
-		bgColor: "bg-red-100",
-		aiPrompt: `Create a social media post showcasing your {projectName} side project.
-  Project Overview: {projectDescription}
-  Key Features: {keyFeatures}
-  Technologies Used: {techStack}
-  Personal Takeaways: {personalTakeaways}
-  Call to Action: {callToAction}
-  Tone: {tone}
-  Platform: {platform}`,
-		features: [
-			"Side project showcase",
-			"Skill demonstration",
-			"Personal growth sharing",
-			"Engaging format",
-			"Platform-optimized",
-		],
-		tags: [
-			"developer-branding",
-			"portfolio",
-			"social-media",
-			"side-projects",
-			"personal-growth",
-		],
-		formFields: [
-			{
-				label: "Project Name",
-				name: "projectName",
-				type: "text",
-				required: true,
-				order: 1,
-			},
-			{
-				label: "Project Description",
-				name: "projectDescription",
-				type: "textarea",
-				required: true,
-				order: 2,
-			},
-			{
-				label: "Key Features",
-				name: "keyFeatures",
-				type: "textarea",
-				required: true,
-				order: 3,
-			},
-			{
-				label: "Tech Stack",
-				name: "techStack",
-				type: "text",
-				required: true,
-				order: 4,
-			},
-			{
-				label: "Personal Takeaways",
-				name: "personalTakeaways",
-				type: "textarea",
-				required: true,
-				order: 5,
-			},
-			{
-				label: "Call to Action",
-				name: "callToAction",
-				type: "text",
-				required: true,
-				order: 6,
-			},
-			{
-				label: "Writing Tone",
-				name: "tone",
-				type: "select",
-				required: true,
-				order: 7,
-				options: [
-					{ label: "Conversational", value: "conversational" },
-					{ label: "Enthusiastic", value: "enthusiastic" },
-					{ label: "Educational", value: "educational" },
-				],
-			},
-			{
-				label: "Target Platform",
-				name: "platform",
-				type: "select",
-				required: true,
-				order: 8,
-				options: [
-					{ label: "LinkedIn", value: "linkedin" },
-					{ label: "Twitter/X", value: "twitter" },
-					{ label: "Instagram", value: "instagram" },
-					{ label: "Facebook", value: "facebook" },
-				],
-			},
-		],
-	},
-	{
-		id: "12",
-		name: "Developer Tech Stack Showcase",
-		description:
-			"Create visually appealing social media posts that highlight your technical skills and expertise.",
-		slug: "tech-stack-showcase",
-		category: "Developer Branding",
-		imageUrl: "/templates/tech-stack.jpg",
-		icon: Box,
-		color: "text-emerald-500",
-		bgColor: "bg-emerald-100",
-		aiPrompt: `Create a social media post showcasing your developer tech stack.
-  Key Technologies: {technologies}
-  Proficiency Levels: {proficiencyLevels}
-  Personal Projects/Experience: {experience}
-  Call to Action: {callToAction}
-  Tone: {tone}
-  Platform: {platform}`,
-		features: [
-			"Tech stack overview",
-			"Skill demonstration",
-			"Visual appeal",
-			"Engagement-driven",
-			"Platform-optimized",
-		],
-		tags: [
-			"developer-branding",
-			"portfolio",
-			"social-media",
-			"tech-stack",
-			"skills",
-		],
-		formFields: [
-			{
-				label: "Key Technologies",
-				name: "technologies",
-				type: "textarea",
-				required: true,
-				order: 1,
-				helpText: "List the key technologies, one per line",
-			},
-			{
-				label: "Proficiency Levels",
-				name: "proficiencyLevels",
-				type: "textarea",
-				required: true,
-				order: 2,
-				helpText:
-					"List the proficiency level for each technology, one per line",
-			},
-			{
-				label: "Personal Experience",
-				name: "experience",
-				type: "textarea",
-				required: true,
-				order: 3,
-				helpText: "Describe your experience with these technologies",
-			},
-			{
-				label: "Call to Action",
-				name: "callToAction",
-				type: "text",
-				required: true,
-				order: 4,
-			},
-			{
-				label: "Writing Tone",
-				name: "tone",
-				type: "select",
-				required: true,
-				order: 5,
-				options: [
-					{ label: "Professional", value: "professional" },
-					{ label: "Confident", value: "confident" },
-					{ label: "Enthusiastic", value: "enthusiastic" },
-				],
-			},
-			{
-				label: "Target Platform",
-				name: "platform",
-				type: "select",
-				required: true,
-				order: 6,
-				options: [
-					{ label: "LinkedIn", value: "linkedin" },
-					{ label: "Twitter/X", value: "twitter" },
-					{ label: "Instagram", value: "instagram" },
-					{ label: "Facebook", value: "facebook" },
-				],
-			},
-		],
-	},
-	{
-		id: "13",
-		name: "Developer Community Building",
-		description:
-			"Create engaging Twitter/X threads that foster meaningful connections and discussions within the developer community.",
-		slug: "developer-community-building",
-		category: "Community Engagement",
-		imageUrl: "/templates/community-building.jpg",
-		icon: Users,
-		color: "text-violet-500",
-		bgColor: "bg-violet-100",
-		aiPrompt: `Create a {threadLength}-tweet thread to foster community engagement around the topic of "{topic}".
-  Key discussion points:
-  1. {point1}
-  2. {point2}
-  3. {point3}
-  4. {point4}
-  5. {point5}
-  Include prompts for community participation, such as questions or opinions.
-  Encourage authentic interaction and learning.
-  End with a call to action: {callToAction}`,
-		features: [
-			"Community-focused content",
-			"Engagement-driven",
-			"Participatory format",
-			"Authentic interaction",
-			"Educational elements",
-		],
-		tags: [
-			"twitter",
-			"developer-community",
-			"community-building",
-			"engagement",
-			"education",
-		],
-		formFields: [
-			{
-				label: "Topic",
-				name: "topic",
-				type: "text",
-				required: true,
-				order: 1,
-			},
-			{
-				label: "Discussion Point 1",
-				name: "point1",
-				type: "textarea",
-				required: true,
-				order: 2,
-			},
-			{
-				label: "Discussion Point 2",
-				name: "point2",
-				type: "textarea",
-				required: true,
-				order: 3,
-			},
-			{
-				label: "Discussion Point 3",
-				name: "point3",
-				type: "textarea",
-				required: true,
-				order: 4,
-			},
-			{
-				label: "Discussion Point 4",
-				name: "point4",
-				type: "textarea",
-				required: true,
-				order: 5,
-			},
-			{
-				label: "Discussion Point 5",
-				name: "point5",
-				type: "textarea",
-				required: true,
-				order: 6,
-			},
-			{
-				label: "Thread Length",
-				name: "threadLength",
-				type: "select",
-				required: true,
-				order: 7,
-				options: [
-					{ label: "Short (5 tweets)", value: "5" },
-					{ label: "Medium (10 tweets)", value: "10" },
-					{ label: "Long (15 tweets)", value: "15" },
-				],
-			},
-			{
-				label: "Call to Action",
-				name: "callToAction",
-				type: "text",
-				required: true,
-				order: 8,
-			},
-		],
-	},
-	{
-		id: "14",
-		name: "Developer Sustainability Spotlight",
-		description:
-			"Create LinkedIn posts that highlight how developers are contributing to sustainable tech solutions.",
-		slug: "developer-sustainability-spotlight",
-		category: "Social Impact",
-		imageUrl: "/templates/sustainability.jpg",
-		icon: Leaf,
-		color: "text-green-500",
-		bgColor: "bg-green-100",
-		aiPrompt: `Create a LinkedIn post showcasing how developers can contribute to sustainable tech solutions.
-  Highlight the project: {projectName}
-  Key sustainable features: {sustainableFeatures}
-  Impact and benefits: {impact}
-  Personal motivation: {personalMotivation}
-  Call to action: {callToAction}
-  Tone: {tone}`,
-		features: [
-			"Sustainability-focused",
-			"Positive impact showcase",
-			"Personal motivation sharing",
-			"Engagement-driven",
-			"Professional branding",
-		],
-		tags: [
-			"linkedin",
-			"sustainability",
-			"social-impact",
-			"tech-for-good",
-			"developer-community",
-		],
-		formFields: [
-			{
-				label: "Project Name",
-				name: "projectName",
-				type: "text",
-				required: true,
-				order: 1,
-			},
-			{
-				label: "Sustainable Features",
-				name: "sustainableFeatures",
-				type: "textarea",
-				required: true,
-				order: 2,
-			},
-			{
-				label: "Impact and Benefits",
-				name: "impact",
-				type: "textarea",
-				required: true,
-				order: 3,
-			},
-			{
-				label: "Personal Motivation",
-				name: "personalMotivation",
-				type: "textarea",
-				required: true,
-				order: 4,
-			},
-			{
-				label: "Call to Action",
-				name: "callToAction",
-				type: "text",
-				required: true,
-				order: 5,
-			},
-			{
-				label: "Writing Tone",
-				name: "tone",
-				type: "select",
-				required: true,
-				order: 6,
-				options: [
-					{ label: "Inspirational", value: "inspirational" },
-					{ label: "Informative", value: "informative" },
-					{ label: "Passionate", value: "passionate" },
-				],
+				helpText: "e.g., E-commerce platform, AI-powered application",
 			},
 		],
 	},
 	{
 		id: "15",
-		name: "Developer Sustainability Spotlight",
+		name: "Marketing Funnel Optimizer",
 		description:
-			"Create LinkedIn posts that highlight how developers are contributing to sustainable tech solutions.",
-		slug: "developer-sustainability-spotlight",
-		category: "Social Impact",
-		imageUrl: "/templates/sustainability.jpg",
-		icon: Leaf,
-		color: "text-green-500",
-		bgColor: "bg-green-100",
-		aiPrompt: `Create a LinkedIn post showcasing how developers can contribute to sustainable tech solutions.
-  Highlight the project: {projectName}
-  Key sustainable features: {sustainableFeatures}
-  Impact and benefits: {impact}
-  Personal motivation: {personalMotivation}
-  Call to action: {callToAction}
-  Tone: {tone}`,
+			"Develop an optimized marketing funnel strategy that converts leads into loyal customers, focusing on personalized and data-driven campaigns.",
+		slug: "marketing-funnel-optimizer",
+		category: "Marketing",
+		icon: "ChartPieIcon",
+		color: "#E74C3C",
+		aiPrompt:
+			"Create a marketing funnel strategy for {businessType} targeting {customerType}:\n\n1. Audience Segmentation: Identify and segment target audiences\n2. Lead Generation: Recommend channels for lead acquisition\n3. Content Strategy: Design targeted content for each stage of the funnel\n4. Lead Nurturing: Develop automated sequences to engage leads\n5. Conversion Optimization: Optimize landing pages and CTAs\n6. Retention Strategy: Implement post-conversion engagement tactics\n7. Performance Metrics: Define KPIs and analytics for each funnel stage\n8. ROI Analysis: Estimate expected return on marketing investments",
 		features: [
-			"Sustainability-focused",
-			"Positive impact showcase",
-			"Personal motivation sharing",
-			"Engagement-driven",
-			"Professional branding",
+			"Audience segmentation",
+			"Lead generation channels",
+			"Content creation",
+			"Conversion tactics",
+			"Analytics and tracking",
 		],
 		tags: [
-			"linkedin",
-			"sustainability",
-			"social-impact",
-			"tech-for-good",
-			"developer-community",
+			"marketing",
+			"funnel",
+			"lead-generation",
+			"conversion",
+			"analytics",
 		],
 		formFields: [
 			{
-				label: "Project Name",
-				name: "projectName",
+				label: "Business Type",
+				name: "businessType",
 				type: "text",
 				required: true,
 				order: 1,
+				helpText: "e.g., E-commerce, SaaS",
 			},
 			{
-				label: "Sustainable Features",
-				name: "sustainableFeatures",
-				type: "textarea",
-				required: true,
-				order: 2,
-			},
-			{
-				label: "Impact and Benefits",
-				name: "impact",
-				type: "textarea",
-				required: true,
-				order: 3,
-			},
-			{
-				label: "Personal Motivation",
-				name: "personalMotivation",
-				type: "textarea",
-				required: true,
-				order: 4,
-			},
-			{
-				label: "Call to Action",
-				name: "callToAction",
+				label: "Customer Type",
+				name: "customerType",
 				type: "text",
 				required: true,
-				order: 5,
-			},
-			{
-				label: "Writing Tone",
-				name: "tone",
-				type: "select",
-				required: true,
-				order: 6,
-				options: [
-					{ label: "Inspirational", value: "inspirational" },
-					{ label: "Informative", value: "informative" },
-					{ label: "Passionate", value: "passionate" },
-				],
+				order: 2,
+				helpText: "e.g., Small business owners, Enterprise clients",
 			},
 		],
 	},
 	{
 		id: "16",
-		name: "Developer Mental Health Awareness",
+		name: "DevOps Efficiency Maximizer",
 		description:
-			"Create LinkedIn posts that raise awareness about mental health challenges faced by developers and offer supportive resources.",
-		slug: "developer-mental-health",
-		category: "Social Impact",
-		imageUrl: "/templates/mental-health.jpg",
-		icon: BrainCircuit,
-		color: "text-sky-500",
-		bgColor: "bg-sky-100",
-		aiPrompt: `Create a LinkedIn post to raise awareness about mental health in the developer community.
-  Key topics to cover:
-  - {topic1}
-  - {topic2}
-  - {topic3}
-  Include personal experiences, statistics, or industry insights.
-  Provide supportive resources and actionable tips.
-  Tone: {tone}`,
+			"Optimize DevOps workflows with a custom tool stack designed to streamline deployments, improve infrastructure reliability, and enhance team collaboration.",
+		slug: "devops-efficiency-maximizer",
+		category: "Productivity",
+		icon: "Server",
+		color: "#9B59B6",
+		aiPrompt:
+			"Develop a DevOps efficiency stack for {projectType} on {infrastructure}:\n\n1. Infrastructure Analysis: Assess current infrastructure and workflows\n2. CI/CD Tools: Recommend tools for streamlined continuous integration/deployment\n3. Monitoring and Logging: Suggest tools for real-time monitoring and logging\n4. Collaboration: Enhance collaboration between DevOps and dev teams\n5. Automation: Identify tasks suitable for automation and recommend tools\n6. Security: Suggest tools for enforcing security protocols\n7. Performance Metrics: Define KPIs for deployment speed and reliability\n8. Cost Optimization: Recommend ways to optimize costs while maintaining quality",
 		features: [
-			"Mental health awareness",
-			"Personal stories",
-			"Data-driven insights",
-			"Supportive resources",
-			"Actionable guidance",
+			"CI/CD optimization",
+			"Infrastructure monitoring",
+			"Automation and security",
+			"Collaboration improvement",
+			"Cost-saving strategies",
 		],
-		tags: [
-			"linkedin",
-			"mental-health",
-			"developer-wellness",
-			"self-care",
-			"community-support",
-		],
+		tags: ["devops", "ci-cd", "automation", "monitoring", "cloud"],
 		formFields: [
 			{
-				label: "Topic 1",
-				name: "topic1",
+				label: "Project Type",
+				name: "projectType",
 				type: "text",
 				required: true,
 				order: 1,
+				helpText:
+					"e.g., Microservices application, E-commerce platform",
 			},
 			{
-				label: "Topic 2",
-				name: "topic2",
+				label: "Infrastructure",
+				name: "infrastructure",
 				type: "text",
 				required: true,
 				order: 2,
-			},
-			{
-				label: "Topic 3",
-				name: "topic3",
-				type: "text",
-				required: true,
-				order: 3,
-			},
-			{
-				label: "Writing Tone",
-				name: "tone",
-				type: "select",
-				required: true,
-				order: 4,
-				options: [
-					{ label: "Compassionate", value: "compassionate" },
-					{ label: "Informative", value: "informative" },
-					{ label: "Encouraging", value: "encouraging" },
-				],
+				helpText: "e.g., AWS, Azure, Kubernetes",
 			},
 		],
 	},
 	{
 		id: "17",
-		name: "Developer Entrepreneurship Showcase",
+		name: "AI-Powered Content Marketer",
 		description:
-			"Create LinkedIn posts that highlight developers who have started their own successful tech ventures.",
-		slug: "developer-entrepreneurship",
-		category: "Professional Development",
-		imageUrl: "/templates/entrepreneurship.jpg",
-		icon: Lightbulb,
-		color: "text-amber-500",
-		bgColor: "bg-amber-100",
-		aiPrompt: `Create a LinkedIn post showcasing a developer entrepreneur and their tech venture.
-  Entrepreneur Name: {entrepreneurName}
-  Company Name: {companyName}
-  Product/Service: {productDescription}
-  Key Achievements: {achievements}
-  Entrepreneurial Journey: {journey}
-  Call to Action: {callToAction}
-  Tone: {tone}`,
+			"Create an AI-enhanced content marketing strategy that uses data insights to drive engagement and conversions.",
+		slug: "ai-content-marketer",
+		category: "Marketing",
+		icon: "PenTool",
+		color: "#2ECC71",
+		aiPrompt:
+			"Design a content marketing strategy using AI for {businessType} targeting {audience}:\n\n1. Audience Insights: Use AI to segment and understand audience preferences\n2. Content Ideation: Generate data-driven content ideas\n3. Content Creation: Recommend tools to assist with content generation and curation\n4. Personalization: Implement AI to deliver personalized content experiences\n5. Distribution Strategy: Plan distribution across optimal channels\n6. Engagement Optimization: Use AI to track and boost engagement metrics\n7. Conversion Tactics: Design tactics to drive conversions\n8. Analytics: Define success metrics and AI-powered analytics for tracking",
 		features: [
-			"Entrepreneurship spotlight",
-			"Inspirational stories",
-			"Product/service showcase",
-			"Key achievements highlights",
-			"Engagement-driven",
+			"Audience insights",
+			"Content ideation",
+			"AI-powered content generation",
+			"Personalized engagement",
+			"Conversion and analytics",
 		],
 		tags: [
-			"linkedin",
-			"developer-entrepreneurship",
-			"tech-startups",
-			"founder-stories",
-			"professional-development",
+			"content-marketing",
+			"ai",
+			"engagement",
+			"personalization",
+			"analytics",
 		],
 		formFields: [
 			{
-				label: "Entrepreneur Name",
-				name: "entrepreneurName",
+				label: "Business Type",
+				name: "businessType",
 				type: "text",
 				required: true,
 				order: 1,
+				helpText: "e.g., SaaS, E-commerce, Consulting",
 			},
 			{
-				label: "Company Name",
-				name: "companyName",
+				label: "Target Audience",
+				name: "audience",
 				type: "text",
 				required: true,
 				order: 2,
-			},
-			{
-				label: "Product/Service Description",
-				name: "productDescription",
-				type: "textarea",
-				required: true,
-				order: 3,
-			},
-			{
-				label: "Key Achievements",
-				name: "achievements",
-				type: "textarea",
-				required: true,
-				order: 4,
-			},
-			{
-				label: "Entrepreneurial Journey",
-				name: "journey",
-				type: "textarea",
-				required: true,
-				order: 5,
-			},
-			{
-				label: "Call to Action",
-				name: "callToAction",
-				type: "text",
-				required: true,
-				order: 6,
-			},
-			{
-				label: "Writing Tone",
-				name: "tone",
-				type: "select",
-				required: true,
-				order: 7,
-				options: [
-					{ label: "Inspirational", value: "inspirational" },
-					{ label: "Informative", value: "informative" },
-					{ label: "Conversational", value: "conversational" },
-				],
+				helpText: "e.g., Small businesses, Technology enthusiasts",
 			},
 		],
 	},
 	{
 		id: "18",
-		name: "Developer Freelancing Spotlight",
+		name: "AI Model Selection Assistant",
 		description:
-			"Create LinkedIn posts that highlight the experiences and successes of developer freelancers.",
-		slug: "developer-freelancing",
-		category: "Professional Development",
-		imageUrl: "/templates/freelancing.jpg",
-		icon: Briefcase,
-		color: "text-lime-500",
-		bgColor: "bg-lime-100",
-		aiPrompt: `Create a LinkedIn post showcasing the freelance experience of a developer.
-  Freelancer Name: {freelancerName}
-  Freelance Services: {services}
-  Key Clients/Projects: {clientsProjects}
-  Freelancing Journey: {journey}
-  Advice for Other Developers: {advice}
-  Call to Action: {callToAction}
-  Tone: {tone}`,
+			"Find the right AI model for your project, balancing performance, scalability, and cost-effectiveness.",
+		slug: "ai-model-selection",
+		category: "Data Science",
+		icon: "Brain",
+		color: "#E67E22",
+		aiPrompt:
+			"Create an AI model recommendation for {useCase} in {industry}:\n\n1. Requirements Analysis: Identify key needs and performance expectations\n2. Model Options: Suggest models that fit the specified use case\n3. Training Data: Outline training data requirements for optimal model performance\n4. Scalability: Assess model scalability options\n5. Cost Analysis: Provide cost estimates and infrastructure needs\n6. Evaluation Metrics: Define success metrics for model evaluation\n7. Deployment Plan: Recommend deployment methods and tools\n8. Risk Mitigation: Identify risks and suggest mitigation strategies",
 		features: [
-			"Freelancing spotlight",
-			"Client/project showcase",
-			"Personal journey sharing",
-			"Actionable advice",
-			"Engagement-driven",
+			"Model selection",
+			"Cost analysis",
+			"Scalability assessment",
+			"Success metrics",
+			"Deployment plan",
 		],
 		tags: [
-			"linkedin",
-			"developer-freelancing",
-			"professional-development",
-			"entrepreneurship",
-			"career-advice",
+			"ai",
+			"machine-learning",
+			"model-selection",
+			"data-science",
+			"scalability",
 		],
 		formFields: [
 			{
-				label: "Freelancer Name",
-				name: "freelancerName",
+				label: "Use Case",
+				name: "useCase",
 				type: "text",
 				required: true,
 				order: 1,
+				helpText: "e.g., Predictive analytics, Image recognition",
 			},
 			{
-				label: "Freelance Services",
-				name: "services",
-				type: "textarea",
-				required: true,
-				order: 2,
-			},
-			{
-				label: "Key Clients/Projects",
-				name: "clientsProjects",
-				type: "textarea",
-				required: true,
-				order: 3,
-			},
-			{
-				label: "Freelancing Journey",
-				name: "journey",
-				type: "textarea",
-				required: true,
-				order: 4,
-			},
-			{
-				label: "Advice for Developers",
-				name: "advice",
-				type: "textarea",
-				required: true,
-				order: 5,
-			},
-			{
-				label: "Call to Action",
-				name: "callToAction",
+				label: "Industry",
+				name: "industry",
 				type: "text",
 				required: true,
-				order: 6,
-			},
-			{
-				label: "Writing Tone",
-				name: "tone",
-				type: "select",
-				required: true,
-				order: 7,
-				options: [
-					{ label: "Inspirational", value: "inspirational" },
-					{ label: "Informative", value: "informative" },
-					{ label: "Conversational", value: "conversational" },
-				],
+				order: 2,
+				helpText: "e.g., Healthcare, Finance, Retail",
 			},
 		],
 	},
 	{
 		id: "19",
-		name: "Developer Upskilling Recommendations",
+		name: "Customer Support AI Enhancer",
 		description:
-			"Create LinkedIn posts that provide guidance and resources for developers to continually upskill and grow their careers.",
-		slug: "developer-upskilling",
-		category: "Professional Development",
-		imageUrl: "/templates/upskilling.jpg",
-		icon: CloudLightning,
-		color: "text-rose-500",
-		bgColor: "bg-rose-100",
-		aiPrompt: `Create a LinkedIn post with recommendations for developers to upskill and grow their careers.
-  Key topics to cover:
-  - {topic1}
-  - {topic2}
-  - {topic3}
-  Include resources, tools, or online learning platforms.
-  Provide actionable steps or advice.
-  Tone: {tone}`,
+			"Implement an AI-driven customer support strategy, enhancing responsiveness and improving customer satisfaction.",
+		slug: "customer-support-ai",
+		category: "Customer Service",
+		icon: "Headphones",
+		color: "#1ABC9C",
+		aiPrompt:
+			"Build an AI-enhanced support strategy for {companyType} focused on {supportGoal}:\n\n1. Support Analysis: Assess current support workflows and response times\n2. Chatbot Setup: Recommend chatbot tools for common queries\n3. Sentiment Analysis: Use AI to gauge customer sentiment\n4. Ticket Prioritization: Implement AI-driven ticketing system\n5. Self-Service Options: Design a knowledge base with AI support\n6. Analytics: Set up metrics to track response time, resolution rate, and satisfaction\n7. Personalization: Provide AI-based personalization for high-value customers\n8. Training: Define training for support staff to maximize AI tool use",
 		features: [
-			"Career development guidance",
-			"Upskilling recommendations",
-			"Resource and tool suggestions",
-			"Actionable advice",
-			"Engagement-driven",
+			"Chatbot integration",
+			"Sentiment analysis",
+			"Ticket prioritization",
+			"Self-service setup",
+			"Performance analytics",
 		],
 		tags: [
-			"linkedin",
-			"developer-upskilling",
-			"professional-development",
-			"career-growth",
-			"life-long-learning",
+			"customer-support",
+			"ai",
+			"chatbots",
+			"analytics",
+			"customer-satisfaction",
 		],
 		formFields: [
 			{
-				label: "Topic 1",
-				name: "topic1",
+				label: "Company Type",
+				name: "companyType",
 				type: "text",
 				required: true,
 				order: 1,
+				helpText: "e.g., E-commerce, SaaS, Telecom",
 			},
 			{
-				label: "Topic 2",
-				name: "topic2",
-				type: "text",
-				required: true,
-				order: 2,
-			},
-			{
-				label: "Topic 3",
-				name: "topic3",
-				type: "text",
-				required: true,
-				order: 3,
-			},
-			{
-				label: "Writing Tone",
-				name: "tone",
+				label: "Primary Support Goal",
+				name: "supportGoal",
 				type: "select",
 				required: true,
-				order: 4,
+				order: 2,
 				options: [
-					{ label: "Informative", value: "informative" },
-					{ label: "Motivational", value: "motivational" },
-					{ label: "Practical", value: "practical" },
+					{ label: "Faster response times", value: "response-time" },
+					{
+						label: "Improved resolution rates",
+						value: "resolution-rate",
+					},
+					{
+						label: "Higher customer satisfaction",
+						value: "customer-satisfaction",
+					},
 				],
 			},
 		],
 	},
-	{
-		id: "20",
-		name: "Developer Technical Blogging",
-		description:
-			"Create a detailed technical blog post that educates and inspires other developers.",
-		slug: "developer-technical-blogging",
-		category: "Technical Content",
-		imageUrl: "/templates/technical-blogging.jpg",
-		icon: BookOpen,
-		color: "text-gray-500",
-		bgColor: "bg-gray-100",
-		aiPrompt: `Create a comprehensive technical blog post on the topic of "{topic}".
-  Outline:
-  1. Introduction: {introduction}
-  2. Problem/Challenge: {problem}
-  3. Technical Solution: {solution}
-  4. Implementation Details: {implementation}
-  5. Results and Learnings: {resultsLearnings}
-  6. Conclusion and Next Steps: {conclusion}
-  Include relevant code samples, diagrams, or references.
-  Aim to educate and inspire other developers.
-  Tone: {tone}`,
-		features: [
-			"In-depth technical content",
-			"Educational format",
-			"Comprehensive coverage",
-			"Practical guidance",
-			"Visuals and references",
-		],
-		tags: [
-			"technical-blogging",
-			"developer-education",
-			"technical-content",
-			"problem-solving",
-			"best-practices",
-		],
-		formFields: [
-			{
-				label: "Topic",
-				name: "topic",
-				type: "text",
-				required: true,
-				order: 1,
-			},
-			{
-				label: "Introduction",
-				name: "introduction",
-				type: "textarea",
-				required: true,
-				order: 2,
-			},
-			{
-				label: "Problem/Challenge",
-				name: "problem",
-				type: "textarea",
-				required: true,
-				order: 3,
-			},
-			{
-				label: "Technical Solution",
-				name: "solution",
-				type: "textarea",
-				required: true,
-				order: 4,
-			},
-			{
-				label: "Implementation Details",
-				name: "implementation",
-				type: "textarea",
-				required: true,
-				order: 5,
-			},
-			{
-				label: "Results and Learnings",
-				name: "resultsLearnings",
-				type: "textarea",
-				required: true,
-				order: 6,
-			},
-			{
-				label: "Conclusion and Next Steps",
-				name: "conclusion",
-				type: "textarea",
-				required: true,
-				order: 7,
-			},
-			{
-				label: "Writing Tone",
-				name: "tone",
-				type: "select",
-				required: true,
-				order: 8,
-				options: [
-					{ label: "Educational", value: "educational" },
-					{ label: "Authoritative", value: "authoritative" },
-					{ label: "Conversational", value: "conversational" },
-				],
-			},
-		],
-	},
+   {
+      "id": "20",
+      "name": "Facebook Group Engagement Builder",
+      "description": "Maximize engagement within Facebook groups by creating valuable, client-attracting content and automating interactions for stronger lead generation.",
+      "slug": "facebook-group-engagement",
+      "category": "Social Media Marketing",
+      "icon": "Users",
+      "color": "#3B5998",
+      "aiPrompt": "Create an engagement strategy for Facebook groups targeting {audienceType}:\n\n1. Audience Insights: Analyze group demographics and interests\n2. Content Themes: Develop content themes relevant to group members’ needs\n3. Engagement Triggers: Plan posts to prompt comments, shares, and feedback\n4. Consistency Schedule: Create a content calendar with optimal post timings\n5. Automation Tools: Suggest tools to manage and schedule content\n6. Conversion Strategy: Design subtle CTAs that encourage direct messages\n7. Lead Tracking: Set up a system for tracking potential leads\n8. Community Building: Outline steps to establish trust and build authority",
+      "features": [
+        "Audience analysis",
+        "Content planning",
+        "Engagement optimization",
+        "Lead generation tracking",
+        "Authority building"
+      ],
+      "tags": ["facebook-groups", "engagement", "lead-generation", "social-media", "content-creation"],
+      "formFields": [
+        {
+          "label": "Target Audience Type",
+          "name": "audienceType",
+          "type": "text",
+          "required": true,
+          "order": 1,
+          "helpText": "e.g., Small business owners, E-commerce entrepreneurs, Freelancers"
+        }
+      ]
+    },
+    {
+      "id": "21",
+      "name": "Client Lead Magnet Content Generator",
+      "description": "Design high-value content that positions you as a Next.js expert, attracting potential clients through educational and actionable content.",
+      "slug": "client-lead-magnet",
+      "category": "Content Marketing",
+      "icon": "Clipboard",
+      "color": "#3498DB",
+      "aiPrompt": "Generate a client-attracting content plan for {platform} aimed at {targetAudience}:\n\n1. Key Topics: Identify pain points and topics of interest for {targetAudience}\n2. Educational Content: Design tutorials, tips, and case studies to showcase your expertise\n3. Lead Magnets: Create downloadable guides, checklists, or templates\n4. Engagement Calls-to-Action: Develop CTAs that guide followers to DM for services\n5. Frequency Plan: Create a posting schedule to maintain visibility\n6. Platform-Specific Strategy: Optimize content formats for {platform}\n7. Analytics: Define metrics to track engagement and client interest\n8. Personal Branding: Outline tone and style guidelines to establish authority",
+      "features": [
+        "Lead-generating content",
+        "Pain-point targeting",
+        "Platform optimization",
+        "Engagement CTAs",
+        "Personal branding"
+      ],
+      "tags": ["lead-magnet", "content-marketing", "nextjs", "client-attraction", "branding"],
+      "formFields": [
+        {
+          "label": "Platform",
+          "name": "platform",
+          "type": "select",
+          "required": true,
+          "order": 1,
+          "options": [
+            { "label": "Facebook", "value": "facebook" },
+            { "label": "LinkedIn", "value": "linkedin" },
+            { "label": "Twitter", "value": "twitter" }
+          ]
+        },
+        {
+          "label": "Target Audience",
+          "name": "targetAudience",
+          "type": "text",
+          "required": true,
+          "order": 2,
+          "helpText": "e.g., SaaS founders, small business owners, e-commerce startups"
+        }
+      ]
+    },
+    {
+      "id": "22",
+      "name": "Niche Client Content Strategy for Developers",
+      "description": "Create a content strategy to connect with niche clients interested in Next.js and web development, focusing on their specific industry needs.",
+      "slug": "niche-client-content",
+      "category": "Content Marketing",
+      "icon": "Target",
+      "color": "#E74C3C",
+      "aiPrompt": "Develop a content plan to target {clientIndustry} clients as a Next.js developer:\n\n1. Industry Research: Highlight trends and pain points in {clientIndustry}\n2. Solution Showcases: Present Next.js solutions relevant to industry problems\n3. Content Types: Use tutorials, case studies, and feature highlights\n4. Value-Driven Content: Emphasize value in speed, SEO, and scalability\n5. Distribution Channels: Identify where target clients spend time online\n6. Portfolio CTAs: Showcase your past work with clear CTAs for inquiries\n7. Testimonials and Case Studies: Use social proof to build trust\n8. Interaction Strategy: Create a method to encourage comments, DMs, and leads",
+      "features": [
+        "Industry-specific insights",
+        "Solution-focused content",
+        "Lead-generating CTAs",
+        "Portfolio promotion",
+        "Social proof"
+      ],
+      "tags": ["content-strategy", "nextjs", "client-attraction", "industry-specific", "lead-generation"],
+      "formFields": [
+        {
+          "label": "Client Industry",
+          "name": "clientIndustry",
+          "type": "text",
+          "required": true,
+          "order": 1,
+          "helpText": "e.g., Real Estate, Education, E-commerce"
+        }
+      ]
+    },
+    {
+      "id": "23",
+      "name": "Cold Outreach Message Generator",
+      "description": "Generate impactful and customized cold outreach messages that connect with potential clients in a meaningful way.",
+      "slug": "cold-outreach-messages",
+      "category": "Sales",
+      "icon": "Mail",
+      "color": "#2980B9",
+      "aiPrompt": "Create a cold outreach message for {clientType} in {industry} highlighting {serviceOffer}:\n\n1. Pain Point Identification: Identify the client’s pain points in {industry}\n2. Service Introduction: Briefly introduce {serviceOffer} as a solution\n3. Value Proposition: Describe the unique benefits of your services\n4. Call-to-Action: Provide a subtle, non-intrusive call to schedule a call\n5. Social Proof: Include a brief testimonial or result if applicable\n6. Personalization Tips: Add hints to personalize based on the client’s profile\n7. Follow-Up Plan: Design a follow-up message template for further engagement\n8. Feedback Loop: Request feedback on how the message resonates with clients",
+      "features": [
+        "Pain point targeting",
+        "Value-driven service intro",
+        "Personalization",
+        "Subtle CTA",
+        "Follow-up template"
+      ],
+      "tags": ["outreach", "lead-generation", "cold-messaging", "sales", "client-acquisition"],
+      "formFields": [
+        {
+          "label": "Client Type",
+          "name": "clientType",
+          "type": "text",
+          "required": true,
+          "order": 1,
+          "helpText": "e.g., Small business owner, Startup founder"
+        },
+        {
+          "label": "Industry",
+          "name": "industry",
+          "type": "text",
+          "required": true,
+          "order": 2,
+          "helpText": "e.g., Retail, SaaS, Real Estate"
+        },
+        {
+          "label": "Service Offer",
+          "name": "serviceOffer",
+          "type": "text",
+          "required": true,
+          "order": 3,
+          "helpText": "e.g., Next.js website development, SEO optimization"
+        }
+      ]
+    }
+
 ];
 
 // Export helper functions for template management
