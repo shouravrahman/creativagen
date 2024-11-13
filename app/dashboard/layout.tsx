@@ -5,6 +5,7 @@ import { getApiLimitCount } from "@/lib/api-limit";
 import { Toaster } from "sonner";
 import { auth } from "@/middleware";
 import { routes } from "@/constants";
+import DashboardNavbar from "@/components/DashboardNavbar";
 
 const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
 	const apiLimitCount = await getApiLimitCount();
@@ -19,8 +20,8 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
 				apiLimitCount={apiLimitCount}
 				isAdmin={isAdmin}
 			/>
-			<main className="flex-1 overflow-y-auto p-4">
-				<Navbar />
+         <main className="flex-1 overflow-y-auto p-4">
+            <DashboardNavbar />
 				<Toaster />
 
 				{children}
