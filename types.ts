@@ -1,16 +1,18 @@
-import { IconType } from "react-icons/lib";
-
 // Types for Enums
 enum UserRole {
 	Admin = "Admin",
 	User = "User",
 }
-
-enum AiModel {
-	GPT4 = "GPT4",
-	GROQ = "GROQ",
+export enum ModelTypeEnum {
 	GEMINI = "GEMINI",
-	CLAUDE = "CLAUDE",
+	GROQ = "GROQ",
+	OPENAI = "OPENAI",
+}
+
+export interface GenerationSettings {
+	model: ModelTypeEnum;
+	temperature: number;
+	maxTokens: number;
 }
 // Account Interface (related to User)
 interface Account {
@@ -34,7 +36,7 @@ interface GeneratedContent {
 	formValues: Record<string, unknown>; // JSON object for form values
 	aiResponse: string;
 	templateId: string;
-	aiModel: AiModel;
+	aiModel: ModelTypeEnum;
 	createdBy: string;
 	createdAt: Date;
 	temperature: number;
