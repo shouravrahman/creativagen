@@ -21,8 +21,9 @@ export default function IconDropdown({ menu, img }: Dropdown) {
          <div>
             <MenuButton className="flex items-center justify-center rounded-full focus:outline-none focus:ring-1 focus:ring-accent   ">
                <span className="sr-only">Open options</span>
-               <Avatar className='w-8 h-8'>
+               <Avatar className='w-8 h-8 bg-white'>
                   <AvatarImage src={img} />
+
                </Avatar>
             </MenuButton>
          </div>

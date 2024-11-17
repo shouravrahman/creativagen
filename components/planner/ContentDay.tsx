@@ -185,11 +185,11 @@ export const ContentDay: React.FC<ContentDayProps> = ({
 										{item.contentType}
 									</span>
 								</div>
-								<div className="mt-2 font-semibold text-white text-sm">
+                        <div className="mt-2 font-semibold text-foreground text-sm">
 									{item.title}
 								</div>
 							</div>
-							<div className="text-xs mt-1 text-white/80 line-clamp-2">
+                     <div className="text-xs mt-1 text-foreground/80 line-clamp-2">
 								{item.description}
 							</div>
 						</Card>

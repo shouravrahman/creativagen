@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
 	}
 
 	try {
-		const content = await prismadb.generatedContent.findMany({
+		const history = await prismadb.generatedContent.findMany({
 			where: {
 				createdBy: session.user.id,
 			},
@@ -18,7 +18,10 @@ export async function GET(req: NextRequest) {
 			},
 		});
 
-		return NextResponse.json(content);
+		return NextResponse.json({
+			success: true,
+			data: history,
+		});
 	} catch (error) {
 		console.error("Error fetching content history:", error);
 		return NextResponse.json(

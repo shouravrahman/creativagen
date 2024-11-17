@@ -69,7 +69,7 @@ const TemplatesList = () => {
 							<td className="border border-gray-300 p-2">
 								<button
 									onClick={() => handleEdit(template.slug)}
-									className="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-600 transition"
+                           className="bg-blue-500 text-foreground py-1 px-2 rounded hover:bg-blue-600 transition"
 								>
 									Edit
 								</button>

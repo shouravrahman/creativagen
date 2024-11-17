@@ -47,7 +47,7 @@ const LandingNavbar = () => {
 					>
 						<Image
 							alt="Logo"
-							src="/creature.svg"
+                     src="/logo.png"
 							className="max-w-[150px] md:max-w-[200px]" // Adjust max width for responsiveness
 							width={200}
 							height={100}

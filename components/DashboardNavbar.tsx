@@ -28,20 +28,20 @@ const DashboardNavbar: React.FC = () => {
 
    return (
       <div className="flex rounded-xl items-center px-4  py-3 bg-sidebar  mx-3 ">
-         <div className="flex w-full justify-between items-center">
-            <div className="relative w-full max-w-md">
+         <div className="flex w-full justify-between  md:items-center">
+            <div className="relative w-full max-w-md  ">
                <div className="absolute inset-0 flex items-center ">
-                  <SearchIcon className="text-accent w-8 h-8 z-10" />
+                  <SearchIcon className="hidden sm:block text-accent w-8 h-8 z-10" />
                </div>
                <Input
                   type="text"
-                  className="block w-full px-12 py-2 text-base bg-sidebar border-none focus:outline-none focus:ring-2 focus:ring-primary-foreground rounded-md placeholder:text-foreground transition-all duration-200"
-                  placeholder="Search anything..."
+                  className="block w-full px-12 py-2 text-base bg-sidebar border-none focus:outline-none focus:ring-2 focus:ring-primary-foreground rounded-md md:placeholder:text-transparent sm:placeholder:text-foreground transition-all duration-200"
+                  placeholder="Search.."
                   value={searchText}
                   onChange={(e) => handleSearchChange(e.target.value)}
                />
             </div>
-            <div className="flex items-center gap-6">
+            <div className="flex   items-center gap-6">
                <ThemeSwitch />
                <IconDropdown
                   menu={menu}

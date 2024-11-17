@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { routes } from "@/constants";
+import { Badge } from "./ui/badge";
 
 interface SidebarProps {
    apiLimitCount: number;
@@ -67,13 +68,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
          >
             {/* Logo Section */}
             <Link
-               className="mt-10 flex items-center justify-center h-16 mb-6 relative group"
+               className="mt-4 mb-7 flex items-center justify-center h-16  relative group"
                href="/"
                title="homepage"
             >
                <Image
                   alt="Logo"
-                  src="/creature.svg"
+                  src="/logo.png"
                   width={160}
                   height={80}
                   className="relative z-10"
@@ -84,39 +85,46 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <div className="mt-4 flex-1 px-2">
                <nav className="space-y-1.5">
                   {routes.map((route) => (
+                     <Link
+                        key={route.href}
+                        href={route.href}
+                        // href={route.isBeta ? "#" : route.href}
+                        className={cn(
+                           "flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200",
+                           "hover:bg-primary/10 active:scale-98",
+                           "group relative",
+                           pathname === route.href
+                              ? "bg-primary/15 text-primary shadow-sm"
+                              : "text-foreground/70 hover:text-foreground",
+                           // route.isBeta && "opacity-50 cursor-not-allowed"
+                        )}
+                     >
+                        <route.icon
+                           className={cn(
+                              "h-5 w-5 transition-colors",
+                              route.color,
+                              pathname === route.href
+                                 ? "text-primary"
+                                 : "text-foreground/50 group-hover:text-foreground/70"
+                           )}
+                        />
+                        <span className="flex-1">{route.label}</span>
+                        {route.isBeta && (
+                           <Badge variant={"destructive"}  >
+                              Beta
+                           </Badge>
+                        )}
+                        <ChevronRight
+                           className={cn(
+                              "w-4 h-4 opacity-0 -translate-x-2 transition-all duration-200",
+                              "text-primary/70",
+                              "group-hover:opacity-100 group-hover:translate-x-0",
+                              pathname === route.href && "opacity-100 translate-x-0"
+                           )}
+                        />
+                     </Link>
+                  ))}
 
-                    <Link
-                       key={route.href}
-                       href={route.href}
-                       className={cn(
-                          "flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200",
-                          "hover:bg-primary/10 active:scale-98",
-                          "group relative",
-                          pathname === route.href
-                             ? "bg-primary/15 text-primary shadow-sm"
-                             : "text-foreground/70 hover:text-foreground"
-                       )}
-                    >
-                       <route.icon
-                          className={cn(
-                             "h-5 w-5 transition-colors",
-                             route.color,
-                             pathname === route.href
-                                ? "text-primary"
-                                : "text-foreground/50 group-hover:text-foreground/70"
-                          )}
-                       />
-                       <span className="flex-1">{route.label}</span>
-                       <ChevronRight
-                          className={cn(
-                             "w-4 h-4 opacity-0 -translate-x-2 transition-all duration-200",
-                             "text-primary/70",
-                             "group-hover:opacity-100 group-hover:translate-x-0",
-                             pathname === route.href && "opacity-100 translate-x-0"
-                          )}
-                       />
-                    </Link>
-                 ))}
 
                   {/* Admin Section */}
                   {isAdmin && (

@@ -1,8 +1,5 @@
 import { auth } from "@/auth";
-import { incrementApiLimit } from "@/lib/api-limit";
-import prismadb from "@/lib/prismadb";
 import { NextRequest, NextResponse } from "next/server";
-import { marked } from "marked"; // For converting markdown to HTML
 
 // Import Langchain integrations
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
@@ -11,40 +8,17 @@ import { ChatGroq } from "@langchain/groq";
 import { PromptTemplate } from "@langchain/core/prompts";
 import { StringOutputParser } from "@langchain/core/output_parsers";
 import { GenerationSettings } from "@/types";
-
-// Helper to convert markdown to HTML with proper formatting for React Quill
-const formatForQuill = (markdown: string): string => {
-	// First, ensure proper line breaks for list items
-	let formattedMd = markdown
-		.replace(/^(\d+\.|\*|-)\s/gm, "\n$1 ") // Add newline before list items
-		.replace(/\n{3,}/g, "\n\n"); // Remove excessive newlines
-
-	// Convert to HTML using marked
-	let html = marked(formattedMd);
-
-	// Post-process HTML for React Quill compatibility
-	return (
-		html
-			.replace(/<ul>/g, "<p></p><ul>")
-			.replace(/<ol>/g, "<p></p><ol>")
-			.replace(/<\/ul>/g, "</ul><p></p>")
-			.replace(/<\/ol>/g, "</ol><p></p>")
-			// Fix double paragraphs
-			.replace(/<p><p>/g, "<p>")
-			.replace(/<\/p><\/p>/g, "</p>")
-			// Ensure proper line breaks
-			.replace(/\n/g, "<br/>")
-	);
-};
+import prismadb from "@/lib/prismadb";
+import { incrementApiLimit } from "@/lib/api-limit";
 
 // Enhanced prompt to ensure consistent formatting
-const enhancePromptForFormatting = (template: string): string => {
-	return `${template}\n\nPlease format the response with proper structure:
-- Use standard numbering for numbered lists (1., 2., etc.)
-- Use bullet points (*) for unordered lists
-- Use clear headings where appropriate
-- Add line breaks between sections for clarity`;
-};
+// const enhancePromptForFormatting = (template: string): string => {
+// 	return `${template}\n\nPlease format the response with proper html structure:
+// - Use standard numbering for numbered lists (1., 2., etc.)
+// - Use bullet points (*) for unordered lists
+// - Use clear headings where appropriate
+// - Add line breaks between sections for clarity`;
+// };
 
 const getModelInstance = (model: string, settings: GenerationSettings) => {
 	const baseSettings = {
@@ -132,7 +106,8 @@ export async function POST(req: NextRequest) {
 
 			// Create prompt template with enhanced formatting instructions
 			const promptTemplate = new PromptTemplate({
-				template: enhancePromptForFormatting(aiPrompt),
+				template: aiPrompt,
+				// template: enhancePromptForFormatting(aiPrompt),
 				inputVariables: inputVariables,
 			});
 
@@ -149,22 +124,38 @@ export async function POST(req: NextRequest) {
 			const model = getModelInstance(settings.model, settings);
 			const markdownResponse = await model.invoke(formattedPrompt);
 			console.log(markdownResponse);
+			console.dir({
+				formValues: { value: values, type: typeof values },
+				createdBy: {
+					value: session?.user.id!,
+					type: typeof session?.user.id!,
+				},
+				temperature: {
+					value: settings.temperature,
+					type: typeof settings.temperature,
+				},
+				maxTokens: {
+					value: settings.maxTokens,
+					type: typeof settings.maxTokens,
+				},
+				templateSlug: { value: slug, type: typeof slug },
+				aiResponse: {
+					value: markdownResponse,
+					type: typeof markdownResponse,
+				},
+			});
 
-			// Convert markdown to HTML for React Quill
-			const htmlResponse = formatForQuill(markdownResponse);
-			console.log(htmlResponse);
-
-			// Save to database
-			// const savedContent = await prismadb.generatedContent.create({
-			// 	data: {
-			// 		formValues: values,
-			// 		createdBy: session?.user.id!,
-			// 		temperature: settings.temperature,
-			// 		maxTokens: settings.maxTokens,
-			// 		templateSlug: slug,
-			// 		aiResponse: htmlResponse.toString(),
-			// 	},
-			// });
+			// // Save to database
+			const savedContent = await prismadb.generatedContent.create({
+				data: {
+					formValues: JSON.stringify(values),
+					createdBy: session?.user.id as string,
+					temperature: Number(settings.temperature),
+					maxTokens: settings.maxTokens,
+					templateSlug: String(slug),
+					aiResponse: markdownResponse,
+				},
+			});
 
 			// Increment API limit
 			await incrementApiLimit();
@@ -172,7 +163,7 @@ export async function POST(req: NextRequest) {
 			return NextResponse.json({
 				success: true,
 				// content: savedContent,
-				formattedContent: htmlResponse, // Send formatted HTML directly
+				formattedContent: markdownResponse,
 			});
 		} catch (error) {
 			if (error instanceof Error) {

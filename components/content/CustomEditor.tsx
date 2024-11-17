@@ -6,11 +6,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import 'react-quill/dist/quill.snow.css';
+import { marked } from "marked";
+import DOMPurify from "dompurify";
 
 const ReactQuill = dynamic(() => import("react-quill"), {
    ssr: false,
    loading: () => (
-      <Skeleton className="w-full h-[400px] rounded-lg" />
+      <Skeleton className="w-full h-[500px] rounded-lg" />
    ),
 });
 
@@ -29,7 +31,8 @@ const CustomEditor: React.FC<EditorProps> = ({
 
    useEffect(() => {
       if (content) {
-         setEditorContent(content);
+         const convertedContent = DOMPurify.sanitize(marked(content));
+         setEditorContent(convertedContent);
       }
    }, [content]);
 
@@ -139,8 +142,6 @@ const CustomEditor: React.FC<EditorProps> = ({
                </div>
             </CardContent>
          </Card>
-
-
       </div>
    );
 };

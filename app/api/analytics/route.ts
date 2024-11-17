@@ -31,7 +31,7 @@ export async function GET() {
 
 		// Fetch content categorized by type
 		const contentByType = await prismadb.generatedContent.groupBy({
-			by: ["templateId"], // Assuming templateSlug represents the type of content
+			by: ["templateSlug"],
 			_count: {
 				id: true,
 			},
@@ -52,8 +52,6 @@ export async function GET() {
 	}
 }
 
-// Example function to calculate time saved
 async function calculateTimeSaved() {
-	// Implement your logic to calculate time saved
 	return 120; // Placeholder value
 }

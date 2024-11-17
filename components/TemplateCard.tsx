@@ -16,7 +16,7 @@ const TemplateCard = ({
    template: Template;
       onToggleFavorite?: () => void;
    }) => {
-   console.log("color", template.color)
+   // console.log("color", template.color)
    const IconComponent: IconType | undefined = getIconComponent(template.icon!);
    return (
       <Card className="group relative overflow-hidden hover:shadow-sm transition-all duration-300 border border-border/50">
@@ -32,9 +32,15 @@ const TemplateCard = ({
                         )}
                      />
                      {IconComponent ? (
-                        <IconComponent className={`w-8 h-8 relative z-10 text-[${template.color}]`} />
+                        <IconComponent
+                           style={{ color: template.color }}  // Apply color here
+                           className="w-8 h-8 relative z-10"
+                        />
                      ) : (
-                           <Sparkle className={cn("w-8 h-8 relative z-10", template.color)} />
+                           <Sparkle
+                              style={{ color: template.color }}  // Fallback color for default icon
+                              className="w-8 h-8 relative z-10"
+                           />
                      )}
 
                   </div>
@@ -71,11 +77,11 @@ const TemplateCard = ({
                   </div>
 
                   {/* Features Section */}
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 mt-2 ">
                      {template.features.slice(0, 3).map((feature, index) => (
                         <Badge
                            key={index}
-                           variant="destructive"
+                           variant="outline"
 
                         >
                            {feature}
@@ -94,7 +100,7 @@ const TemplateCard = ({
 
                {/* Bottom Action Indicator */}
                <div className="mt-6 flex items-center justify-end text-sm text-foreground/50">
-                  <span className="flex items-center gap-1 group-hover:text-primary transition-colors duration-200">
+                  <span className="flex text-primary items-center gap-1  group-hover:text-accent transition-colors duration-200">
                      Use Template
                      <ChevronRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-200" />
                   </span>

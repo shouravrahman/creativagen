@@ -62,7 +62,7 @@ const CreateTemplate = () => {
 				className="space-y-4 text-black"
 			>
 				<div>
-					<label className="block mb-1 text-white">
+               <label className="block mb-1 text-foreground">
 						Template Name
 					</label>
 					<input
@@ -83,7 +83,7 @@ const CreateTemplate = () => {
 					/>
 				</div>
 				<div>
-					<label className="text-white block mb-1">Slug</label>
+               <label className="text-foreground block mb-1">Slug</label>
 					<input
 						type="text"
 						value={slug}
@@ -93,7 +93,7 @@ const CreateTemplate = () => {
 					/>
 				</div>
 				<div>
-					<label className="text-white block mb-1">Category</label>
+               <label className="text-foreground block mb-1">Category</label>
 					<input
 						type="text"
 						value={category}
@@ -103,7 +103,7 @@ const CreateTemplate = () => {
 					/>
 				</div>
 				<div>
-					<label className="text-white block mb-1">Image URL</label>
+               <label className="text-foreground block mb-1">Image URL</label>
 					<input
 						type="text"
 						value={imageUrl}
@@ -113,7 +113,7 @@ const CreateTemplate = () => {
 					/>
 				</div>
 				<div>
-					<label className="text-white block mb-1">AI Prompt</label>
+               <label className="text-foreground block mb-1">AI Prompt</label>
 					<textarea
 						value={aiPrompt}
 						onChange={(e) => setAiPrompt(e.target.value)}
@@ -122,7 +122,7 @@ const CreateTemplate = () => {
 					/>
 				</div>
 				<div>
-					<label className="block mb-1 text-white">Features</label>
+               <label className="block mb-1 text-foreground">Features</label>
 					{features.map((feature, index) => (
 						<div
 							key={index}
@@ -149,7 +149,7 @@ const CreateTemplate = () => {
 				</div>
 				<button
 					type="submit"
-					className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
+               className="bg-blue-500 text-foreground py-2 px-4 rounded hover:bg-blue-600 transition"
 				>
 					Create Template
 				</button>

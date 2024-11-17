@@ -7,12 +7,21 @@ import { Card } from "@/components/ui/card";
 import { InfoIcon } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { UseFormReturn } from 'react-hook-form';
+import { Badge } from './ui/badge';
+import { checkSubscription } from '@/lib/subscription';
 
 const CommonFormOptions = ({ form }: { form: UseFormReturn<any> }) => {
+   // const subscription = checkSubscription()
    return (
       <Card className="p-6 space-y-6">
          <div className="flex items-center justify-between">
             <h3 className="text-lg font-semibold">Generation Options</h3>
+            <Badge variant={"destructive"}>
+               {/* {
+                  subscription ? "beta":"pro"
+               } */}
+               Beta
+            </Badge>
          </div>
          <Separator />
 
@@ -39,6 +48,7 @@ const CommonFormOptions = ({ form }: { form: UseFormReturn<any> }) => {
                         <Switch
                            checked={field.value}
                            onCheckedChange={field.onChange}
+                           disabled
                         />
                      </FormControl>
                   </FormItem>
@@ -67,6 +77,7 @@ const CommonFormOptions = ({ form }: { form: UseFormReturn<any> }) => {
                         <Switch
                            checked={field.value}
                            onCheckedChange={field.onChange}
+                           disabled
                         />
                      </FormControl>
                   </FormItem>
@@ -95,6 +106,7 @@ const CommonFormOptions = ({ form }: { form: UseFormReturn<any> }) => {
                         <Switch
                            checked={field.value}
                            onCheckedChange={field.onChange}
+                           disabled
                         />
                      </FormControl>
                   </FormItem>
@@ -123,6 +135,7 @@ const CommonFormOptions = ({ form }: { form: UseFormReturn<any> }) => {
                         <Switch
                            checked={field.value}
                            onCheckedChange={field.onChange}
+                           disabled
                         />
                      </FormControl>
                   </FormItem>

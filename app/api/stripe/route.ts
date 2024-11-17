@@ -10,7 +10,7 @@ const settingsUrl = absoluteUrl("/dashboard");
 export async function GET() {
   try {
     const user = await currentUser();
-    console.log(user);
+   //  console.log(user);
 
 	if (!user || !user) {
 		return new NextResponse("Unauthorized", { status: 401 });

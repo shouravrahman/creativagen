@@ -9,7 +9,7 @@ export function validateRequest(req: Request): NextResponse | null {
     return new NextResponse("Unauthorized", { status: 401 });
   }
 
-  console.log(openai);
+//   console.log(openai);
   if (!openai) {
     return new NextResponse("OpenAI API Key not configured.", { status: 500 });
   }

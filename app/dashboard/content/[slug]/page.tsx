@@ -38,10 +38,10 @@ const TemplatePage = () => {
 
    const path = usePathname();
    const slug = path.split("/dashboard/content/").join("");
-   console.log(path, slug);
+   // console.log(path, slug);
 
    const template = TEMPLATES.find((t) => t.slug === slug);
-   console.log(template);
+   // console.log(template);
 
    const generateContent = async (values: Record<string, any>) => {
       setIsLoading(true);
@@ -65,7 +65,7 @@ const TemplatePage = () => {
          }
 
          const data = await response.json();
-         console.log("dt", data)
+         // console.log("dt", data)
          setGeneratedContent(data.formattedContent);
       } catch (error) {
          console.error("Error generating content:", error);
@@ -75,7 +75,7 @@ const TemplatePage = () => {
    };
 
    return (
-      <div className="w-full max-w-9xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-9xl mx-auto px-3 sm:px-6 lg:px-8">
          <div className="py-6 space-y-6">
             {/* Back Button */}
             <Link

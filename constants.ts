@@ -22,6 +22,7 @@ export const routes = [
 		icon: Calendar,
 		href: "/dashboard/planner",
 		color: "text-yellow-500",
+		isBeta: true,
 	},
 	{
 		label: "History",
