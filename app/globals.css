@@ -22,16 +22,16 @@ body,
  }
 
  .rbc-time-header-cell .rbc-today {
-   background-color: #04aa6d !important;
+   background-color: #157552 !important;
  }
 
  .rbc-time-slot {
-   color: #74a4c3;
+   color: #092e46;
    z-index: 1;
  }
 
  .rbc-time-slot:not(.rbc-today .rbc-time-slot) {
-   background-color: #eff4f7;
+   background-color: #1f38c0;
  }
 
  /*Event Styles*/
