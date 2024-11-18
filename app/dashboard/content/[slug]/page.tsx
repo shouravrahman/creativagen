@@ -28,6 +28,7 @@ import DynamicForm from "@/components/DynamicForm";
 import EnhancedEditor from "@/components/content/CustomEditor";
 import { useGenerationSettings } from "@/context/GenerationSettingsContext";
 import { ModelTypeEnum } from "@/types";
+import { toast } from "sonner";
 
 
 const TemplatePage = () => {
@@ -62,6 +63,11 @@ const TemplatePage = () => {
 
          if (!response.ok) {
             throw new Error("Failed to generate content");
+         }
+         if (response.status === 429) {
+            toast.error("Rate Limit Exceeed", {
+               description: "You can query up to 2 templates per minute"
+            })
          }
 
          const data = await response.json();
