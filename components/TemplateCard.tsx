@@ -44,7 +44,7 @@ const TemplateCard = ({
                      )}
 
                   </div>
-                  <button
+                  {/* <button
                      className="p-2 rounded-full hover:bg-accent/10 transition-colors duration-200"
                      onClick={(e) => {
                         e.preventDefault();
@@ -59,7 +59,7 @@ const TemplateCard = ({
                         //       : "text-foreground/50 hover:text-yellow-500"
                         // )}
                      />
-                  </button>
+                  </button> */}
                </div>
 
 

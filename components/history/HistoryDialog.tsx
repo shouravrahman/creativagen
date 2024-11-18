@@ -23,7 +23,11 @@ export function HistoryDialog({
    onOpenChange,
 }: HistoryDialogProps) {
    if (!content) return null;
-
+   function stripHTML(html: string) {
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = html;
+      return tempDiv.innerText || tempDiv.textContent;
+   }
    return (
       <Dialog open={isOpen} onOpenChange={onOpenChange}>
          <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
@@ -44,7 +48,7 @@ export function HistoryDialog({
                <div className="prose prose-sm max-w-none">
                   <h3 className="text-lg font-semibold mb-2">Generated Content</h3>
                   <div className="whitespace-pre-wrap rounded-lg bg-muted p-4">
-                     {content.aiResponse}
+                     {stripHTML(content.aiResponse)}
                   </div>
                </div>
                {Object.entries(content.formValues).length > 0 && (
