@@ -10,6 +10,7 @@ import { StringOutputParser } from "@langchain/core/output_parsers";
 import { GenerationSettings } from "@/types";
 import prismadb from "@/lib/prismadb";
 import { incrementApiLimit } from "@/lib/api-limit";
+import rateLimiter from "@/lib/rate-limit";
 
 // Enhanced prompt to ensure consistent formatting
 // const enhancePromptForFormatting = (template: string): string => {
@@ -81,6 +82,22 @@ const validatePromptValues = (
 };
 
 export async function POST(req: NextRequest) {
+	// Get user identifier (you might want to use a more secure method)
+	const identifier = req.headers.get("x-user-id") || req.ip || "anonymous";
+
+	// Check rate limit
+	if (!rateLimiter.isAllowed(identifier)) {
+		const remainingTime = rateLimiter.getRemainingTime(identifier);
+		return NextResponse.json(
+			{
+				error: "Rate limit exceeded",
+				message: `Please try again in ${Math.ceil(
+					remainingTime / 1000
+				)} seconds`,
+			},
+			{ status: 429 }
+		);
+	}
 	try {
 		const session = await auth();
 		if (!session?.user) {
