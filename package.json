@@ -70,6 +70,7 @@
     "next-themes": "^0.3.0",
     "nodemailer": "^6.9.14",
     "postcss": "8.4.38",
+    "posthog-js": "^1.188.0",
     "react": "18.3.1",
     "react-datepicker": "^7.5.0",
     "react-day-picker": "^8.10.1",

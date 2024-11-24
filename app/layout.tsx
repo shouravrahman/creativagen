@@ -11,6 +11,8 @@ import { GenerationSettingsProvider } from "@/context/GenerationSettingsContext"
 import { ContentProvider } from "@/context/ContentPlannerContext";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { TemplateProvider } from "@/context/TemplateContext";
+import dynamic from "next/dynamic";
+import { PHProvider } from "@/providers/AnalyticsProvider";
 
 const OpenSans = Open_Sans({ subsets: ["latin"] });
 
@@ -47,6 +49,9 @@ export const metadata: Metadata = {
 		images: ["https://creativagen.vercel.app/og-image.png"],
 	},
 };
+const PostHogPageView = dynamic(() => import('../components/PostHogPageView'), {
+   ssr: false,
+})
 
 export default async function RootLayout({
    children,
@@ -55,10 +60,7 @@ export default async function RootLayout({
 }) {
    return (
 		<html>
-			{/* <CrispProvider /> */}
-         <head>
-            <PlausibleProvider domain="example.com" />
-         </head>
+         <PHProvider>
 			<body className={OpenSans.className}>
 				<ThemeProvider attribute="class">
 					<AuthProvider>
@@ -67,6 +69,7 @@ export default async function RootLayout({
 							<GenerationSettingsProvider>
 								<ModalProvider />
                            <TooltipProvider>
+                                 <PostHogPageView />
 								{children}
                            </TooltipProvider>
 								<Toaster />
@@ -76,6 +79,7 @@ export default async function RootLayout({
 					</AuthProvider>
 				</ThemeProvider>
 			</body>
+         </PHProvider>
 		</html>
    );
 }
