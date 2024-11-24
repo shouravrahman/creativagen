@@ -113,7 +113,41 @@ export interface Template {
 	formFields: FormField[];
 	generatedContents?: GeneratedContent[];
 }
+export interface BlogGenerationConfig {
+	topic: string;
+	blogType:
+		| "how-to"
+		| "technical"
+		| "affiliate"
+		| "listicle"
+		| "case-study"
+		| "comparison";
+	targetAudience: string;
+	contentStyle: string;
+	wordCount: number;
+	keywords: string[];
+	plagiarismCheck: boolean;
+	humanizeLevel: number;
+	researchDepth: "basic" | "moderate" | "deep" | "academic";
+	citations: boolean;
+	aiTemperature: number;
+	outlineComplexity: string;
+	contentElements: {
+		examples: boolean;
+		quotes: boolean;
+		statistics: boolean;
+		takeaways: boolean;
+		tableOfContents: boolean;
+		executiveSummary: boolean;
+	};
+}
 
+export interface ResearchResult {
+	url: string;
+	title: string;
+	snippet: string;
+	relevanceScore: number;
+}
 export interface FormField {
 	label: string;
 	name: string;
