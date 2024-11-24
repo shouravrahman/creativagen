@@ -30,9 +30,9 @@ export function HistoryDialog({
    }
    return (
       <Dialog open={isOpen} onOpenChange={onOpenChange}>
-         <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
+         <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto p-6 rounded-lg  shadow-sm">
             <DialogHeader>
-               <DialogTitle className="flex items-center gap-2">
+               <DialogTitle className="flex items-center gap-2 text-xl font-semibold">
                   <Badge variant="secondary" className="text-sm">
                      {content.templateSlug}
                   </Badge>
@@ -40,35 +40,38 @@ export function HistoryDialog({
                      Created on {formatDate(content.createdAt)}
                   </span>
                </DialogTitle>
-               <DialogDescription>
+               {/* <DialogDescription className="ml-3 mt-2 text-sm text-muted-foreground">
                   Generated content details and preview
-               </DialogDescription>
+               </DialogDescription> */}
             </DialogHeader>
-            <div className="mt-4 space-y-4">
-               <div className="prose prose-sm max-w-none">
-                  <h3 className="text-lg font-semibold mb-2">Generated Content</h3>
-                  <div className="whitespace-pre-wrap rounded-lg bg-muted p-4">
+
+            <div className="mt-6 space-y-6">
+               {/* Generated Content Section */}
+               <div className="prose max-w-none">
+                  <h3 className="text-lg font-semibold mb-4">Generated Content</h3>
+                  <div className="whitespace-pre-wrap rounded-lg bg-muted p-4 text-sm border border-muted">
                      {stripHTML(content.aiResponse)}
                   </div>
                </div>
-               {Object.entries(content.formValues).length > 0 && (
-                  <div>
+
+               {/* Input Parameters Section */}
+               {/* {Object.entries(content.formValues).length > 0 && (
+                  <div className="space-y-4">
                      <h3 className="text-lg font-semibold mb-2">Input Parameters</h3>
-                     {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                     <div className="space-y-2">
+
                         {Object.entries(content.formValues).map(([key, value]) => (
-                           <div key={key} className="space-y-1">
-                              <p className="text-sm font-medium capitalize">{key}:</p>
-                              <p className="text-sm text-muted-foreground">{String(value)}</p>
+                           <div key={key} className="flex justify-between text-sm">
+                              <span className="font-medium capitalize">{key}:</span>
+                              <span className="text-muted-foreground">{String(value)}</span>
                            </div>
                         ))}
-                     </div> */}
-                     {
-                        content.formValues
-                     }
+                     </div>
                   </div>
-               )}
+               )} */}
             </div>
          </DialogContent>
       </Dialog>
+
    );
 }

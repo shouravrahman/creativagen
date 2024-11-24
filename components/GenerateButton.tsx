@@ -71,7 +71,7 @@ export default function GenerateButton({ setHtml }: Props) {
 	return (
 		<button
 			onClick={handleExport}
-         className='fixed top-4 left-1/2 transform -translate-x-1/2 shadow-md shadow-blue-800/50 bg-blue-500 hover:bg-blue-700    font-semibold py-2 px-4 rounded-lg z-[1000] text-lg'
+         className='fixed top-4 left-1/2 transform -translate-x-1/2 shadow-sm shadow-blue-800/50 bg-blue-500 hover:bg-blue-700    font-semibold py-2 px-4 rounded-lg z-[1000] text-lg'
 			disabled={loading}
 		>
 			{loading ? (

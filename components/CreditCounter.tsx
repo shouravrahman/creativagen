@@ -134,7 +134,7 @@ export const CreditCounter = ({
 							className={`
                 w-full px-1
                 hover:opacity-90 transition-all duration-300
-                ${isHovered ? "shadow-lg scale-105" : "shadow-md"}
+                ${isHovered ? "shadow-sm scale-105" : "shadow-sm"}
               `}
 							onMouseEnter={() => setIsHovered(true)}
 							onMouseLeave={() => setIsHovered(false)}

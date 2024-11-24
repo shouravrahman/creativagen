@@ -96,7 +96,7 @@ const TemplatePage = () => {
                <div className="space-y-1 w-full">
                   <div className="flex items-center gap-3">
                      {/* Icon with subtle background styling */}
-                     <div className="p-2 bg-primary/10 rounded-lg shadow-md">
+                     <div className="p-2 bg-primary/10 rounded-lg shadow-sm">
                         <Sparkles className="w-6 h-6 text-primary" />
                      </div>
                      {/* Template Title */}
@@ -109,7 +109,7 @@ const TemplatePage = () => {
                               <Settings2 className="h-6 fill-white w-6  hover:text-accent transition-colors" />
                            </Button>
                         </SheetTrigger>
-                        <SheetContent className="p-6 shadow-lg rounded-lg">
+                        <SheetContent className="p-6 shadow-sm rounded-lg">
                            <SheetHeader>
                               <SheetTitle className="text-lg font-semibold text-primary">
                                  AI Generation Settings

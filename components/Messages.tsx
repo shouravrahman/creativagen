@@ -41,7 +41,7 @@ export default function Messages({ messages, isGenerating }: Props) {
                               target="_blank"
                               rel="noopener noreferrer"
                            >
-                              <Button size="icon" className="rounded-full shadow-md">
+                              <Button size="icon" className="rounded-full shadow-sm">
                                  <ExternalLinkIcon className="icon" />
                               </Button>
                            </a>

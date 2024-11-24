@@ -77,7 +77,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   src="/logo.png"
                   width={160}
                   height={80}
-                  className="relative z-10"
+                  className="relative z-10 invert dark:invert-0"
                />
             </Link>
 

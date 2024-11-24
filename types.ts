@@ -124,9 +124,9 @@ export interface FormField {
 	validation?: Record<string, any>;
 	helpText?: string;
 	default?: string;
-	min?: number; // For number/slider inputs
-	max?: number; // For number/slider inputs
-	step?: number; // For number/slider inputs
+	min?: number;
+	max?: number;
+	step?: number;
 }
 
 export interface Option {

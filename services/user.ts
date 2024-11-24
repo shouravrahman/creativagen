@@ -1,3 +1,4 @@
+
 import prismadb from "@/lib/prismadb.ts";
 import { registerSchema } from "@/schemas";
 import { Prisma } from "@prisma/client";

@@ -123,7 +123,7 @@ export default function Testimonials() {
 					className="mx-auto mt-16 grid max-w-2xl grid-cols-1 grid-rows-1 gap-8 text-sm leading-6 text-foreground sm:mt-20 sm:grid-cols-2 xl:mx-0 xl:max-w-none xl:grid-flow-col xl:grid-cols-4 px-4 md:px-0"
 				>
 					<motion.figure
-						className="col-span-2 hidden sm:block sm:rounded-2xl bg-card  sm:shadow-lg sm:ring-1 sm:ring-gray-900/5 xl:col-start-2 xl:row-end-1 border border-border"
+                  className="col-span-2 hidden sm:block sm:rounded-2xl bg-card  sm:shadow-sm sm:ring-1 sm:ring-gray-900/5 xl:col-start-2 xl:row-end-1 border border-border"
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						transition={{ duration: 2.5 }}
@@ -177,7 +177,7 @@ export default function Testimonials() {
 									{column.map((testimonial, i) => (
 										<motion.figure
 											key={testimonial.author.handle}
-											className="rounded-2xl  bg-card p-6 shadow-lg ring-1 ring-gray-900/5 border border-border"
+                                 className="rounded-2xl  bg-card p-6 shadow-sm ring-1 ring-gray-900/5 border border-border"
 											variants={{
 												hidden: {
 													opacity: 0,

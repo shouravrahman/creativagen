@@ -414,3 +414,17 @@ export const createValidationSchema = (fields: FormField[]) => {
 
 		return z.object(schemaFields);
  };
+ export async function generateImageFromAPI(
+		prompt: string,
+		style: string,
+		mood: string
+ ): Promise<string> {
+		// This is a placeholder function - replace with actual API integration
+		return new Promise((resolve) => {
+			setTimeout(() => {
+				resolve(
+					"https://images.unsplash.com/photo-1699894195921-5112e5545438?q=80&w=1000"
+				);
+			}, 2000);
+		});
+ }

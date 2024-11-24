@@ -111,7 +111,7 @@ const Card = ({ data, controls }: CardProps) => {
 			animate={controls}
 			className={`${
 				data.bgClass
-			} overflow-hidden flex flex-col justify-around shadow-lg row-span-1 rounded-2xl border outline-none border-slate-400/10 bg-[##0e1420] p-4  ${
+         } overflow-hidden flex flex-col justify-around shadow-sm row-span-1 rounded-2xl border outline-none border-slate-400/10 bg-[##0e1420] p-4  ${
 				data.index === 3 || data.index === 6 ? "md:col-span-2" : ""
 			} ${data.index === 2 ? "md:col-span-2" : ""}`}
 		>

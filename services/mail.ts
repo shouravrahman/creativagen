@@ -31,9 +31,9 @@ import { sendEmail } from "@/lib/email.ts";
 //   });
 // };
 export const sendVerificationEmail = async (email: string, token: string) => {
-  const verifyEmailLink = `${process.env.NEXT_PUBLIC_APP_URL}/verify?token=${token}`;
+	const verifyEmailLink = `${process.env.NEXT_PUBLIC_APP_URL}/verify?token=${token}`;
 
-  const mailOptions = {
+	const mailOptions = {
 		from: process.env.EMAIL_FROM,
 		to: email,
 		subject: "[Creativagen] Action Required : Verify Your Email",
@@ -49,15 +49,15 @@ export const sendVerificationEmail = async (email: string, token: string) => {
        <p>Best regards,<br/>The Next Dashboard Team</p>
      </div>
    `,
-  };
+	};
 
-  await sendEmail(mailOptions);
+	await sendEmail(mailOptions);
 };
 
 export const sendResetPasswordEmail = async (email: string, token: string) => {
-  const resetPasswordLink = `${process.env.NEXT_PUBLIC_APP_URL}/new-password?token=${token}`;
+	const resetPasswordLink = `${process.env.NEXT_PUBLIC_APP_URL}/new-password?token=${token}`;
 
-  const mailOptions = {
+	const mailOptions = {
 		from: process.env.EMAIL_FROM,
 		to: email,
 		subject: "[Creativagen] Action Required: Reset Your Password",
@@ -73,19 +73,19 @@ export const sendResetPasswordEmail = async (email: string, token: string) => {
        <p>Best regards,<br/>The Next Dashboard Team</p>
      </div>
    `,
-  };
+	};
 
-  await sendEmail(mailOptions);
+	await sendEmail(mailOptions);
 };
 
 export const sendTwoFactorEmail = async (email: string, token: string) => {
-  const mailOptions = {
-    from: process.env.EMAIL_FROM,
-    to: email,
-    subject:
-      "[Next Dashboard] Action required: Confirm Two-Factor Authentication",
-    html: `<p>${token} is your authentication Code.</p>`,
-  };
+	const mailOptions = {
+		from: process.env.EMAIL_FROM,
+		to: email,
+		subject:
+			"[Next Dashboard] Action required: Confirm Two-Factor Authentication",
+		html: `<p>${token} is your authentication Code.</p>`,
+	};
 
-  await sendEmail(mailOptions);
+	await sendEmail(mailOptions);
 };

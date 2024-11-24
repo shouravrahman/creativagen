@@ -41,7 +41,7 @@ function Plan({
 				"flex flex-col rounded-3xl max-w-sm mx-auto px-6 sm:px-8",
 				featured
 					? "order-first bg-card py-8 lg:order-none  shadow-sm  "
-					: "py-8 shadow-md border border-border"
+               : "py-8 shadow-sm border border-border"
 			)}
 		>
 			<h3 className="mt-5 font-display text-lg ">{name}</h3>

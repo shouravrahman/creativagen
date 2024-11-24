@@ -1,3 +1,4 @@
+
 import { auth } from "@/auth";
 import { GeneratedContent } from "@/components/history/HistoryTable";
 import prismadb from "@/lib/prismadb";

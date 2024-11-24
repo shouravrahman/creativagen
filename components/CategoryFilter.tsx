@@ -61,7 +61,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ categories }) => {
                            cursor-pointer select-none py-2 px-3
                            transition-colors duration-200
                            ${category === selectedCategory
-                              ? "bg-primary text-foreground shadow-sm"
+                           ? "bg-primary text-primary-foreground shadow-sm"
                               : "bg-card text-card-foreground hover:bg-accent hover:text-accent-foreground"
                            }
                         `}

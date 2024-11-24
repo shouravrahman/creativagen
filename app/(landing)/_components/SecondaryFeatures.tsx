@@ -91,7 +91,7 @@ function Feature({
 			<p className="mt-2 font-display text-lg">{feature.summary}</p>
 			<p className="my-3 text-sm">{feature.description}</p>
 			<Image
-				className="mt-4 w-full rounded-lg  shadow-md"
+            className="mt-4 w-full rounded-lg  shadow-sm"
 				src={feature.image}
 				alt={feature.summary}
 				sizes="(max-width: 52.75rem) 100vw, 52.75rem"

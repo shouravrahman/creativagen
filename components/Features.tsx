@@ -63,7 +63,7 @@ export default function Features() {
 					<Image
 						src="/inventory.png"
 						alt="App screenshot"
-						className="mb-[-12%] rounded-xl shadow-2xl ring-1 ring-white/10"
+                  className="mb-[-12%] rounded-xl shadow-sm ring-1 ring-white/10"
 						width={2000}
 						height={500}
 					/>

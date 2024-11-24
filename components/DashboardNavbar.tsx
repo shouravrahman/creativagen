@@ -31,7 +31,7 @@ const DashboardNavbar: React.FC = () => {
          <div className="flex w-full justify-between  md:items-center">
             <div className="relative w-full max-w-md  ">
                <div className="absolute inset-0 flex items-center ">
-                  <SearchIcon className="hidden sm:block text-accent w-8 h-8 z-10" />
+                  <SearchIcon className="hidden sm:block text-accent w-8 h-8 z-10 ml-2" />
                </div>
                <Input
                   type="text"

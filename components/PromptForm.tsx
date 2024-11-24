@@ -20,13 +20,13 @@ export default function PromptForm({
           name="prompt"
           defaultValue={initialPrompt}
           placeholder="What do you want to change?"
-          className="border text-lg shadow-md border-gray-300 focus:ring-2 focus:ring-gray-600 outline-none px-2 mr-2 block w-full flex-grow rounded-md"
+              className="border text-lg shadow-sm border-gray-300 focus:ring-2 focus:ring-gray-600 outline-none px-2 mr-2 block w-full flex-grow rounded-md"
           disabled={disabled}
         />
         <Button
           type="submit"
           size="icon"
-          className="shadow-md"
+              className="shadow-sm"
           disabled={disabled}
         >
           <SendHorizonalIcon />

@@ -3,6 +3,7 @@ import {
 	Home,
 	History,
 	CreditCard,
+	Image,
 	User,
 	Calendar,
 } from "lucide-react";
@@ -17,6 +18,13 @@ export const routes = [
 		href: "/dashboard",
 		color: "text-green-500",
 	},
+	{
+		label: "Image Generator",
+		icon: Image,
+		href: "/image",
+		color: "text-blue-500",
+	},
+
 	{
 		label: "Planner",
 		icon: Calendar,

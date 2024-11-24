@@ -36,7 +36,7 @@ export default function IconDropdown({ menu, img }: Dropdown) {
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
          >
-            <MenuItems className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md  shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none bg-background border border-border">
+            <MenuItems className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md  shadow-sm ring-1 ring-black ring-opacity-5 focus:outline-none bg-background border border-border">
                <div className="py-1">
                   {menu?.map((link) => {
                      return (

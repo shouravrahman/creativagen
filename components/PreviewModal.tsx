@@ -27,7 +27,7 @@ export default function PreviewModal({ html, setHtml }: Props) {
 
   return (
     <dialog className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center z-[2000] bg-black/50 h-screen w-screen">
-      <div className="bg-white h-[calc(100%-100px)] w-[calc(100%-100px)] rounded-lg shadow-xl flex flex-col">
+        <div className="bg-white h-[calc(100%-100px)] w-[calc(100%-100px)] rounded-lg shadow-sm flex flex-col">
         <header className="relative p-3 border-b">
           <div className="space-x-2 flex justify-center">
             <PreviewTab

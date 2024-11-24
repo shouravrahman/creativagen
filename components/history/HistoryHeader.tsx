@@ -40,7 +40,7 @@ export function HistoryHeader({
          <h1 className="text-3xl font-bold">Content History</h1>
          <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
             <div className="relative w-full sm:w-96">
-               <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+               <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white w-4 h-4" />
                <Input
                   type="search"
                   placeholder="Search by title, type, or content..."
