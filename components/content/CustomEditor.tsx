@@ -130,7 +130,7 @@ const CustomEditor = ({ initialContent = '', onSave }) => {
                   </div>
                </div>
 
-               <EditorContent editor={editor} className="min-h-[300px]" />
+               <EditorContent editor={editor} className="min-h-screen" />
             </CardContent>
          </Card>
       </div>
