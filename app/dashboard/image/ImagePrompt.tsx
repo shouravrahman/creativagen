@@ -1,3 +1,5 @@
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import React from 'react';
 
 interface ImagePromptProps {
@@ -8,13 +10,13 @@ interface ImagePromptProps {
 export function ImagePrompt({ prompt, setPrompt }: ImagePromptProps) {
   return (
     <div className="space-y-2">
-      <label className="block text-sm font-medium text-gray-700">
+        <Label >
         Describe your image
-      </label>
-      <textarea
+        </Label>
+        <Textarea
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
-        className="w-full h-24 px-4 py-2 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+           className="w-full h-24 focus:ring-1 ring-primary "
         placeholder="A serene lake at sunset with mountains in the background..."
       />
     </div>

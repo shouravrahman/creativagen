@@ -15,9 +15,9 @@ export function ImageDisplay({ image, loading, onDownload, variants }: ImageDisp
 
    if (!image) {
       return (
-         <div className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center">
-            <ImageIcon className="w-12 h-12 mx-auto text-gray-400" />
-            <p className="mt-2 text-sm text-gray-600">
+         <div className="border-2 border-dashed  border-gray-300 rounded-lg p-12 text-center">
+            <ImageIcon className="w-12 h-12 mx-auto " />
+            <p className="mt-2 text-sm text-muted">
                Your generated image will appear here
             </p>
          </div>

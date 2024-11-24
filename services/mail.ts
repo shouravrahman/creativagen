@@ -41,12 +41,12 @@ export const sendVerificationEmail = async (email: string, token: string) => {
      <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
        <h2 style="color: #4CAF50;">Verify Your Email Address</h2>
        <p>Dear User,</p>
-       <p>Thank you for registering with Next Dashboard. To complete your registration, please verify your email address by clicking the link below:</p>
+       <p>Thank you for registering with us. To complete your registration, please verify your email address by clicking the link below:</p>
        <p>
          <a href="${verifyEmailLink}" style="background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Verify Email</a>
        </p>
        <p>If you did not create an account, please ignore this email.</p>
-       <p>Best regards,<br/>The Next Dashboard Team</p>
+       <p>Best regards,<br/>Creativagen Team</p>
      </div>
    `,
 	};

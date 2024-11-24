@@ -1,145 +1,136 @@
-import React, { useState, useCallback, useMemo, useEffect } from "react";
-import dynamic from "next/dynamic";
-import { Copy, Edit, Save } from "lucide-react";
-import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
-import 'react-quill/dist/quill.snow.css';
-import { marked } from "marked";
-import DOMPurify from "dompurify";
+import React, { useState } from 'react';
+import { useEditor, EditorContent } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import {
+   Bold,
+   Italic,
+   List,
+   ListOrdered,
+   Heading2,
+   Undo,
+   Redo,
+   Copy,
+   Save
+} from 'lucide-react';
 
-const ReactQuill = dynamic(() => import("react-quill"), {
-   ssr: false,
-   loading: () => (
-      <Skeleton className="w-full h-[500px] rounded-lg" />
-   ),
-});
+const CustomEditor = ({ initialContent = '', onSave }) => {
+   const [isCopied, setIsCopied] = useState(false);
 
-interface EditorProps {
-   content: string;
-   onSave?: (content: string) => void;
-   isLoading?: boolean;
-}
-
-const CustomEditor: React.FC<EditorProps> = ({
-   content,
-   onSave,
-   isLoading = false,
-}) => {
-   const [editorContent, setEditorContent] = useState<string>("");
-
-   useEffect(() => {
-      if (content) {
-         const convertedContent = DOMPurify.sanitize(marked(content));
-         setEditorContent(convertedContent);
-      }
-   }, [content]);
-
-   const modules = useMemo(
-      () => ({
-         toolbar: [
-            [{ header: [2, 3, false] }],
-            ["bold", "italic", "underline"],
-            [{ list: "ordered" }, { list: "bullet" }],
-            ["link"],
-            ["clean"],
-         ],
-         clipboard: {
-            matchVisual: false,
-         },
-      }),
-      []
-   );
-
-   const formats = useMemo(
-      () => [
-         "header",
-         "bold",
-         "italic",
-         "underline",
-         "list",
-         "bullet",
-         "link",
+   const editor = useEditor({
+      extensions: [
+         StarterKit
       ],
-      []
-   );
-
-   const handleChange = useCallback((value: string) => {
-      setEditorContent(value);
-   }, []);
-
-   const handleSave = useCallback(async () => {
-      if (!onSave) return;
-
-      try {
-         await onSave(editorContent);
-         toast.success("Changes saved successfully", {
-            duration: 2000,
-         });
-      } catch (error) {
-         toast.error("Failed to save changes");
+      content: initialContent,
+      editorProps: {
+         attributes: {
+            class: 'prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto focus:outline-none px-2 text-black dark:text-foreground '
+         }
       }
-   }, [editorContent, onSave]);
+   });
 
-   const handleCopyToClipboard = useCallback(async () => {
-      try {
-         await navigator.clipboard.writeText(editorContent);
-         toast.success("Content copied to clipboard");
-      } catch (err) {
-         toast.error("Failed to copy content");
+   if (!editor) {
+      return null;
+   }
+
+   const handleCopy = async () => {
+      if (editor) {
+         await navigator.clipboard.writeText(editor.getHTML());
+         setIsCopied(true);
+         setTimeout(() => setIsCopied(false), 2000);
       }
-   }, [editorContent]);
+   };
+
+   const handleSave = () => {
+      if (editor && onSave) {
+         onSave(editor.getHTML());
+      }
+   };
 
    return (
       <div className="w-full max-w-4xl mx-auto">
-         <Card className="bg-white shadow-sm border-0">
-            <CardContent className="p-0">
-               <div className=" p-4 flex items-center justify-between">
-                  <h2 className="text-lg font-semibold text-background flex gap-2">Editor<Edit /></h2>
-                  <div className="flex gap-2">
+         <Card className=" shadow-md">
+            <CardContent className="p-4">
+               <div className="border-b  pb-4 mb-4">
+                  <div className="flex flex-wrap gap-2">
                      <Button
-                        onClick={handleCopyToClipboard}
                         variant="outline"
                         size="sm"
-                        disabled={isLoading}
+                        onClick={() => editor.chain().focus().toggleBold().run()}
+                        className={editor.isActive('bold') ? 'bg-accent text-accent-foreground' : ''}
                      >
-                        <Copy className="w-4 h-4 mr-2" />
-                        Copy
+                        <Bold className="h-4 w-4" />
                      </Button>
                      <Button
-                        onClick={handleSave}
-                        size="sm"
                         variant="outline"
-                        disabled={isLoading}
+                        size="sm"
+                        onClick={() => editor.chain().focus().toggleItalic().run()}
+                        className={editor.isActive('italic') ? 'bg-accent text-accent-foreground' : ''}
                      >
-                        <Save className="w-4 h-4 mr-2" />
-                        Save
+                        <Italic className="h-4 w-4" />
                      </Button>
+                     <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+                        className={editor.isActive('heading', { level: 2 }) ? 'bg-accent text-accent-foreground' : ''}
+                     >
+                        <Heading2 className="h-4 w-4" />
+                     </Button>
+                     <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => editor.chain().focus().toggleBulletList().run()}
+                        className={editor.isActive('bulletList') ? 'bg-accent text-accent-foreground' : ''}
+                     >
+                        <List className="h-4 w-4" />
+                     </Button>
+                     <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => editor.chain().focus().toggleOrderedList().run()}
+                        className={editor.isActive('orderedList') ? 'bg-accent text-accent-foreground' : ''}
+                     >
+                        <ListOrdered className="h-4 w-4" />
+                     </Button>
+                     <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => editor.chain().focus().undo().run()}
+                     >
+                        <Undo className="h-4 w-4" />
+                     </Button>
+                     <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => editor.chain().focus().redo().run()}
+                     >
+                        <Redo className="h-4 w-4" />
+                     </Button>
+
+                     <div className="ml-auto flex gap-2">
+                        <Button
+                           variant="outline"
+                           size="sm"
+                           onClick={handleCopy}
+                        >
+                           <Copy className="h-4 w-4 mr-2" />
+                           {isCopied ? 'Copied!' : 'Copy'}
+                        </Button>
+                        <Button
+                           variant="default"
+                           size="sm"
+                           onClick={handleSave}
+                        >
+                           <Save className="h-4 w-4 mr-2" />
+                           Save
+                        </Button>
+                     </div>
                   </div>
                </div>
 
-               <div className="relative">
-                  <ReactQuill
-                     value={editorContent}
-                     onChange={handleChange}
-                     modules={modules}
-                     formats={formats}
-                     className="editor-container"
-                     placeholder="Your content will appear here"
-                     theme="snow"
-                  />
-
-                  {isLoading && (
-                     <div className="absolute inset-0 bg-white/80 backdrop-blur-[2px] flex items-center justify-center">
-                        <div className="flex items-center gap-2">
-                           <div className="w-2 h-2 bg-accent rounded-full animate-bounce [animation-delay:-0.3s]" />
-                           <div className="w-2 h-2 bg-accent rounded-full animate-bounce [animation-delay:-0.15s]" />
-                           <div className="w-2 h-2 bg-accent rounded-full animate-bounce" />
-                        </div>
-                     </div>
-                  )}
-               </div>
+               <EditorContent editor={editor} className="min-h-[300px]" />
             </CardContent>
          </Card>
       </div>

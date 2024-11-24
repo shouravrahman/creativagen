@@ -1,4 +1,5 @@
 "use client"
+import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import React from 'react';
 
@@ -39,7 +40,7 @@ export function ImageOptions({
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
          {/* Resolution Selector */}
          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">Resolution</label>
+            <Label >Resolution</Label>
             <div className="grid grid-cols-2 gap-2">
                {RESOLUTIONS.map((resolution) => (
                   <button
@@ -48,8 +49,8 @@ export function ImageOptions({
                      className={cn(
                         "px-3 py-2 text-sm rounded-lg transition-colors",
                         selectedResolution === resolution
-                           ? "bg-blue-500 text-white"
-                           : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                           ? "bg-primary text-foreground"
+                           : "bg-card"
                      )}
                   >
                      {resolution}
@@ -60,7 +61,7 @@ export function ImageOptions({
 
          {/* Quality Selector */}
          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">Quality</label>
+            <Label >Quality</Label>
             <div className="grid grid-cols-1 gap-2">
                {QUALITIES.map((quality) => (
                   <button
@@ -69,8 +70,8 @@ export function ImageOptions({
                      className={cn(
                         "px-3 py-2 text-sm rounded-lg transition-colors",
                         selectedQuality === quality
-                           ? "bg-blue-500 text-white"
-                           : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                           ? "bg-primary text-foreground"
+                           : "bg-card"
                      )}
                   >
                      {quality}
@@ -81,7 +82,7 @@ export function ImageOptions({
 
          {/* Variants Selector */}
          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">Variants</label>
+            <Label >Variants</Label>
             <div className="grid grid-cols-3 gap-2">
                {VARIANTS.map((variant) => (
                   <button
@@ -90,8 +91,8 @@ export function ImageOptions({
                      className={cn(
                         "px-3 py-2 text-sm rounded-lg transition-colors",
                         selectedVariants === variant
-                           ? "bg-blue-500 text-white"
-                           : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                           ? "bg-primary text-foreground"
+                           : "bg-card"
                      )}
                   >
                      {variant}

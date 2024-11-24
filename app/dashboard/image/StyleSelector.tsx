@@ -1,3 +1,4 @@
+import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import React from 'react';
 
@@ -21,7 +22,7 @@ interface StyleSelectorProps {
 export function StyleSelector({ selectedStyle, onStyleSelect }: StyleSelectorProps) {
    return (
       <div className="space-y-2">
-         <label className="block text-sm font-medium text-gray-700">Style</label>
+         <Label >Style</Label>
          <div className="grid grid-cols-2 gap-2">
             {STYLES.map((style) => (
                <button
@@ -30,8 +31,8 @@ export function StyleSelector({ selectedStyle, onStyleSelect }: StyleSelectorPro
                   className={cn(
                      "px-4 py-2 text-sm rounded-lg transition-colors",
                      selectedStyle === style
-                        ? "bg-blue-500 text-white"
-                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                        ? "bg-primary text-foreground"
+                        : "bg-card"
                   )}
                >
                   {style}

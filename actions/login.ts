@@ -44,7 +44,10 @@ export const login = async (payload: z.infer<typeof loginSchema>) => {
 	}
 
 	// Check if passwords doesn't matches, then return an error.
-	const isPasswordMatch = await bcrypt.compare(password, existingUser.password);
+	const isPasswordMatch = await bcrypt.compare(
+		password,
+		existingUser.password
+	);
 	if (!isPasswordMatch) {
 		return response({
 			success: false,

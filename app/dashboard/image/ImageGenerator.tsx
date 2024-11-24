@@ -8,6 +8,7 @@ import { ImageOptions, RESOLUTIONS, QUALITIES, VARIANTS } from './ImageOptions';
 import { GenerateButton } from './GenerateButton';
 import { ImageDisplay } from './ImageDisplay';
 import { generateImage } from './services/imageService';
+import { Wand2 } from 'lucide-react';
 
 
 export function ImageGenerator() {
@@ -63,43 +64,48 @@ export function ImageGenerator() {
    };
 
    return (
-      <div className="w-full max-w-4xl mx-auto p-6 space-y-8">
-         <div className="text-center space-y-2">
-            <h1 className="text-4xl font-bold text-gray-900">AI Image Generator</h1>
-            <p className="text-gray-600">Transform your ideas into stunning visuals</p>
+      <div className="w-full  mx-auto p-6 space-y-8">
+         <div className="flex items-center gap-3 mb-8 p-4 rounded-lg bg-card">
+            <Wand2 className="w-8 h-8 text-primary" />
+            <div>
+               <h1 className="text-3xl font-bold text-card-foreground">AI Image Generator</h1>
+               <p className="text-sm text-muted-foreground">Create optimized image in seconds</p>
+            </div>
          </div>
 
-         <div className="space-y-6">
-            <ImagePrompt prompt={prompt} setPrompt={setPrompt} />
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-               <StyleSelector
-                  selectedStyle={selectedStyle}
-                  onStyleSelect={setSelectedStyle}
+         <div className="space-y-6 flex  justify-between gap-6">
+            <section className='h-full w-full flex flex-col gap-10'>
+               <ImagePrompt prompt={prompt} setPrompt={setPrompt} />
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                  <StyleSelector
+                     selectedStyle={selectedStyle}
+                     onStyleSelect={setSelectedStyle}
+                  />
+                  <MoodSelector
+                     selectedMood={selectedMood}
+                     onMoodSelect={setSelectedMood}
+                  />
+               </div>
+               <ImageOptions
+                  selectedResolution={selectedResolution}
+                  selectedQuality={selectedQuality}
+                  selectedVariants={selectedVariants}
+                  onResolutionSelect={setSelectedResolution}
+                  onQualitySelect={setSelectedQuality}
+                  onVariantsSelect={setSelectedVariants}
                />
-               <MoodSelector
-                  selectedMood={selectedMood}
-                  onMoodSelect={setSelectedMood}
-               />
-            </div>
-
-            <ImageOptions
-               selectedResolution={selectedResolution}
-               selectedQuality={selectedQuality}
-               selectedVariants={selectedVariants}
-               onResolutionSelect={setSelectedResolution}
-               onQualitySelect={setSelectedQuality}
-               onVariantsSelect={setSelectedVariants}
-            />
-
-            <GenerateButton loading={loading} onClick={handleImageGeneration} />
-
+               <GenerateButton loading={loading} onClick={handleImageGeneration} />
+            </section>
+            <section className='w-full h-full'>
             <ImageDisplay
                image={image}
                loading={loading}
                onDownload={downloadImage}
                variants={selectedVariants}
             />
+            </section>
+
+
 
             {currentProvider && (
                <p className="text-sm text-gray-500 text-center">

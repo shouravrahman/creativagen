@@ -34,7 +34,10 @@ export const LoginForm = () => {
 					if (!data.success) {
 						return toast.error(data.error.message);
 					}
-					return router.push("/two-factor");
+               data.success && toast.success("Logged In")
+               return router.push("/two-factor");
+               // return toast.success("Logged In")
+
 				})
 				.catch(() => toast.error("Something went wrong."));
 		});
@@ -42,7 +45,7 @@ export const LoginForm = () => {
 
 	const handleDemoUser = () => {
 		form.setValue("email", "shouravatwork@gmail.com");
-		form.setValue("password", "admin1");
+      form.setValue("password", "adminhere");
 		handleSubmit(form.getValues());
 	};
 

@@ -14,30 +14,35 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
 export const RegisterForm = () => {
-  const router = useRouter();
-  const [isPending, startTransition] = useTransition();
-  const form = useForm<z.infer<typeof registerSchema>>({
-    resolver: zodResolver(registerSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      password: "",
-    },
-  });
+   const router = useRouter();
+   const [isPending, startTransition] = useTransition();
+   const form = useForm<z.infer<typeof registerSchema>>({
+      resolver: zodResolver(registerSchema),
+      defaultValues: {
+         name: "",
+         email: "",
+         password: "",
+      },
+   });
 
-  const handleSubmit = form.handleSubmit((values) => {
-    startTransition(() => {
-      register(values).then((data) => {
-        if (data.success) {
-          router.push("/login");
-          return toast.success(data.message);
-        }
-        return toast.error(data.error.message);
+   const handleSubmit = form.handleSubmit((values) => {
+      startTransition(() => {
+         register(values)
+            .then((data) => {
+               if (!data) return;
+               if (!data.success) {
+                  return toast.error(data.error.message);
+               }
+               data.success && toast.success(data.message)
+
+               return router.push("/login");
+
+            })
+            .catch(() => toast.error("Something went wrong."));
       });
-    });
-  });
+   });
 
-  return (
+   return (
 		<CardWrapper
 			headerTitle="Register"
 			headerDescription="Register your account by filling out the form below, make sure the data you enter is correct."
@@ -46,10 +51,7 @@ export const RegisterForm = () => {
 			showSocial={false}
 		>
 			<Form {...form}>
-				<form
-					onSubmit={handleSubmit}
-					className="space-y-6"
-				>
+            <form onSubmit={handleSubmit} className="space-y-6">
 					<div className="space-y-4">
 						<FormInput
 							control={form.control}
@@ -80,12 +82,12 @@ export const RegisterForm = () => {
 						type="submit"
 						disabled={isPending}
 						className="w-full"
-                 variant={"destructive"}
+                  variant={"destructive"}
 					>
 						Create an account
 					</Button>
 				</form>
 			</Form>
 		</CardWrapper>
-  );
+   );
 };
