@@ -37,11 +37,17 @@ export const register = async (payload: z.infer<typeof registerSchema>) => {
   const hashedPassword = await hashPassword(password);
 
   // Create an user.
-  await createUser({ name, email, password: hashedPassword });
+  const user = await createUser({ name, email, password: hashedPassword });
 
-  // Generate verification token, then send it to the email.
-  const verificationToken = await generateVerificationToken(email);
-  await sendVerificationEmail(verificationToken.email, verificationToken.token);
+  if (user) {
+		// Generate verification token, then send it to the email.
+		const verificationToken = await generateVerificationToken(email);
+		await sendVerificationEmail(
+			verificationToken.email,
+			verificationToken.token
+		);
+  }
+
 
   // Return response success.
   return response({

@@ -1,6 +1,9 @@
+import { Appointment } from "@/schemas/Appointment";
+import { Resource } from "@/schemas/Resource";
+import { AppointmentService } from "@/services/AppointmentService";
+import { ResourceService } from "@/services/ResourceService";
 import React, { createContext, useContext, useState, ReactNode, FC } from "react";
-import { AppointmentService, ResourceService } from "../services";
-import { Appointment, Resource } from "../models";
+
 
 interface DataContextType {
   appointments: Appointment[];
