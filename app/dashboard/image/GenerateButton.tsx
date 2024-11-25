@@ -1,6 +1,6 @@
-import React from 'react';
-import { Wand2, Loader2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import { Loader2, Wand2 } from 'lucide-react';
 
 interface GenerateButtonProps {
   loading: boolean;
@@ -9,24 +9,25 @@ interface GenerateButtonProps {
 
 export function GenerateButton({ loading, onClick }: GenerateButtonProps) {
   return (
-     <Button
-      onClick={onClick}
-      disabled={loading}
-        size={'lg'}
-        variant={'destructive'}
-        className='w-full'
-    >
-      {loading ? (
-        <>
-          <Loader2 className="w-5 h-5 animate-spin" />
-          <span>Generating...</span>
-        </>
-      ) : (
-        <>
-          <Wand2 className="w-5 h-5" />
-          <span>Generate Image</span>
-        </>
-      )}
-     </Button>
+     <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+        <Button
+           className="w-full"
+           size="lg"
+           onClick={onClick}
+           disabled={loading}
+        >
+           {loading ? (
+              <>
+                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                 Generating...
+              </>
+           ) : (
+              <>
+                 <Wand2 className="mr-2 h-4 w-4" />
+                 Generate Image
+              </>
+           )}
+        </Button>
+     </motion.div>
   );
 }

@@ -15,9 +15,9 @@ const LandingPage = () => {
 		<div className="h-full flex flex-col gap-16 md:gap-32 ">
 			<LandingNavbar />
 			<LandingHero />
-			{/* <PrimaryFeatures /> */}
+
 			<SecondaryFeatures />
-			{/* <Features /> */}
+
 			<Pricing />
 			<Testimonials />
 			<Contact />

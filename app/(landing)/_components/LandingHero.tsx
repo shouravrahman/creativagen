@@ -8,10 +8,10 @@ export const LandingHero = () => {
 	return (
 		<div className="h-full  font-bold  px-4 flex flex-col items-center justify-around gap-10 md:gap-6 space-y-2 sm:-mt-10">
 			<section className="flex flex-col  items-center lg:justify-around gap-4 md:gap-6">
-				<div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl w-full mx-auto text-center space-y-5 font-extrabold">
-					<h1>The Best AI Tool for</h1>
+            <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl w-full leading-loose mx-auto text-center space-y-5 font-extrabold">
+               <h1>Top Notch AI Tool for</h1>
 					{/* <Typewriter /> */}
-					Developers Content
+               Effortless Content
 				</div>
 				<div className="text-sm md:text-xl font-light ">
 					Create Better content using AI 10x faster.

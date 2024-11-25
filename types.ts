@@ -141,6 +141,29 @@ export interface BlogGenerationConfig {
 		executiveSummary: boolean;
 	};
 }
+export interface ApiConfig {
+	apiKey: string;
+	baseUrl: string;
+}
+
+export interface ImageGenerationParams {
+	prompt: string;
+	style?: string;
+	mood?: string;
+	width?: number;
+	height?: number;
+	seed?: number;
+	model?: string;
+	resolution?: string;
+	quality?: string;
+	variants?: number;
+}
+
+export interface ImageGenerationResponse {
+	success: boolean;
+	imageUrl: string;
+	error?: string;
+}
 
 export interface ResearchResult {
 	url: string;
