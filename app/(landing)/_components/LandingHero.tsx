@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import hero from "../../../public/heross.png";
+import hero from "../../../public/heroImage.png";
 
 export const LandingHero = () => {
 	// const user = await currentUser();

@@ -93,35 +93,42 @@ export function Pricing() {
 				mainTitle="Pricing"
 				secondaryText="It doesn’t matter what size your business is, our software will work well for you."
 			/>
-			<div className="mt-16 flex flex-col md:flex-row max-w-2xl mx-auto  gap-3 lg:max-w-4xl">
-				<Plan
-					featured
-					name="Unlimited"
-					price="$20"
-					description="Enjoy unlimited content generation for your business needs."
-					href="/register"
-					features={[
-						"Generate unlimited emails and content",
-						"Access to all templates and prompts",
-						"Automated content scheduling",
-						"Comprehensive usage analytics",
-						"Priority support",
-					]}
-				/>
-				<Plan
-					name="Custom Quote"
-					price="Contact Us"
-					description="Get a tailored solution for your enterprise needs."
-					href="/contact"
-					features={[
-						"Custom content generation solutions",
-						"Dedicated account manager",
-						"API access for automation",
-						"Comprehensive analytics and reporting",
-						"24/7 support",
-					]}
-				/>
-			</div>
+         <div className="mt-16 flex flex-col md:flex-row max-w-2xl mx-auto gap-3 lg:max-w-4xl">
+            <div className="mt-16 flex flex-col md:flex-row max-w-2xl mx-auto gap-3 lg:max-w-4xl">
+               <Plan
+                  featured
+                  name="Pro Plan"
+                  price="$20"
+
+                  description="Unleash your content creation potential"
+                  href="/register"
+                  features={[
+                     "Unlimited content generation",
+                     "Access to all AI templates",
+                     "Content planner & scheduler (Beta)",
+                     "Image generation",
+                     "Blog post generator",
+                     "Comprehensive usage analytics",
+                     "Generation history tracking"
+                  ]}
+               />
+               <Plan
+                  name="Enterprise Solution"
+                  price="Contact Us"
+
+                  description="Tailored solutions for your business"
+                  href="/contact"
+                  features={[
+                     "Custom content generation workflow",
+                     "Dedicated account support",
+                     "Priority feature requests",
+                     "All Pro Plan features",
+                     "Volume-based pricing",
+                     "Custom integration options"
+                  ]}
+               />
+            </div>
+         </div>
 		</section>
 	);
 }

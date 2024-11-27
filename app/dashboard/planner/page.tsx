@@ -77,7 +77,7 @@ export default function PlannerPage() {
   };
 
    return (
-     <div className="container mx-auto py-8">
+      <div className="px-4 mx-auto py-8">
         <div className="flex justify-between items-center mb-8">
            <h1 className="text-3xl font-bold">Social Media Planner</h1>
            <Button onClick={() => {

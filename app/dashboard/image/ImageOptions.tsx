@@ -49,7 +49,7 @@ export function ImageOptions({
                      className={cn(
                         "px-3 py-2 text-sm rounded-lg transition-colors",
                         selectedResolution === resolution
-                           ? "bg-primary text-foreground"
+                           ? "bg-primary text-primary-foreground dark:text-foreground"
                            : "bg-card"
                      )}
                   >
@@ -70,7 +70,7 @@ export function ImageOptions({
                      className={cn(
                         "px-3 py-2 text-sm rounded-lg transition-colors",
                         selectedQuality === quality
-                           ? "bg-primary text-foreground"
+                           ? "bg-primary text-primary-foreground dark:text-foreground"
                            : "bg-card"
                      )}
                   >
@@ -91,7 +91,7 @@ export function ImageOptions({
                      className={cn(
                         "px-3 py-2 text-sm rounded-lg transition-colors",
                         selectedVariants === variant
-                           ? "bg-primary text-foreground"
+                           ? "bg-primary text-primary-foreground dark:text-foreground"
                            : "bg-card"
                      )}
                   >

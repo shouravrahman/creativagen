@@ -69,9 +69,9 @@ export default function Contact() {
 								<dd>
 									<Link
 										className="hover:   italic"
-										href="mailto:hello@example.com"
+                              href="mailto:shouravatwork@gmail.com"
 									>
-										hello@example.com
+                              shouravatwork@gmail.com
 									</Link>
 								</dd>
 							</div>

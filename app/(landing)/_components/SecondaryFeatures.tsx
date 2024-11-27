@@ -4,13 +4,14 @@ import { useId } from "react";
 import Image, { type ImageProps } from "next/image";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import clsx from "clsx";
-import { CheckCircleIcon, ClockIcon } from "lucide-react";
+import { Calendar, CheckCircleIcon, ClockIcon, LayoutTemplateIcon } from "lucide-react";
 import { ChartBarIcon } from "@heroicons/react/20/solid";
 
-import screenshotCasestudy from "/public/screenshotCasestudy.png";
-import screenshotAnalytics from "/public/analytics.png";
-import screenshotHistory from "/public/history.png";
+import planner from "/public/planner.png";
+import heroImage from "/public/heroImage.png";
+import imageGen from "/public/imageGen.png";
 import SectionHeading from "./SectionHeading.tsx";
+import { FcPicture } from "react-icons/fc";
 
 interface Feature {
 	name: React.ReactNode;
@@ -21,32 +22,27 @@ interface Feature {
 }
 
 const features: Array<Feature> = [
-	{
-		name: "Content Creation for Developers",
-		summary:
-			"Generate tailored content such as case studies, LinkedIn posts, and technical documentation.",
-		description:
-			"Utilize our AI tools to create engaging and informative content that resonates with your audience.",
-		image: screenshotCasestudy,
-		icon: <CheckCircleIcon className="h-9 w-9" />,
-	},
-	{
-		name: "Analytics Dashboard",
-		summary:
-			"Monitor your word usage, token consumption, and past generations with ease.",
-		description:
-			"Gain insights to optimize your content strategy with our analytics dashboard.",
-		image: screenshotAnalytics,
-		icon: <ChartBarIcon className="h-9 w-9" />,
-	},
-	{
-		name: "Content Scheduling (Beta)",
-		summary: "Schedule your content to be published at optimal times.",
-		description:
-			"Ensure maximum engagement and reach with our content scheduling feature.",
-		image: screenshotCasestudy,
-		icon: <ClockIcon className="h-9 w-9" />,
-	},
+   {
+      name: "AI-Powered Content Templates",
+      summary: "Streamline your content creation with intelligent, context-aware templates.",
+      description: "Access a comprehensive library of pre-configured templates spanning multiple content types. From technical documentation to marketing materials, our AI-driven templates adapt to your specific needs, reducing writing time and enhancing content quality.",
+      image: heroImage,
+      icon: <LayoutTemplateIcon className="h-9 w-9" />,
+   },
+   {
+      name: "Content Planner & Scheduler",
+      summary: "Strategic content management with intelligent scheduling.",
+      description: "Optimize your content strategy with an advanced planner that suggests ideal publishing times, tracks content performance, and helps you maintain a consistent publishing rhythm across multiple platforms.",
+      image: planner,
+      icon: <Calendar className="h-9 w-9" />,
+   },
+   {
+      name: "AI Image Generation",
+      summary: "Create custom visuals that complement your content instantly.",
+      description: "Generate unique, professional-quality images tailored to your content's context. Our AI understands your narrative and produces visually compelling graphics that enhance engagement and storytelling.",
+      image: imageGen,
+      icon: <FcPicture className="h-9 w-9" />,
+   }
 ];
 
 function Feature({
@@ -62,7 +58,7 @@ function Feature({
 		<div
 			className={clsx(
 				isActive
-					? "bg-accent text-accent-foreground"
+               ? "bg-accent/80 text-accent-foreground"
 					: "bg-card text-card-foreground",
 				className,
 				"opacity-90 hover:opacity-100",

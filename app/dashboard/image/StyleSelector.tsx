@@ -31,7 +31,7 @@ export function StyleSelector({ selectedStyle, onStyleSelect }: StyleSelectorPro
                   className={cn(
                      "px-4 py-2 text-sm rounded-lg transition-colors",
                      selectedStyle === style
-                        ? "bg-primary text-foreground"
+                        ? "bg-primary text-primary-foreground dark:text-foreground"
                         : "bg-card"
                   )}
                >

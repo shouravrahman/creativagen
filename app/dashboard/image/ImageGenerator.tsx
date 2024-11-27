@@ -124,15 +124,15 @@ export function ImageGenerator() {
 
    return (
       <div className="min-h-screen bg-background">
-         <div className="container mx-auto px-4 py-8">
+         <div className=" mx-auto px-4 py-8">
             <motion.div
                initial={{ opacity: 0, y: 20 }}
                animate={{ opacity: 1, y: 0 }}
                className="space-y-8"
             >
                {/* Header */}
-               <Card className="border-none shadow-lg">
-                  <CardHeader className="space-y-1">
+               {/* <Card className="border-none shadow-sm">
+                  <CardHeader className="">
                      <div className="flex items-center gap-3">
                         <motion.div
                            whileHover={{ rotate: 180 }}
@@ -146,12 +146,12 @@ export function ImageGenerator() {
                         </div>
                      </div>
                   </CardHeader>
-               </Card>
+               </Card> */}
 
                {/* Main Content */}
                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                   {/* Left Column - Controls */}
-                  <Card className="border-none shadow-lg">
+                  <Card className="border-none shadow-sm">
                      <CardContent className="p-6 space-y-8">
                         <ImagePrompt
                            prompt={prompt}
@@ -191,7 +191,7 @@ export function ImageGenerator() {
                   </Card>
 
                   {/* Right Column - Image Display */}
-                  <Card className="border-none shadow-lg">
+                  <Card className="border-none shadow-sm">
                      <CardContent className="p-6">
                         <Suspense fallback={<ImageSkeleton />}>
                            <AnimatePresence mode="wait">
@@ -250,7 +250,7 @@ export function ImageGenerator() {
 
                {/* Image History */}
                {generatedImages.length > 0 && (
-                  <Card className="border-none shadow-lg">
+                  <Card className="border-none shadow-sm">
                      <CardHeader className="flex flex-row items-center justify-between">
                         <CardTitle className="text-xl">Generated Images</CardTitle>
                         <Button

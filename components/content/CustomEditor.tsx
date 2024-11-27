@@ -81,7 +81,7 @@ const CustomEditor: React.FC<CustomEditorProps> = ({
    if (!editor) return null;
    return (
       <div className="w-full max-w-4xl mx-auto">
-         <Card className="shadow-md">
+         <Card className="shadow-sm">
             <CardContent className="p-4">
                <div className="border-b pb-4 mb-4">
                   <div className="flex flex-wrap gap-2">

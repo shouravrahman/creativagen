@@ -81,26 +81,26 @@ body,
    border-top: 1px solid #fbb3ec;
    display: block;
  }
-@layer base {
+ @layer base {
    :root {
-       --background: 220 25% 97%;
-       --foreground: 225 25% 20%;
-       --primary: 230 85% 60%;
-       --primary-foreground: 0 0% 100%;
-       --accent: 45 95% 50%;
-       --accent-foreground: 225 25% 20%;
-       --sidebar: 220 30% 95%;
-       --sidebar-text: 225 25% 20%;
-       --card: 0 0% 100%;
-       --card-foreground: 225 25% 20%;
-       --border: 220 20% 90%;
+       --background: 220 25% 97%; /* Slightly lighter than dark mode's 8% */
+       --foreground: 225 25% 20%; /* Darkest text color */
+       --primary: 230 85% 60%; /* Similar to dark mode's 65% */
+       --primary-foreground: 0 0% 100%; /* White */
+       --accent: 45 95% 50%; /* Similar to dark mode's 55% */
+       --accent-foreground: 225 25% 20%; /* Matches dark mode text color */
+       --sidebar: 220 30% 95%; /* Very light, contrasting with dark mode's 12% */
+       --sidebar-text: 225 25% 20%; /* Darkest text color */
+       --card: 0 0% 100%; /* Pure white */
+       --card-foreground: 225 25% 20%; /* Darkest text color */
+       --border: 220 20% 90%; /* Light border */
        --radius: 0.75rem;
-       --color-desktop: 225 25% 20%;
-       --chart-1: 45 95% 50%;
-       --chart-2: 230 85% 60%;
-       --chart-3: 190 90% 50%;
-       --chart-4: 260 85% 55%;
-       --chart-5: 270 85% 45%;
+       --color-desktop: 225 25% 20%; /* Darkest text color */
+       --chart-1: 45 95% 50%; /* Similar to dark mode's 55% */
+       --chart-2: 230 85% 60%; /* Similar to dark mode's 65% */
+       --chart-3: 190 90% 50%; /* Similar to dark mode's 55% */
+       --chart-4: 260 85% 55%; /* Similar to dark mode's 60% */
+       --chart-5: 270 85% 45%; /* Similar to dark mode's 50% */
    }
 
    .dark {
