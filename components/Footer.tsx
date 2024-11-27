@@ -40,7 +40,7 @@ export default function Footer() {
 
                   <Image
                      alt="Logo"
-                     src="/creature.svg"
+                     src="/logo.png"
                      className="invert dark:invert-0"
                      width={200}
                      height={100}
