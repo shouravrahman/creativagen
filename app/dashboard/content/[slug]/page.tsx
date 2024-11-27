@@ -29,6 +29,7 @@ import EnhancedEditor from "@/components/content/CustomEditor";
 import { useGenerationSettings } from "@/context/GenerationSettingsContext";
 import { ModelTypeEnum } from "@/types";
 import { toast } from "sonner";
+import CustomEditor from "@/components/content/CustomEditor";
 
 
 const TemplatePage = () => {
@@ -77,6 +78,46 @@ const TemplatePage = () => {
          console.error("Error generating content:", error);
       } finally {
          setIsLoading(false);
+      }
+   };
+
+   const handleRegenerate = () => {
+      if (Object.keys(formValues).length > 0) {
+         generateContent(formValues);
+      } else {
+         toast.error("No previous form values", {
+            description: "Please fill out the form first"
+         });
+      }
+   };
+
+   const handleSave = async (content: string) => {
+      try {
+         // Implement your save logic here
+         // For example, you might want to send the content to a backend API
+         const response = await fetch("/api/save-content", {
+            method: "POST",
+            headers: {
+               "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+               content,
+               templateSlug: slug
+            }),
+         });
+
+         if (response.ok) {
+            toast.success("Content Saved", {
+               description: "Your content has been saved successfully"
+            });
+         } else {
+            throw new Error("Failed to save content");
+         }
+      } catch (error) {
+         console.error("Error saving content:", error);
+         toast.error("Save Failed", {
+            description: "Unable to save content. Please try again."
+         });
       }
    };
 
@@ -134,7 +175,7 @@ const TemplatePage = () => {
                                     </SelectTrigger>
                                     <SelectContent>
                                        {["GROQ", "GEMINI", "OPENAI"].map((model) => (
-                                          <SelectItem key={model} value={model}>
+                                          <SelectItem defaultValue={"GROQ"} key={model} value={model}>
                                              {model}
                                           </SelectItem>
                                        ))}
@@ -152,6 +193,7 @@ const TemplatePage = () => {
                                     min={0}
                                     max={1}
                                     step={0.1}
+
                                     onValueChange={([value]) =>
                                        setSettings({ ...settings, temperature: value })
                                     }
@@ -172,7 +214,8 @@ const TemplatePage = () => {
                                        })
                                     }
                                     min={1}
-                                    max={4000}
+                                    defaultValue={800}
+                                    max={2000}
                                     className="border-gray-300 hover:border-primary focus:ring-2 focus:ring-primary transition"
                                  />
                               </div>
@@ -191,8 +234,13 @@ const TemplatePage = () => {
             {/* Dynamic Form and Editor */}
             <div className="flex flex-col justify-around lg:flex-row gap-6">
                <DynamicForm formFields={template?.formFields!} onSubmit={generateContent} />
-               <div className=" h-full w-full mt-6">
-                  <EnhancedEditor content={generatedContent} isLoading={isLoading} />
+               <div className="h-fit w-full mt-6">
+                  <CustomEditor
+                     initialContent={generatedContent}
+                     isLoading={isLoading}
+                     onRegenerate={handleRegenerate}
+                     onSave={handleSave}
+                  />
                </div>
             </div>
          </div>

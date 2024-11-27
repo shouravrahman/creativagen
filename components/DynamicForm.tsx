@@ -83,7 +83,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({
 	};
 
 	return (
-		<div className="flex lg:min-w-[40%] gap-6 mt-6">
+      <div className="flex h-fit lg:min-w-[40%] gap-6 mt-6">
 			<Card className="p-6 w-full">
 				<Form {...form}>
 					<form
@@ -186,7 +186,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({
 																	required={
 																		field.required
 																	}
-																	multiple
+
 																>
 																	<SelectTrigger>
 																		<SelectValue

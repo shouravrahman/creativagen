@@ -70,7 +70,26 @@ interface ContentPlanPlatform {
 	contentPlanId: string;
 	platformId: string;
 }
+export type Platform = "twitter" | "instagram" | "facebook" | "linkedin";
 
+export type PostStatus = "draft" | "scheduled" | "published";
+
+export interface SocialPost {
+	id: string;
+	title: string;
+	content: string;
+	platform: Platform;
+	scheduledDate: string;
+	scheduledTime?: string; // Added time field
+	status: PostStatus;
+	mediaUrls?: string[];
+	hashtags?: string[];
+}
+
+export interface DaySchedule {
+	date: string;
+	posts: SocialPost[];
+}
 // User Interface
 export interface User {
 	id: string;

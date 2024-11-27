@@ -1,8 +1,7 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import {
-   Wand2, BookOpen, Target, Sparkles, RefreshCcw, Type,
-   Tags, Shield, Brain, PenTool, Search, AlertTriangle
+   Wand2, BookOpen, RefreshCcw, AlertTriangle, Shield
 } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Switch } from '@/components/ui/switch';
@@ -13,46 +12,109 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import CustomEditor from '@/components/content/CustomEditor';
 import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
+import axios from 'axios';
+import CustomEditor from '@/components/content/CustomEditor';
+import { Textarea } from '@/components/ui/textarea';
 
-const BlogEditor = () => {
-   // Core states
-   const [content, setContent] = useState('');
-   const [topic, setTopic] = useState('');
-   const [keywords, setKeywords] = useState('');
-   const [wordCount, setWordCount] = useState(800);
+// Comprehensive type definitions
+type BlogType = 'how-to' | 'technical' | 'affiliate' | 'listicle' | 'case-study' | 'comparison';
+type AudienceType = 'beginners' | 'intermediate' | 'advanced' | 'expert';
+type ContentStyleType = 'informative' | 'persuasive' | 'analytical' | 'narrative' | 'tutorial';
+type WritingStyleType = 'conversational' | 'professional' | 'academic' | 'technical' | 'casual' | 'journalistic' | 'storytelling';
+type ResearchDepthType = 'basic' | 'moderate' | 'deep' | 'academic';
+type OutlineComplexityType = 'pyramid' | 'step-by-step' | 'problem-solution' | 'compare-contrast' | 'chronological' | 'detailed';
+
+// Define interfaces for better type safety
+interface BlogEditorState {
+   topic: string;
+   keywords: string[];
+   content: string;
+   wordCount: number;
+   blogTypes: { value: BlogType, label: string }[];
+   blogType: BlogType;
+   targetAudience: AudienceType;
+   contentStyle: ContentStyleType;
+   writingStyle: WritingStyleType;
+   outlineComplexity: OutlineComplexityType;
+   plagiarismCheck: boolean;
+   humanizeLevel: number;
+   researchDepth: ResearchDepthType;
+   aiTemperature: number;
+   includeCaseStudies: boolean;
+   citations: boolean;
+   monetization: boolean;
+   contentElements: {
+      examples: boolean;
+      quotes: boolean;
+      statistics: boolean;
+      takeaways: boolean;
+      toc: boolean;
+      summary: boolean;
+   };
+   technicalElements?: {
+      codeSnippets: boolean;
+      diagrams: boolean;
+   };
+   affiliateElements?: {
+      productComparison: boolean;
+      pricingTables: boolean;
+      prosCons: boolean;
+      cta: boolean;
+   };
+}
+
+const BlogEditor: React.FC = () => {
+   const [state, setState] = useState<BlogEditorState>({
+      topic: '',
+      keywords: [],
+      content: '',
+      wordCount: 800,
+      blogTypes: [
+         { value: 'how-to', label: 'How-To Guide' },
+         { value: 'technical', label: 'Technical Article' },
+         { value: 'affiliate', label: 'Affiliate Post' },
+         { value: 'listicle', label: 'Listicle' },
+         { value: 'case-study', label: 'Case Study' },
+         { value: 'comparison', label: 'Comparison' }
+      ],
+      blogType: 'how-to',
+      targetAudience: 'beginners',
+      contentStyle: 'informative',
+      writingStyle: 'conversational',
+      outlineComplexity: 'step-by-step',
+      plagiarismCheck: false,
+      humanizeLevel: 70,
+      researchDepth: 'moderate',
+      aiTemperature: 0.7,
+      includeCaseStudies: false,
+      citations: true,
+      monetization: false,
+      contentElements: {
+         examples: false,
+         quotes: false,
+         statistics: false,
+         takeaways: false,
+         toc: false,
+         summary: false
+      },
+      technicalElements: {
+         codeSnippets: false,
+         diagrams: false
+      },
+      affiliateElements: {
+         productComparison: false,
+         pricingTables: false,
+         prosCons: false,
+         cta: false
+      }
+   });
+
    const [loading, setLoading] = useState(false);
-   const [keywordTags, setKeywordTags] = useState([]);
+   const [newKeyword, setNewKeyword] = useState('');
 
-   // Enhanced features states
-   const [blogType, setBlogType] = useState('how-to');
-   const [targetAudience, setTargetAudience] = useState('beginners');
-   const [contentStyle, setContentStyle] = useState('informative');
-   const [plagiarismCheck, setPlagiarismCheck] = useState(false);
-   const [humanizeLevel, setHumanizeLevel] = useState(70);
-   const [researchDepth, setResearchDepth] = useState('moderate');
-   const [includeCaseStudies, setIncludeCaseStudies] = useState(false);
-   const [monetization, setMonetization] = useState(false);
-   const [readabilityScore, setReadabilityScore] = useState('intermediate');
-   const [outlineComplexity, setOutlineComplexity] = useState('detailed');
-   const [citations, setCitations] = useState(true);
-
-   // Advanced settings
-   const [aiTemperature, setAiTemperature] = useState(0.7);
-   const [realtime, setRealtime] = useState(false);
-   const [autoSeo, setAutoSeo] = useState(true);
-   const [readingTime, setReadingTime] = useState('5');
-
-   const blogTypes = [
-      { value: 'how-to', label: 'How-To Guide', icon: PenTool },
-      { value: 'technical', label: 'Technical Documentation', icon: Target },
-      { value: 'affiliate', label: 'Affiliate Content', icon: Search },
-      { value: 'listicle', label: 'List-Based Article', icon: Tags },
-      { value: 'case-study', label: 'Case Study', icon: Brain },
-      { value: 'comparison', label: 'Comparison Review', icon: RefreshCcw }
-   ];
-
+   // Audience options
    const audienceOptions = [
       { value: 'beginners', label: 'Beginners' },
       { value: 'intermediate', label: 'Intermediate' },
@@ -60,6 +122,7 @@ const BlogEditor = () => {
       { value: 'expert', label: 'Expert' }
    ];
 
+   // Content style options
    const contentStyles = [
       { value: 'informative', label: 'Informative' },
       { value: 'persuasive', label: 'Persuasive' },
@@ -68,35 +131,90 @@ const BlogEditor = () => {
       { value: 'tutorial', label: 'Tutorial' }
    ];
 
-   // Dynamic feature enabling/disabling based on blog type
+   // Validation function
+   const validateForm = (): boolean => {
+      if (!state.topic.trim()) {
+         toast.error('Please enter a blog topic');
+         return false;
+      }
+
+      if (state.wordCount < 300 || state.wordCount > 3000) {
+         toast.error('Word count must be between 300 and 3000');
+         return false;
+      }
+
+      return true;
+   };
+
+   // Submit handler for backend API
+   const handleSubmit = async () => {
+      if (!validateForm()) return;
+
+      setLoading(true);
+      try {
+         console.log(state)
+         return;
+         const response = await axios.post('/api/generate-blog', state);
+         setState(prevState => ({
+            ...prevState,
+            content: response.data.generatedContent
+         }));
+         toast.success('Blog Generated Successfully');
+      } catch (error) {
+         toast.error('Failed to generate blog content');
+      } finally {
+         setLoading(false);
+      }
+   };
+
+   // Dynamic updates based on blog type
    useEffect(() => {
-      if (blogType === 'technical') {
-         setCitations(true);
-         setResearchDepth('deep');
-         setMonetization(false);
-      } else if (blogType === 'affiliate') {
-         setMonetization(true);
-         setIncludeCaseStudies(true);
-         setContentStyle('persuasive');
-      } else if (blogType === 'how-to') {
-         setOutlineComplexity('step-by-step');
-         setReadabilityScore('beginner-friendly');
-      }
-   }, [blogType]);
+      setState(prevState => {
+         const updates: Partial<BlogEditorState> = {};
 
-   const handleAddKeyword = (e) => {
-      if (e.key === 'Enter' && e.target.value) {
-         setKeywordTags([...keywordTags, e.target.value]);
-         e.target.value = '';
+         switch (prevState.blogType) {
+            case 'technical':
+               updates.citations = true;
+               updates.researchDepth = 'deep';
+               updates.monetization = false;
+               break;
+            case 'affiliate':
+               updates.monetization = true;
+               updates.includeCaseStudies = true;
+               updates.contentStyle = 'persuasive';
+               break;
+            case 'how-to':
+               updates.outlineComplexity = 'step-by-step';
+               break;
+         }
+
+         return { ...prevState, ...updates };
+      });
+   }, [state.blogType]);
+
+   // Keyword management
+   const handleAddKeyword = (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === 'Enter' && newKeyword.trim()) {
+         setState(prev => ({
+            ...prev,
+            keywords: prev.keywords.includes(newKeyword.trim())
+               ? prev.keywords
+               : [...prev.keywords, newKeyword.trim()]
+         }));
+         setNewKeyword('');
       }
    };
 
-   const removeKeyword = (keyword) => {
-      setKeywordTags(keywordTags.filter(k => k !== keyword));
+   const removeKeyword = (keyword: string) => {
+      setState(prev => ({
+         ...prev,
+         keywords: prev.keywords.filter(k => k !== keyword)
+      }));
    };
+
 
    return (
-      <div className="mx-auto p-6 bg-background">
+      <div className="container mx-auto p-6 bg-background">
          <div className="flex items-center gap-3 mb-8 p-4 rounded-lg bg-card">
             <Wand2 className="w-8 h-8 text-primary" />
             <div>
@@ -122,14 +240,13 @@ const BlogEditor = () => {
                            <div className="space-y-2">
                               <Label>Blog Type</Label>
                               <div className="grid grid-cols-2 gap-2">
-                                 {blogTypes.map((type) => (
+                                 {state.blogTypes.map((type) => (
                                     <Button
                                        key={type.value}
-                                       variant={blogType === type.value ? "default" : "outline"}
+                                       variant={state.blogType === type.value ? "default" : "outline"}
                                        className="justify-start"
-                                       onClick={() => setBlogType(type.value)}
+                                       onClick={() => setState(prev => ({ ...prev, blogType: type.value }))}
                                     >
-                                       <type.icon className="w-4 h-4 mr-2" />
                                        {type.label}
                                     </Button>
                                  ))}
@@ -139,8 +256,8 @@ const BlogEditor = () => {
                            <div className="space-y-2">
                               <Label>Target Audience</Label>
                               <select
-                                 value={targetAudience}
-                                 onChange={(e) => setTargetAudience(e.target.value)}
+                                 value={state.targetAudience}
+                                 onChange={(e) => setState(prev => ({ ...prev, targetAudience: e.target.value as AudienceType }))}
                                  className="w-full rounded-md border border-border bg-background px-3 py-2"
                               >
                                  {audienceOptions.map((option) => (
@@ -156,8 +273,8 @@ const BlogEditor = () => {
                            <div className="space-y-2">
                               <Label>Topic</Label>
                               <Input
-                                 value={topic}
-                                 onChange={(e) => setTopic(e.target.value)}
+                                 value={state.topic}
+                                 onChange={(e) => setState(prev => ({ ...prev, topic: e.target.value }))}
                                  placeholder="Enter your blog topic..."
                                  className="bg-background border-border"
                               />
@@ -165,13 +282,15 @@ const BlogEditor = () => {
 
                            <div className="space-y-2">
                               <Label>Keywords</Label>
-                              <Input
+                              <Textarea
+                                 value={newKeyword}
+                                 onChange={(e) => setNewKeyword(e.target.value)}
+                                 onKeyDown={handleAddKeyword}
                                  placeholder="Press Enter to add keywords..."
-                                 onKeyPress={handleAddKeyword}
                                  className="bg-background border-border"
                               />
                               <div className="flex flex-wrap gap-2 mt-2">
-                                 {keywordTags?.map((keyword) => (
+                                 {state.keywords.map((keyword) => (
                                     <Badge
                                        key={keyword}
                                        variant="secondary"
@@ -188,8 +307,8 @@ const BlogEditor = () => {
                            <div className="space-y-2">
                               <Label>Content Style</Label>
                               <select
-                                 value={contentStyle}
-                                 onChange={(e) => setContentStyle(e.target.value)}
+                                 value={state.contentStyle}
+                                 onChange={(e) => setState(prev => ({ ...prev, contentStyle: e.target.value as ContentStyleType }))}
                                  className="w-full rounded-md border border-border bg-background px-3 py-2"
                               >
                                  {contentStyles.map((option) => (
@@ -200,14 +319,12 @@ const BlogEditor = () => {
                               </select>
                            </div>
                         </TabsContent>
-
-
                         <TabsContent value="style" className="space-y-4">
                            <div className="space-y-2">
                               <Label>Writing Style</Label>
                               <select
-                                 value={contentStyle}
-                                 onChange={(e) => setContentStyle(e.target.value)}
+                                 value={state.contentStyle}
+                                 onChange={(e) => setState(prev => ({ ...prev, contentStyle: e.target.value as ContentStyleType }))}
                                  className="w-full rounded-md border border-border bg-background px-3 py-2"
                               >
                                  <option value="conversational">Conversational</option>
@@ -223,10 +340,10 @@ const BlogEditor = () => {
                            <div className="space-y-2">
                               <Label>Content Format</Label>
                               <select
-                                 value={outlineComplexity}
-                                 onChange={(e) => setOutlineComplexity(e.target.value)}
+                                 value={state.outlineComplexity}
+                                 onChange={(e) => setState(prev => ({ ...prev, outlineComplexity: e.target.value as OutlineComplexityType }))}
                                  className="w-full rounded-md border border-border bg-background px-3 py-2"
-                                 disabled={blogType === 'how-to'} // Disabled for how-to as it requires step-by-step
+                                 disabled={state.blogType === 'how-to'} // Disabled for how-to as it requires step-by-step
                               >
                                  <option value="pyramid">Inverted Pyramid</option>
                                  <option value="step-by-step">Step-by-Step</option>
@@ -245,8 +362,8 @@ const BlogEditor = () => {
                                  </div>
                               </div>
                               <Switch
-                                 checked={citations}
-                                 onCheckedChange={setCitations}
+                                 checked={state.citations}
+                                 onCheckedChange={() => setState(prev => ({ ...prev, citations: !state.citations }))}
                               />
                            </div>
 
@@ -305,7 +422,7 @@ const BlogEditor = () => {
                               </div>
                            </div>
 
-                           {blogType === 'technical' && (
+                           {state.blogType === 'technical' && (
                               <div className="space-y-2">
                                  <Label>Technical Elements</Label>
                                  <div className="grid grid-cols-2 gap-2">
@@ -321,7 +438,7 @@ const BlogEditor = () => {
                               </div>
                            )}
 
-                           {blogType === 'affiliate' && (
+                           {state.blogType === 'affiliate' && (
                               <div className="space-y-2">
                                  <Label>Promotional Elements</Label>
                                  <div className="grid grid-cols-2 gap-2">
@@ -367,16 +484,16 @@ const BlogEditor = () => {
                                  </div>
                               </div>
                               <Switch
-                                 checked={plagiarismCheck}
-                                 onCheckedChange={setPlagiarismCheck}
+                                 checked={state.plagiarismCheck}
+                                 onCheckedChange={() => setState(prev => ({ ...prev, plagiarismCheck: !state.plagiarismCheck }))}
                               />
                            </div>
 
                            <div className="space-y-2">
-                              <Label>Humanize Level: {humanizeLevel}%</Label>
+                              <Label>Humanize Level: {state.humanizeLevel}%</Label>
                               <Slider
-                                 value={[humanizeLevel]}
-                                 onValueChange={([value]) => setHumanizeLevel(value)}
+                                 value={[state.humanizeLevel]}
+                                 onValueChange={([value]) => setState(prev => ({ ...prev, humanizeLevel: value }))}
                                  min={0}
                                  max={100}
                                  step={10}
@@ -387,8 +504,8 @@ const BlogEditor = () => {
                            <div className="space-y-2">
                               <Label>Research Depth</Label>
                               <select
-                                 value={researchDepth}
-                                 onChange={(e) => setResearchDepth(e.target.value)}
+                                 value={state.researchDepth}
+                                 onChange={(e) => setState(prev => ({ ...prev, researchDepth: e.target.value as ResearchDepthType }))}
                                  className="w-full rounded-md border border-border bg-background px-3 py-2"
                               >
                                  <option value="basic">Basic Research</option>
@@ -398,7 +515,7 @@ const BlogEditor = () => {
                               </select>
                            </div>
 
-                           {blogType === 'affiliate' && (
+                           {state.blogType === 'affiliate' && (
                               <Alert>
                                  <AlertTriangle className="h-4 w-4" />
                                  <AlertDescription>
@@ -417,16 +534,16 @@ const BlogEditor = () => {
                                  </div>
                               </div>
                               <Switch
-                                 checked={citations}
-                                 onCheckedChange={setCitations}
+                                 checked={state.citations}
+                                 onCheckedChange={() => setState(prev => ({ ...prev, citations: !state.citations }))}
                               />
                            </div>
 
                            <div className="space-y-2">
-                              <Label>Word Count: {wordCount}</Label>
+                              <Label>Word Count: {state.wordCount}</Label>
                               <Slider
-                                 value={[wordCount]}
-                                 onValueChange={([value]) => setWordCount(value)}
+                                 value={[state.wordCount]}
+                                 onValueChange={([value]) => setState(prev => ({ ...prev, wordCount: value }))}
                                  min={300}
                                  max={3000}
                                  step={100}
@@ -435,10 +552,10 @@ const BlogEditor = () => {
                            </div>
 
                            <div className="space-y-2">
-                              <Label>AI Temperature: {aiTemperature}</Label>
+                              <Label>AI Temperature: {state.aiTemperature}</Label>
                               <Slider
-                                 value={[aiTemperature]}
-                                 onValueChange={([value]) => setAiTemperature(value)}
+                                 value={[state.aiTemperature]}
+                                 onValueChange={([value]) => setState(prev => ({ ...prev, aiTemperature: value }))}
                                  min={0}
                                  max={1}
                                  step={0.1}
@@ -446,14 +563,16 @@ const BlogEditor = () => {
                               />
                            </div>
                         </TabsContent>
+
+                        {/* Other tabs remain similar, with state management updated accordingly */}
                      </CardContent>
                   </Tabs>
                </Card>
 
                <div className="flex gap-2">
                   <Button
-                     onClick={() => {/* Generate content */ }}
-                     disabled={loading || !topic}
+                     onClick={handleSubmit}
+                     disabled={loading || !state.topic}
                      className="w-full"
                      variant="destructive"
                   >
@@ -465,7 +584,55 @@ const BlogEditor = () => {
                      {loading ? 'Generating...' : 'Generate Blog'}
                   </Button>
                   <Button
-                     onClick={() => {/* Clear form */ }}
+                     onClick={() => {
+                        // Reset to initial state
+                        setState({
+                           ...{
+                              topic: '',
+                              keywords: [],
+                              content: '',
+                              wordCount: 800,
+                              blogTypes: [
+                                 { value: 'how-to', label: 'How-To Guide' },
+                                 { value: 'technical', label: 'Technical Article' },
+                                 { value: 'affiliate', label: 'Affiliate Post' },
+                                 { value: 'listicle', label: 'Listicle' },
+                                 { value: 'case-study', label: 'Case Study' },
+                                 { value: 'comparison', label: 'Comparison' }
+                              ],
+                              blogType: 'how-to',
+                              targetAudience: 'beginners',
+                              contentStyle: 'informative',
+                              writingStyle: 'conversational',
+                              outlineComplexity: 'step-by-step',
+                              plagiarismCheck: false,
+                              humanizeLevel: 70,
+                              researchDepth: 'moderate',
+                              aiTemperature: 0.7,
+                              includeCaseStudies: false,
+                              citations: true,
+                              monetization: false,
+                              contentElements: {
+                                 examples: false,
+                                 quotes: false,
+                                 statistics: false,
+                                 takeaways: false,
+                                 toc: false,
+                                 summary: false
+                              },
+                              technicalElements: {
+                                 codeSnippets: false,
+                                 diagrams: false
+                              },
+                              affiliateElements: {
+                                 productComparison: false,
+                                 pricingTables: false,
+                                 prosCons: false,
+                                 cta: false
+                              }
+                           }
+                        });
+                     }}
                      variant="outline"
                   >
                      Clear
@@ -480,16 +647,18 @@ const BlogEditor = () => {
                         <BookOpen className="w-5 h-5 text-primary" />
                         <h2 className="text-xl font-semibold">Generated Content</h2>
                      </div>
-                     {plagiarismCheck && (
+                     {state.plagiarismCheck && (
                         <Badge variant="outline" className="flex items-center gap-1">
                            <Shield className="w-4 h-4" />
                            Originality Verified
                         </Badge>
                      )}
                   </div>
-                  <ScrollArea className="h-[600px]">
-                     <CustomEditor initialContent={content} onSave={() => console.log("saved")} />
+                  <ScrollArea className="h-[600px] w-full">
+
+                     <CustomEditor initialContent={state.content} onSave={() => console.log("saved")} />
                   </ScrollArea>
+
                </Card>
             </div>
          </div>

@@ -25,12 +25,12 @@ export const routes = [
 		href: "/dashboard/image",
 		color: "text-blue-500",
 	},
-	{
-		label: "Blog",
-		icon: Newspaper,
-		href: "/dashboard/blog",
-		color: "text-blue-500",
-	},
+	// {
+	// 	label: "Blog",
+	// 	icon: Newspaper,
+	// 	href: "/dashboard/blog",
+	// 	color: "text-blue-500",
+	// },
 
 	{
 		label: "Planner",

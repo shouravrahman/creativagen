@@ -1,47 +1,109 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Appointment } from "@/schemas/Appointment";
-import { Resource } from "@/schemas/Resource";
-
-import Link from "next/link";
-import { CircleUser, Menu, Package2, Search } from "lucide-react";
+import { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import {
-   DropdownMenu,
-   DropdownMenuContent,
-   DropdownMenuItem,
-   DropdownMenuLabel,
-   DropdownMenuSeparator,
-   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import Planner from "@/components/planner/Planner";
-import { ModeToggle } from "@/components/ModeToggle";
-import { generateAppointments, generateResources } from "@/utils/fakeData";
 
-export default function HomePage() {
-   const [resources, setResources] = useState<Resource[]>([]);
-   const [appointments, setAppointments] = useState<Appointment[]>([]);
+import { PlusCircle } from 'lucide-react';
+import { DaySchedule, SocialPost } from '@/types';
+import { CalendarGrid } from '@/components/calendar/CalendarGrid';
+import { PostModal } from '@/components/planner/PostModal';
 
-   useEffect(() => {
-      const initResources = generateResources(4); // Generate 10 resources
-      const initAppointments = generateAppointments(100, initResources); // Generate 20 appointments linked to the resources
-      setResources(initResources);
-      setAppointments(initAppointments);
-   }, []);
+export default function PlannerPage() {
+   const [schedules, setSchedules] = useState<DaySchedule[]>([]);
+   const [isModalOpen, setIsModalOpen] = useState(false);
+   const [selectedPost, setSelectedPost] = useState<SocialPost | undefined>();
+
+   const handleDragEnd = (result: any) => {
+      if (!result.destination) return;
+
+      const sourceDate = result.source.droppableId;
+      const destDate = result.destination.droppableId;
+
+      const newSchedules = [...schedules];
+      const sourceSchedule = newSchedules.find(s => s.date === sourceDate);
+      const destSchedule = newSchedules.find(s => s.date === destDate);
+
+      if (!sourceSchedule) return;
+
+      const [movedPost] = sourceSchedule.posts.splice(result.source.index, 1);
+      movedPost.scheduledDate = destDate;
+
+      if (!destSchedule) {
+         newSchedules.push({
+            date: destDate,
+            posts: [movedPost],
+         });
+      } else {
+         destSchedule.posts.splice(result.destination.index, 0, movedPost);
+      }
+
+      setSchedules(newSchedules.filter(s => s.posts.length > 0));
+   };
+
+   const handlePostClick = (post: SocialPost) => {
+      setSelectedPost(post);
+      setIsModalOpen(true);
+   };
+
+   const handleSavePost = (post: SocialPost) => {
+      if (selectedPost) {
+         // Edit existing post
+         const newSchedules = schedules.map(schedule => ({
+            ...schedule,
+            posts: schedule.posts.map(p =>
+               p.id === selectedPost.id ? { ...post, id: selectedPost.id } : p
+            ),
+         }));
+         setSchedules(newSchedules);
+      } else {
+         // Create new post
+         const newPost: SocialPost = {
+            ...post,
+            id: Math.random().toString(36).substr(2, 9),
+            status: 'scheduled',
+         };
+
+        const existingSchedule = schedules.find(s => s.date === newPost.scheduledDate);
+        if (existingSchedule) {
+           existingSchedule.posts.push(newPost);
+           setSchedules([...schedules]);
+        } else {
+           setSchedules([...schedules, {
+              date: newPost.scheduledDate,
+              posts: [newPost],
+           }]);
+        }
+     }
+  };
+
    return (
-     <div className="flex min-h-screen w-full flex-col">
+     <div className="container mx-auto py-8">
+        <div className="flex justify-between items-center mb-8">
+           <h1 className="text-3xl font-bold">Social Media Planner</h1>
+           <Button onClick={() => {
+              setSelectedPost(undefined);
+              setIsModalOpen(true);
+           }}>
+              <PlusCircle className="mr-2 h-4 w-4" />
+              New Post
+           </Button>
+        </div>
 
-        <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
-           {appointments.length > 0 && (
-              <Planner
-                 initialResources={resources}
-                 initialAppointments={appointments}
-              />
-           )}
-        </main>
+        <CalendarGrid
+           schedules={schedules}
+           onDragEnd={handleDragEnd}
+           onPostClick={handlePostClick}
+        />
+
+        <PostModal
+           post={selectedPost}
+           isOpen={isModalOpen}
+           onClose={() => {
+              setIsModalOpen(false);
+              setSelectedPost(undefined);
+           }}
+           onSave={handleSavePost}
+        />
      </div>
   );
 }
