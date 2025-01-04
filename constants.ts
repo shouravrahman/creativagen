@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 
 import { Template } from "./types";
+import { IoCartSharp } from "react-icons/io5";
 export const MAX_FREE_COUNTS = 10;
 
 export const routes = [
@@ -25,10 +26,16 @@ export const routes = [
 		href: "/dashboard/image",
 		color: "text-blue-500",
 	},
+	{
+		label: "Blog Generator",
+		icon: Newspaper,
+		href: "/dashboard/blog",
+		color: "text-blue-500",
+	},
 	// {
-	// 	label: "Blog",
-	// 	icon: Newspaper,
-	// 	href: "/dashboard/blog",
+	// 	label: "Ecommerce Ads",
+	// 	icon: IoCartSharp,
+	// 	href: "/dashboard/ads",
 	// 	color: "text-blue-500",
 	// },
 
@@ -1119,147 +1126,180 @@ export const TEMPLATES: Template[] = [
 			},
 		],
 	},
-   {
-      "id": "20",
-      "name": "Facebook Group Engagement Builder",
-      "description": "Maximize engagement within Facebook groups by creating valuable, client-attracting content and automating interactions for stronger lead generation.",
-      "slug": "facebook-group-engagement",
-      "category": "Social Media Marketing",
-      "icon": "Users",
-      "color": "#3B5998",
-      "aiPrompt": "Create an engagement strategy for Facebook groups targeting {audienceType}:\n\n1. Audience Insights: Analyze group demographics and interests\n2. Content Themes: Develop content themes relevant to group members’ needs\n3. Engagement Triggers: Plan posts to prompt comments, shares, and feedback\n4. Consistency Schedule: Create a content calendar with optimal post timings\n5. Automation Tools: Suggest tools to manage and schedule content\n6. Conversion Strategy: Design subtle CTAs that encourage direct messages\n7. Lead Tracking: Set up a system for tracking potential leads\n8. Community Building: Outline steps to establish trust and build authority",
-      "features": [
-        "Audience analysis",
-        "Content planning",
-        "Engagement optimization",
-        "Lead generation tracking",
-        "Authority building"
-      ],
-      "tags": ["facebook-groups", "engagement", "lead-generation", "social-media", "content-creation"],
-      "formFields": [
-        {
-          "label": "Target Audience Type",
-          "name": "audienceType",
-          "type": "text",
-          "required": true,
-          "order": 1,
-          "helpText": "e.g., Small business owners, E-commerce entrepreneurs, Freelancers"
-        }
-      ]
-    },
-    {
-      "id": "21",
-      "name": "Client Lead Magnet Content Generator",
-      "description": "Design high-value content that positions you as a Next.js expert, attracting potential clients through educational and actionable content.",
-      "slug": "client-lead-magnet",
-      "category": "Content Marketing",
-      "icon": "Clipboard",
-      "color": "#3498DB",
-      "aiPrompt": "Generate a client-attracting content plan for {platform} aimed at {targetAudience}:\n\n1. Key Topics: Identify pain points and topics of interest for {targetAudience}\n2. Educational Content: Design tutorials, tips, and case studies to showcase your expertise\n3. Lead Magnets: Create downloadable guides, checklists, or templates\n4. Engagement Calls-to-Action: Develop CTAs that guide followers to DM for services\n5. Frequency Plan: Create a posting schedule to maintain visibility\n6. Platform-Specific Strategy: Optimize content formats for {platform}\n7. Analytics: Define metrics to track engagement and client interest\n8. Personal Branding: Outline tone and style guidelines to establish authority",
-      "features": [
-        "Lead-generating content",
-        "Pain-point targeting",
-        "Platform optimization",
-        "Engagement CTAs",
-        "Personal branding"
-      ],
-      "tags": ["lead-magnet", "content-marketing", "nextjs", "client-attraction", "branding"],
-      "formFields": [
-        {
-          "label": "Platform",
-          "name": "platform",
-          "type": "select",
-          "required": true,
-          "order": 1,
-          "options": [
-            { "label": "Facebook", "value": "facebook" },
-            { "label": "LinkedIn", "value": "linkedin" },
-            { "label": "Twitter", "value": "twitter" }
-          ]
-        },
-        {
-          "label": "Target Audience",
-          "name": "targetAudience",
-          "type": "text",
-          "required": true,
-          "order": 2,
-          "helpText": "e.g., SaaS founders, small business owners, e-commerce startups"
-        }
-      ]
-    },
-    {
-      "id": "22",
-      "name": "Niche Client Content Strategy for Developers",
-      "description": "Create a content strategy to connect with niche clients interested in Next.js and web development, focusing on their specific industry needs.",
-      "slug": "niche-client-content",
-      "category": "Content Marketing",
-      "icon": "Target",
-      "color": "#E74C3C",
-      "aiPrompt": "Develop a content plan to target {clientIndustry} clients as a Next.js developer:\n\n1. Industry Research: Highlight trends and pain points in {clientIndustry}\n2. Solution Showcases: Present Next.js solutions relevant to industry problems\n3. Content Types: Use tutorials, case studies, and feature highlights\n4. Value-Driven Content: Emphasize value in speed, SEO, and scalability\n5. Distribution Channels: Identify where target clients spend time online\n6. Portfolio CTAs: Showcase your past work with clear CTAs for inquiries\n7. Testimonials and Case Studies: Use social proof to build trust\n8. Interaction Strategy: Create a method to encourage comments, DMs, and leads",
-      "features": [
-        "Industry-specific insights",
-        "Solution-focused content",
-        "Lead-generating CTAs",
-        "Portfolio promotion",
-        "Social proof"
-      ],
-      "tags": ["content-strategy", "nextjs", "client-attraction", "industry-specific", "lead-generation"],
-      "formFields": [
-        {
-          "label": "Client Industry",
-          "name": "clientIndustry",
-          "type": "text",
-          "required": true,
-          "order": 1,
-          "helpText": "e.g., Real Estate, Education, E-commerce"
-        }
-      ]
-    },
-    {
-      "id": "23",
-      "name": "Cold Outreach Message Generator",
-      "description": "Generate impactful and customized cold outreach messages that connect with potential clients in a meaningful way.",
-      "slug": "cold-outreach-messages",
-      "category": "Sales",
-      "icon": "Mail",
-      "color": "#2980B9",
-      "aiPrompt": "Create a cold outreach message for {clientType} in {industry} highlighting {serviceOffer}:\n\n1. Pain Point Identification: Identify the client’s pain points in {industry}\n2. Service Introduction: Briefly introduce {serviceOffer} as a solution\n3. Value Proposition: Describe the unique benefits of your services\n4. Call-to-Action: Provide a subtle, non-intrusive call to schedule a call\n5. Social Proof: Include a brief testimonial or result if applicable\n6. Personalization Tips: Add hints to personalize based on the client’s profile\n7. Follow-Up Plan: Design a follow-up message template for further engagement\n8. Feedback Loop: Request feedback on how the message resonates with clients",
-      "features": [
-        "Pain point targeting",
-        "Value-driven service intro",
-        "Personalization",
-        "Subtle CTA",
-        "Follow-up template"
-      ],
-      "tags": ["outreach", "lead-generation", "cold-messaging", "sales", "client-acquisition"],
-      "formFields": [
-        {
-          "label": "Client Type",
-          "name": "clientType",
-          "type": "text",
-          "required": true,
-          "order": 1,
-          "helpText": "e.g., Small business owner, Startup founder"
-        },
-        {
-          "label": "Industry",
-          "name": "industry",
-          "type": "text",
-          "required": true,
-          "order": 2,
-          "helpText": "e.g., Retail, SaaS, Real Estate"
-        },
-        {
-          "label": "Service Offer",
-          "name": "serviceOffer",
-          "type": "text",
-          "required": true,
-          "order": 3,
-          "helpText": "e.g., Next.js website development, SEO optimization"
-        }
-      ]
-    }
-
+	{
+		id: "20",
+		name: "Facebook Group Engagement Builder",
+		description:
+			"Maximize engagement within Facebook groups by creating valuable, client-attracting content and automating interactions for stronger lead generation.",
+		slug: "facebook-group-engagement",
+		category: "Social Media Marketing",
+		icon: "Users",
+		color: "#3B5998",
+		aiPrompt:
+			"Create an engagement strategy for Facebook groups targeting {audienceType}:\n\n1. Audience Insights: Analyze group demographics and interests\n2. Content Themes: Develop content themes relevant to group members’ needs\n3. Engagement Triggers: Plan posts to prompt comments, shares, and feedback\n4. Consistency Schedule: Create a content calendar with optimal post timings\n5. Automation Tools: Suggest tools to manage and schedule content\n6. Conversion Strategy: Design subtle CTAs that encourage direct messages\n7. Lead Tracking: Set up a system for tracking potential leads\n8. Community Building: Outline steps to establish trust and build authority",
+		features: [
+			"Audience analysis",
+			"Content planning",
+			"Engagement optimization",
+			"Lead generation tracking",
+			"Authority building",
+		],
+		tags: [
+			"facebook-groups",
+			"engagement",
+			"lead-generation",
+			"social-media",
+			"content-creation",
+		],
+		formFields: [
+			{
+				label: "Target Audience Type",
+				name: "audienceType",
+				type: "text",
+				required: true,
+				order: 1,
+				helpText:
+					"e.g., Small business owners, E-commerce entrepreneurs, Freelancers",
+			},
+		],
+	},
+	{
+		id: "21",
+		name: "Client Lead Magnet Content Generator",
+		description:
+			"Design high-value content that positions you as a Next.js expert, attracting potential clients through educational and actionable content.",
+		slug: "client-lead-magnet",
+		category: "Content Marketing",
+		icon: "Clipboard",
+		color: "#3498DB",
+		aiPrompt:
+			"Generate a client-attracting content plan for {platform} aimed at {targetAudience}:\n\n1. Key Topics: Identify pain points and topics of interest for {targetAudience}\n2. Educational Content: Design tutorials, tips, and case studies to showcase your expertise\n3. Lead Magnets: Create downloadable guides, checklists, or templates\n4. Engagement Calls-to-Action: Develop CTAs that guide followers to DM for services\n5. Frequency Plan: Create a posting schedule to maintain visibility\n6. Platform-Specific Strategy: Optimize content formats for {platform}\n7. Analytics: Define metrics to track engagement and client interest\n8. Personal Branding: Outline tone and style guidelines to establish authority",
+		features: [
+			"Lead-generating content",
+			"Pain-point targeting",
+			"Platform optimization",
+			"Engagement CTAs",
+			"Personal branding",
+		],
+		tags: [
+			"lead-magnet",
+			"content-marketing",
+			"nextjs",
+			"client-attraction",
+			"branding",
+		],
+		formFields: [
+			{
+				label: "Platform",
+				name: "platform",
+				type: "select",
+				required: true,
+				order: 1,
+				options: [
+					{ label: "Facebook", value: "facebook" },
+					{ label: "LinkedIn", value: "linkedin" },
+					{ label: "Twitter", value: "twitter" },
+				],
+			},
+			{
+				label: "Target Audience",
+				name: "targetAudience",
+				type: "text",
+				required: true,
+				order: 2,
+				helpText:
+					"e.g., SaaS founders, small business owners, e-commerce startups",
+			},
+		],
+	},
+	{
+		id: "22",
+		name: "Niche Client Content Strategy for Developers",
+		description:
+			"Create a content strategy to connect with niche clients interested in Next.js and web development, focusing on their specific industry needs.",
+		slug: "niche-client-content",
+		category: "Content Marketing",
+		icon: "Target",
+		color: "#E74C3C",
+		aiPrompt:
+			"Develop a content plan to target {clientIndustry} clients as a Next.js developer:\n\n1. Industry Research: Highlight trends and pain points in {clientIndustry}\n2. Solution Showcases: Present Next.js solutions relevant to industry problems\n3. Content Types: Use tutorials, case studies, and feature highlights\n4. Value-Driven Content: Emphasize value in speed, SEO, and scalability\n5. Distribution Channels: Identify where target clients spend time online\n6. Portfolio CTAs: Showcase your past work with clear CTAs for inquiries\n7. Testimonials and Case Studies: Use social proof to build trust\n8. Interaction Strategy: Create a method to encourage comments, DMs, and leads",
+		features: [
+			"Industry-specific insights",
+			"Solution-focused content",
+			"Lead-generating CTAs",
+			"Portfolio promotion",
+			"Social proof",
+		],
+		tags: [
+			"content-strategy",
+			"nextjs",
+			"client-attraction",
+			"industry-specific",
+			"lead-generation",
+		],
+		formFields: [
+			{
+				label: "Client Industry",
+				name: "clientIndustry",
+				type: "text",
+				required: true,
+				order: 1,
+				helpText: "e.g., Real Estate, Education, E-commerce",
+			},
+		],
+	},
+	{
+		id: "23",
+		name: "Cold Outreach Message Generator",
+		description:
+			"Generate impactful and customized cold outreach messages that connect with potential clients in a meaningful way.",
+		slug: "cold-outreach-messages",
+		category: "Sales",
+		icon: "Mail",
+		color: "#2980B9",
+		aiPrompt:
+			"Create a cold outreach message for {clientType} in {industry} highlighting {serviceOffer}:\n\n1. Pain Point Identification: Identify the client’s pain points in {industry}\n2. Service Introduction: Briefly introduce {serviceOffer} as a solution\n3. Value Proposition: Describe the unique benefits of your services\n4. Call-to-Action: Provide a subtle, non-intrusive call to schedule a call\n5. Social Proof: Include a brief testimonial or result if applicable\n6. Personalization Tips: Add hints to personalize based on the client’s profile\n7. Follow-Up Plan: Design a follow-up message template for further engagement\n8. Feedback Loop: Request feedback on how the message resonates with clients",
+		features: [
+			"Pain point targeting",
+			"Value-driven service intro",
+			"Personalization",
+			"Subtle CTA",
+			"Follow-up template",
+		],
+		tags: [
+			"outreach",
+			"lead-generation",
+			"cold-messaging",
+			"sales",
+			"client-acquisition",
+		],
+		formFields: [
+			{
+				label: "Client Type",
+				name: "clientType",
+				type: "text",
+				required: true,
+				order: 1,
+				helpText: "e.g., Small business owner, Startup founder",
+			},
+			{
+				label: "Industry",
+				name: "industry",
+				type: "text",
+				required: true,
+				order: 2,
+				helpText: "e.g., Retail, SaaS, Real Estate",
+			},
+			{
+				label: "Service Offer",
+				name: "serviceOffer",
+				type: "text",
+				required: true,
+				order: 3,
+				helpText: "e.g., Next.js website development, SEO optimization",
+			},
+		],
+	},
 ];
 
 // Export helper functions for template management
@@ -1276,3 +1316,27 @@ export const getTemplatesByTag = (tag: string): Template[] => {
 		(template) => template.tags && template.tags.includes(tag)
 	);
 };
+export const PLATFORM_CONSTRAINTS = {
+	twitter: {
+		maxLength: 280,
+		maxImages: 4,
+		maxVideoLength: 140,
+		supportedFormats: ["jpg", "png", "gif", "mp4"],
+	},
+	instagram: {
+		maxLength: 2200,
+		maxImages: 10,
+		aspectRatios: ["1:1", "4:5", "16:9"],
+		supportedFormats: ["jpg", "png", "mp4"],
+	},
+	facebook: {
+		maxLength: 63206,
+		maxImages: 10,
+		supportedFormats: ["jpg", "png", "gif", "mp4"],
+	},
+	linkedin: {
+		maxLength: 3000,
+		maxImages: 9,
+		supportedFormats: ["jpg", "png", "gif", "mp4"],
+	},
+} as const;

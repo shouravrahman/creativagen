@@ -175,3 +175,27 @@ model ScheduledPost {
 
    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+model Media {
+  id          String    @id @default(cuid())
+  url         String
+  publicId    String    // Cloudinary public_id
+  type        String
+  postId      String
+  post        Post      @relation(fields: [postId], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Post {
+  id            String    @id @default(cuid())
+  title         String
+  content       String
+  platform      String
+  scheduledDate DateTime
+  scheduledTime DateTime?
+  status        String
+  media         Media[]
+  hashtags      String[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}

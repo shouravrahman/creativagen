@@ -25,7 +25,29 @@ type ContentStyleType = 'informative' | 'persuasive' | 'analytical' | 'narrative
 type WritingStyleType = 'conversational' | 'professional' | 'academic' | 'technical' | 'casual' | 'journalistic' | 'storytelling';
 type ResearchDepthType = 'basic' | 'moderate' | 'deep' | 'academic';
 type OutlineComplexityType = 'pyramid' | 'step-by-step' | 'problem-solution' | 'compare-contrast' | 'chronological' | 'detailed';
-
+type MetaTagType = {
+   title: string;
+   description: string;
+   canonical?: string;
+   robots?: string;
+};
+type SeoSettingsType = {
+   metaTags: MetaTagType;
+   focusKeyphrase: string;
+   secondaryKeyphrases: string[];
+   internalLinks: number;
+   externalLinks: number;
+   imageAltText: boolean;
+   slugOptimization: boolean;
+   schemaType: 'Article' | 'BlogPosting' | 'HowTo' | 'Product' | 'Review';
+   readabilityCheck: boolean;
+   keywordDensity: number;
+   socialShare: {
+      facebook: boolean;
+      twitter: boolean;
+      linkedin: boolean;
+   };
+};
 // Define interfaces for better type safety
 interface BlogEditorState {
    topic: string;
@@ -63,6 +85,7 @@ interface BlogEditorState {
       prosCons: boolean;
       cta: boolean;
    };
+   seoSettings: SeoSettingsType;
 }
 
 const BlogEditor: React.FC = () => {
@@ -108,6 +131,28 @@ const BlogEditor: React.FC = () => {
          pricingTables: false,
          prosCons: false,
          cta: false
+      },
+      seoSettings: {
+         metaTags: {
+            title: '',
+            description: '',
+            canonical: '',
+            robots: 'index, follow'
+         },
+         focusKeyphrase: '',
+         secondaryKeyphrases: [],
+         internalLinks: 2,
+         externalLinks: 3,
+         imageAltText: true,
+         slugOptimization: true,
+         schemaType: 'BlogPosting',
+         readabilityCheck: true,
+         keywordDensity: 2,
+         socialShare: {
+            facebook: true,
+            twitter: true,
+            linkedin: false
+         }
       }
    });
 
@@ -154,7 +199,7 @@ const BlogEditor: React.FC = () => {
       try {
          console.log(state)
          return;
-         const response = await axios.post('/api/generate-blog', state);
+         const response = await axios.post('/api/generate/blog', state);
          setState(prevState => ({
             ...prevState,
             content: response.data.generatedContent
@@ -214,7 +259,7 @@ const BlogEditor: React.FC = () => {
 
 
    return (
-      <div className="container mx-auto p-6 bg-background">
+      <div className=" mx-auto p-6 bg-background">
          <div className="flex items-center gap-3 mb-8 p-4 rounded-lg bg-card">
             <Wand2 className="w-8 h-8 text-primary" />
             <div>
@@ -227,12 +272,13 @@ const BlogEditor: React.FC = () => {
             <div className="space-y-6">
                <Card>
                   <Tabs defaultValue="type" className="w-full">
-                     <TabsList className="w-full grid grid-cols-5 gap-1 p-1">
+                     <TabsList className="w-full grid grid-cols-6  gap-1 p-3">
                         <TabsTrigger value="type">Type</TabsTrigger>
                         <TabsTrigger value="content">Content</TabsTrigger>
                         <TabsTrigger value="style">Style</TabsTrigger>
                         <TabsTrigger value="quality">Quality</TabsTrigger>
                         <TabsTrigger value="settings">Settings</TabsTrigger>
+                        <TabsTrigger value="seo">SEO</TabsTrigger>
                      </TabsList>
 
                      <CardContent className="mt-4">
@@ -564,7 +610,164 @@ const BlogEditor: React.FC = () => {
                            </div>
                         </TabsContent>
 
-                        {/* Other tabs remain similar, with state management updated accordingly */}
+                        <TabsContent value="seo" className="space-y-4">
+                           <div className="space-y-4">
+                              <div className="space-y-2">
+                                 <Label>Focus Keyphrase</Label>
+                                 <Input
+                                    value={state.seoSettings.focusKeyphrase}
+                                    onChange={(e) => setState(prev => ({
+                                       ...prev,
+                                       seoSettings: {
+                                          ...prev.seoSettings,
+                                          focusKeyphrase: e.target.value
+                                       }
+                                    }))}
+                                    placeholder="Main keyword to optimize for..."
+                                    className="bg-background border-border"
+                                 />
+                              </div>
+
+                              <div className="space-y-2">
+                                 <Label>Meta Title</Label>
+                                 <Input
+                                    value={state.seoSettings.metaTags.title}
+                                    onChange={(e) => setState(prev => ({
+                                       ...prev,
+                                       seoSettings: {
+                                          ...prev.seoSettings,
+                                          metaTags: {
+                                             ...prev.seoSettings.metaTags,
+                                             title: e.target.value
+                                          }
+                                       }
+                                    }))}
+                                    placeholder="SEO title..."
+                                    maxLength={60}
+                                    className="bg-background border-border"
+                                 />
+                                 <p className="text-sm text-muted-foreground">
+                                    {60 - (state.seoSettings.metaTags.title?.length || 0)} characters remaining
+                                 </p>
+                              </div>
+
+                              <div className="space-y-2">
+                                 <Label>Meta Description</Label>
+                                 <Textarea
+                                    value={state.seoSettings.metaTags.description}
+                                    onChange={(e) => setState(prev => ({
+                                       ...prev,
+                                       seoSettings: {
+                                          ...prev.seoSettings,
+                                          metaTags: {
+                                             ...prev.seoSettings.metaTags,
+                                             description: e.target.value
+                                          }
+                                       }
+                                    }))}
+                                    placeholder="Meta description..."
+                                    maxLength={160}
+                                    className="bg-background border-border"
+                                 />
+                                 <p className="text-sm text-muted-foreground">
+                                    {160 - (state.seoSettings.metaTags.description?.length || 0)} characters remaining
+                                 </p>
+                              </div>
+
+                              <div className="space-y-2">
+                                 <Label>Schema Type</Label>
+                                 <select
+                                    value={state.seoSettings.schemaType}
+                                    onChange={(e) => setState(prev => ({
+                                       ...prev,
+                                       seoSettings: {
+                                          ...prev.seoSettings,
+                                          schemaType: e.target.value as SeoSettingsType['schemaType']
+                                       }
+                                    }))}
+                                    className="w-full rounded-md border border-border bg-background px-3 py-2"
+                                 >
+                                    <option value="Article">Article</option>
+                                    <option value="BlogPosting">Blog Post</option>
+                                    <option value="HowTo">How-To Guide</option>
+                                    <option value="Product">Product Review</option>
+                                    <option value="Review">Review</option>
+                                 </select>
+                              </div>
+
+                              <div className="space-y-2">
+                                 <Label>Keyword Density: {state.seoSettings.keywordDensity}%</Label>
+                                 <Slider
+                                    value={[state.seoSettings.keywordDensity]}
+                                    onValueChange={([value]) => setState(prev => ({
+                                       ...prev,
+                                       seoSettings: {
+                                          ...prev.seoSettings,
+                                          keywordDensity: value
+                                       }
+                                    }))}
+                                    min={1}
+                                    max={5}
+                                    step={0.1}
+                                    className="w-full"
+                                 />
+                              </div>
+
+                              <div className="grid grid-cols-2 gap-4">
+                                 <div className="flex items-center space-x-2">
+                                    <Switch
+                                       checked={state.seoSettings.imageAltText}
+                                       onCheckedChange={(checked) => setState(prev => ({
+                                          ...prev,
+                                          seoSettings: {
+                                             ...prev.seoSettings,
+                                             imageAltText: checked
+                                          }
+                                       }))}
+                                    />
+                                    <Label>Image Alt Text</Label>
+                                 </div>
+
+                                 <div className="flex items-center space-x-2">
+                                    <Switch
+                                       checked={state.seoSettings.readabilityCheck}
+                                       onCheckedChange={(checked) => setState(prev => ({
+                                          ...prev,
+                                          seoSettings: {
+                                             ...prev.seoSettings,
+                                             readabilityCheck: checked
+                                          }
+                                       }))}
+                                    />
+                                    <Label>Readability Analysis</Label>
+                                 </div>
+                              </div>
+
+                              <div className="space-y-2">
+                                 <Label>Social Sharing</Label>
+                                 <div className="grid grid-cols-3 gap-2">
+                                    {Object.entries(state.seoSettings.socialShare).map(([platform, enabled]) => (
+                                       <div key={platform} className="flex items-center space-x-2">
+                                          <Switch
+                                             checked={enabled}
+                                             onCheckedChange={(checked) => setState(prev => ({
+                                                ...prev,
+                                                seoSettings: {
+                                                   ...prev.seoSettings,
+                                                   socialShare: {
+                                                      ...prev.seoSettings.socialShare,
+                                                      [platform]: checked
+                                                   }
+                                                }
+                                             }))}
+                                          />
+                                          <Label className="capitalize">{platform}</Label>
+                                       </div>
+                                    ))}
+                                 </div>
+                              </div>
+                           </div>
+                        </TabsContent>
                      </CardContent>
                   </Tabs>
                </Card>

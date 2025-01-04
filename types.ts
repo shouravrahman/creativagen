@@ -70,8 +70,9 @@ interface ContentPlanPlatform {
 	contentPlanId: string;
 	platformId: string;
 }
-export type Platform = "twitter" | "instagram" | "facebook" | "linkedin";
+import { type ReactNode } from "react";
 
+export type Platform = "twitter" | "instagram" | "facebook" | "linkedin";
 export type PostStatus = "draft" | "scheduled" | "published";
 
 export interface SocialPost {
@@ -80,7 +81,7 @@ export interface SocialPost {
 	content: string;
 	platform: Platform;
 	scheduledDate: string;
-	scheduledTime?: string; // Added time field
+	scheduledTime?: string;
 	status: PostStatus;
 	mediaUrls?: string[];
 	hashtags?: string[];
@@ -90,6 +91,14 @@ export interface DaySchedule {
 	date: string;
 	posts: SocialPost[];
 }
+export interface UploadProgress {
+	[fileName: string]: number;
+}
+
+export interface PreviewUrls {
+	[fileName: string]: string;
+}
+
 // User Interface
 export interface User {
 	id: string;
