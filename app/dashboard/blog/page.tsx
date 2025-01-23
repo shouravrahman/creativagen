@@ -198,8 +198,9 @@ const BlogEditor: React.FC = () => {
       setLoading(true);
       try {
          console.log(state)
-         return;
+         // return;
          const response = await axios.post('/api/generate/blog', state);
+         console.log(response)
          setState(prevState => ({
             ...prevState,
             content: response.data.generatedContent

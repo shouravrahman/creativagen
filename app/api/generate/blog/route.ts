@@ -9,38 +9,67 @@ import { z } from "zod";
 
 // Validation schema for blog generation request
 const BlogRequestSchema = z.object({
-  topic: z.string().min(1, "Topic is required"),
-  keywords: z.array(z.string()),
-  wordCount: z.number().min(300).max(3000),
-  blogType: z.enum(['how-to', 'technical', 'affiliate', 'listicle', 'case-study', 'comparison']),
-  targetAudience: z.enum(['beginners', 'intermediate', 'advanced', 'expert']),
-  contentStyle: z.enum(['informative', 'persuasive', 'analytical', 'narrative', 'tutorial']),
-  writingStyle: z.enum(['conversational', 'professional', 'academic', 'technical', 'casual', 'journalistic', 'storytelling']),
-  outlineComplexity: z.enum(['pyramid', 'step-by-step', 'problem-solution', 'compare-contrast', 'chronological', 'detailed']),
-  plagiarismCheck: z.boolean(),
-  humanizeLevel: z.number().min(0).max(100),
-  researchDepth: z.enum(['basic', 'moderate', 'deep', 'academic']),
-  aiTemperature: z.number().min(0).max(1),
-  citations: z.boolean(),
-  contentElements: z.object({
-    examples: z.boolean(),
-    quotes: z.boolean(),
-    statistics: z.boolean(),
-    takeaways: z.boolean(),
-    toc: z.boolean(),
-    summary: z.boolean()
-  }),
-  seoSettings: z.object({
-    metaTags: z.object({
-      title: z.string(),
-      description: z.string(),
-      canonical: z.string().optional(),
-      robots: z.string().optional()
-    }),
-    focusKeyphrase: z.string(),
-    keywordDensity: z.number(),
-    readabilityCheck: z.boolean()
-  })
+	topic: z.string().min(1, "Topic is required"),
+	keywords: z.array(z.string()),
+	wordCount: z.number().min(300).max(3000),
+	blogType: z.enum([
+		"how-to",
+		"technical",
+		"affiliate",
+		"listicle",
+		"case-study",
+		"comparison",
+	]),
+	targetAudience: z.enum(["beginners", "intermediate", "advanced", "expert"]),
+	contentStyle: z.enum([
+		"informative",
+		"persuasive",
+		"analytical",
+		"narrative",
+		"technical",
+		"tutorial",
+	]),
+	writingStyle: z.enum([
+		"conversational",
+		"professional",
+		"academic",
+		"technical",
+		"casual",
+		"journalistic",
+		"storytelling",
+	]),
+	outlineComplexity: z.enum([
+		"pyramid",
+		"step-by-step",
+		"problem-solution",
+		"compare-contrast",
+		"chronological",
+		"detailed",
+	]),
+	plagiarismCheck: z.boolean(),
+	humanizeLevel: z.number().min(0).max(100),
+	researchDepth: z.enum(["basic", "moderate", "deep", "academic"]),
+	aiTemperature: z.number().min(0).max(1),
+	citations: z.boolean(),
+	contentElements: z.object({
+		examples: z.boolean(),
+		quotes: z.boolean(),
+		statistics: z.boolean(),
+		takeaways: z.boolean(),
+		toc: z.boolean(),
+		summary: z.boolean(),
+	}),
+	seoSettings: z.object({
+		metaTags: z.object({
+			title: z.string(),
+			description: z.string(),
+			canonical: z.string().optional(),
+			robots: z.string().optional(),
+		}),
+		focusKeyphrase: z.string(),
+		keywordDensity: z.number(),
+		readabilityCheck: z.boolean(),
+	}),
 });
 
 // Helper function to get AI model instance
